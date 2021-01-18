@@ -62,7 +62,6 @@ Turn in assignments to Canvas on time.
 If any of the above rules are broken, group leaders will reach out to figure out what happened.
 
 If rules are consistently broken or a situation can't be solved by the group leaders or group, then leaders will reach out to the TA.
-  
-    
-    
+
+&nbsp
 Name: __________________________ &emsp;&emsp;&emsp;&emsp; Signature: __________________________
