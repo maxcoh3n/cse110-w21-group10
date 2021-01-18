@@ -64,4 +64,4 @@ If rules are consistently broken or a situation can't be solved by the group lea
 
 
 
-Name: __________________________ &emsp;&emsp;&emsp;&emsp;Signature: __________________________
+Name: __________________________ &emsp;&emsp;&emsp;&emsp; Signature: __________________________
