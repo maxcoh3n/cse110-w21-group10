@@ -63,9 +63,5 @@ If any of the above rules are broken, group leaders will reach out to figure out
 
 If rules are consistently broken or a situation can't be solved by the group leaders or group, then leaders will reach out to the TA.
   
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+##   ##  
 Name: __________________________ &emsp;&emsp;&emsp;&emsp; Signature: __________________________
