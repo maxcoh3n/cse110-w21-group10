@@ -45,6 +45,8 @@ If you want to make any changes to this contract, let the group know.
 
 Try to meet all set deadlines. Let the group know in advance if you can't so the group can help out.
 
+You are expected to comment your code so other group members can understand it. 
+
 ## Group Leader Responsibilities ##
 
 Group leaders will send out When2Meet link at least 4 days in advance.
