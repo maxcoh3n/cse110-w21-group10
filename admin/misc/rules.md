@@ -13,6 +13,8 @@ Group name: Keyboard Warriors
 
 Group Members: Max Cohen, Jerry Waldorf, An Vu, Hoang-Anthony Dinh, Matthew Cohen, Navid Kazimi, Nir Bekker, Noah Todd
 
+Group Leaders: Max Cohen, Jerry Waldorf
+
 ## Means of Communication ##
 
 Communicate through Slack, using the appropriate channel.
@@ -39,10 +41,29 @@ If you can't make it make sure to let the group know so we can record the meetin
 
 Feel free to ask other group members for help if you need it.
 
+If you want to make any changes to this contract, let the group know.
+
+Try to meet all set deadlines. Let the group know in advance if you can't so the group can help out.
+
 ## Group Leader Responsibilities ##
 
 Group leaders will send out When2Meet link at least 4 days in advance.
 
 Come to each meeting with a plan. 
 
-Take meeting notes and upload to repository.
+Take meeting notes and upload to the repository.
+
+Turn in assignments to Canvas on time. 
+
+## Conflict Resolution ##
+
+If any of the above rules are broken, group leaders will reach out to figure out what happened.
+
+If rules are consistently broken or a situation can't be solved by the group leaders or group, then leaders will reach out to the TA.
+
+
+
+
+Name: __________________________      
+
+Signature: __________________________
