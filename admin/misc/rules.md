@@ -27,10 +27,22 @@ No set meeting times or quantity.
 
 We are going to see week by week what is the appropriate number of times to meet that week.
 
-Group leaders will send out When2Meet link at least 4 days in advance. Group members will fill it out within 24 hours.
+Group members will fill out When2Meet within 24 hours of receiving it.
 
 ## General Responsibilities ##
 
 Try to make all scheduled meetings. 
 
-If you can't make it make sure to let the group know so we can record the meeting or figure out other accomidations.
+If you commit to going to a meeting, you should be present. 
+
+If you can't make it make sure to let the group know so we can record the meeting or figure out other accommodations.
+
+Feel free to ask other group members for help if you need it.
+
+## Group Leader Responsibilities ##
+
+Group leaders will send out When2Meet link at least 4 days in advance.
+
+Come to each meeting with a plan. 
+
+Take meeting notes and upload to repository.
