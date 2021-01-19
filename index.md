@@ -51,9 +51,16 @@ most interested in web development or AI. In my free time, I like to play Go, Ch
 Click [here](https://hod002.github.io/) for Anthony's github page.
 
 #### Matthew
+> I am a second year computer science major in Warren College. My personal hobbies and interests includes sports like basketball and soccer, including being a basketball coach. 
+I am also very interested in and enjoy talking about cars. I hope to be a software engineer that specializes in making applications to automate tasks to make them easier for 
+people. <br/>
+
+Click [here](https://m3cohen.github.io/CSE110Lab1/) for Matthew's github page.
 
 #### Navid
 
 #### Nir
 
 #### Noah
+
+[Group Video]()
