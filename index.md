@@ -1,0 +1,59 @@
+# CSE 110 Group 10 - Keyboard Warriors
+Welcome to the Keyboard Warriors' homepage. Here you can find our team values, rules, and a brief introduction to each team member.
+
+#### Navigation Links
+* [Values](#team-values)
+* [Rules](#team-rules)
+* [Roster](#team-roster)
+
+## Team Values
+The Keyboard warriors value communication and coordination. Communication is important to the Keyboard Warriors because the lack of \
+communication can lead to bigger problems during a project. If a team member has any problems or difficulties in finishing their part \
+for an assignment, it is better to communicate with the team rather than keep the problem to themself until it is too late. In order to \
+get work done, team members must feel free to reach out to others for any help. Coordination is important to the Keyboard Warriors because\
+meeting with the team often to set clear goals for the week is vital for our success. Having regular meetings and setting a goal each meeting \
+allows us to designate clear tasks for each team member that needs to be completed by a specific deadline. 
+
+## Team Rules
+In general, the Keyboard Warriors agree to:
+* Using and checking slack often for primary communication
+* Filling out When2Meet within a day of receiving it
+* Attempt to attend all meetings
+* Communicate to the team about any problems \
+[View the full team contract here](admin/misc/rules.md)
+
+## Team Roster
+Meet the Keyboard Warriors' team roster:
+* (Team Leader) [Max Cohen](#max)
+* (Team Leader) [Jerry Waldorf](#jerry)
+* [An Vu](#an)
+* [Hoang-Anthony Dinh](#anthony)
+* [Matthew Cohen](#matthew)
+* [Navid Kazimi](#navid)
+* [Nir Bekker](#nir)
+* [Noah Todd](#noah)
+
+#### Max
+> My name is Max Cohen and I am an aspiring Sofware Engineer/Developer. I dabbled a bit with coding starting from middle school, but I really
+started to learn get into good Computer Science practices during senior year of high school. I have worked as the Database and Internal Website
+Manager of Fass Selections for the past 6 years, and I also was a Software Development Intern this past summer. <br/> 
+
+Click [here](https://maxcoh3n.github.io/About-Me/) for Max's github page.
+
+#### Jerry
+
+#### An
+
+#### Anthony
+> My name is Hoang-Anthony Dinh, but you can just call me Anthony. I am Computer Engineering major and I'm going to focus more on software; I am
+most interested in web development or AI. In my free time, I like to play Go, Chess, and guitar. <br/>
+
+Click [here](https://hod002.github.io/) for Anthony's github page.
+
+#### Matthew
+
+#### Navid
+
+#### Nir
+
+#### Noah
