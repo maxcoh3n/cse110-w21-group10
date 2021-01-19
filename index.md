@@ -60,6 +60,10 @@ Click [here](https://m3cohen.github.io/CSE110Lab1/) for Matthew's github page.
 #### Navid
 
 #### Nir
+> My name is Nir Bekker and I am a math-cs major. In my spare time, I like to travel and be outside. I really enjoy computer science and hope to be a good
+software engineer, working on something that will impact the world. <br/>
+
+Click [here](https://nir24.github.io/) for Nir's github page.
 
 #### Noah
 
