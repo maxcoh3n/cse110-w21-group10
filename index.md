@@ -65,8 +65,6 @@ people. <br/>
 
 Click [here](https://m3cohen.github.io/CSE110Lab1/) for Matthew's github page.
 
-#### Navid
-
 #### Nir
 > My name is Nir Bekker and I am a math-cs major. In my spare time, I like to travel and be outside. I really enjoy computer science and hope to be a good
 software engineer, working on something that will impact the world. <br/>
@@ -78,11 +76,11 @@ Click [here](https://nir24.github.io/) for Nir's github page.
 
 Click [here](https://nwtodd.github.io/) for Noah's github page.
 
-[Group Video]()
-
 #### Navid
 > My name is Navid Kazimi, I'm a senior student majoring in Computer Science and affiliated with sixth college. My favorite place to study before pandemic was Giseal library. Moreover, because of social distancing I had to come up with new ideas.
 As a result,I decided to go to the La Jolla downtown beach and relax and study my school subjects. I also like to play soccer and watch soccer games, especially when Juventus is playing. Another example,I enjoy learning new programming languages by Mosh in youtube, currently learning about SQL language. My favorite language is Java, and C+.
 Thank you everyone <br.>
 
 Click [here](https://nkazimi.github.io/) for Navid's github page.
+
+[Group Video]()
