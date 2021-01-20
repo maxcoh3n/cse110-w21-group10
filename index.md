@@ -74,5 +74,8 @@ software engineer, working on something that will impact the world. <br/>
 Click [here](https://nir24.github.io/) for Nir's github page.
 
 #### Noah
+> Hello! My name is Noah Todd, I'm a third-year Computer Engineering major in Warren College. I enjoy playing video games and spending time with my friends and family. On campus, I'm involved as a Campus Ambassador, where I give tours and reach out to prospective students! Currently I'm exploring FinTech as a potential career path! <br/>
+
+Click [here](https://nwtodd.github.io/) for Noah's github page.
 
 [Group Video]()
