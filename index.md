@@ -41,6 +41,9 @@ Manager of Fass Selections for the past 6 years, and I also was a Software Devel
 Click [here](https://maxcoh3n.github.io/About-Me/) for Max's github page.
 
 #### Jerry
+> Hello, my name is Jerry Waldorf.  I am from the Los Angeles area, and I am a big LA sports fan.  I enjoy spending time with friends and family.  My main hobbies are playing fantasy sports, watching movies, and trying new food.  I hope to one day apply my computer science background to a sports analyst field, preferably baseball.
+
+Click [here](https://jerrywaldorfiii.github.io/CSE_110_Projects/) for Jerry's github page.
 
 #### An
 > I'm An Vu, my friends usually call me Uvna which is my name backward. First it was for fun, but now it becomes my nickname. I am a transfer student
