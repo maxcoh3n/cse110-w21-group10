@@ -43,8 +43,6 @@ Click [here](https://maxcoh3n.github.io/About-Me/) for Max's github page.
 #### Jerry
 
 #### An
-Click [here](https://maxcoh3n.github.io/About-Me/) for Max's github page.
-
 > I'm An Vu, my friends usually call me Uvna which is my name backward. First it was for fun, but now it becomes my nickname. I am a transfer student
 at UCSD and this is my second year, so hopefully I won't fail any classes this quarter. My hobbies are trading stocks, playing games, and traveling around.
 I hope I can learn a lot this and the next semester in software engineer so I will be a little more prepare for an intern or job.
