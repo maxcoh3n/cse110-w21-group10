@@ -65,6 +65,13 @@ people. <br/>
 
 Click [here](https://m3cohen.github.io/CSE110Lab1/) for Matthew's github page.
 
+#### Navid
+> My name is Navid Kazimi, I'm a senior student majoring in Computer Science and affiliated with sixth college. My favorite place to study before pandemic was Geisel library. Moreover, because of social distancing I had to come up with new ideas.
+As a result,I decided to go to the La Jolla downtown beach and relax and study my school subjects. I also like to play soccer and watch soccer games, especially when Juventus is playing. Another example,I enjoy learning new programming languages by Mosh in youtube, currently learning about SQL language. My favorite language is Java, and C+.
+Thank you everyone. <br/>
+
+Click [here](https://nkazimi.github.io/) for Navid's github page.
+
 #### Nir
 > My name is Nir Bekker and I am a math-cs major. In my spare time, I like to travel and be outside. I really enjoy computer science and hope to be a good
 software engineer, working on something that will impact the world. <br/>
@@ -75,12 +82,5 @@ Click [here](https://nir24.github.io/) for Nir's github page.
 > Hello! My name is Noah Todd, I'm a third-year Computer Engineering major in Warren College. I enjoy playing video games and spending time with my friends and family. On campus, I'm involved as a Campus Ambassador, where I give tours and reach out to prospective students! Currently I'm exploring FinTech as a potential career path! <br/>
 
 Click [here](https://nwtodd.github.io/) for Noah's github page.
-
-#### Navid
-> My name is Navid Kazimi, I'm a senior student majoring in Computer Science and affiliated with sixth college. My favorite place to study before pandemic was Geisel library. Moreover, because of social distancing I had to come up with new ideas.
-As a result,I decided to go to the La Jolla downtown beach and relax and study my school subjects. I also like to play soccer and watch soccer games, especially when Juventus is playing. Another example,I enjoy learning new programming languages by Mosh in youtube, currently learning about SQL language. My favorite language is Java, and C+.
-Thank you everyone. <br/>
-
-Click [here](https://nkazimi.github.io/) for Navid's github page.
 
 [Group Video]()
