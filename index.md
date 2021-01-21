@@ -5,6 +5,7 @@ Welcome to the Keyboard Warriors' homepage. Here you can find our team values, r
 * [Values](#team-values)
 * [Rules](#team-rules)
 * [Roster](#team-roster)
+* [Identity](#group-identity)
 
 ## Team Values
 The Keyboard warriors value communication and coordination. Communication is important to the Keyboard Warriors because the lack of \
