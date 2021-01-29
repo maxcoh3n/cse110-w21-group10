@@ -27,6 +27,7 @@ Noah and Nir arrived at around 2:00pm
  - Anthony Shared Screen of some pomo apps
  - We all added to miro, talked over ideas
  - Created Tentative Roles for Next Week
+ - [This is the miro Link](https://miro.com/app/board/o9J_lWyhmW0=/)
 
 
 ## Action Items
