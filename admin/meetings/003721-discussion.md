@@ -17,6 +17,8 @@ Wednesday 02/03/21 @9am - 9:48am on Sasya's Zoom
 - some groups have done personas already
 - some groups planning on doing exploratory programming this week
 
+[Notes](https://docs.google.com/document/d/1tUJi-w6ENhE2cp1cjQVWuJlsiKtK948aSgiiRwwjYrw/edit)
+
 ## advice from Sasya
 
  - book very important for pitch
