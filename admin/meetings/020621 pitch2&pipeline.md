@@ -77,7 +77,7 @@ Linting - research which extensions for vscode to use for html/css/js
 
 ## Decisions 
 
-Various decisions on UI included in diagrams
-
-We will have last-minute extra meeting for pipeline
+- We will conduct standups via excel spreadsheet
+- assign pipeline tasks
+- meeting on monday to finish up pipeline
 
