@@ -24,13 +24,6 @@ Thursday 02/04/21 @1:00pm - 2:45 pm on Max's Zoom
   - gave tips on certain parts
 - Went over pipeline
 
-
-
-Linting - research which extensions for vscode to use for html/css/js
-
-
-
-
 ## Pitch Action Items
 
 **All**
@@ -63,7 +56,7 @@ Linting - research which extensions for vscode to use for html/css/js
 
 
  **An**
- - Linting
+ - Linting research which extensions for vscode to use for html/css/js
 
 
 **All** 
