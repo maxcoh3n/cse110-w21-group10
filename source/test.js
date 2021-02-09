@@ -1,6 +1,3 @@
-console.log("test")
-console.log("test")
-
 /**
  *
  * @param {number} floors1
