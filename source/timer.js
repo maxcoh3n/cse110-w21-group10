@@ -1,17 +1,18 @@
-const startMins = 25;
-let time = startMins*60;
+let startingMins = 25;
+let time = startingMins * 60;
 
-const countdown = document.getElementByID('countdown');
+const countdown = document.getElementById('countdown');
 
 setInterval(updateCountdown, 1000);
 
-function updateCountdown(){
-   const mins = Math.floor(time/60);
-   let sec = time%60;
-   
-   //sec = sec < 10
-   
-   countdown.innerHTML = `${mins}: ${sec}`;
-   time--;
+function updateCountdown() {
+  time = time < 0 ? 0 : time;
 
+  let mins = Math.floor(time/60);
+  let sec = time % 60;
+
+  sec = sec < 10 ? '0' + sec : sec;
+
+  countdown.innerHTML = `${mins}:${sec}`;
+  time--;
 }
