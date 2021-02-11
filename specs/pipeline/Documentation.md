@@ -1,20 +1,21 @@
-**Linting and code style enforcement**: The linting extension, Prettier Code-Formatter, allows us to create a standardized coding style through our project in visual studio code. It works for most languages, but we will primarily use it for HTML, CSS, and javascript. Using linter will help identify violations of common rules, such as combining two different data types together, indexing over arrays size, dereferencing a null pointer, etc. Some small examples of prettier-code formatter is that it auto changes single quote to double quote, adds semicolon at the end of statements, and it adjusts all the codes we pull from gitHub. With this extension, everyone will have the same coding format and easier to read for viewers when they visit.
+**Linting and code style enforcement**:   
+The linting extension, Prettier Code-Formatter, allows us to create a standardized coding style through our project in visual studio code. It works for most languages, but we will primarily use it for HTML, CSS, and javascript. Using linter will help identify violations of common rules, such as combining two different data types together, indexing over arrays size, dereferencing a null pointer, etc. Some small examples of prettier-code formatter is that it auto changes single quote to double quote, adds semicolon at the end of statements, and it adjusts all the codes we pull from gitHub. With this extension, everyone will have the same coding format and easier to read for viewers when they visit.
 In order to lint, press:
  - ctrl + SHIFT + P
  - Then click:
  - Format Document
 
  
-**Code Quality Tool: Code Climate**
+**Code Quality Tool: Code Climate:**  
 <del> This tool will be used to measure and improve the quality of the code of our project. This is a free product that integrates with GitHub to provide feedback on code quality as well as other aspects like pull request and comments. It integrated with GitHub through a browser extension. Its features include inline code review, integrated test coverage, a letter/color grading system, code review comments on pull requests. You can view an overview, issues, letter grades, and other settings on their website when connected to your repo, or you can view it integrated with the GitHub interface with issues, color coded lines, pull request comments, etc.  </del>
 
 None of this works with a private repository
  
-**Code Quality Via Human Review**
+**Code Quality Via Human Review:**  
 We will be using built in GitHub functionality for this step. We have a master branch which we will use as the live deployment branch. Each major change to this branch will require manual review as it is protected, and we will also create a separate release for this new version using GitHub’s native tools. Additionally, the main branch that we will be committing to most will be “develop”. This branch is also protected and will require manual review by at least one other person to merge into. All the other branches will be free to be created and merged at each developer’s will when a new feature is made. Additionally, we will continue to commit documentation directly to develop because this does not need to be manually reviewed, but nothing else should be pushed to develop.   
  
-**Documentation generation via automation JSDocs**
+**Documentation generation via automation JSDocs:**  
  This portion of the CI/CD Pipeline workflow is taking care of the documentation for added readability in order for a single team member’s code to be understandable by other members of the group.  Our group will be using JSDocs in order to form formal and clear documentation of the code we all will be contributing to our Pomodoro Timer Project.  JSDocs will be incorporated into two segments of our workflow as we will first be incorporating the VSCode extension “Add jsdoc comments” into our individual local VSCode editors.  We will also be adding JSDocs into our workflow through GitHub Actions by integrating JSDocs.  Documentation will be an integral part of our workflow process as it will be the step we undertake after we run our tests on our individual edits to code and before we make a pull request to merge with the develop branch on GitHub.  Our goal for documentation is for everyone’s progress and edits to be more readable and understandable by other members of the group.
   
-**Unit tests via automation (Jest)**
+**Unit tests via automation (Jest):**  
 It is very important to test recently pushed code to github during the CI/CD Pipeline. In our project we have set up Jest to help us run javascript unit testing. We have integrated it into github actions so that it will be an autonomous feature in the pipeline. The way it works is that when a group member pushes a new change to the repository, Github actions will run the command ‘npm test’ which will run jest on a specific file in our repository. In the specific file that we want jest to run on, we can add and modify unit tests as the project progresses. These unit tests are the first safety net in our pipeline. When they are finished, we have automatically verified that the new code a group member has added still passes all the tests that we expect it to. And of course if not all the tests are passed, the group member has very quick and informative feedback that will need to be fixed before someone reviews the changes.
