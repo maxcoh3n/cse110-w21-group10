@@ -92,12 +92,12 @@ Here are a few interests that we share:
 
 ### Sports
 
-![Dodgers](dodgers.jpg)
+![Dodgers](images/dodgers.jpg)
 
 ### Movies
 
-![CatchMe](catchMe.jpg)
+![CatchMe](images/catchMe.jpg)
 
 ### Video Games
 
-![League](league.jpg)
+![League](images/league.jpg)
