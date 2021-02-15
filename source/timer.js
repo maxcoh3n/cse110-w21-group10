@@ -7,8 +7,7 @@ Uses the countdown h1 to set and run a timer of length designated by the startTi
 
 function timer(startTime){
 
-  let startingMins = startTime;
-  let time = startingMins * 60;
+  let time = startTime * 60;
 
   const countdown = document.getElementById('countdown');
 
