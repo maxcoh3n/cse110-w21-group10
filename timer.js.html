@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>testDocs.js - Documentation</title>
+    <title>timer.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">testDocs.js</h1>
+    <h1 class="page-title">timer.js</h1>
     
 
     
@@ -39,23 +39,36 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>// import functions from "functions"
+            <pre class="prettyprint source linenums"><code>/**
+timer
+Uses the countdown h1 to set and run a timer of length designated by the startTime parameter.
 
-/**
- *
- * @param {number} floors1
- * @param {number} bathrooms
- * @param {number} rooms
- * @param {string} street
- */
-function house( floors1, bathrooms, rooms, street ) {
-    let ret = `This house on ${street} street has ${floors1} floors, ${bathrooms} bathrooms, and ${rooms} rooms!`;
-    return ret; //random comment2
+@param    startTime the length of the timer in minutes.
+*/
+
+function timer(startTime){
+
+  let time = startTime * 60;
+
+  const countdown = document.getElementById('countdown');
+
+  setInterval(updateCountdown, 1000);
+
+  function updateCountdown() {
+    time = time &lt; 0 ? 0 : time;
+
+    let mins = Math.floor(time/60);
+    let sec = time % 60;
+
+    sec = sec &lt; 10 ? '0' + sec : sec;
+
+    countdown.innerHTML = `${mins}:${sec}`;
+    time--;
+  }
 }
 
-console.log("hi")
-
-// console.log(functions.add(1,2))</code></pre>
+timer(25);
+</code></pre>
         </article>
     </section>
 
