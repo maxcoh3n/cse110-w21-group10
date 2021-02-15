@@ -2,7 +2,7 @@
 timer
 Uses the countdown h1 to set and run a timer of length designated by the startTime parameter.
 
-@param startTime the length of the timer in minutes.
+@param    startTime the length of the timer in minutes.
 */
 
 function timer(startTime){
