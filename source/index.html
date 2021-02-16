@@ -11,7 +11,6 @@
 <body>
     <h1>Pomodoro Timer</h1>
         <h1 id="countdown" style="font-size:100pt"></h1>
-        <script src="timer.js"></script>
         <div id="canvas-container"></div>
             <canvas id="myCanvas" width="500" height="500"></canvas>
         </div>
@@ -40,6 +39,35 @@
         </div>
     </details>
 
+    <!-- Settings -->
+
+  <button id="settingsBtn" style="position: absolute; top: 10px; right: 10px">Settings</button>
+
+  <div id="myModal" class="modal">
+
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Settings</p>
+      <label id="worktime-label">Work Time:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+      <input id="worktime-number" type="number" min="0" max="60" value="25">
+      <input id="worktime-slider" type="range" min="0" max="60" value="25" style="width: 500px"><br><br>
+
+      <label id="breaktime-label">Break Time:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+      <input id="breaktime-number" type="number" min="0" max="60" value="5">
+      <input id="breaktime-slider" type="range" min="0" max="60" value="5" style="width: 500px"><br><br>
+
+      <label id="numbreaks-label">Number of Short Breaks: </label>
+      <input id="numbreaks-number" type="number" min="0" max="10" value="5">
+      <input id="numbreaks-slider" type="range" min="0" max="10" value="5" style="width: 500px">
+    </div>
+
+  </div>
+
+
+<button id="startBtn" style="position: absolute; top: 50%; right: 50%">Start</button>
+
+
+<script src="timer.js"></script>
 </body>
 
 </html>
