@@ -1,3 +1,5 @@
+//Timer
+
 /**
 timer
 Uses the countdown h1 to set and run a timer of length designated by the startTime parameter.
@@ -26,10 +28,16 @@ function timer(startTime){
 }
 
 
+const startBtn = document.getElementById("start-btn");
+startBtn.onclick = function() {
+  timer(worktimeNumber.value);
+  startBtn.disabled = true;
+}
+
 //Settings
 
-var modal = document.getElementById("myModal");
-var settingsBtn = document.getElementById("settingsBtn");
+var modal = document.getElementById("my-modal");
+var settingsBtn = document.getElementById("settings-btn");
 var span = document.getElementsByClassName("close")[0];
 
 settingsBtn.onclick = function() {
@@ -47,44 +55,43 @@ window.onclick = function(event) {
 }
 
 const worktimeSlider = document.getElementById("worktime-slider");
-worktimeSlider.addEventListener('input', updateWorktimeValue);
-
 const worktimeNumber = document.getElementById('worktime-number');
-worktimeNumber.addEventListener('input', updateWorktimeValue);
-
-const breaktimeSlider = document.getElementById('breaktime-slider');
-breaktimeSlider.addEventListener('input', updateBreaktimeValue);
-
-const breaktimeNumber = document.getElementById('breaktime-number');
-breaktimeNumber.addEventListener('input', updateBreaktimeValue);
-
+const shortBreaktimeSlider = document.getElementById('short-breaktime-slider');
+const shortBreaktimeNumber = document.getElementById('short-breaktime-number');
+const longBreaktimeSlider = document.getElementById('long-breaktime-slider');
+const longBreaktimeNumber = document.getElementById('long-breaktime-number');
 const numbreaksSlider = document.getElementById('numbreaks-slider');
-numbreaksSlider.addEventListener('input', updateNumbreaksValue);
-
 const numbreaksNumber = document.getElementById('numbreaks-number');
-numbreaksNumber.addEventListener('input', updateNumbreaksValue);
 
-function updateWorktimeValue(e){
+worktimeSlider.addEventListener('input', updateWorktime);
+worktimeNumber.addEventListener('input', updateWorktime);
+shortBreaktimeSlider.addEventListener('input', updateShortBreaktime);
+shortBreaktimeNumber.addEventListener('input', updateShortBreaktime);
+longBreaktimeSlider.addEventListener('input', updateLongBreaktime);
+longBreaktimeNumber.addEventListener('input', updateLongBreaktime);
+numbreaksSlider.addEventListener('input', updateNumbreaks);
+numbreaksNumber.addEventListener('input', updateNumbreaks);
+
+function updateWorktime(e){
   let num = e.target.value;
   worktimeSlider.value = num;
   worktimeNumber.value = num;
 }
 
-function updateBreaktimeValue(e){
+function updateShortBreaktime(e){
   let num = e.target.value;
-  breaktimeSlider.value = num;
-  breaktimeNumber.value = num;
+  shortBreaktimeSlider.value = num;
+  shortBreaktimeNumber.value = num;
 }
 
-function updateNumbreaksValue(e){
+function updateLongBreaktime(e){
+  let num = e.target.value;
+  longBreaktimeSlider.value = num;
+  longBreaktimeNumber.value = num;
+}
+
+function updateNumbreaks(e){
   let num = e.target.value;
   numbreaksSlider.value = num;
   numbreaksNumber.value = num;
-}
-
-
-const startBtn = document.getElementById("startBtn");
-startBtn.onclick = function() {
-  timer(worktimeNumber.value);
-  startBtn.disabled = true;
 }
