@@ -11,6 +11,7 @@ function timer(startTime){
   let time = startTime * 60;
 
   const countdown = document.getElementById('countdown');
+  const title = document.getElementById('title-countdown');
 
   setInterval(updateCountdown, 1000);
 
@@ -22,6 +23,7 @@ function timer(startTime){
 
     sec = sec < 10 ? '0' + sec : sec;
 
+    title.innerHTML = `${mins}:${sec}`
     countdown.innerHTML = `${mins}:${sec}`;
     time--;
   }
