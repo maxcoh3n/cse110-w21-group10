@@ -43,3 +43,24 @@ label + ol > li {
 }
 
 /* --------------------------------------------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+
+* {
+    background-color:snow;
+}
+
+h1 {
+    color:rgb(47, 50, 53);
+    text-align: center;
+    font-size: 2em;
+    font-family: 'Lora', serif;
+}
+
+/*
+#canvas-container {
+    text-align: center;
+}
+canvas {
+    display: inline;
+}
+*/

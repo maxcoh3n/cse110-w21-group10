@@ -2,13 +2,20 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pomodoro Timer</title>
     <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 
 <body>
-    <h1 id="countdown" style="font-size:100pt"></h1>
-    <script src="timer.js"></script>
+    <!-- Timer -->
+    <h1>Pomodoro Timer</h1>
+        <h1 id="countdown"></h1>
+        <div id="canvas-container"></div>
+            <canvas id="myCanvas" width="500" height="500"></canvas>
+        </div>
+        <button id="start-btn">Start</button>
 
     <!-- Pomo log 2: using checkbox-->
     <div id="pomo-toggle-container">
@@ -36,6 +43,36 @@
         </ol>
     </div>
 
+    <!-- Settings -->
+
+  <button id="settings-btn">Settings</button>
+
+  <div id="my-modal" class="modal">
+
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Settings</p>
+      <label id="worktime-label">Work Time:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+      <input id="worktime-number" type="number" min="20" max="30" value="25">
+      <input id="worktime-slider" type="range" min="20" max="30" value="25"><br><br>
+
+      <label id="short-breaktime-label">Short Break Time:&emsp;&emsp;&emsp;</label>
+      <input id="short-breaktime-number" type="number" min="5" max="10" value="7">
+      <input id="short-breaktime-slider" type="range" min="5" max="10" value="7"><br><br>
+
+      <label id="long-breaktime-label">Long Break Time:&emsp;&emsp;&emsp;</label>
+      <input id="long-breaktime-number" type="number" min="15" max="25" value="20">
+      <input id="long-breaktime-slider" type="range" min="15" max="25" value="20"><br><br>
+
+      <label id="numbreaks-label">Number of Short Breaks: </label>
+      <input id="numbreaks-number" type="number" min="3" max="5" value="4">
+      <input id="numbreaks-slider" type="range" min="3" max="5" value="4">
+    </div>
+
+  </div>
+
+<script src="settings.js"></script>
+<script src="timer.js"></script>
 </body>
 
 </html>

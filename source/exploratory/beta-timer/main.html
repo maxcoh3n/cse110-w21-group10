@@ -1,43 +1,15 @@
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles.css" />
-    <title>Beta</title>
-</head>
-
-<body>
-    <h1>HI How are you?</h1>
-    <canvas id="myCanvas" width="500" height="500">
-    </canvas>
-    <script src="main.js"></script>
-
-    <!-- Pomo log 2: using checkbox-->
-    <div id="pomo-toggle-container">
-        <input id="pomo-toggle" type="checkbox" class="pomo-toggle" />
-        <label for="pomo-toggle" id="pomo-label">Pomodoro Log</label>
-        
-        <ol class="pomo-log2">
-            <li>
-                <details>
-                    <summary>Statistics</summary>
-                    <ol style="list-style: none;">
-                        <li>
-                            test element
-                        </li>
-                    </ol>
-                </details>
-            </li>
-            <hr />
-            <li>Daily Log</li>
-            <ol style="list-style: none;">
-                <li>
-                    test element
-                </li>
-            </ol>
-        </ol>
-    </div>
-</body>
-
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Beta</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <h1>Pomodoro Timer</h1>
+        <div id="canvas-container"></div>
+            <canvas id="myCanvas" width="500" height="500"></canvas>
+        </div>
+        <script src="main.js"></script>
+    </body>
 </html>
