@@ -80,6 +80,13 @@ input[type="range"]{
   right: 50%;
 }
 
+#cancel-btn {
+  position: absolute;
+  top: 54%;
+  right: 49.4%;
+}
+
+
 /* Pomo log using checkbox --------------------------------------------------*/
 #pomo-toggle {
   display: none;
