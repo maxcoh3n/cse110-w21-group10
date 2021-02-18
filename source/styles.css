@@ -79,3 +79,49 @@ input[type="range"]{
   top: 50%;
   right: 50%;
 }
+
+/* Pomo log using checkbox --------------------------------------------------*/
+#pomo-toggle {
+  display: none;
+}
+
+.pomo-toggle:checked ~ .pomo-log {
+  max-height: 200px;
+  overflow: scroll;
+  background-color: rgb(238, 238, 238);
+}
+
+label + ol {
+  list-style: none;
+  position: relative;
+  padding: 0;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+#pomo-toggle-container {
+  width: 300px;
+  margin-left: 400px;
+  --orange: #ff8566;
+  --light-orange: #ffc2b3;
+}
+
+label + ol > li {
+  position: relative;
+}
+
+#pomo-label {
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: var(--light-orange);
+  color: #521101;
+  box-shadow: 1px 1px 2px #b95c44;
+}
+
+.pomo-log {
+  max-height: 0;
+  transition: max-height 0.5s ease;
+}
+
+/* --------------------------------------------------------------------------*/
