@@ -18,6 +18,7 @@ jobs:
       - uses: actions/checkout@v2
       # Runs a single command using the runners shell
       - name: Run jest
-        run: npm config set user 0
-        run: npm config set unsafe-perm true
-        run: npm test
+        run: |
+        npm config set user 0
+        npm config set unsafe-perm true
+        npm test
