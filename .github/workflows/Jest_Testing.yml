@@ -16,9 +16,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      # Runs a single command using the runners shell
-      # - name: Set User 
-      #   run: npm config set user 0
       - name: Change mod
         run: chmod +rwx node_modules/.bin/jest
       - name: Run Test
