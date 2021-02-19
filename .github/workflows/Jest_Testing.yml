@@ -19,7 +19,7 @@ jobs:
       # Runs a single command using the runners shell
       # - name: Set User 
       #   run: npm config set user 0
-      # - name: Set Permission
-      #   run: npm config set unsafe-perm true
+      - name: Change mod
+        run: chmod +rwx node_modules/.bin/jest
       - name: Run Test
         run: sudo npm test
