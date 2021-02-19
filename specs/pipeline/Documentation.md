@@ -4,13 +4,10 @@ In order to lint, press:
  - ctrl + SHIFT + P
  - Then click:
  - Format Document
-
  
-**Code Quality Tool: Code Climate:**  
-<del> This tool will be used to measure and improve the quality of the code of our project. This is a free product that integrates with GitHub to provide feedback on code quality as well as other aspects like pull request and comments. It integrated with GitHub through a browser extension. Its features include inline code review, integrated test coverage, a letter/color grading system, code review comments on pull requests. You can view an overview, issues, letter grades, and other settings on their website when connected to your repo, or you can view it integrated with the GitHub interface with issues, color coded lines, pull request comments, etc.  </del>
+**Code Quality Tool: Code Factor:**  
+This tool will be used to measure and improve the quality of the code of our project. This is a free product that works with GitHub to provide feedback on code quality with letter grades and issues regarding files, pull requests, branches, etc. You can view your repo on their website [codefactor.io](codefactor.io) which allows you to view general issues, pull requests, files, and active branches. The free version of Codefactor allows one private repository and unlimited public repositories.
 
-None of this works with a private repository
- 
 **Code Quality Via Human Review:**  
 We will be using built in GitHub functionality for this step. We have a master branch which we will use as the live deployment branch. Each major change to this branch will require manual review as it is protected, and we will also create a separate release for this new version using GitHub’s native tools. Additionally, the main branch that we will be committing to most will be “develop”. This branch is also protected and will require manual review by at least one other person to merge into. All the other branches will be free to be created and merged at each developer’s will when a new feature is made. Additionally, we will continue to commit documentation directly to develop because this does not need to be manually reviewed, but nothing else should be pushed to develop.   
  
