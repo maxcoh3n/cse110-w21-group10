@@ -1,6 +1,7 @@
 //Timer
 
 var count;
+var time;
 const countdown = document.getElementById('countdown');
 const title = document.getElementById('title-countdown');
 
@@ -12,7 +13,7 @@ Uses the countdown h1 to set and run a timer of length designated by the startTi
 
 function timer(startTime){
 
-  let time = startTime * 60;
+  time = startTime * 60;
 
   count = setInterval(updateCountdown, 1000);
 
@@ -33,22 +34,15 @@ function timer(startTime){
 
 const startBtn = document.getElementById("start-btn");
 startBtn.onclick = function() {
-  timer(worktimeNumber.value);
-  startBtn.disabled = true;
-  cancelBtn.disabled = false;
-}
-
-/**
-cancelBtn
-When cancel button is clicked while timer is in progress, countdown is set to 0:00
-*/
-const cancelBtn = document.getElementById("cancel-btn");
-cancelBtn.onclick = function() {
-  if( worktimeNumber.value > 0 && startBtn.disabled ) {
+  if( time <  (worktimeNumber.value * 60) && time > 0 ) {
     clearInterval(count);
+    time = 0;
     title.innerHTML = "0:00";
     countdown.innerHTML = "0:00";
-    startBtn.disabled = false;
-    cancelBtn.disabled = true;
+    startBtn.innerHTML = "Start";
+  } else {
+    timer(worktimeNumber.value);
+    startBtn.innerHTML = "Cancel";
   }
 }
+
