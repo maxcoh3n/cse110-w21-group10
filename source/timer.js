@@ -34,14 +34,14 @@ function timer(startTime){
 
 const startBtn = document.getElementById("start-btn");
 startBtn.onclick = function() {
-  if( time <  (worktimeNumber.value * 60) && time > 0 ) {
+  if( time <  (worktimeNumber.value * 60) && time > 0 ) { /* TODO replace worktimeNumber.value */
     clearInterval(count);
     time = 0;
     title.innerHTML = "0:00";
     countdown.innerHTML = "0:00";
     startBtn.innerHTML = "Start";
   } else {
-    timer(worktimeNumber.value);
+    timer(worktimeNumber.value); /* TODO replace worktimeNumber.value */
     startBtn.innerHTML = "Cancel";
   }
 }
