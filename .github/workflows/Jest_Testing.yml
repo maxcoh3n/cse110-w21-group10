@@ -17,8 +17,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       # Runs a single command using the runners shell
-      - name: Run jest
-        run: |
-        npm config set user 0
-        npm config set unsafe-perm true
-        npm test
+      - name: Set User 
+        run: npm config set user 0
+      - name: Set Permission
+        run: npm config set unsafe-perm true
+      - name: Run Test
+        run: npm test
