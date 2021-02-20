@@ -1,14 +1,14 @@
-let maxTimer = localStorage.getItem('Timer');
+let maxTimer = localStorage.getItem('workMin');
 if (maxTimer == null)
-    localStorage.setItem('Timer', '25:00');
+    localStorage.setItem('workMin', '25');
 
-let maxShortBreak = localStorage.getItem('shortBreak');
+let maxShortBreak = localStorage.getItem('shortBreakMin');
 if (maxShortBreak == null)
-    localStorage.setItem('shortBreak', '0');
+    localStorage.setItem('shortBreakMin', '5');
 
-let maxLongBreak = localStorage.getItem('longBreak');
+let maxLongBreak = localStorage.getItem('longBreakMin');
 if (maxLongBreak == null)
-    localStorage.setItem('longBreak', '0')
+    localStorage.setItem('longBreakMin', '15')
 
 let numShortBreaks = localStorage.getItem('numShortBreaks') // nums of short break berfore long break
 if (numShortBreaks == null)
@@ -38,16 +38,15 @@ completed.onclick = function() {
     }
 }
 
-
 function logs()
 {
     var today = new Date();
     var day = String(today.getDate()).padStart(2, '0');
     var month = String(today.getMonth() + 1).padStart(2, '0'); 
-    today = mm + '/' + dd + ': ';
+    today = month + '/' + day + ': ';
     for (var i = 0; i < numtasks; i++)
     {
-        if (document.getElementById(tasks[i]).checked == true)
+        if (completedTasks[i])
         {
             console.log(today + tasks[i]);
         }
