@@ -24,8 +24,8 @@ const shortBreaktimeSlider = document.getElementById('short-breaktime-slider');
 const shortBreaktimeNumber = document.getElementById('short-breaktime-number');
 const longBreaktimeSlider = document.getElementById('long-breaktime-slider');
 const longBreaktimeNumber = document.getElementById('long-breaktime-number');
-const numSessionsSlider = document.getElementById('numbreaks-slider');
-const numSessionsNumber = document.getElementById('numbreaks-number');
+const numSessionsSlider = document.getElementById('num-sessions-slider');
+const numSessionsNumber = document.getElementById('num-sessions-number');
 
 worktimeSlider.addEventListener('input', updateWorktime);
 worktimeNumber.addEventListener('input', updateWorktime);
