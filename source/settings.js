@@ -24,8 +24,8 @@ const shortBreaktimeSlider = document.getElementById('short-breaktime-slider');
 const shortBreaktimeNumber = document.getElementById('short-breaktime-number');
 const longBreaktimeSlider = document.getElementById('long-breaktime-slider');
 const longBreaktimeNumber = document.getElementById('long-breaktime-number');
-const numbreaksSlider = document.getElementById('numbreaks-slider');
-const numbreaksNumber = document.getElementById('numbreaks-number');
+const numSessionsSlider = document.getElementById('numbreaks-slider');
+const numSessionsNumber = document.getElementById('numbreaks-number');
 
 worktimeSlider.addEventListener('input', updateWorktime);
 worktimeNumber.addEventListener('input', updateWorktime);
@@ -33,8 +33,8 @@ shortBreaktimeSlider.addEventListener('input', updateShortBreaktime);
 shortBreaktimeNumber.addEventListener('input', updateShortBreaktime);
 longBreaktimeSlider.addEventListener('input', updateLongBreaktime);
 longBreaktimeNumber.addEventListener('input', updateLongBreaktime);
-numbreaksSlider.addEventListener('input', updateNumbreaks);
-numbreaksNumber.addEventListener('input', updateNumbreaks);
+numSessionsSlider.addEventListener('input', updateNumSessions);
+numSessionsNumber.addEventListener('input', updateNumSessions);
 
 function updateWorktime(e){
   let num = e.target.value;
@@ -54,8 +54,8 @@ function updateLongBreaktime(e){
   longBreaktimeNumber.value = num;
 }
 
-function updateNumbreaks(e){
+function updateNumSessions(e){
   let num = e.target.value;
-  numbreaksSlider.value = num;
-  numbreaksNumber.value = num;
+  numSessionsSlider.value = num;
+  numSessionsNumber.value = num;
 }
