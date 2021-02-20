@@ -36,8 +36,6 @@ function timer(){
     time--;
   }
 
-}
-
 startBtn.onclick = function() {
   timer();
 }
