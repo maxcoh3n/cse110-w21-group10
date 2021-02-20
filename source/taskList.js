@@ -19,7 +19,7 @@ addTask.onclick = function() {
 
 const completed = document.getElementById("complete-task-btn")
 completed.onclick = function() {
-    console.log("complete");
+    // console.log("complete");
     // var completedTasks = [];
     // for (var i = 0; i < numtasks; i++)
     // {
@@ -44,4 +44,3 @@ function logs()
     }
 }
 //task list to do, and completed tasks along with date, rating, associated task
-//default empty array for completedTasks and upcomingTasks
