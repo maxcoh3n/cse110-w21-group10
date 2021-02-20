@@ -10,15 +10,15 @@ let maxLongBreak = localStorage.getItem('longBreakMin');
 if (maxLongBreak == null)
     localStorage.setItem('longBreakMin', '15')
 
-let numShortBreaks = localStorage.getItem('numShortBreaks') // nums of short break berfore long break
-if (numShortBreaks == null)
-    localStorage.setItem('numShortBreaks', '4');
+let numSessions = localStorage.getItem('numSessions') 
+if (numSessions == null)
+    localStorage.setItem('numSessions', '4');
 
-let completedTasks = localStorage.getItem('completedTasks') // nums of short break berfore long break
+let completedTasks = localStorage.getItem('completedTasks') 
 if (completedTasks == null)
     localStorage.setItem('completedTasks', '[]');
 
-let upcomingTasks = localStorage.getItem('upcomingTasks') // nums of short break berfore long break
+let upcomingTasks = localStorage.getItem('upcomingTasks') 
 if (upcomingTasks == null)
     localStorage.setItem('upcomingTasks', '[]');
 
