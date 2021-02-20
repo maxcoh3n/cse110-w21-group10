@@ -1,5 +1,5 @@
 let maxTimer = localStorage.getItem('workMin');
-if (maxTimer == null)
+if (!maxTimer)
     localStorage.setItem('workMin', '25');
 
 let maxShortBreak = localStorage.getItem('shortBreakMin');
@@ -12,11 +12,17 @@ if (maxLongBreak == null)
 
 let numShortBreaks = localStorage.getItem('numShortBreaks') // nums of short break berfore long break
 if (numShortBreaks == null)
-    localStorage.setItem('numShortBreaks', '0');
+    localStorage.setItem('numShortBreaks', '4');
 
-// let numTasks = localStorage.getItem('numTasks')
-// if (numTasks == null)
-//     localStorage.setItem('numTasks', '0')
+let completedTasks = localStorage.getItem('completedTasks') // nums of short break berfore long break
+if (completedTasks == null)
+    localStorage.setItem('completedTasks', '[]');
+
+let upcomingTasks = localStorage.getItem('upcomingTasks') // nums of short break berfore long break
+if (upcomingTasks == null)
+    localStorage.setItem('upcomingTasks', '[]');
+
+
 
 addTask.onclick = function() {                          // Don't know the button name on html yet
     var tasks = [];
