@@ -1,21 +1,32 @@
-addTask.onclick = function() {                          // Don't know the button name on html yet
-    var tasks = [];
-    //tasks[numTasks] = prompt("Enter new task:");
-    if (tasks != null)
-    {
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        tasks.push(JSON.parse(localStorage.getItem('tasks')));
-        //numtasks++;
+
+
+const addTask = document.getElementById("new-task-btn");
+addTask.onclick = function() {                     
+    let tasksArray = localStorage.getItem("upcomingTasks");
+    tasksArray = JSON.parse(tasksArray);  
+
+    const newTaskInput = document.getElementById("new-task");
+
+    if(newTaskInput.value){
+        tasksArray.push(newTaskInput.value);
+        localStorage.setItem("upcomingTasks", JSON.stringify(tasksArray));
+        newTaskInput.value = "";
     }
+
+    tasksArray = localStorage.getItem("upcomingTasks");
 }
+
+
+const completed = document.getElementById("complete-task-btn")
 completed.onclick = function() {
-    var completedTasks = [];
-    for (var i = 0; i < numtasks; i++)
-    {
-        completedTasks[i] = false;
-        if (document.getElementById(tasks[i]).checked == true)      //.condition for if tasks in checked
-            completedTasks[i] = true;                               // mark task as complete if condition is true. 
-    }
+    console.log("complete");
+    // var completedTasks = [];
+    // for (var i = 0; i < numtasks; i++)
+    // {
+    //     completedTasks[i] = false;
+    //     if (document.getElementById(tasks[i]).checked == true)      //.condition for if tasks in checked
+    //         completedTasks[i] = true;                               // mark task as complete if condition is true. 
+    // }
 }
 
 function logs()
