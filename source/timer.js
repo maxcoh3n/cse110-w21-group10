@@ -1,19 +1,27 @@
 //Timer
 
+const countdown = document.getElementById('countdown');
+const title = document.getElementById('title-countdown');
+const startBtn = document.getElementById("start-btn");
+
 /**
 timer
 Uses the countdown h1 to set and run a timer of length designated by the startTime parameter.
-@param    startTime the length of the timer in minutes.
 */
 
-function timer(startTime){
+function timer(){
 
-  let time = startTime * 60;
-
-  const countdown = document.getElementById('countdown');
-  const title = document.getElementById('title-countdown');
-
-  setInterval(updateCountdown, 1000);
+  if( startBtn.innerHTML == "Start" ) {
+    time = worktimeNumber.value * 60;
+    count = setInterval(updateCountdown, 1000);
+    startBtn.innerHTML = "Cancel";
+  } else {
+    time = 0;
+    clearInterval(count);
+    title.innerHTML = "0:00";
+    countdown.innerHTML = "0:00";
+    startBtn.innerHTML = "Start";
+  }
 
   function updateCountdown() {
     time = time < 0 ? 0 : time;
@@ -29,9 +37,6 @@ function timer(startTime){
   }
 }
 
-
-const startBtn = document.getElementById("start-btn");
 startBtn.onclick = function() {
-  timer(worktimeNumber.value);
-  startBtn.disabled = true;
+  timer();
 }
