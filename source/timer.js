@@ -35,6 +35,7 @@ function timer(){
     countdown.innerHTML = `${mins}:${sec}`;
     time--;
   }
+}
 
 startBtn.onclick = function() {
   timer();
