@@ -29,6 +29,10 @@
 
 Chosen option: "[option 1]", because [justification. e.g., only option, which meets k.o. criterion decision driver | which resolves force force | … | comes out best (see below)].
 
+-- OR --
+
+* Bulleted list explaining list of smaller decisions bundled together
+
 ## Caveats/Workarounds
 <!--> optional -->
 
