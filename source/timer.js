@@ -12,8 +12,10 @@ Uses the countdown h1 to set and run a timer of length designated by the startTi
 function timer(){
 
   if( startBtn.innerHTML == "Start" ) {
+    const devMode = document.getElementById("dev-mode");
+
     time = localStorage.getItem('workMins') * 60;
-    count = setInterval(updateCountdown, 1000);
+    count = setInterval(updateCountdown, devMode.checked? 10: 1000);
     startBtn.innerHTML = "Cancel";
   } else {
     time = 0;
