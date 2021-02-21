@@ -27,6 +27,15 @@ const longBreaktimeNumber = document.getElementById('long-breaktime-number');
 const numSessionsSlider = document.getElementById('num-sessions-slider');
 const numSessionsNumber = document.getElementById('num-sessions-number');
 
+worktimeSlider.value = localStorage.getItem('workMin');
+worktimeNumber.value = localStorage.getItem('workMin');
+shortBreaktimeSlider.value = localStorage.getItem('shortBreakMin');
+shortBreaktimeNumber.value = localStorage.getItem('shortBreakMin');
+longBreaktimeSlider.value = localStorage.getItem('longBreakMin');
+longBreaktimeNumber.value = localStorage.getItem('longBreakMin');
+numSessionsSlider.value = localStorage.getItem('numSessions');
+numSessionsNumber.value = localStorage.getItem('numSessions');
+
 worktimeSlider.addEventListener('input', updateWorktime);
 worktimeNumber.addEventListener('input', updateWorktime);
 shortBreaktimeSlider.addEventListener('input', updateShortBreaktime);
@@ -40,22 +49,26 @@ function updateWorktime(e){
   let num = e.target.value;
   worktimeSlider.value = num;
   worktimeNumber.value = num;
+  localStorage.setItem('workMin', num);
 }
 
 function updateShortBreaktime(e){
   let num = e.target.value;
   shortBreaktimeSlider.value = num;
   shortBreaktimeNumber.value = num;
+  localStorage.setItem('shortBreakMin', num);
 }
 
 function updateLongBreaktime(e){
   let num = e.target.value;
   longBreaktimeSlider.value = num;
   longBreaktimeNumber.value = num;
+  localStorage.setItem('longBreakMin', num);
 }
 
 function updateNumSessions(e){
   let num = e.target.value;
   numSessionsSlider.value = num;
   numSessionsNumber.value = num;
+  localStorage.setItem('numSessions', num);
 }
