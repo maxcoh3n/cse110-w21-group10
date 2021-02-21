@@ -56,11 +56,21 @@ h1 {
     font-family: 'Lora', serif;
 }
 
-/*
+
 #canvas-container {
     text-align: center;
+    position: relative;
+    left: 100px;
 }
 canvas {
     display: inline;
+
 }
-*/
+
+#myCanvas{
+    position: relative;
+    text-align: center;
+    top: 100px; 
+    background-color: aqua;
+}
+
