@@ -22,8 +22,8 @@ function timer(){
   if( startBtn.innerHTML == "Start" ) {
     const devMode = document.getElementById("dev-mode");
 
-    time = 5;
-    //time = localStorage.getItem('workMins') * 60;
+    
+    time = localStorage.getItem('workMins') * 60;
     count = setInterval(updateCountdown, devMode.checked? 10: 1000);
     startBtn.innerHTML = "Cancel";
   } else {
