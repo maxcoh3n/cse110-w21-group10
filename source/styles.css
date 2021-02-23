@@ -80,33 +80,43 @@ input[type="range"]{
   right: 50%;
 }
 
-/* Pomo log using checkbox --------------------------------------------------*/
+/* Pomo log -----------------------------------------------------------------*/
+#pomo-toggle-container {
+  width: 300px;
+  --orange: #ff8566;
+  --orange-shadow: #f07c5f;
+  --label-color: #9b2406;
+  --light-orange: #ffc2b3;
+  --background: rgb(245, 245, 245);
+}
+
 #pomo-toggle {
   display: none;
 }
 
 .pomo-toggle:checked ~ .pomo-log {
-  max-height: 200px;
+  max-height: 400px;
   overflow: scroll;
-  background-color: rgb(238, 238, 238);
+  background-color: var(--background);
+  transition: max-height .4s ease-in;
 }
 
-label + ol {
+.pomo-toggle:checked ~ .pomo-log * {
+  background-color: var(--background);
+}
+
+.pomo-log {
   list-style: none;
   position: relative;
-  padding: 0;
-  margin-top: 5px;
+  max-height: 0;
+  padding: 5px;
+  margin-top: 8px;
   overflow: hidden;
+  animation: .3s overflow-animation;
+  transition: max-height .1s;
 }
 
-#pomo-toggle-container {
-  width: 300px;
-  margin-left: 400px;
-  --orange: #ff8566;
-  --light-orange: #ffc2b3;
-}
-
-label + ol > li {
+.pomo-log > li {
   position: relative;
 }
 
@@ -115,13 +125,30 @@ label + ol > li {
   padding: 5px 10px;
   border-radius: 5px;
   background-color: var(--light-orange);
-  color: #521101;
-  box-shadow: 1px 1px 2px #b95c44;
+  color: var(--label-color);
+  box-shadow: 2px 2px 3px var(--orange-shadow);
 }
 
-.pomo-log {
-  max-height: 0;
-  transition: max-height 0.5s ease;
+#pomo-label:active {
+  transition: box-shadow .05s ease-in;
+  box-shadow: none;
 }
 
-/* --------------------------------------------------------------------------*/
+#daily-log-container > h6 {
+  padding: 0;
+  margin: 0;
+  font-size: 10pt;
+}
+
+@keyframes overflow-animation {
+  from { overflow: auto }
+}
+/* End pomolog */
+
+/* Task Selector */
+#task-selector-container {
+  --border-color: black;
+  border: 2px solid var(--border-color);
+  width: fit-content;
+  padding: .35em;
+}
