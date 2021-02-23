@@ -21,4 +21,4 @@ if (!WorkOrBreak) {
   localStorage.setItem('WorkOrBreak', 'work');
 }
 let NumcurrentSech = localStorage.getItem('NumcurrentSech');
-if (NumcurrentSech != 0) localStorage.setItem('NumcurrentSech', '0');
+if (!NumcurrentSech) localStorage.setItem('NumcurrentSech', '0');
