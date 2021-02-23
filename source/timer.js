@@ -6,9 +6,11 @@ const startBtn = document.getElementById("start-btn");
 
 /*sound*/
 const sound = document.getElementById("alarm-sound");
-function startMusic() {
+
+function startSound() {
   sound.play();
 }
+
 
 
 
@@ -22,7 +24,7 @@ function timer(){
   if( startBtn.innerHTML == "Start" ) {
     const devMode = document.getElementById("dev-mode");
 
-
+    
     time = localStorage.getItem('workMins') * 60;
     count = setInterval(updateCountdown, devMode.checked? 10: 1000);
     startBtn.innerHTML = "Cancel";
@@ -50,7 +52,7 @@ function timer(){
     countdown.innerHTML = `${mins}:${sec}`;
     time--;
     if (time === 0) {
-      startMusic();
+      startSound();
     }
   }
 }
