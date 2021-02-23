@@ -1,6 +1,5 @@
 function renderOne(taskInput){
-  let taskContainer = document.getElementById("task-list-container");
-  let hr = document.getElementById("hr");
+  let taskList = document.getElementById("task-list");
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
 
@@ -11,17 +10,15 @@ function renderOne(taskInput){
   if(tasksArray.length == 1){
     task.setAttribute("checked", "true");
   }
-  taskContainer.insertBefore(task, hr);
+  taskList.appendChild(task);
 
   let label = document.createElement("label");
   label.setAttribute("for", taskInput);
   label.innerHTML = taskInput + "<br>";
-  taskContainer.insertBefore(label, hr);
+  taskList.appendChild(label);
 }
 
 function renderAll(){
-  let taskContainer = document.getElementById("task-list-container");
-  let hr = document.getElementById("hr");
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
 
