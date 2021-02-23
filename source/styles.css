@@ -151,4 +151,17 @@ input[type="range"]{
   border: 2px solid var(--border-color);
   width: fit-content;
   padding: .35em;
+/* --------------------------------------------------------------------------*/
+
+
+#task-list-container{
+  position: fixed;
+  right: 50px;
+  top: 50px;
+}
+
+#complete-task-btn{
+  position: fixed;
+  right: 75px;
+  top: 75px;
 }
