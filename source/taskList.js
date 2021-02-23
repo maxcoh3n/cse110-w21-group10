@@ -14,6 +14,9 @@ function renderOne(taskInput){
 
   let label = document.createElement("label");
   label.setAttribute("for", taskInput);
+
+  label.setAttribute("id", "label" + taskInput);
+
   label.innerHTML = taskInput + "<br>";
   taskList.appendChild(label);
 }
@@ -49,14 +52,24 @@ addTask.onclick = function() {
 
 const completed = document.getElementById("complete-task-btn")
 completed.onclick = function() {
-    // console.log("complete");
-    // var completedTasks = [];
-    // for (var i = 0; i < numtasks; i++)
-    // {
-    //     completedTasks[i] = false;
-    //     if (document.getElementById(tasks[i]).checked == true)      //.condition for if tasks in checked
-    //         completedTasks[i] = true;                               // mark task as complete if condition is true.
-    // }
+
+  let taskList = document.getElementById("task-list");
+
+  let taskArray = [];
+
+    for( let box of taskList.childNodes ) {
+      if( box.checked ) {
+        let label = document.getElementById("label" + box.id);
+        label.style.textDecoration = 'line-through';
+      } else {
+        if( box.name == 'task-list' ) {
+          taskArray.push(box.id);
+        }
+      }
+    }
+
+    localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
+
 }
 
 function logs()
