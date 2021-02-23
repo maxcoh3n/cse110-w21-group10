@@ -1,24 +1,24 @@
 //Settings
 
-var modal = document.getElementById("my-modal");
-var settingsBtn = document.getElementById("settings-btn");
-var span = document.getElementsByClassName("close")[0];
+var modal = document.getElementById('my-modal');
+var settingsBtn = document.getElementById('settings-btn');
+var span = document.getElementsByClassName('close')[0];
 
-settingsBtn.onclick = function() {
-  modal.style.display = "block";
-}
+settingsBtn.onclick = function () {
+  modal.style.display = 'block';
+};
 
-span.onclick = function() {
-  modal.style.display = "none";
-}
+span.onclick = function () {
+  modal.style.display = 'none';
+};
 
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target == modal) {
-    modal.style.display = "none";
+    modal.style.display = 'none';
   }
-}
+};
 
-const worktimeSlider = document.getElementById("worktime-slider");
+const worktimeSlider = document.getElementById('worktime-slider');
 const worktimeNumber = document.getElementById('worktime-number');
 const shortBreaktimeSlider = document.getElementById('short-breaktime-slider');
 const shortBreaktimeNumber = document.getElementById('short-breaktime-number');
@@ -45,28 +45,30 @@ longBreaktimeNumber.addEventListener('input', updateLongBreaktime);
 numSessionsSlider.addEventListener('input', updateNumSessions);
 numSessionsNumber.addEventListener('input', updateNumSessions);
 
-function updateWorktime(e){
+function updateWorktime(e) {
   let num = e.target.value;
   worktimeSlider.value = num;
   worktimeNumber.value = num;
   localStorage.setItem('workMins', num);
+  document.getElementById('countdown').innerHTML =
+    localStorage.getItem('workMins') + ':00';
 }
 
-function updateShortBreaktime(e){
+function updateShortBreaktime(e) {
   let num = e.target.value;
   shortBreaktimeSlider.value = num;
   shortBreaktimeNumber.value = num;
   localStorage.setItem('shortBreakMins', num);
 }
 
-function updateLongBreaktime(e){
+function updateLongBreaktime(e) {
   let num = e.target.value;
   longBreaktimeSlider.value = num;
   longBreaktimeNumber.value = num;
   localStorage.setItem('longBreakMins', num);
 }
 
-function updateNumSessions(e){
+function updateNumSessions(e) {
   let num = e.target.value;
   numSessionsSlider.value = num;
   numSessionsNumber.value = num;
