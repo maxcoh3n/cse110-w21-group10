@@ -1,0 +1,22 @@
+{
+  "name": "cse110-w21-group10",
+  "version": "1.0.0",
+  "description": "A pomodoro timer for cse 110 by group 10",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cse110-w21-group10/cse110-w21-group10.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cse110-w21-group10/cse110-w21-group10/issues"
+  },
+  "homepage": "https://github.com/cse110-w21-group10/cse110-w21-group10#readme",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}
