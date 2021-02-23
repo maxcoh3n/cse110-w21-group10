@@ -125,3 +125,16 @@ label + ol > li {
 }
 
 /* --------------------------------------------------------------------------*/
+
+
+#task-list-container{
+  position: fixed;
+  right: 50px;
+  top: 50px;
+}
+
+#complete-task-btn{
+  position: fixed;
+  right: 75px;
+  top: 75px;
+}
