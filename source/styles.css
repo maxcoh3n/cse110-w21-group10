@@ -151,6 +151,7 @@ input[type="range"]{
   border: 2px solid var(--border-color);
   width: fit-content;
   padding: .35em;
+}
 /* --------------------------------------------------------------------------*/
 
 
