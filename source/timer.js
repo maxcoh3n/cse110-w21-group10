@@ -26,7 +26,6 @@ function timer() {
     sound.pause();
     sound.currentTime = 0;
     updateCountdown(false);
-
     startBtn.innerHTML = "Start";
   }
 }
@@ -43,16 +42,16 @@ function updateCountdown(IsOn) {
     }
     count = setInterval(updateTime, devMode.checked ? 10 : 1000);
     localStorage.setItem("intervalID", count);
-    
   } else {
     document.getElementById("settings-btn").style.display = "block";
     clearInterval(localStorage.getItem("intervalID"));
     if (localStorage.getItem("workOrBreak") == "work") {
       countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
-    } else if (localStorage.getItem("workOrBreak") == "break") {
-      countdown.innerHTML = `${localStorage.getItem("shortBreakMins")}:00`;
-    } else if (localStorage.getItem("workOrBreak") == "longBreak") {
-      countdown.innerHTML = `${localStorage.getItem("longBreakMins")}:00`;
+      title.innerHTML = `${localStorage.getItem("workMins")}:00`;
+    } else if (localStorage.getItem("workOrBreak") != "work") {
+      localStorage.setItem("workOrBreak", "work");
+      countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
+      title.innerHTML = `${localStorage.getItem("workMins")}:00`;
     }
   }
 
@@ -75,11 +74,15 @@ function updateCountdown(IsOn) {
           "numCurrentSech",
           1 + Number(localStorage.getItem("numCurrentSech"))
         );
-        console.log(localStorage.getItem("numCurrentSech"));
+        console.log(
+          "Testing: Work session number " +
+            localStorage.getItem("numCurrentSech")
+        );
         if (
           localStorage.getItem("numCurrentSech") >=
           localStorage.getItem("numSessions")
         ) {
+          localStorage.setItem("numCurrentSech", "0");
           localStorage.setItem("workOrBreak", "longBreak");
         } else {
           localStorage.setItem("workOrBreak", "break");
@@ -90,7 +93,6 @@ function updateCountdown(IsOn) {
         updateCountdown(false);
         return;
       } else if (localStorage.getItem("workOrBreak") == "longBreak") {
-        localStorage.setItem("numCurrentSech", "0");
         localStorage.setItem("workOrBreak", "work");
         startBtn.innerHTML = "Start";
         updateCountdown(false);
