@@ -58,13 +58,14 @@ completed.onclick = function() {
   let taskArray = [];
 
     for( let box of taskList.childNodes ) {
+      let label = document.getElementById("label" + box.id);
       if( box.checked ) {
-        let label = document.getElementById("label" + box.id);
         label.style.textDecoration = 'line-through';
+        completed.disabled = true;
       } else {
         if( box.name == 'task-list' ) {
           taskArray.push(box.id);
-        }
+          }
       }
     }
 
