@@ -4,6 +4,8 @@ const countdown = document.getElementById("countdown");
 const title = document.getElementById("title-countdown");
 const startBtn = document.getElementById("start-btn");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
+const workBreakLabel = document.getElementById("work-break-label");
+
 
 /*sound*/
 const sound = document.getElementById("alarm-sound");
@@ -53,9 +55,19 @@ function updateCountdown(IsOn) {
       countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
       title.innerHTML = `${localStorage.getItem("workMins")}:00`;
     }
+    workBreakLabel.style.display = "none";
   }
 
   function updateTime() {
+    if(localStorage.getItem("workOrBreak") == "work"){
+      workBreakLabel.style.display = "block";
+      workBreakLabel.innerHTML = "Work Time";
+    }
+    if(localStorage.getItem("workOrBreak") == "break" || localStorage.getItem("workOrBreak") == "longBreak"){
+      workBreakLabel.style.display = "block";
+      workBreakLabel.innerHTML = "Break Time";
+    }
+
     time = time < 0 ? 0 : time;
 
     let mins = Math.floor(time / 60);
