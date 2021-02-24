@@ -146,9 +146,10 @@ input[type="range"]{
 /* End pomolog */
 
 /* Task Selector */
-#task-selector-container {
+#curr-task {
   --border-color: black;
   border: 2px solid var(--border-color);
   width: fit-content;
   padding: .35em;
+  font-size: 12pt;
 }
