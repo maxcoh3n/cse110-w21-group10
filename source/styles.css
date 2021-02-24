@@ -153,3 +153,17 @@ input[type="range"]{
   padding: .35em;
   font-size: 12pt;
 }
+/* --------------------------------------------------------------------------*/
+
+
+#task-list-container{
+  position: fixed;
+  right: 50px;
+  top: 50px;
+}
+
+#complete-task-btn{
+  position: fixed;
+  right: 75px;
+  top: 75px;
+}
