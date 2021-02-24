@@ -1,3 +1,5 @@
+const completed = document.getElementById("complete-task-btn")
+
 function renderOne(taskInput){
   let taskList = document.getElementById("task-list");
   let tasksArray = localStorage.getItem("upcomingTasks");
@@ -50,7 +52,6 @@ addTask.onclick = function() {
 }
 
 
-const completed = document.getElementById("complete-task-btn")
 completed.onclick = function() {
 
   let taskList = document.getElementById("task-list");
@@ -65,7 +66,7 @@ completed.onclick = function() {
       } else {
         if( box.name == 'task-list' ) {
           taskArray.push(box.id);
-          }
+        }
       }
     }
 

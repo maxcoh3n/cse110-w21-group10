@@ -3,7 +3,6 @@
 const countdown = document.getElementById("countdown");
 const title = document.getElementById("title-countdown");
 const startBtn = document.getElementById("start-btn");
-// const completed = document.getElementById("complete-task-btn")
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
 
 /**
@@ -13,8 +12,17 @@ Uses the countdown h1 to set and run a timer of length designated by the startTi
 
 function timer() {
   if (startBtn.innerHTML == "Start") {
-    startBtn.innerHTML = "cancel";
     completed.disabled = true;
+    let taskList = document.getElementById("task-list");
+    for( let task of taskList.childNodes ) {
+      let label = document.getElementById("label" + task.id);
+      if( label != null && label.style.textDecoration == 'line-through' ) {
+        label.remove();
+        task.remove();
+      }
+    }
+
+    startBtn.innerHTML = "cancel";
     document.getElementById("settings-btn").style.display = "none";
     updateCountdown(true);
   } else {
