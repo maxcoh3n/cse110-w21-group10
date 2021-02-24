@@ -80,6 +80,17 @@ input[type="range"]{
   right: 50%;
 }
 
+#work-break-label {
+  position: absolute;
+  top: 55%;
+  right: 47%;
+  --border-color: black;
+  border: 2px solid var(--border-color);
+  width: fit-content;
+  padding: 0.35em;
+  display: none;
+}
+
 /* Pomo log using checkbox --------------------------------------------------*/
 #pomo-toggle {
   display: none;
