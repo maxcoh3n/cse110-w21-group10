@@ -49,6 +49,13 @@ addTask.onclick = function() {
     tasksArray = localStorage.getItem("upcomingTasks");
 }
 
+const newTaskInput = document.getElementById("new-task");
+newTaskInput.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    addTask.click();
+  }
+});
 
 const completed = document.getElementById("complete-task-btn")
 completed.onclick = function() {
