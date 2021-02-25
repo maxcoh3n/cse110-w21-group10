@@ -9,9 +9,11 @@ tasks.addEventListener("change", function (event) {
 
 /* Current Tasks displays the only task when the first task is added */
 const checkOneTaskSize = function () {
-  if (tasks.children.length == 2) {
+  let storedTasks = localStorage.getItem("upcomingTasks");
+  storedTasks = JSON.parse(storedTasks);
+  if (storedTasks.length == 1) {
     document.getElementById("curr-task").children[0].innerHTML =
-      tasks.children[0].id;
+      storedTasks[0];
   }
 };
 
@@ -25,7 +27,6 @@ function checkOneStoredTask() {
   if (JSON.parse(storedTasks).length == 1) {
     document.getElementById("curr-task").children[0].innerHTML =
       tasks.children[0].id;
-    console.log("helo");
   }
 }
 checkOneStoredTask();

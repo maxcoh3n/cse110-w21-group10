@@ -1,4 +1,4 @@
-function renderOne(taskInput){
+function renderOne(taskInput) {
   let taskList = document.getElementById("task-list");
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
@@ -7,7 +7,7 @@ function renderOne(taskInput){
   task.setAttribute("type", "radio");
   task.setAttribute("name", "task-list");
   task.setAttribute("id", taskInput);
-  if(tasksArray.length == 1){
+  if (tasksArray.length == 1) {
     task.setAttribute("checked", "true");
   }
   taskList.appendChild(task);
@@ -21,11 +21,11 @@ function renderOne(taskInput){
   taskList.appendChild(label);
 }
 
-function renderAll(){
+function renderAll() {
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
 
-  for(i = 0; i < tasksArray.length; i++){
+  for (i = 0; i < tasksArray.length; i++) {
     renderOne(tasksArray[i]);
   }
 }
@@ -33,64 +33,67 @@ function renderAll(){
 renderAll();
 
 const addTask = document.getElementById("new-task-btn");
-addTask.onclick = function() {
-    let tasksArray = localStorage.getItem("upcomingTasks");
-    tasksArray = JSON.parse(tasksArray);
+addTask.onclick = function () {
+  let tasksArray = localStorage.getItem("upcomingTasks");
+  tasksArray = JSON.parse(tasksArray);
 
-    const newTaskInput = document.getElementById("new-task");
+  const newTaskInput = document.getElementById("new-task");
 
-    if(newTaskInput.value){
-        tasksArray.push(newTaskInput.value);
-        localStorage.setItem("upcomingTasks", JSON.stringify(tasksArray));
-        renderOne(newTaskInput.value);
-        newTaskInput.value = "";
-    }
+  if (newTaskInput.value) {
+    tasksArray.push(newTaskInput.value);
+    localStorage.setItem("upcomingTasks", JSON.stringify(tasksArray));
+    renderOne(newTaskInput.value);
+    newTaskInput.value = "";
+  }
 
-    tasksArray = localStorage.getItem("upcomingTasks");
-}
+  tasksArray = localStorage.getItem("upcomingTasks");
+};
 
 const newTaskInput = document.getElementById("new-task");
-newTaskInput.addEventListener("keyup", function(event) {
+newTaskInput.addEventListener("keyup", function (event) {
   if (event.keyCode === 13) {
     event.preventDefault();
     addTask.click();
   }
 });
 
-const completed = document.getElementById("complete-task-btn")
-completed.onclick = function() {
-
+const completed = document.getElementById("complete-task-btn");
+completed.onclick = function () {
   let taskList = document.getElementById("task-list");
 
   let taskArray = [];
 
-    for( let box of taskList.childNodes ) {
-      if( box.checked ) {
-        let label = document.getElementById("label" + box.id);
-        label.style.textDecoration = 'line-through';
-      } else {
-        if( box.name == 'task-list' ) {
-          taskArray.push(box.id);
-        }
+  for (let box of taskList.childNodes) {
+    if (box.checked) {
+      let label = document.getElementById("label" + box.id);
+      label.style.textDecoration = "line-through";
+    } else {
+      if (box.name == "task-list" && document.getElementById("label" + box.id).style.textDecoration != "line-through") {
+        taskArray.push(box.id);
       }
     }
+  }
 
-    localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
+  localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
+  if (taskArray.length > 0) {
+    document.getElementById(taskArray[0]).checked = true;
+    document.getElementById("curr-task").children[0].innerHTML =
+      taskArray[0];
+  } else {
+    document.getElementById("curr-task").children[0].innerHTML = "None";
+  }
+  console.log(localStorage.getItem("upcomingTasks"));
+};
 
-}
-
-function logs()
-{
-    var today = new Date();
-    var day = String(today.getDate()).padStart(2, '0');
-    var month = String(today.getMonth() + 1).padStart(2, '0');
-    today = month + '/' + day + ': ';
-    for (var i = 0; i < numtasks; i++)
-    {
-        if (completedTasks[i])
-        {
-            console.log(today + tasks[i]);
-        }
+function logs() {
+  var today = new Date();
+  var day = String(today.getDate()).padStart(2, "0");
+  var month = String(today.getMonth() + 1).padStart(2, "0");
+  today = month + "/" + day + ": ";
+  for (var i = 0; i < numtasks; i++) {
+    if (completedTasks[i]) {
+      console.log(today + tasks[i]);
     }
+  }
 }
 //task list to do, and completed tasks along with date, rating, associated task
