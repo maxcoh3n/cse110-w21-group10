@@ -17,8 +17,8 @@ let upcomingTasks = localStorage.getItem("upcomingTasks");
 if (!upcomingTasks) localStorage.setItem("upcomingTasks", "[]");
 
 let workOrBreak = localStorage.getItem("workOrBreak");
-if (!workOrBreak) {
+if (workOrBreak != "work") {
   localStorage.setItem("workOrBreak", "work");
 }
 let numCurrentSech = localStorage.getItem("numCurrentSech");
-if (!numCurrentSech) localStorage.setItem("numCurrentSech", "0");
+if (numCurrentSech != 0) localStorage.setItem("numCurrentSech", "0");
