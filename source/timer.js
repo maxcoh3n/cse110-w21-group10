@@ -66,6 +66,7 @@ function updateCountdown(IsOn) {
       title.innerHTML = `${localStorage.getItem("workMins")}:00`;
     }
     workBreakLabel.style.display = "none";
+    completed.disabled = false;
   }
 
   function updateTime() {
