@@ -19,6 +19,7 @@ Uses the countdown h1 to set and run a timer of length designated by the startTi
 */
 
 function timer() {
+  completed.innerHTML = "Completed";
   if (startBtn.innerHTML == "Start") {
     completed.disabled = true;
     let taskList = document.getElementById("task-list");
