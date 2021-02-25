@@ -1,16 +1,10 @@
-describe('timer ', ()=>{
-  test( ' does not crash', ()=>{
-    document.body.innerHTML =
-    '        <h1 id="countdown"></h1>    ' +
-    '        <button id="start-btn">Start</button>'     +
-    '            <h2>Task List</h2> <button id="complete-task-btn">Completed</button>    ' +
-    '<div id="task-list"> </div>' +
-    '    <button id="settings-btn">Settings</button>    ' +
-    '         <br><br><label for="dev-mode">Dev Mode</label><input type="checkbox" id="dev-mode">  '
-    ;
-    const {timer} = require('../timer'); // must be included after innerHTML is defined or else it will crash
+const functions = require('../functions.js');
 
-    expect(timer()).toBeUndefined();
-  })
+test('adds 1 + 2 to equal 3', () => {
+  expect(functions.functionAdd.add(1, 2)).toBe(3);
+});
+
+test('subtracts 3 - 2 to equal 1', () => {
+  expect(functions.functionSub.subtract(3, 2)).toBe(1);
 });
 
