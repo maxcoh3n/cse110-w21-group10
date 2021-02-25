@@ -7,7 +7,7 @@ tasks.addEventListener("change", function (event) {
   }
 });
 
-/* Current Tasks displays the only tasks if there is one task */
+/* Current Tasks displays the only task when the first task is added */
 const checkOneTaskSize = function () {
   if (tasks.children.length == 2) {
     document.getElementById("curr-task").children[0].innerHTML =
@@ -18,3 +18,14 @@ const checkOneTaskSize = function () {
 const mutations = { childList: true };
 const taskListObserver = new MutationObserver(checkOneTaskSize);
 taskListObserver.observe(tasks, mutations);
+
+/* Check if there already exists a task and only one task */
+function checkOneStoredTask() {
+  let storedTasks = localStorage.getItem("upcomingTasks");
+  if (JSON.parse(storedTasks).length == 1) {
+    document.getElementById("curr-task").children[0].innerHTML =
+      tasks.children[0].id;
+    console.log("helo");
+  }
+}
+checkOneStoredTask();
