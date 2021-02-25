@@ -1,4 +1,4 @@
-function renderOne(taskInput) {
+function renderOne(taskInput){
   let taskList = document.getElementById("task-list");
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
@@ -72,6 +72,7 @@ completed.onclick = function () {
     if (box.checked) {
       let label = document.getElementById("label" + box.id);
       label.style.textDecoration = "line-through";
+      completed.disabled = true;
     } else {
       if (
         box.name == "task-list" &&

@@ -6,7 +6,6 @@ const startBtn = document.getElementById("start-btn");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
 const workBreakLabel = document.getElementById("work-break-label");
 
-
 /*sound*/
 const sound = document.getElementById("alarm-sound");
 
@@ -21,10 +20,21 @@ Uses the countdown h1 to set and run a timer of length designated by the startTi
 
 function timer() {
   if (startBtn.innerHTML == "Start") {
+    completed.disabled = true;
+    let taskList = document.getElementById("task-list");
+    for( let task of taskList.childNodes ) {
+      let label = document.getElementById("label" + task.id);
+      if( label != null && label.style.textDecoration == 'line-through' ) {
+        label.remove();
+        task.remove();
+      }
+    }
+
     startBtn.innerHTML = "Cancel";
     document.getElementById("settings-btn").style.display = "none";
     updateCountdown(true);
   } else {
+    completed.disabled = false;
     sound.pause();
     sound.currentTime = 0;
     updateCountdown(false);
@@ -56,6 +66,7 @@ function updateCountdown(IsOn) {
       title.innerHTML = `${localStorage.getItem("workMins")}:00`;
     }
     workBreakLabel.style.display = "none";
+    completed.disabled = false;
   }
 
   function updateTime() {
