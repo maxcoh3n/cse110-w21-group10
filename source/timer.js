@@ -6,7 +6,6 @@ const startBtn = document.getElementById("start-btn");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
 const workBreakLabel = document.getElementById("work-break-label");
 
-
 /*sound*/
 const sound = document.getElementById("alarm-sound");
 

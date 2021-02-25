@@ -59,6 +59,7 @@ newTaskInput.addEventListener("keyup", function(event) {
   }
 });
 
+
 completed.onclick = function() {
 
   let taskList = document.getElementById("task-list");
