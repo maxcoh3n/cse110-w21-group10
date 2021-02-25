@@ -64,27 +64,38 @@ newTaskInput.addEventListener("keyup", function (event) {
 
 const completed = document.getElementById("complete-task-btn");
 completed.onclick = function () {
-  let taskList = document.getElementById("task-list");
 
+  let taskList = document.getElementById("task-list");
   let taskArray = [];
 
-  for (let box of taskList.childNodes) {
-    if (box.checked) {
+  if( completed.innerHTML == "Completed" ) {
+    for (let box of taskList.childNodes) {
+      if (box.checked) {
+        let label = document.getElementById("label" + box.id);
+        label.style.textDecoration = "line-through";
+        completed.innerHTML = "Undo";
+      } else {
+        if ( box.name == "task-list" &&
+        document.getElementById("label" + box.id).style.textDecoration != "line-through" ) {
+          taskArray.push(box.id);
+        }
+      }
+    }
+  } else {
+    for (let box of taskList.childNodes) {
       let label = document.getElementById("label" + box.id);
-      label.style.textDecoration = "line-through";
-      completed.disabled = true;
-    } else {
-      if (
-        box.name == "task-list" &&
-        document.getElementById("label" + box.id).style.textDecoration !=
-          "line-through"
-      ) {
+      if ( box.name == "task-list" ) {
         taskArray.push(box.id);
+      }
+      if (label != null && label.style.textDecoration == 'line-through' ) {
+        label.style.textDecoration = "none";
+        completed.innerHTML = "Completed";
       }
     }
   }
 
   localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
+
   if (taskArray.length > 0) {
     document.getElementById(taskArray[0]).checked = true;
     document.getElementById("curr-task").children[0].innerHTML = taskArray[0];
