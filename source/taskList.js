@@ -1,3 +1,5 @@
+const completed = document.getElementById("complete-task-btn");
+
 function renderOne(taskInput){
   let taskList = document.getElementById("task-list");
   let tasksArray = localStorage.getItem("upcomingTasks");
@@ -57,7 +59,7 @@ newTaskInput.addEventListener("keyup", function(event) {
   }
 });
 
-const completed = document.getElementById("complete-task-btn")
+
 completed.onclick = function() {
 
   let taskList = document.getElementById("task-list");
@@ -68,6 +70,7 @@ completed.onclick = function() {
       if( box.checked ) {
         let label = document.getElementById("label" + box.id);
         label.style.textDecoration = 'line-through';
+        completed.disabled = true;
       } else {
         if( box.name == 'task-list' ) {
           taskArray.push(box.id);
