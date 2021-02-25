@@ -28,6 +28,11 @@ function renderAll() {
   for (i = 0; i < tasksArray.length; i++) {
     renderOne(tasksArray[i]);
   }
+
+  if (tasksArray.length != 0) {
+    document.getElementById(tasksArray[0]).checked = true;
+    document.getElementById("curr-task").children[0].innerHTML = tasksArray[0];
+  }
 }
 
 renderAll();
@@ -68,7 +73,11 @@ completed.onclick = function () {
       let label = document.getElementById("label" + box.id);
       label.style.textDecoration = "line-through";
     } else {
-      if (box.name == "task-list" && document.getElementById("label" + box.id).style.textDecoration != "line-through") {
+      if (
+        box.name == "task-list" &&
+        document.getElementById("label" + box.id).style.textDecoration !=
+          "line-through"
+      ) {
         taskArray.push(box.id);
       }
     }
@@ -77,12 +86,10 @@ completed.onclick = function () {
   localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
   if (taskArray.length > 0) {
     document.getElementById(taskArray[0]).checked = true;
-    document.getElementById("curr-task").children[0].innerHTML =
-      taskArray[0];
+    document.getElementById("curr-task").children[0].innerHTML = taskArray[0];
   } else {
     document.getElementById("curr-task").children[0].innerHTML = "None";
   }
-  console.log(localStorage.getItem("upcomingTasks"));
 };
 
 function logs() {
