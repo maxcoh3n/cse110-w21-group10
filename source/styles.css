@@ -96,14 +96,15 @@ input[type="range"]{
 }
 
 #work-break-label {
-  position: absolute;
-  top: 55%;
-  right: 47%;
   --border-color: black;
   border: 2px solid var(--border-color);
   width: fit-content;
-  padding: 0.35em;
   display: none;
+  padding: 0.35em;
+  position: relative;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Pomo log -----------------------------------------------------------------*/
@@ -187,9 +188,13 @@ input[type="range"]{
 #curr-task {
   --border-color: black;
   border: 2px solid var(--border-color);
-  width: fit-content;
+  width: fit-content; 
   padding: 0.35em;
   font-size: 12pt;
+  position: relative;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Task List ----------------------------------------------------------------*/
