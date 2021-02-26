@@ -60,7 +60,7 @@ h1 {
   bottom: 0;
   left: 50%;
   transform: translate(-50%, -50%);
-  
+
   /*
   position: absolute;
   top: 50%;
@@ -144,7 +144,7 @@ input[type="range"]{
   position: relative;
   max-height: 0;
   overflow: hidden;
-  
+
   list-style: none;
   padding: 0px;
   margin-top: 8px;
@@ -188,7 +188,7 @@ input[type="range"]{
 #curr-task {
   --border-color: black;
   border: 2px solid var(--border-color);
-  width: fit-content; 
+  width: fit-content;
   padding: 0.35em;
   font-size: 12pt;
   position: relative;
@@ -202,7 +202,7 @@ input[type="range"]{
   position: absolute;
   right: 4%;
   top: 15%;
-  width: 250px; 
+  width: 250px;
   padding: 5px;
   margin-bottom: 0;
   border-style: solid;
@@ -229,6 +229,10 @@ input[type="range"]{
 #complete-task-btn{
   vertical-align:top;
   float: right;
+}
+
+.tasks:hover{
+  background-color: yellow;
 }
 
 /* Media query to prevent bunching of elements */
