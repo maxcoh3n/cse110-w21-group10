@@ -94,6 +94,31 @@ function updateCountdown(IsOn) {
       startSound();
       clearInterval(count);
       if (localStorage.getItem("workOrBreak") == "work") {
+        //Complete tasks
+        let completedTasks = localStorage.getItem("completedTasks");
+        completedTasks = JSON.parse(completedTasks);
+        let newTask = true;
+        let dateObject = new Date();
+        let date = (dateObject.getMonth() + 1) +"/"+ dateObject.getDate();;
+        let worktimeNumber = document.getElementById("worktime-number");
+        let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
+
+        for(i = 0; i<completedTasks.length; i++){
+          if(completedTasks[i].taskName == currentTaskName && completedTasks[i].date == date){
+            newTask = false;
+            completedTasks[i].durationArray.push(worktimeNumber.value);
+          }
+        }
+
+        if(newTask == true){
+          let completedTask = {taskName:currentTaskName, durationArray:[worktimeNumber.value], date:date, completed:false};
+          completedTasks.push(completedTask);
+        }
+
+        console.log(completedTasks);
+        localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+
+
         localStorage.setItem(
           "numCurrentSech",
           1 + Number(localStorage.getItem("numCurrentSech"))
