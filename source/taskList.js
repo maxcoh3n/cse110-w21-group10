@@ -14,7 +14,7 @@ function renderOne(taskInput){
 
   let label = document.createElement("label");
   label.setAttribute("for", taskInput);
-
+  label.setAttribute("class", "tasks");
   label.setAttribute("id", "label" + taskInput);
 
   label.innerHTML = taskInput + "<br>";
@@ -44,6 +44,10 @@ addTask.onclick = function () {
 
   const newTaskInput = document.getElementById("new-task");
 
+  if(tasksArray.includes(newTaskInput.value)){
+    newTaskInput.value = "";
+  }
+
   if (newTaskInput.value) {
     tasksArray.push(newTaskInput.value);
     localStorage.setItem("upcomingTasks", JSON.stringify(tasksArray));
@@ -71,6 +75,18 @@ completed.onclick = function () {
   if( completed.innerHTML == "Completed" ) {
     for (let box of taskList.childNodes) {
       if (box.checked) {
+        //Completed tasks
+        let completedTasks = localStorage.getItem("completedTasks");
+        completedTasks = JSON.parse(completedTasks);
+        let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
+        for(i = 0; i<completedTasks.length; i++){
+          if(completedTasks[i].taskName == currentTaskName){
+            completedTasks[i].completed = true;
+            console.log(completedTasks);
+          }
+        }
+
+
         let label = document.getElementById("label" + box.id);
         label.style.textDecoration = "line-through";
         completed.innerHTML = "Undo";
@@ -92,6 +108,18 @@ completed.onclick = function () {
         completed.innerHTML = "Completed";
       }
     }
+
+
+    //completed tasks
+    let completedTasks = localStorage.getItem("completedTasks");
+    completedTasks = JSON.parse(completedTasks);
+    let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
+    for(i = 0; i<completedTasks.length; i++){
+      if(completedTasks[i].taskName == currentTaskName){
+        completedTasks[i].completed = false;
+        console.log(completedTasks);
+      }
+    }
   }
 
   localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
@@ -104,15 +132,3 @@ completed.onclick = function () {
   }
 };
 
-function logs() {
-  var today = new Date();
-  var day = String(today.getDate()).padStart(2, "0");
-  var month = String(today.getMonth() + 1).padStart(2, "0");
-  today = month + "/" + day + ": ";
-  for (var i = 0; i < numtasks; i++) {
-    if (completedTasks[i]) {
-      console.log(today + tasks[i]);
-    }
-  }
-}
-//task list to do, and completed tasks along with date, rating, associated task
