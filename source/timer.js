@@ -99,7 +99,7 @@ function updateCountdown(IsOn) {
         completedTasks = JSON.parse(completedTasks);
         let newTask = true;
         let dateObject = new Date();
-        let date = (dateObject.getMonth() + 1) +"/"+ dateObject.getDate();;
+        let date = (dateObject.getMonth() + 1) +"/"+ dateObject.getDate();
         let worktimeNumber = document.getElementById("worktime-number");
         let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
 
