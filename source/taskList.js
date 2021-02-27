@@ -132,16 +132,3 @@ completed.onclick = function () {
   }
 };
 
-function logs() {
-  var today = new Date();
-  var day = String(today.getDate()).padStart(2, "0");
-  var month = String(today.getMonth() + 1).padStart(2, "0");
-  today = month + "/" + day + ": ";
-  for (var i = 0; i < numtasks; i++) {
-    if (completedTasks[i]) {
-      console.log(today + tasks[i]);
-    }
-  }
-}
-
-//task list to do, and completed tasks along with date, rating, associated task
