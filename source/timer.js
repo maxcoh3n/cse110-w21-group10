@@ -5,7 +5,7 @@ const title = document.getElementById("title-countdown");
 const startBtn = document.getElementById("start-btn");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
 const workBreakLabel = document.getElementById("work-break-label");
-
+const completed = document.getElementById("complete-task-btn");
 /*sound*/
 const sound = document.getElementById("alarm-sound");
 
@@ -19,7 +19,6 @@ Uses the countdown h1 to set and run a timer of length designated by the startTi
 */
 
 function timer() {
-  const completed = document.getElementById("complete-task-btn");
   completed.innerHTML = "Completed";
   if (startBtn.innerHTML == "Start") {
     completed.disabled = true;
@@ -70,6 +69,7 @@ function updateCountdown(IsOn) {
     workBreakLabel.style.display = "none";
     completed.disabled = false;
   }
+}
 
   function updateTime() {
     if(localStorage.getItem("workOrBreak") == "work"){
@@ -80,6 +80,14 @@ function updateCountdown(IsOn) {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Break Time";
     }
+
+    // if (localStorage.getItem("workOrBreak") == "work") {
+    //   time = localStorage.getItem("workMins") * 60;
+    // } else if (localStorage.getItem("workOrBreak") == "break") {
+    //   time = localStorage.getItem("shortBreakMins") * 60;
+    // } else if (localStorage.getItem("workOrBreak") == "longBreak") {
+    //   time = localStorage.getItem("longBreakMins") * 60;
+    // }
 
     time = time < 0 ? 0 : time;
 
@@ -126,10 +134,12 @@ function updateCountdown(IsOn) {
       updateCountdown(true);
     }
   }
-}
 
 startBtn.onclick = function () {
   timer();
 };
 
-module.exports = {timer};
+module.exports = {
+  timer,
+  updateCountdown
+};

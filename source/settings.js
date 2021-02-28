@@ -74,3 +74,10 @@ function updateNumSessions(e) {
   numSessionsNumber.value = num;
   localStorage.setItem("numSessions", num);
 }
+
+module.exports = {
+  updateLongBreaktime,
+  updateNumSessions,
+  updateShortBreaktime,
+  updateWorktime 
+};
