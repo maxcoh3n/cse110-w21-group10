@@ -37,7 +37,7 @@ describe('timer ', ()=>{
     '        <input id="num-sessions-slider" type="range" min="3" max="5">' +
     '        <br><br><label for="dev-mode">Dev Mode</label><input type="checkbox" id="dev-mode">'
     ;
-    const settings = require('../settings.js'); // must be included after innerHTML is defined or else it will crash
+    const settings = require('../settings.js'); // must be included after innerHTML is defined or else it will crashaa
     //expect(localStorage.getItem("workMins")).toBe(30)
     //expect(settings.updateWorktime(30)).toBeUndefined();
   })
