@@ -23,9 +23,9 @@ function timer() {
   if (startBtn.innerHTML == "Start") {
     completed.disabled = true;
     let taskList = document.getElementById("task-list");
-    for( let task of taskList.childNodes ) {
+    for (let task of taskList.childNodes) {
       let label = document.getElementById("label" + task.id);
-      if( label != null && label.style.textDecoration == 'line-through' ) {
+      if (label != null && label.style.textDecoration == "line-through") {
         label.remove();
         task.remove();
       }
@@ -71,69 +71,71 @@ function updateCountdown(IsOn) {
   }
 }
 
-  function updateTime() {
-    if(localStorage.getItem("workOrBreak") == "work"){
-      workBreakLabel.style.display = "block";
-      workBreakLabel.innerHTML = "Work Time";
-    }
-    if(localStorage.getItem("workOrBreak") == "break" || localStorage.getItem("workOrBreak") == "longBreak"){
-      workBreakLabel.style.display = "block";
-      workBreakLabel.innerHTML = "Break Time";
-    }
-
-    // if (localStorage.getItem("workOrBreak") == "work") {
-    //   time = localStorage.getItem("workMins") * 60;
-    // } else if (localStorage.getItem("workOrBreak") == "break") {
-    //   time = localStorage.getItem("shortBreakMins") * 60;
-    // } else if (localStorage.getItem("workOrBreak") == "longBreak") {
-    //   time = localStorage.getItem("longBreakMins") * 60;
-    // }
-
-    time = time < 0 ? 0 : time;
-
-    let mins = Math.floor(time / 60);
-    let sec = time % 60;
-
-    sec = sec < 10 ? "0" + sec : sec;
-
-    title.innerHTML = `${mins}:${sec}`;
-    countdown.innerHTML = `${mins}:${sec}`;
-    time--;
-    if (time == 0) {
-      startSound();
-      clearInterval(count);
-      if (localStorage.getItem("workOrBreak") == "work") {
-        localStorage.setItem(
-          "numCurrentSech",
-          1 + Number(localStorage.getItem("numCurrentSech"))
-        );
-        console.log(
-          "Testing: Work session number " +
-            localStorage.getItem("numCurrentSech")
-        );
-        if (
-          localStorage.getItem("numCurrentSech") >=
-          localStorage.getItem("numSessions")
-        ) {
-          localStorage.setItem("numCurrentSech", "0");
-          localStorage.setItem("workOrBreak", "longBreak");
-        } else {
-          localStorage.setItem("workOrBreak", "break");
-        }
-      } else if (localStorage.getItem("workOrBreak") == "break") {
-        localStorage.setItem("workOrBreak", "work");
-        startBtn.innerHTML = "Start";
-        updateCountdown(false);
-        return;
-      } else if (localStorage.getItem("workOrBreak") == "longBreak") {
-        localStorage.setItem("workOrBreak", "work");
-        startBtn.innerHTML = "Start";
-        updateCountdown(false);
-        return;
-      }
-      updateCountdown(true);
-    }
+function updateTime() {
+  if (localStorage.getItem("workOrBreak") == "work") {
+    workBreakLabel.style.display = "block";
+    workBreakLabel.innerHTML = "Work Time";
   }
+  if (
+    localStorage.getItem("workOrBreak") == "break" ||
+    localStorage.getItem("workOrBreak") == "longBreak"
+  ) {
+    workBreakLabel.style.display = "block";
+    workBreakLabel.innerHTML = "Break Time";
+  }
+
+  // if (localStorage.getItem("workOrBreak") == "work") {
+  //   time = localStorage.getItem("workMins") * 60;
+  // } else if (localStorage.getItem("workOrBreak") == "break") {
+  //   time = localStorage.getItem("shortBreakMins") * 60;
+  // } else if (localStorage.getItem("workOrBreak") == "longBreak") {
+  //   time = localStorage.getItem("longBreakMins") * 60;
+  // }
+
+  time = time < 0 ? 0 : time;
+
+  let mins = Math.floor(time / 60);
+  let sec = time % 60;
+
+  sec = sec < 10 ? "0" + sec : sec;
+
+  title.innerHTML = `${mins}:${sec}`;
+  countdown.innerHTML = `${mins}:${sec}`;
+  time--;
+  if (time == 0) {
+    startSound();
+    clearInterval(count);
+    if (localStorage.getItem("workOrBreak") == "work") {
+      localStorage.setItem(
+        "numCurrentSech",
+        1 + Number(localStorage.getItem("numCurrentSech"))
+      );
+      console.log(
+        "Testing: Work session number " + localStorage.getItem("numCurrentSech")
+      );
+      if (
+        localStorage.getItem("numCurrentSech") >=
+        localStorage.getItem("numSessions")
+      ) {
+        localStorage.setItem("numCurrentSech", "0");
+        localStorage.setItem("workOrBreak", "longBreak");
+      } else {
+        localStorage.setItem("workOrBreak", "break");
+      }
+    } else if (localStorage.getItem("workOrBreak") == "break") {
+      localStorage.setItem("workOrBreak", "work");
+      startBtn.innerHTML = "Start";
+      updateCountdown(false);
+      return;
+    } else if (localStorage.getItem("workOrBreak") == "longBreak") {
+      localStorage.setItem("workOrBreak", "work");
+      startBtn.innerHTML = "Start";
+      updateCountdown(false);
+      return;
+    }
+    updateCountdown(true);
+  }
+}
 
 startBtn.onclick = function () {
   timer();
@@ -141,5 +143,5 @@ startBtn.onclick = function () {
 
 module.exports = {
   timer,
-  updateCountdown
+  updateCountdown,
 };
