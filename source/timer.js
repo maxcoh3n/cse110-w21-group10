@@ -21,11 +21,12 @@ Uses the countdown h1 to set and run a timer of length designated by the startTi
 function timer() {
   completed.innerHTML = "Completed";
   if (startBtn.innerHTML == "Start") {
-    completed.disabled = true;
+    completed.disabled = true; // disables changing tasks during work session
     let taskList = document.getElementById("task-list");
-    for( let task of taskList.childNodes ) {
+    for (let task of taskList.childNodes) {
+      task.disabled = true;
       let label = document.getElementById("label" + task.id);
-      if( label != null && label.style.textDecoration == 'line-through' ) {
+      if (label != null && label.style.textDecoration == "line-through") {
         label.remove();
         task.remove();
       }
@@ -35,6 +36,10 @@ function timer() {
     document.getElementById("settings-btn").style.display = "none";
     updateCountdown(true);
   } else {
+    let taskList = document.getElementById("task-list");
+    for (let task of taskList.childNodes) {
+      task.disabled = false; // enables changing tasks
+    }
     completed.disabled = false;
     sound.pause();
     sound.currentTime = 0;
@@ -56,6 +61,10 @@ function updateCountdown(IsOn) {
     count = setInterval(updateTime, devMode.checked ? 10 : 1000);
     localStorage.setItem("intervalID", count);
   } else {
+    let taskList = document.getElementById("task-list");
+    for (let task of taskList.childNodes) {
+      task.disabled = false; // enables changing tasks
+    }
     document.getElementById("settings-btn").style.display = "block";
     clearInterval(localStorage.getItem("intervalID"));
     if (localStorage.getItem("workOrBreak") == "work") {
@@ -71,11 +80,11 @@ function updateCountdown(IsOn) {
   }
 
   function updateTime() {
-    if(localStorage.getItem("workOrBreak") == "work"){
+    if (localStorage.getItem("workOrBreak") == "work") {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Work Time";
     }
-    if(localStorage.getItem("workOrBreak") == "break" || localStorage.getItem("workOrBreak") == "longBreak"){
+    if (localStorage.getItem("workOrBreak") == "break" || localStorage.getItem("workOrBreak") == "longBreak") {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Break Time";
     }
@@ -99,38 +108,37 @@ function updateCountdown(IsOn) {
         completedTasks = JSON.parse(completedTasks);
         let newTask = true;
         let dateObject = new Date();
-        let date = (dateObject.getMonth() + 1) +"/"+ dateObject.getDate();
+        let date = dateObject.getMonth() + 1 + "/" + dateObject.getDate();
         let worktimeNumber = document.getElementById("worktime-number");
+        // bug here, if user changes tasks in the middle of the work session, the last task will be recorded.
+        // Danger to get the current task name from the html tag's value.
         let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
-
-        for(i = 0; i<completedTasks.length; i++){
-          if(completedTasks[i].taskName == currentTaskName && completedTasks[i].date == date){
+        // does this for loop check if a task exists based on if it was created today? better to do a check to not
+        // have tasks of the same name when adding them? or giving each new tasks a unique id?
+        // bug if we log back in next day?
+        for (i = 0; i < completedTasks.length; i++) {
+          if (completedTasks[i].taskName == currentTaskName && completedTasks[i].date == date) {
             newTask = false;
             completedTasks[i].durationArray.push(worktimeNumber.value);
           }
         }
 
-        if(newTask == true){
-          let completedTask = {taskName:currentTaskName, durationArray:[worktimeNumber.value], date:date, completed:false};
+        if (newTask == true) {
+          let completedTask = {
+            taskName: currentTaskName,
+            durationArray: [worktimeNumber.value],
+            date: date,
+            completed: false,
+          };
           completedTasks.push(completedTask);
         }
 
         console.log(completedTasks);
         localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
 
-
-        localStorage.setItem(
-          "numCurrentSech",
-          1 + Number(localStorage.getItem("numCurrentSech"))
-        );
-        console.log(
-          "Testing: Work session number " +
-            localStorage.getItem("numCurrentSech")
-        );
-        if (
-          localStorage.getItem("numCurrentSech") >=
-          localStorage.getItem("numSessions")
-        ) {
+        localStorage.setItem("numCurrentSech", 1 + Number(localStorage.getItem("numCurrentSech")));
+        console.log("Testing: Work session number " + localStorage.getItem("numCurrentSech"));
+        if (localStorage.getItem("numCurrentSech") >= localStorage.getItem("numSessions")) {
           localStorage.setItem("numCurrentSech", "0");
           localStorage.setItem("workOrBreak", "longBreak");
         } else {

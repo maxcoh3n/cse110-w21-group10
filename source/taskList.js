@@ -1,4 +1,4 @@
-function renderOne(taskInput){
+function renderOne(taskInput) {
   let taskList = document.getElementById("task-list");
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
@@ -44,7 +44,7 @@ addTask.onclick = function () {
 
   const newTaskInput = document.getElementById("new-task");
 
-  if(tasksArray.includes(newTaskInput.value)){
+  if (tasksArray.includes(newTaskInput.value)) {
     newTaskInput.value = "";
   }
 
@@ -68,31 +68,31 @@ newTaskInput.addEventListener("keyup", function (event) {
 
 const completed = document.getElementById("complete-task-btn");
 completed.onclick = function () {
-
   let taskList = document.getElementById("task-list");
   let taskArray = [];
 
-  if( completed.innerHTML == "Completed" ) {
+  if (completed.innerHTML == "Completed") {
     for (let box of taskList.childNodes) {
       if (box.checked) {
         //Completed tasks
         let completedTasks = localStorage.getItem("completedTasks");
         completedTasks = JSON.parse(completedTasks);
         let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
-        for(i = 0; i<completedTasks.length; i++){
-          if(completedTasks[i].taskName == currentTaskName){
+        for (i = 0; i < completedTasks.length; i++) {
+          if (completedTasks[i].taskName == currentTaskName) {
             completedTasks[i].completed = true;
             console.log(completedTasks);
           }
         }
 
-
         let label = document.getElementById("label" + box.id);
         label.style.textDecoration = "line-through";
         completed.innerHTML = "Undo";
       } else {
-        if ( box.name == "task-list" &&
-        document.getElementById("label" + box.id).style.textDecoration != "line-through" ) {
+        if (
+          box.name == "task-list" &&
+          document.getElementById("label" + box.id).style.textDecoration != "line-through"
+        ) {
           taskArray.push(box.id);
         }
       }
@@ -100,22 +100,22 @@ completed.onclick = function () {
   } else {
     for (let box of taskList.childNodes) {
       let label = document.getElementById("label" + box.id);
-      if ( box.name == "task-list" ) {
+      if (box.name == "task-list") {
         taskArray.push(box.id);
       }
-      if (label != null && label.style.textDecoration == 'line-through' ) {
+      if (label != null && label.style.textDecoration == "line-through") {
         label.style.textDecoration = "none";
         completed.innerHTML = "Completed";
       }
     }
 
-
     //completed tasks
+    // what is the point of this?
     let completedTasks = localStorage.getItem("completedTasks");
     completedTasks = JSON.parse(completedTasks);
     let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
-    for(i = 0; i<completedTasks.length; i++){
-      if(completedTasks[i].taskName == currentTaskName){
+    for (i = 0; i < completedTasks.length; i++) {
+      if (completedTasks[i].taskName == currentTaskName) {
         completedTasks[i].completed = false;
         console.log(completedTasks);
       }
@@ -131,4 +131,3 @@ completed.onclick = function () {
     document.getElementById("curr-task").children[0].innerHTML = "None";
   }
 };
-
