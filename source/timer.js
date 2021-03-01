@@ -1,17 +1,7 @@
 //Timer
 
 const countdown = document.getElementById("countdown");
-const title = document.getElementById("title-countdown");
-const startBtn = document.getElementById("start-btn");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
-const workBreakLabel = document.getElementById("work-break-label");
-
-/*sound*/
-const sound = document.getElementById("alarm-sound");
-
-function startSound() {
-  sound.play();
-}
 
 /**
 timer
@@ -19,6 +9,8 @@ Uses the countdown h1 to set and run a timer of length designated by the startTi
 */
 
 function timer() {
+  const sound = document.getElementById("alarm-sound");
+
   completed.innerHTML = "Completed";
   if (startBtn.innerHTML == "Start") {
     completed.disabled = true;
@@ -44,6 +36,9 @@ function timer() {
 }
 
 function updateCountdown(IsOn) {
+  const title = document.getElementById("title-countdown");
+  const workBreakLabel = document.getElementById("work-break-label");
+
   const devMode = document.getElementById("dev-mode");
   if (IsOn) {
     if (localStorage.getItem("workOrBreak") == "work") {
@@ -91,7 +86,8 @@ function updateCountdown(IsOn) {
     countdown.innerHTML = `${mins}:${sec}`;
     time--;
     if (time == 0) {
-      startSound();
+      const sound = document.getElementById("alarm-sound");
+      sound.play();
       clearInterval(count);
       if (localStorage.getItem("workOrBreak") == "work") {
         //Complete tasks
@@ -152,6 +148,7 @@ function updateCountdown(IsOn) {
   }
 }
 
+const startBtn = document.getElementById("start-btn");
 startBtn.onclick = function () {
   timer();
 };
