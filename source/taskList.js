@@ -81,6 +81,9 @@ completed.onclick = function () {
         for (i = 0; i < completedTasks.length; i++) {
           if (completedTasks[i].taskName == currentTaskName) {
             completedTasks[i].completed = true;
+            //            console.log("triyng to finsih a task");      Bug: pressing on the complete button does not add
+            //                                                              task to the completedTasks list in storage
+            //            AddToLog(completedTasks[i]); // from pomoLog.js to add to log
             console.log(completedTasks);
           }
         }
@@ -110,7 +113,6 @@ completed.onclick = function () {
     }
 
     //completed tasks
-    // what is the point of this?
     let completedTasks = localStorage.getItem("completedTasks");
     completedTasks = JSON.parse(completedTasks);
     let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;

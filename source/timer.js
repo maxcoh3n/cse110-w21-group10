@@ -110,12 +110,7 @@ function updateCountdown(IsOn) {
         let dateObject = new Date();
         let date = dateObject.getMonth() + 1 + "/" + dateObject.getDate();
         let worktimeNumber = document.getElementById("worktime-number");
-        // bug here, if user changes tasks in the middle of the work session, the last task will be recorded.
-        // Danger to get the current task name from the html tag's value.
         let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
-        // does this for loop check if a task exists based on if it was created today? better to do a check to not
-        // have tasks of the same name when adding them? or giving each new tasks a unique id?
-        // bug if we log back in next day?
         for (i = 0; i < completedTasks.length; i++) {
           if (completedTasks[i].taskName == currentTaskName && completedTasks[i].date == date) {
             newTask = false;
