@@ -1,17 +1,7 @@
 //Timer
 
 const countdown = document.getElementById("countdown");
-const title = document.getElementById("title-countdown");
-const startBtn = document.getElementById("start-btn");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
-const workBreakLabel = document.getElementById("work-break-label");
-
-/*sound*/
-const sound = document.getElementById("alarm-sound");
-
-function startSound() {
-  sound.play();
-}
 
 /**
 timer
@@ -19,13 +9,15 @@ Uses the countdown h1 to set and run a timer of length designated by the startTi
 */
 
 function timer() {
+  const sound = document.getElementById("alarm-sound");
+
   completed.innerHTML = "Completed";
   if (startBtn.innerHTML == "Start") {
     completed.disabled = true;
     let taskList = document.getElementById("task-list");
-    for( let task of taskList.childNodes ) {
+    for (let task of taskList.childNodes) {
       let label = document.getElementById("label" + task.id);
-      if( label != null && label.style.textDecoration == 'line-through' ) {
+      if (label != null && label.style.textDecoration == "line-through") {
         label.remove();
         task.remove();
       }
@@ -44,6 +36,9 @@ function timer() {
 }
 
 function updateCountdown(IsOn) {
+  const title = document.getElementById("title-countdown");
+  const workBreakLabel = document.getElementById("work-break-label");
+
   const devMode = document.getElementById("dev-mode");
   if (IsOn) {
     if (localStorage.getItem("workOrBreak") == "work") {
@@ -71,11 +66,14 @@ function updateCountdown(IsOn) {
   }
 
   function updateTime() {
-    if(localStorage.getItem("workOrBreak") == "work"){
+    if (localStorage.getItem("workOrBreak") == "work") {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Work Time";
     }
-    if(localStorage.getItem("workOrBreak") == "break" || localStorage.getItem("workOrBreak") == "longBreak"){
+    if (
+      localStorage.getItem("workOrBreak") == "break" ||
+      localStorage.getItem("workOrBreak") == "longBreak"
+    ) {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Break Time";
     }
@@ -91,7 +89,8 @@ function updateCountdown(IsOn) {
     countdown.innerHTML = `${mins}:${sec}`;
     time--;
     if (time == 0) {
-      startSound();
+      const sound = document.getElementById("alarm-sound");
+      sound.play();
       clearInterval(count);
       if (localStorage.getItem("workOrBreak") == "work") {
         //Complete tasks
@@ -99,25 +98,33 @@ function updateCountdown(IsOn) {
         completedTasks = JSON.parse(completedTasks);
         let newTask = true;
         let dateObject = new Date();
-        let date = (dateObject.getMonth() + 1) +"/"+ dateObject.getDate();
+        let date = dateObject.getMonth() + 1 + "/" + dateObject.getDate();
         let worktimeNumber = document.getElementById("worktime-number");
-        let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
+        let currentTaskName = document.getElementById("curr-task").children[0]
+          .innerHTML;
 
-        for(i = 0; i<completedTasks.length; i++){
-          if(completedTasks[i].taskName == currentTaskName && completedTasks[i].date == date){
+        for (i = 0; i < completedTasks.length; i++) {
+          if (
+            completedTasks[i].taskName == currentTaskName &&
+            completedTasks[i].date == date
+          ) {
             newTask = false;
             completedTasks[i].durationArray.push(worktimeNumber.value);
           }
         }
 
-        if(newTask == true){
-          let completedTask = {taskName:currentTaskName, durationArray:[worktimeNumber.value], date:date, completed:false};
+        if (newTask == true) {
+          let completedTask = {
+            taskName: currentTaskName,
+            durationArray: [worktimeNumber.value],
+            date: date,
+            completed: false,
+          };
           completedTasks.push(completedTask);
         }
 
         console.log(completedTasks);
         localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
-
 
         localStorage.setItem(
           "numCurrentSech",
@@ -152,6 +159,7 @@ function updateCountdown(IsOn) {
   }
 }
 
+const startBtn = document.getElementById("start-btn");
 startBtn.onclick = function () {
   timer();
 };
