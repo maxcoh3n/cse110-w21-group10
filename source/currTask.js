@@ -12,8 +12,7 @@ const checkOneTaskSize = function () {
   let storedTasks = localStorage.getItem("upcomingTasks");
   storedTasks = JSON.parse(storedTasks);
   if (storedTasks.length == 1) {
-    document.getElementById("curr-task").children[0].innerHTML =
-      storedTasks[0];
+    document.getElementById("curr-task").children[0].innerHTML = storedTasks[0];
   }
 };
 

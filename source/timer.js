@@ -23,9 +23,9 @@ function timer() {
   if (startBtn.innerHTML == "Start") {
     completed.disabled = true;
     let taskList = document.getElementById("task-list");
-    for( let task of taskList.childNodes ) {
+    for (let task of taskList.childNodes) {
       let label = document.getElementById("label" + task.id);
-      if( label != null && label.style.textDecoration == 'line-through' ) {
+      if (label != null && label.style.textDecoration == "line-through") {
         label.remove();
         task.remove();
       }
@@ -71,11 +71,14 @@ function updateCountdown(IsOn) {
   }
 
   function updateTime() {
-    if(localStorage.getItem("workOrBreak") == "work"){
+    if (localStorage.getItem("workOrBreak") == "work") {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Work Time";
     }
-    if(localStorage.getItem("workOrBreak") == "break" || localStorage.getItem("workOrBreak") == "longBreak"){
+    if (
+      localStorage.getItem("workOrBreak") == "break" ||
+      localStorage.getItem("workOrBreak") == "longBreak"
+    ) {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Break Time";
     }
@@ -99,25 +102,33 @@ function updateCountdown(IsOn) {
         completedTasks = JSON.parse(completedTasks);
         let newTask = true;
         let dateObject = new Date();
-        let date = (dateObject.getMonth() + 1) +"/"+ dateObject.getDate();
+        let date = dateObject.getMonth() + 1 + "/" + dateObject.getDate();
         let worktimeNumber = document.getElementById("worktime-number");
-        let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
+        let currentTaskName = document.getElementById("curr-task").children[0]
+          .innerHTML;
 
-        for(i = 0; i<completedTasks.length; i++){
-          if(completedTasks[i].taskName == currentTaskName && completedTasks[i].date == date){
+        for (i = 0; i < completedTasks.length; i++) {
+          if (
+            completedTasks[i].taskName == currentTaskName &&
+            completedTasks[i].date == date
+          ) {
             newTask = false;
             completedTasks[i].durationArray.push(worktimeNumber.value);
           }
         }
 
-        if(newTask == true){
-          let completedTask = {taskName:currentTaskName, durationArray:[worktimeNumber.value], date:date, completed:false};
+        if (newTask == true) {
+          let completedTask = {
+            taskName: currentTaskName,
+            durationArray: [worktimeNumber.value],
+            date: date,
+            completed: false,
+          };
           completedTasks.push(completedTask);
         }
 
         console.log(completedTasks);
         localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
-
 
         localStorage.setItem(
           "numCurrentSech",
