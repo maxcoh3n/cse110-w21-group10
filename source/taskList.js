@@ -75,16 +75,16 @@ completed.onclick = function () {
     for (let box of taskList.childNodes) {
       if (box.checked) {
         //Completed tasks
-        let completedTasks = localStorage.getItem("completedTasks");
-        completedTasks = JSON.parse(completedTasks);
+        let completedSessions = localStorage.getItem("completedSessions");
+        completedSessions = JSON.parse(completedSessions);
         let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
-        for (i = 0; i < completedTasks.length; i++) {
-          if (completedTasks[i].taskName == currentTaskName) {
-            completedTasks[i].completed = true;
+        for (i = 0; i < completedSessions.length; i++) {
+          if (completedSessions[i].taskName == currentTaskName) {
+            completedSessions[i].completed = true;
             //            console.log("triyng to finsih a task");      Bug: pressing on the complete button does not add
-            //                                                              task to the completedTasks list in storage
-            //            AddToLog(completedTasks[i]); // from pomoLog.js to add to log
-            console.log(completedTasks);
+            //                                                              task to the completedSessions list in storage
+                      //  AddToLog(completedSessions[i]); // from pomoLog.js to add to log
+            console.log(completedSessions);
           }
         }
 
@@ -113,13 +113,13 @@ completed.onclick = function () {
     }
 
     //completed tasks
-    let completedTasks = localStorage.getItem("completedTasks");
-    completedTasks = JSON.parse(completedTasks);
+    let completedSessions = localStorage.getItem("completedSessions");
+    completedSessions = JSON.parse(completedSessions);
     let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
-    for (i = 0; i < completedTasks.length; i++) {
-      if (completedTasks[i].taskName == currentTaskName) {
-        completedTasks[i].completed = false;
-        console.log(completedTasks);
+    for (i = 0; i < completedSessions.length; i++) {
+      if (completedSessions[i].taskName == currentTaskName) {
+        completedSessions[i].completed = false;
+        console.log(completedSessions);
       }
     }
   }
