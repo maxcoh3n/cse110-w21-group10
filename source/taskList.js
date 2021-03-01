@@ -81,9 +81,6 @@ completed.onclick = function () {
         for (i = 0; i < completedTasks.length; i++) {
           if (completedTasks[i].taskName == currentTaskName) {
             completedTasks[i].completed = true;
-            //            console.log("triyng to finsih a task");      Bug: pressing on the complete button does not add
-            //                                                              task to the completedTasks list in storage
-            //            AddToLog(completedTasks[i]); // from pomoLog.js to add to log
             console.log(completedTasks);
           }
         }
