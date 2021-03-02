@@ -7,7 +7,7 @@ function renderOne(taskInput){
   tasksArray = JSON.parse(tasksArray);
 
   let task = document.createElement("input");
-  task.addEventListener("click", function(event) {
+  task.addEventListener("click", function() {
 
     let taskList = document.getElementById("task-list");
 
@@ -131,13 +131,10 @@ newTaskInput.addEventListener("keyup", function (event) {
   }
 });
 
-const completed = document.getElementById("complete-task-btn");
-completed.onclick = function () {
+function comple() {
 
   let taskList = document.getElementById("task-list");
-
-  if( completed.innerHTML == "Completed" ) {
-    let taskArray = [];
+  let taskArray = [];
     for (let box of taskList.childNodes) {
       if (box.checked) {
         //Completed tasks
@@ -163,8 +160,12 @@ completed.onclick = function () {
       }
     }
     localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
-  } else if( completed.innerHTML == "Undo" ) {
-    let taskArray = [];
+}
+
+function undo() {
+
+  let taskList = document.getElementById("task-list");
+  let taskArray = [];
     for (let box of taskList.childNodes) {
       let label = document.getElementById("label" + box.id);
       if( box.checked) {
@@ -185,8 +186,13 @@ completed.onclick = function () {
       }
     }
     localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
-  } else if(completed.innerHTML == "Delete") {
-    document.getElementById("curr-task").children[0].innerHTML = "None";
+
+}
+
+function del() {
+
+  let taskList = document.getElementById("task-list");
+  document.getElementById("curr-task").children[0].innerHTML = "None";
     let taskArray = [];
     let completedTasks = localStorage.getItem("completedTasks");
     completedTasks = JSON.parse(completedTasks);
@@ -202,6 +208,18 @@ completed.onclick = function () {
     }
     localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
     localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
+
+}
+
+const completed = document.getElementById("complete-task-btn");
+completed.onclick = function () {
+
+  if( completed.innerHTML == "Completed" ) {
+    comple();
+  } else if( completed.innerHTML == "Undo" ) {
+    undo();
+  } else if(completed.innerHTML == "Delete") {
+    del();
   }
 };
 
