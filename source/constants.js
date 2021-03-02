@@ -22,3 +22,6 @@ if (workOrBreak != "work") {
 }
 let numCurrentSech = localStorage.getItem("numCurrentSech");
 if (numCurrentSech != 0) localStorage.setItem("numCurrentSech", "0");
+
+let statistics = localStorage.getItem("statistics");
+if (statistics != 0) localStorage.setItem("statistics", "{}");
