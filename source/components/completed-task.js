@@ -21,15 +21,15 @@ class CompletedTask extends HTMLElement {
     dateLabel.setAttribute("id", "DateLabel");
     ol.setAttribute("id", "olTimeSes");
 
-    nameLabel.innerText = "Task name: " + this.getAttribute("name");
-    dateLabel.innerText = "Date: " + this.getAttribute("date");
+    dateLabel.innerText = this.getAttribute("date") + ": ";
+    nameLabel.innerText =  this.getAttribute("name");
     let arr = JSON.parse(this.getAttribute("totaltime"));
 
     for (let i = 0; i < arr.length; i++) {
       let timeLabel = document.createElement("label");
       let newline = document.createElement("br");
       timeLabel.setAttribute("id", "timeLabel");
-      timeLabel.innerText = "Session time " + arr[i];
+      timeLabel.innerText = arr[i] + " minute session";
       timeLabel.appendChild(newline);
       ol.appendChild(timeLabel);
     }
@@ -37,7 +37,7 @@ class CompletedTask extends HTMLElement {
     li.appendChild(nameLabel);
     li.appendChild(ol);
 
-    //let stlye = document.createElement("style"); // for css style
+    //let style = document.createElement("style"); // for css style
 
     shadow.appendChild(li);
   }
