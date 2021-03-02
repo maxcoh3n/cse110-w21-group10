@@ -36,7 +36,8 @@ function updatePomoLog(updatedTask) {
     if (children[i].id == updatedTask.taskName + " " + updatedTask.date) {
       children[i].setAttribute(
         "totaltime",
-        Number(children[i].getAttribute("totaltime")) + Number(localStorage.getItem("workMins"))
+        Number(children[i].getAttribute("totaltime")) +
+          Number(localStorage.getItem("workMins"))
       );
       return;
     }

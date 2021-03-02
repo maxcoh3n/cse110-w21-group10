@@ -1,17 +1,7 @@
 //Timer
 
 const countdown = document.getElementById("countdown");
-const title = document.getElementById("title-countdown");
-const startBtn = document.getElementById("start-btn");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
-const workBreakLabel = document.getElementById("work-break-label");
-
-/*sound*/
-const sound = document.getElementById("alarm-sound");
-
-function startSound() {
-  sound.play();
-}
 
 /**
 timer
@@ -19,6 +9,8 @@ Uses the countdown h1 to set and run a timer of length designated by the startTi
 */
 
 function timer() {
+  const sound = document.getElementById("alarm-sound");
+
   completed.innerHTML = "Completed";
   if (startBtn.innerHTML == "Start") {
     completed.disabled = true; // disables changing tasks during work session
@@ -49,6 +41,9 @@ function timer() {
 }
 
 function updateCountdown(IsOn) {
+  const title = document.getElementById("title-countdown");
+  const workBreakLabel = document.getElementById("work-break-label");
+
   const devMode = document.getElementById("dev-mode");
   if (IsOn) {
     if (localStorage.getItem("workOrBreak") == "work") {
@@ -84,7 +79,10 @@ function updateCountdown(IsOn) {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Work Time";
     }
-    if (localStorage.getItem("workOrBreak") == "break" || localStorage.getItem("workOrBreak") == "longBreak") {
+    if (
+      localStorage.getItem("workOrBreak") == "break" ||
+      localStorage.getItem("workOrBreak") == "longBreak"
+    ) {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Break Time";
     }
@@ -100,7 +98,8 @@ function updateCountdown(IsOn) {
     countdown.innerHTML = `${mins}:${sec}`;
     time--;
     if (time == 0) {
-      startSound();
+      const sound = document.getElementById("alarm-sound");
+      sound.play();
       clearInterval(count);
       if (localStorage.getItem("workOrBreak") == "work") {
         //Complete tasks
@@ -110,9 +109,14 @@ function updateCountdown(IsOn) {
         let dateObject = new Date();
         let date = dateObject.getMonth() + 1 + "/" + dateObject.getDate();
         let worktimeNumber = document.getElementById("worktime-number");
-        let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
-        for (i = 0; i < completedSessions.length; i++) {
-          if (completedSessions[i].taskName == currentTaskName && completedSessions[i].date == date) {
+        let currentTaskName = document.getElementById("curr-task").children[0]
+          .innerHTML;
+
+        for (i = 0; i < completedTasks.length; i++) {
+          if (
+            completedTasks[i].taskName == currentTaskName &&
+            completedTasks[i].date == date
+          ) {
             newTask = false;
             completedSessions[i].durationArray.push(worktimeNumber.value);
             updatePomoLog(completedSessions[i]); //for pomo log, function from pomoLog.js
@@ -126,16 +130,25 @@ function updateCountdown(IsOn) {
             date: date,
             completed: false,
           };
-          completedSessions.push(completedTask);
-          AddToLog(completedTask); //for pomo log, function from pomoLog.js
+          AddToLog(completedTask);
+          completedTasks.push(completedTask);
         }
 
-        console.log(completedSessions);
-        localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
+        console.log(completedTasks);
+        localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
 
-        localStorage.setItem("numCurrentSech", 1 + Number(localStorage.getItem("numCurrentSech")));
-        //console.log("Testing: Work session number " + localStorage.getItem("numCurrentSech"));
-        if (localStorage.getItem("numCurrentSech") >= localStorage.getItem("numSessions")) {
+        localStorage.setItem(
+          "numCurrentSech",
+          1 + Number(localStorage.getItem("numCurrentSech"))
+        );
+        console.log(
+          "Testing: Work session number " +
+            localStorage.getItem("numCurrentSech")
+        );
+        if (
+          localStorage.getItem("numCurrentSech") >=
+          localStorage.getItem("numSessions")
+        ) {
           localStorage.setItem("numCurrentSech", "0");
           localStorage.setItem("workOrBreak", "longBreak");
         } else {
@@ -157,6 +170,7 @@ function updateCountdown(IsOn) {
   }
 }
 
+const startBtn = document.getElementById("start-btn");
 startBtn.onclick = function () {
   timer();
 };
