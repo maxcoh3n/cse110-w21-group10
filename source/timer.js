@@ -13,6 +13,7 @@ function startSound() {
   sound.play();
 }
 
+
 /**
 timer
 Uses the countdown h1 to set and run a timer of length designated by the startTime parameter.
@@ -43,9 +44,11 @@ function timer() {
   }
 }
 
+
 function updateCountdown(IsOn) {
   const devMode = document.getElementById("dev-mode");
   if (IsOn) {
+    var time; // must be var so that updateTime can access it
     if (localStorage.getItem("workOrBreak") == "work") {
       time = localStorage.getItem("workMins") * 60;
     } else if (localStorage.getItem("workOrBreak") == "break") {
@@ -82,8 +85,11 @@ function updateCountdown(IsOn) {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Break Time";
     }
+    time--;
 
     time = time < 0 ? 0 : time;
+    console.log("interval")
+
 
     let mins = Math.floor(time / 60);
     let sec = time % 60;
@@ -92,7 +98,6 @@ function updateCountdown(IsOn) {
 
     title.innerHTML = `${mins}:${sec}`;
     countdown.innerHTML = `${mins}:${sec}`;
-    time--;
     if (time == 0) {
       startSound();
       clearInterval(count);
