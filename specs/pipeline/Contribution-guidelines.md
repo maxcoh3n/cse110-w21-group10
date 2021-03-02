@@ -31,7 +31,7 @@ Name your commits consistant with the work that you did. <br/>
 
 ## open a pull request
 
-Assign at one person to review pull request. <br/>
+Assign at least one person to review pull request. <br/>
 Leave a comment describing what work was done in this pull request. <br/>
 open pull request and link the specific issues to it. <br/>
 
