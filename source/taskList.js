@@ -15,13 +15,13 @@ function renderOne(taskInput){
     for (let box of taskList.childNodes) {
       if (box.checked) {
         boxChecked = true;
-        let completedTasks = localStorage.getItem("completedTasks");
-        completedTasks = JSON.parse(completedTasks);
+        let completedSessions = localStorage.getItem("completedSessions");
+        completedSessions = JSON.parse(completedSessions);
         let foundTask = false;
-        for(i = 0; i<completedTasks.length; i++){
-          if( box.id == completedTasks[i].taskName ) {
+        for(i = 0; i<completedSessions.length; i++){
+          if( box.id == completedSessions[i].taskName ) {
             foundTask = true;
-            if( completedTasks[i].completed == false ) {
+            if( completedSessions[i].completed == false ) {
               document.getElementById("curr-task").children[0].innerHTML = box.id;
               taskButton.innerHTML = "Completed";
             } else {
@@ -74,13 +74,13 @@ function renderAll() {
 
   if (tasksArray.length != 0) {
 
-    let completedTasks = localStorage.getItem("completedTasks");
-    completedTasks = JSON.parse(completedTasks);
+    let completedSessions = localStorage.getItem("completedSessions");
+    completedSessions = JSON.parse(completedSessions);
     let foundTask = false;
-    for(i = 0; i<completedTasks.length; i++){
-      if( tasksArray[0] == completedTasks[i].taskName ) {
+    for(i = 0; i<completedSessions.length; i++){
+      if( tasksArray[0] == completedSessions[i].taskName ) {
         foundTask = true;
-        if( completedTasks[i].completed == false ) {
+        if( completedSessions[i].completed == false ) {
           taskButton.innerHTML = "Completed";
         } else {
           taskButton.innerHTML = "Undo";
@@ -138,16 +138,16 @@ function comple() {
     for (let box of taskList.childNodes) {
       if (box.checked) {
         //Completed tasks
-        let completedTasks = localStorage.getItem("completedTasks");
-        completedTasks = JSON.parse(completedTasks);
-        for(i = 0; i<completedTasks.length; i++){
-          if( box.id == completedTasks[i].taskName ) {
-            completedTasks[i].completed = true;
+        let completedSessions = localStorage.getItem("completedSessions");
+        completedSessions = JSON.parse(completedSessions);
+        for(i = 0; i<completedSessions.length; i++){
+          if( box.id == completedSessions[i].taskName ) {
+            completedSessions[i].completed = true;
             completed.innerHTML = "Undo";
             document.getElementById("curr-task").children[0].innerHTML = "None";
           }
         }
-        localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+        localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
 
 
         let label = document.getElementById("label" + box.id);
@@ -172,14 +172,14 @@ function undo() {
         document.getElementById("curr-task").children[0].innerHTML = box.id;
         completed.innerHTML = "Completed";
         label.style.textDecoration = "none";
-        let completedTasks = localStorage.getItem("completedTasks");
-        completedTasks = JSON.parse(completedTasks);
-        for(i = 0; i<completedTasks.length; i++){
-          if( box.id == completedTasks[i].taskName ) {
-            completedTasks[i].completed = false;
+        let completedSessions = localStorage.getItem("completedSessions");
+        completedSessions = JSON.parse(completedSessions);
+        for(i = 0; i<completedSessions.length; i++){
+          if( box.id == completedSessions[i].taskName ) {
+            completedSessions[i].completed = false;
           }
         }
-        localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+        localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
       }
       if ( box.name == "task-list" ) {
         taskArray.push(box.id);
@@ -194,19 +194,19 @@ function del() {
   let taskList = document.getElementById("task-list");
   document.getElementById("curr-task").children[0].innerHTML = "None";
     let taskArray = [];
-    let completedTasks = localStorage.getItem("completedTasks");
-    completedTasks = JSON.parse(completedTasks);
+    let completedSessions = localStorage.getItem("completedSessions");
+    completedSessions = JSON.parse(completedSessions);
     for (let box of taskList.childNodes) {
       let label = document.getElementById("label" + box.id);
       if( box.checked ) {
-        completedTasks = completedTasks.filter( task => task != box.id );
+        completedSessions = completedSessions.filter( task => task != box.id );
         label.remove();
         box.remove();
       } else if( label != null ){
         taskArray.push(box.id);
       }
     }
-    localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+    localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
     localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
 
 }

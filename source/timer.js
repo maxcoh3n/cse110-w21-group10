@@ -94,8 +94,8 @@ function updateCountdown(IsOn) {
       clearInterval(count);
       if (localStorage.getItem("workOrBreak") == "work") {
         //Complete tasks
-        let completedTasks = localStorage.getItem("completedTasks");
-        completedTasks = JSON.parse(completedTasks);
+        let completedSessions = localStorage.getItem("completedSessions");
+        completedSessions = JSON.parse(completedSessions);
         let newTask = true;
         let dateObject = new Date();
         let date = dateObject.getMonth() + 1 + "/" + dateObject.getDate();
@@ -103,13 +103,13 @@ function updateCountdown(IsOn) {
         let currentTaskName = document.getElementById("curr-task").children[0]
           .innerHTML;
 
-        for (i = 0; i < completedTasks.length; i++) {
+        for (i = 0; i < completedSessions.length; i++) {
           if (
-            completedTasks[i].taskName == currentTaskName &&
-            completedTasks[i].date == date
+            completedSessions[i].taskName == currentTaskName &&
+            completedSessions[i].date == date
           ) {
             newTask = false;
-            completedTasks[i].durationArray.push(worktimeNumber.value);
+            completedSessions[i].durationArray.push(worktimeNumber.value);
           }
         }
 
@@ -120,11 +120,11 @@ function updateCountdown(IsOn) {
             date: date,
             completed: false,
           };
-          completedTasks.push(completedTask);
+          completedSessions.push(completedTask);
         }
 
-        console.log(completedTasks);
-        localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+        console.log(completedSessions);
+        localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
 
         localStorage.setItem(
           "numCurrentSech",
