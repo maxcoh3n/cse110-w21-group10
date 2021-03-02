@@ -14,7 +14,7 @@ function AddToLog(newTask) {
     "totaltime",
     JSON.stringify(newTask.durationArray)
   );
-  dailyLog.appendChild(customElement);
+  dailyLog.prepend(customElement);
 }
 
 // updates an existing pomo log entry, updatedTask is the taks to update
@@ -33,6 +33,20 @@ function updateLogWhenPageRefresh() {
   let completedSessions = localStorage.getItem("completedSessions");
   completedSessions = JSON.parse(completedSessions);
   for (let i = completedSessions.length - 1; i >= 0; i--) {
-    AddToLog(completedSessions[i]);
+    RenderToLog(completedSessions[i]);
   }
+}
+function RenderToLog(newTask) {
+  let dailyLog = document.getElementById("log-list");
+  let customElement = document.createElement("completed-task");
+
+  customElement.setAttribute("name", newTask.taskName);
+  customElement.setAttribute("date", newTask.date);
+  customElement.setAttribute("id", newTask.taskName + " " + newTask.date);
+
+  customElement.setAttribute(
+    "totaltime",
+    JSON.stringify(newTask.durationArray)
+  );
+  dailyLog.appendChild(customElement);
 }
