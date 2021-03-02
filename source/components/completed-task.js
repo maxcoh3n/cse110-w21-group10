@@ -37,7 +37,7 @@ class CompletedTask extends HTMLElement {
     li.appendChild(nameLabel);
     li.appendChild(ol);
 
-    let stlye = document.createElement("style"); // for css style
+    //let stlye = document.createElement("style"); // for css style
 
     shadow.appendChild(li);
   }

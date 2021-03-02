@@ -1,4 +1,5 @@
 //Timer
+import { updatePomoLog, AddToLog } from "./pomoLog.js";
 
 const countdown = document.getElementById("countdown");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
