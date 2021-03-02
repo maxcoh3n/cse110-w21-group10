@@ -22,7 +22,8 @@ class CompletedTask extends HTMLElement {
     dateLabel.setAttribute("id", "DateLabel");
 
     nameLabel.innerText = "Task name: " + this.getAttribute("name");
-    timeLabel.innerText = "Total time of task: " + this.getAttribute("totaltime");
+    timeLabel.innerText =
+      "Total time of task: " + this.getAttribute("totaltime");
     dateLabel.innerText = "Date: " + this.getAttribute("date");
 
     li.appendChild(nameLabel);
@@ -37,7 +38,8 @@ class CompletedTask extends HTMLElement {
     if (name == "totaltime" && oldvalue != null) {
       const shadow = this.shadowRoot;
       let timeLabel = shadow.getElementById("timeLabel");
-      timeLabel.innerText = "Total time of task: " + this.getAttribute("totaltime");
+      timeLabel.innerText =
+        "Total time of task: " + this.getAttribute("totaltime");
     }
   }
 }

@@ -112,10 +112,10 @@ function updateCountdown(IsOn) {
         let currentTaskName = document.getElementById("curr-task").children[0]
           .innerHTML;
 
-        for (i = 0; i < completedTasks.length; i++) {
+        for (i = 0; i < completedSessions.length; i++) {
           if (
-            completedTasks[i].taskName == currentTaskName &&
-            completedTasks[i].date == date
+            completedSessions[i].taskName == currentTaskName &&
+            completedSessions[i].date == date
           ) {
             newTask = false;
             completedSessions[i].durationArray.push(worktimeNumber.value);
@@ -131,11 +131,14 @@ function updateCountdown(IsOn) {
             completed: false,
           };
           AddToLog(completedTask);
-          completedTasks.push(completedTask);
+          completedSessions.push(completedTask);
         }
 
-        console.log(completedTasks);
-        localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+        console.log(completedSessions);
+        localStorage.setItem(
+          "completedSessions",
+          JSON.stringify(completedSessions)
+        );
 
         localStorage.setItem(
           "numCurrentSech",
