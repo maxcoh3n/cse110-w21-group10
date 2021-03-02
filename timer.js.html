@@ -42,7 +42,17 @@
             <pre class="prettyprint source linenums"><code>//Timer
 
 const countdown = document.getElementById("countdown");
+const title = document.getElementById("title-countdown");
+const startBtn = document.getElementById("start-btn");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
+const workBreakLabel = document.getElementById("work-break-label");
+
+/*sound*/
+const sound = document.getElementById("alarm-sound");
+
+function startSound() {
+  sound.play();
+}
 
 /**
 timer
@@ -50,13 +60,12 @@ Uses the countdown h1 to set and run a timer of length designated by the startTi
 */
 
 function timer() {
-  const sound = document.getElementById("alarm-sound");
-
   completed.innerHTML = "Completed";
   if (startBtn.innerHTML == "Start") {
-    completed.disabled = true;
+    completed.disabled = true; // disables changing tasks during work session
     let taskList = document.getElementById("task-list");
     for (let task of taskList.childNodes) {
+      task.disabled = true;
       let label = document.getElementById("label" + task.id);
       if (label != null &amp;&amp; label.style.textDecoration == "line-through") {
         label.remove();
@@ -68,6 +77,10 @@ function timer() {
     document.getElementById("settings-btn").style.display = "none";
     updateCountdown(true);
   } else {
+    let taskList = document.getElementById("task-list");
+    for (let task of taskList.childNodes) {
+      task.disabled = false; // enables changing tasks
+    }
     completed.disabled = false;
     sound.pause();
     sound.currentTime = 0;
@@ -77,9 +90,6 @@ function timer() {
 }
 
 function updateCountdown(IsOn) {
-  const title = document.getElementById("title-countdown");
-  const workBreakLabel = document.getElementById("work-break-label");
-
   const devMode = document.getElementById("dev-mode");
   if (IsOn) {
     if (localStorage.getItem("workOrBreak") == "work") {
@@ -92,6 +102,10 @@ function updateCountdown(IsOn) {
     count = setInterval(updateTime, devMode.checked ? 10 : 1000);
     localStorage.setItem("intervalID", count);
   } else {
+    let taskList = document.getElementById("task-list");
+    for (let task of taskList.childNodes) {
+      task.disabled = false; // enables changing tasks
+    }
     document.getElementById("settings-btn").style.display = "block";
     clearInterval(localStorage.getItem("intervalID"));
     if (localStorage.getItem("workOrBreak") == "work") {
@@ -111,10 +125,7 @@ function updateCountdown(IsOn) {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Work Time";
     }
-    if (
-      localStorage.getItem("workOrBreak") == "break" ||
-      localStorage.getItem("workOrBreak") == "longBreak"
-    ) {
+    if (localStorage.getItem("workOrBreak") == "break" || localStorage.getItem("workOrBreak") == "longBreak") {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Break Time";
     }
@@ -130,27 +141,22 @@ function updateCountdown(IsOn) {
     countdown.innerHTML = `${mins}:${sec}`;
     time--;
     if (time == 0) {
-      const sound = document.getElementById("alarm-sound");
-      sound.play();
+      startSound();
       clearInterval(count);
       if (localStorage.getItem("workOrBreak") == "work") {
         //Complete tasks
-        let completedTasks = localStorage.getItem("completedTasks");
-        completedTasks = JSON.parse(completedTasks);
+        let completedSessions = localStorage.getItem("completedSessions");
+        completedSessions = JSON.parse(completedSessions);
         let newTask = true;
         let dateObject = new Date();
         let date = dateObject.getMonth() + 1 + "/" + dateObject.getDate();
         let worktimeNumber = document.getElementById("worktime-number");
-        let currentTaskName = document.getElementById("curr-task").children[0]
-          .innerHTML;
-
-        for (i = 0; i &lt; completedTasks.length; i++) {
-          if (
-            completedTasks[i].taskName == currentTaskName &amp;&amp;
-            completedTasks[i].date == date
-          ) {
+        let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
+        for (i = 0; i &lt; completedSessions.length; i++) {
+          if (completedSessions[i].taskName == currentTaskName &amp;&amp; completedSessions[i].date == date) {
             newTask = false;
-            completedTasks[i].durationArray.push(worktimeNumber.value);
+            completedSessions[i].durationArray.push(worktimeNumber.value);
+            updatePomoLog(completedSessions[i]); //for pomo log, function from pomoLog.js
           }
         }
 
@@ -161,24 +167,16 @@ function updateCountdown(IsOn) {
             date: date,
             completed: false,
           };
-          completedTasks.push(completedTask);
+          completedSessions.push(completedTask);
+          AddToLog(completedTask); //for pomo log, function from pomoLog.js
         }
 
-        console.log(completedTasks);
-        localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+        console.log(completedSessions);
+        localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
 
-        localStorage.setItem(
-          "numCurrentSech",
-          1 + Number(localStorage.getItem("numCurrentSech"))
-        );
-        console.log(
-          "Testing: Work session number " +
-            localStorage.getItem("numCurrentSech")
-        );
-        if (
-          localStorage.getItem("numCurrentSech") >=
-          localStorage.getItem("numSessions")
-        ) {
+        localStorage.setItem("numCurrentSech", 1 + Number(localStorage.getItem("numCurrentSech")));
+        //console.log("Testing: Work session number " + localStorage.getItem("numCurrentSech"));
+        if (localStorage.getItem("numCurrentSech") >= localStorage.getItem("numSessions")) {
           localStorage.setItem("numCurrentSech", "0");
           localStorage.setItem("workOrBreak", "longBreak");
         } else {
@@ -200,7 +198,6 @@ function updateCountdown(IsOn) {
   }
 }
 
-const startBtn = document.getElementById("start-btn");
 startBtn.onclick = function () {
   timer();
 };
@@ -216,7 +213,7 @@ startBtn.onclick = function () {
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Mon Mar 01 2021 23:38:53 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Tue Mar 02 2021 00:44:49 GMT+0000 (Coordinated Universal Time) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
