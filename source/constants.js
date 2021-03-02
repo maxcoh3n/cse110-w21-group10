@@ -10,8 +10,8 @@ if (!longBreakMins) localStorage.setItem("longBreakMins", "15");
 let numSessions = localStorage.getItem("numSessions");
 if (!numSessions) localStorage.setItem("numSessions", "4");
 
-let completedTasks = localStorage.getItem("completedTasks");
-if (!completedTasks) localStorage.setItem("completedTasks", "[]");
+let completedSessions = localStorage.getItem("completedSessions");
+if (!completedSessions) localStorage.setItem("completedSessions", "[]");
 
 let upcomingTasks = localStorage.getItem("upcomingTasks");
 if (!upcomingTasks) localStorage.setItem("upcomingTasks", "[]");
@@ -22,3 +22,8 @@ if (workOrBreak != "work") {
 }
 let numCurrentSech = localStorage.getItem("numCurrentSech");
 if (numCurrentSech != 0) localStorage.setItem("numCurrentSech", "0");
+
+// let logTasks = localStorage.getItem("logTasks");
+// if (!logTasks) {
+//   localStorage.setItem("logTasks", "[]");
+// }
