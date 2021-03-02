@@ -33,15 +33,11 @@ function updatePomoLog(updatedTask) {
   let dailyLog = document.getElementById("log-list");
   let children = dailyLog.children;
   for (let i = 0; i < children.length; i++) {
-    console.log(children[i]);
     if (children[i].id == updatedTask.taskName + " " + updatedTask.date) {
-      console.log("YOOOOO" + children[i].getAttribute("totaltime"));
       children[i].setAttribute(
         "totaltime",
         Number(children[i].getAttribute("totaltime")) + Number(localStorage.getItem("workMins"))
       );
-      console.log("YOOOOO" + children[i].getAttribute("totaltime"));
-      console.log(children[i]);
       return;
     }
   }
