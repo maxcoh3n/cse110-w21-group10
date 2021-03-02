@@ -2,7 +2,6 @@
 
 const countdown = document.getElementById("countdown");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
-
 /**
 timer
 Uses the countdown h1 to set and run a timer of length designated by the startTime parameter.
@@ -86,7 +85,6 @@ function updateCountdown(IsOn) {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Break Time";
     }
-
     time = time < 0 ? 0 : time;
 
     let mins = Math.floor(time / 60);
