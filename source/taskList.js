@@ -106,7 +106,7 @@ addTask.onclick = function () {
 
   const newTaskInput = document.getElementById("new-task");
 
-  if(tasksArray.includes(newTaskInput.value)){
+  if (tasksArray.includes(newTaskInput.value)) {
     newTaskInput.value = "";
   }
 
@@ -149,12 +149,13 @@ function comple() {
         }
         localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
 
-
         let label = document.getElementById("label" + box.id);
         label.style.textDecoration = "line-through";
       } else {
-        if ( box.name == "task-list" &&
-        document.getElementById("label" + box.id).style.textDecoration != "line-through" ) {
+        if (
+          box.name == "task-list" &&
+          document.getElementById("label" + box.id).style.textDecoration != "line-through"
+        ) {
           taskArray.push(box.id);
         }
       }
@@ -222,4 +223,3 @@ completed.onclick = function () {
     del();
   }
 };
-

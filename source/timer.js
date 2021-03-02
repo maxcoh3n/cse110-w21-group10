@@ -1,8 +1,8 @@
 //Timer
+import { updatePomoLog, AddToLog } from "./pomoLog.js";
 
 const countdown = document.getElementById("countdown");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
-
 /**
 timer
 Uses the countdown h1 to set and run a timer of length designated by the startTime parameter.
@@ -13,9 +13,10 @@ function timer() {
 
   completed.innerHTML = "Completed";
   if (startBtn.innerHTML == "Start") {
-    completed.disabled = true;
+    completed.disabled = true; // disables changing tasks during work session
     let taskList = document.getElementById("task-list");
     for (let task of taskList.childNodes) {
+      task.disabled = true;
       let label = document.getElementById("label" + task.id);
       if (label != null && label.style.textDecoration == "line-through") {
         label.remove();
@@ -27,6 +28,10 @@ function timer() {
     document.getElementById("settings-btn").style.display = "none";
     updateCountdown(true);
   } else {
+    let taskList = document.getElementById("task-list");
+    for (let task of taskList.childNodes) {
+      task.disabled = false; // enables changing tasks
+    }
     completed.disabled = false;
     sound.pause();
     sound.currentTime = 0;
@@ -41,6 +46,7 @@ function updateCountdown(IsOn) {
 
   const devMode = document.getElementById("dev-mode");
   if (IsOn) {
+    var time;  // must be var so that updateTime can access it
     if (localStorage.getItem("workOrBreak") == "work") {
       time = localStorage.getItem("workMins") * 60;
     } else if (localStorage.getItem("workOrBreak") == "break") {
@@ -48,9 +54,13 @@ function updateCountdown(IsOn) {
     } else if (localStorage.getItem("workOrBreak") == "longBreak") {
       time = localStorage.getItem("longBreakMins") * 60;
     }
-    count = setInterval(updateTime, devMode.checked ? 10 : 1000);
+    var count = setInterval(updateTime, devMode.checked ? 10 : 1000);
     localStorage.setItem("intervalID", count);
   } else {
+    let taskList = document.getElementById("task-list");
+    for (let task of taskList.childNodes) {
+      task.disabled = false; // enables changing tasks
+    }
     document.getElementById("settings-btn").style.display = "block";
     clearInterval(localStorage.getItem("intervalID"));
     if (localStorage.getItem("workOrBreak") == "work") {
@@ -77,7 +87,7 @@ function updateCountdown(IsOn) {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Break Time";
     }
-
+    time--;
     time = time < 0 ? 0 : time;
 
     let mins = Math.floor(time / 60);
@@ -87,7 +97,7 @@ function updateCountdown(IsOn) {
 
     title.innerHTML = `${mins}:${sec}`;
     countdown.innerHTML = `${mins}:${sec}`;
-    time--;
+
     if (time == 0) {
       const sound = document.getElementById("alarm-sound");
       sound.play();
@@ -110,6 +120,7 @@ function updateCountdown(IsOn) {
           ) {
             newTask = false;
             completedSessions[i].durationArray.push(worktimeNumber.value);
+            updatePomoLog(completedSessions[i]); //for pomo log, function from pomoLog.js
           }
         }
 
@@ -120,11 +131,15 @@ function updateCountdown(IsOn) {
             date: date,
             completed: false,
           };
+          AddToLog(completedTask);
           completedSessions.push(completedTask);
         }
 
         console.log(completedSessions);
-        localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
+        localStorage.setItem(
+          "completedSessions",
+          JSON.stringify(completedSessions)
+        );
 
         localStorage.setItem(
           "numCurrentSech",
