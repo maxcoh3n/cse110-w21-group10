@@ -104,17 +104,18 @@ function updateCountdown(IsOn) {
       clearInterval(count);
       if (localStorage.getItem("workOrBreak") == "work") {
         //Complete tasks
-        let completedTasks = localStorage.getItem("completedTasks");
-        completedTasks = JSON.parse(completedTasks);
+        let completedSessions = localStorage.getItem("completedSessions");
+        completedSessions = JSON.parse(completedSessions);
         let newTask = true;
         let dateObject = new Date();
         let date = dateObject.getMonth() + 1 + "/" + dateObject.getDate();
         let worktimeNumber = document.getElementById("worktime-number");
         let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
-        for (i = 0; i < completedTasks.length; i++) {
-          if (completedTasks[i].taskName == currentTaskName && completedTasks[i].date == date) {
+        for (i = 0; i < completedSessions.length; i++) {
+          if (completedSessions[i].taskName == currentTaskName && completedSessions[i].date == date) {
             newTask = false;
-            completedTasks[i].durationArray.push(worktimeNumber.value);
+            completedSessions[i].durationArray.push(worktimeNumber.value);
+            updatePomoLog(completedSessions[i]); //for pomo log, function from pomoLog.js
           }
         }
 
@@ -125,14 +126,15 @@ function updateCountdown(IsOn) {
             date: date,
             completed: false,
           };
-          completedTasks.push(completedTask);
+          completedSessions.push(completedTask);
+          AddToLog(completedTask); //for pomo log, function from pomoLog.js
         }
 
-        console.log(completedTasks);
-        localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+        console.log(completedSessions);
+        localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
 
         localStorage.setItem("numCurrentSech", 1 + Number(localStorage.getItem("numCurrentSech")));
-        console.log("Testing: Work session number " + localStorage.getItem("numCurrentSech"));
+        //console.log("Testing: Work session number " + localStorage.getItem("numCurrentSech"));
         if (localStorage.getItem("numCurrentSech") >= localStorage.getItem("numSessions")) {
           localStorage.setItem("numCurrentSech", "0");
           localStorage.setItem("workOrBreak", "longBreak");

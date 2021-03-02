@@ -1,4 +1,8 @@
 class CompletedTask extends HTMLElement {
+  static get observedAttributes() {
+    return ["totaltime"];
+  }
+
   constructor() {
     super();
   }
@@ -13,12 +17,12 @@ class CompletedTask extends HTMLElement {
     // for css styling
     li.setAttribute("class", "listElement");
     div.setAttribute("class", "divTag");
-    nameLabel.setAttribute("class", "nameLabel");
-    timeLabel.setAttribute("class", "timeLabel");
-    dateLabel.setAttribute("class", "DateLabel");
+    nameLabel.setAttribute("id", "nameLabel");
+    timeLabel.setAttribute("id", "timeLabel");
+    dateLabel.setAttribute("id", "DateLabel");
 
     nameLabel.innerText = "Task name: " + this.getAttribute("name");
-    timeLabel.innerText = "Total time of task: " + this.getAttribute("totalTime");
+    timeLabel.innerText = "Total time of task: " + this.getAttribute("totaltime");
     dateLabel.innerText = "Date: " + this.getAttribute("date");
 
     li.appendChild(nameLabel);
@@ -28,6 +32,13 @@ class CompletedTask extends HTMLElement {
     let stlye = document.createElement("style"); // for css style
 
     shadow.appendChild(li);
+  }
+  attributeChangedCallback(name, oldvalue, newvalue) {
+    if (name == "totaltime" && oldvalue != null) {
+      const shadow = this.shadowRoot;
+      let timeLabel = shadow.getElementById("timeLabel");
+      timeLabel.innerText = "Total time of task: " + this.getAttribute("totaltime");
+    }
   }
 }
 
