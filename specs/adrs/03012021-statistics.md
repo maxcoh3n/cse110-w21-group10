@@ -28,6 +28,7 @@ we would like to make this O(1)
 avg num sessions to complete a task (total number of session of completed tasks/ # of completed tasks)
  - numSessionsForCompletedTasks
     - add to onclick for completed button- add size of duration array
+      - undo must get rid of these, so you need to store num tasksAdded and then subtract them when u hit undo and set this var to 0
   - numCompletedTasks
     - add to onclick for completed button
 avg tasks completed per day (edited) 
