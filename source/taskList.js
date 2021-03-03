@@ -131,35 +131,91 @@ newTaskInput.addEventListener("keyup", function (event) {
   }
 });
 
+function inCompleted(taskName) {
+  let completedTasks = localStorage.getItem("completedTasks");
+  completedTasks = JSON.parse(completedTasks);
+  for(let task of completedTasks) {
+    if( task.taskName == taskName ) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function isCompleted(taskName) {
+  let completedTasks = localStorage.getItem("completedTasks");
+  completedTasks = JSON.parse(completedTasks);
+  for(let task of completedTasks) {
+    if( task.taskName == taskName ) {
+      return task.completed;
+    }
+  }
+  return false;
+}
+
 function comple() {
 
   let taskList = document.getElementById("task-list");
+  let completedTasks = localStorage.getItem("completedTasks");
+  completedTasks = JSON.parse(completedTasks);
   let taskArray = [];
-    for (let box of taskList.childNodes) {
-      if (box.checked) {
-        //Completed tasks
-        let completedTasks = localStorage.getItem("completedTasks");
-        completedTasks = JSON.parse(completedTasks);
-        for(i = 0; i<completedTasks.length; i++){
-          if( box.id == completedTasks[i].taskName ) {
-            completedTasks[i].completed = true;
-            completed.innerHTML = "Undo";
-            document.getElementById("curr-task").children[0].innerHTML = "None";
-          }
-        }
-        localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
-
-
-        let label = document.getElementById("label" + box.id);
-        label.style.textDecoration = "line-through";
-      } else {
-        if ( box.name == "task-list" &&
-        document.getElementById("label" + box.id).style.textDecoration != "line-through" ) {
-          taskArray.push(box.id);
+  let taskCheck = 0;
+  let foundCheck = false;
+  for (let box of taskList.childNodes) {
+    if (box.checked) {
+      foundCheck = true;
+      for(i = 0; i<completedTasks.length; i++){
+        if( box.id == completedTasks[i].taskName ) {
+          completedTasks[i].completed = true;
+          completed.innerHTML = "Undo";
+          document.getElementById("curr-task").children[0].innerHTML = "None";
         }
       }
+      localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+
+      let label = document.getElementById("label" + box.id);
+      label.style.textDecoration = "line-through";
+    } else {
+      if ( box.name == "task-list" &&
+      document.getElementById("label" + box.id).style.textDecoration != "line-through" ) {
+        taskArray.push(box.id);
+      }
     }
-    localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
+    if( foundCheck == false ) {
+      taskCheck++;
+    }
+  }
+  localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
+  taskCheck = Math.floor(taskCheck / 2);
+
+  if( taskArray.length > 0 ) {
+    if( taskCheck < (taskArray.length) ) {
+      document.getElementById(taskArray[taskCheck]).checked = true;
+      document.getElementById("curr-task").children[0].innerHTML = taskArray[taskCheck];
+      if( inCompleted(taskArray[taskCheck]) ) {
+        if( isCompleted(taskArray[taskCheck]) ) {
+          completed.innerHTML = "Undo";
+        } else {
+          completed.innerHTML = "Completed";
+        }
+      } else {
+        completed.innerHTML = "Delete";
+      }
+    } else {
+      document.getElementById(taskArray[0]).checked = true;
+      document.getElementById("curr-task").children[0].innerHTML = taskArray[0];
+      if( inCompleted(taskArray[0]) ) {
+        if( isCompleted(taskArray[0]) ) {
+          completed.innerHTML = "Undo";
+        } else {
+          completed.innerHTML = "Completed";
+        }
+      } else {
+        completed.innerHTML = "Delete";
+      }
+    }
+  }
+
 }
 
 function undo() {
@@ -168,7 +224,7 @@ function undo() {
   let taskArray = [];
     for (let box of taskList.childNodes) {
       let label = document.getElementById("label" + box.id);
-      if( box.checked) {
+      if( box.checked ) {
         document.getElementById("curr-task").children[0].innerHTML = box.id;
         completed.innerHTML = "Completed";
         label.style.textDecoration = "none";
@@ -193,21 +249,50 @@ function del() {
 
   let taskList = document.getElementById("task-list");
   document.getElementById("curr-task").children[0].innerHTML = "None";
-    let taskArray = [];
-    let completedTasks = localStorage.getItem("completedTasks");
-    completedTasks = JSON.parse(completedTasks);
-    for (let box of taskList.childNodes) {
-      let label = document.getElementById("label" + box.id);
-      if( box.checked ) {
-        completedTasks = completedTasks.filter( task => task != box.id );
-        label.remove();
-        box.remove();
-      } else if( label != null ){
-        taskArray.push(box.id);
+  let taskArray = [];
+  let upcomingTasks = localStorage.getItem("upcomingTasks");
+  upcomingTasks = JSON.parse(upcomingTasks);
+  let nextTaskNum = 0;
+  for (let box of taskList.childNodes) {
+    let label = document.getElementById("label" + box.id);
+    if( box.checked == true ) {
+      taskArray = upcomingTasks.filter( task => task != box.id );
+      label.remove();
+      box.remove();
+      break;
+    }
+    nextTaskNum++;
+  }
+  nextTaskNum = Math.floor(nextTaskNum / 2);
+  localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
+
+  if( taskArray.length > 0 ) {
+    if( nextTaskNum < (taskArray.length) ) {
+      document.getElementById(taskArray[nextTaskNum]).checked = true;
+      document.getElementById("curr-task").children[0].innerHTML = taskArray[nextTaskNum];
+      if( inCompleted(taskArray[nextTaskNum]) ) {
+        if( isCompleted(taskArray[nextTaskNum]) ) {
+          completed.innerHTML = "Undo";
+        } else {
+          completed.innerHTML = "Completed";
+        }
+      } else {
+        completed.innerHTML = "Delete";
+      }
+    } else {
+      document.getElementById(taskArray[0]).checked = true;
+      document.getElementById("curr-task").children[0].innerHTML = taskArray[0];
+      if( inCompleted(taskArray[0]) ) {
+        if( isCompleted(taskArray[0]) ) {
+          completed.innerHTML = "Undo";
+        } else {
+          completed.innerHTML = "Completed";
+        }
+      } else {
+        completed.innerHTML = "Delete";
       }
     }
-    localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
-    localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
+  }
 
 }
 
@@ -221,5 +306,6 @@ completed.onclick = function () {
   } else if(completed.innerHTML == "Delete") {
     del();
   }
+
 };
 

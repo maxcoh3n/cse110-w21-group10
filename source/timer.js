@@ -12,15 +12,23 @@ function timer() {
   const sound = document.getElementById("alarm-sound");
 
   completed.innerHTML = "Completed";
+  let removeLabels = [];
+  let removeTasks = [];
   if (startBtn.innerHTML == "Start") {
     completed.disabled = true;
     let taskList = document.getElementById("task-list");
     for (let task of taskList.childNodes) {
       let label = document.getElementById("label" + task.id);
       if (label != null && label.style.textDecoration == "line-through") {
-        label.remove();
-        task.remove();
+        removeLabels.push(label);
+        removeTasks.push(task);
       }
+    }
+    for(let label of removeLabels) {
+      label.remove();
+    }
+    for(let task of removeTasks) {
+      task.remove();
     }
 
     startBtn.innerHTML = "Cancel";
@@ -123,16 +131,11 @@ function updateCountdown(IsOn) {
           completedTasks.push(completedTask);
         }
 
-        console.log(completedTasks);
         localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
 
         localStorage.setItem(
           "numCurrentSech",
           1 + Number(localStorage.getItem("numCurrentSech"))
-        );
-        console.log(
-          "Testing: Work session number " +
-            localStorage.getItem("numCurrentSech")
         );
         if (
           localStorage.getItem("numCurrentSech") >=
