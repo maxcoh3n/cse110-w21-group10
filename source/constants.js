@@ -10,8 +10,8 @@ if (!longBreakMins) localStorage.setItem("longBreakMins", "15");
 let numSessions = localStorage.getItem("numSessions");
 if (!numSessions) localStorage.setItem("numSessions", "4");
 
-let completedTasks = localStorage.getItem("completedTasks");
-if (!completedTasks) localStorage.setItem("completedTasks", "[]");
+let completedSessions = localStorage.getItem("completedSessions");
+if (!completedSessions) localStorage.setItem("completedSessions", "[]");
 
 let upcomingTasks = localStorage.getItem("upcomingTasks");
 if (!upcomingTasks) localStorage.setItem("upcomingTasks", "[]");
