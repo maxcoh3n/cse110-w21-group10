@@ -1,5 +1,9 @@
 import {renderStatistics} from "./statistics.js";
 
+// runs on page refresh
+renderAll();
+
+
 function renderOne(taskInput){
 
   const taskButton = document.getElementById("complete-task-btn");
@@ -98,7 +102,6 @@ function renderAll() {
   }
 }
 
-renderAll();
 
 const addTask = document.getElementById("new-task-btn");
 addTask.onclick = function () {
