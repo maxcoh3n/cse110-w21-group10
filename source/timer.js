@@ -12,6 +12,8 @@ function timer() {
   const sound = document.getElementById("alarm-sound");
 
   completed.innerHTML = "Completed";
+  let removeLabels = [];
+  let removeTasks = [];
   if (startBtn.innerHTML == "Start") {
     completed.disabled = true; // disables changing tasks during work session
     let taskList = document.getElementById("task-list");
@@ -19,9 +21,15 @@ function timer() {
       task.disabled = true;
       let label = document.getElementById("label" + task.id);
       if (label != null && label.style.textDecoration == "line-through") {
-        label.remove();
-        task.remove();
+        removeLabels.push(label);
+        removeTasks.push(task);
       }
+    }
+    for(let label of removeLabels) {
+      label.remove();
+    }
+    for(let task of removeTasks) {
+      task.remove();
     }
 
     startBtn.innerHTML = "Cancel";
@@ -46,7 +54,7 @@ function updateCountdown(IsOn) {
 
   const devMode = document.getElementById("dev-mode");
   if (IsOn) {
-    var time;
+    var time;  // must be var so that updateTime can access it
     if (localStorage.getItem("workOrBreak") == "work") {
       time = localStorage.getItem("workMins") * 60;
     } else if (localStorage.getItem("workOrBreak") == "break") {
@@ -87,6 +95,7 @@ function updateCountdown(IsOn) {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Break Time";
     }
+    time--;
     time = time < 0 ? 0 : time;
 
     let mins = Math.floor(time / 60);
@@ -96,7 +105,7 @@ function updateCountdown(IsOn) {
 
     title.innerHTML = `${mins}:${sec}`;
     countdown.innerHTML = `${mins}:${sec}`;
-    time--;
+
     if (time == 0) {
       const sound = document.getElementById("alarm-sound");
       sound.play();
@@ -134,19 +143,10 @@ function updateCountdown(IsOn) {
           completedSessions.push(completedTask);
         }
 
-        console.log(completedSessions);
-        localStorage.setItem(
-          "completedSessions",
-          JSON.stringify(completedSessions)
-        );
-
+        localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
         localStorage.setItem(
           "numCurrentSech",
           1 + Number(localStorage.getItem("numCurrentSech"))
-        );
-        console.log(
-          "Testing: Work session number " +
-            localStorage.getItem("numCurrentSech")
         );
         if (
           localStorage.getItem("numCurrentSech") >=
