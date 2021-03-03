@@ -25,5 +25,5 @@ if (numCurrentSech != 0) localStorage.setItem("numCurrentSech", "0");
 
 let statistics = localStorage.getItem("statistics");
 let statsObj = {numSessionsForCompletedTasks:0, numCompletedTasks: 0, numSessions: 0, numDaysWorking: 0, numDistractions: 0};
-if (statistics != 0) localStorage.setItem("statistics", JSON.stringify(statsObj));
+if (!statistics) localStorage.setItem("statistics", JSON.stringify(statsObj));
 
