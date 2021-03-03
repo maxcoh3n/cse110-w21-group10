@@ -41,9 +41,11 @@
         <article>
             <pre class="prettyprint source linenums"><code>//Timer
 import { updatePomoLog, AddToLog } from "./pomoLog.js";
+import { changeSession, endBreak } from "./sessionCircles.js";
 
 const countdown = document.getElementById("countdown");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
+let sessionNum = localStorage.getItem("numCurrentSech");
 /**
 timer
 Uses the countdown h1 to set and run a timer of length designated by the startTime parameter.
@@ -52,10 +54,7 @@ Uses the countdown h1 to set and run a timer of length designated by the startTi
 function timer() {
   const sound = document.getElementById("alarm-sound");
 
-  const completed = document.getElementById("new-task-btn");
   completed.innerHTML = "Completed";
-  let removeLabels = [];
-  let removeTasks = [];
   if (startBtn.innerHTML == "Start") {
     completed.disabled = true; // disables changing tasks during work session
     let taskList = document.getElementById("task-list");
@@ -63,15 +62,9 @@ function timer() {
       task.disabled = true;
       let label = document.getElementById("label" + task.id);
       if (label != null &amp;&amp; label.style.textDecoration == "line-through") {
-        removeLabels.push(label);
-        removeTasks.push(task);
+        label.remove();
+        task.remove();
       }
-    }
-    for(let label of removeLabels) {
-      label.remove();
-    }
-    for(let task of removeTasks) {
-      task.remove();
     }
 
     startBtn.innerHTML = "Cancel";
@@ -90,14 +83,13 @@ function timer() {
   }
 }
 
-
 function updateCountdown(IsOn) {
   const title = document.getElementById("title-countdown");
   const workBreakLabel = document.getElementById("work-break-label");
 
   const devMode = document.getElementById("dev-mode");
   if (IsOn) {
-    var time;  // must be var so that updateTime can access it
+    var time;
     if (localStorage.getItem("workOrBreak") == "work") {
       time = localStorage.getItem("workMins") * 60;
     } else if (localStorage.getItem("workOrBreak") == "break") {
@@ -123,7 +115,6 @@ function updateCountdown(IsOn) {
       title.innerHTML = `${localStorage.getItem("workMins")}:00`;
     }
     workBreakLabel.style.display = "none";
-    const completed = document.getElementById("new-task-btn");
     completed.disabled = false;
   }
 
@@ -139,7 +130,6 @@ function updateCountdown(IsOn) {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Break Time";
     }
-    time--;
     time = time &lt; 0 ? 0 : time;
 
     let mins = Math.floor(time / 60);
@@ -149,6 +139,7 @@ function updateCountdown(IsOn) {
 
     title.innerHTML = `${mins}:${sec}`;
     countdown.innerHTML = `${mins}:${sec}`;
+    time--;
     if (time == 0) {
       const sound = document.getElementById("alarm-sound");
       sound.play();
@@ -164,7 +155,7 @@ function updateCountdown(IsOn) {
         let currentTaskName = document.getElementById("curr-task").children[0]
           .innerHTML;
 
-        for (let i = 0; i &lt; completedSessions.length; i++) {
+        for (i = 0; i &lt; completedSessions.length; i++) {
           if (
             completedSessions[i].taskName == currentTaskName &amp;&amp;
             completedSessions[i].date == date
@@ -186,16 +177,28 @@ function updateCountdown(IsOn) {
           completedSessions.push(completedTask);
         }
 
-        localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
+        console.log(completedSessions);
+        localStorage.setItem(
+          "completedSessions",
+          JSON.stringify(completedSessions)
+        );
+
         localStorage.setItem(
           "numCurrentSech",
           1 + Number(localStorage.getItem("numCurrentSech"))
+        );
+
+        sessionNum = Number(sessionNum) + 1;
+        changeSession(sessionNum);
+
+        console.log(
+          "Testing: Work session number " +
+            localStorage.getItem("numCurrentSech")
         );
         if (
           localStorage.getItem("numCurrentSech") >=
           localStorage.getItem("numSessions")
         ) {
-          localStorage.setItem("numCurrentSech", "0");
           localStorage.setItem("workOrBreak", "longBreak");
         } else {
           localStorage.setItem("workOrBreak", "break");
@@ -206,7 +209,9 @@ function updateCountdown(IsOn) {
         updateCountdown(false);
         return;
       } else if (localStorage.getItem("workOrBreak") == "longBreak") {
+        localStorage.setItem("numCurrentSech", "0");
         localStorage.setItem("workOrBreak", "work");
+        sessionNum = 0;
         startBtn.innerHTML = "Start";
         updateCountdown(false);
         return;
@@ -219,6 +224,11 @@ function updateCountdown(IsOn) {
 const startBtn = document.getElementById("start-btn");
 startBtn.onclick = function () {
   timer();
+  let maxSessions = localStorage.getItem("numSessions");
+  if (sessionNum >= maxSessions) {
+    sessionNum = 0;
+  }
+  endBreak(sessionNum);
 };
 </code></pre>
         </article>
@@ -232,7 +242,7 @@ startBtn.onclick = function () {
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Wed Mar 03 2021 21:59:06 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Wed Mar 03 2021 22:24:38 GMT+0000 (Coordinated Universal Time) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
