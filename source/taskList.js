@@ -132,9 +132,9 @@ newTaskInput.addEventListener("keyup", function (event) {
 });
 
 function inCompleted(taskName) {
-  let completedTasks = localStorage.getItem("completedTasks");
-  completedTasks = JSON.parse(completedTasks);
-  for(let task of completedTasks) {
+  let completedSessions = localStorage.getItem("completedSessions");
+  completedSessions = JSON.parse(completedSessions);
+  for(let task of completedSessions) {
     if( task.taskName == taskName ) {
       return true;
     }
@@ -143,9 +143,9 @@ function inCompleted(taskName) {
 }
 
 function isCompleted(taskName) {
-  let completedTasks = localStorage.getItem("completedTasks");
-  completedTasks = JSON.parse(completedTasks);
-  for(let task of completedTasks) {
+  let completedSessions = localStorage.getItem("completedSessions");
+  completedSessions = JSON.parse(completedSessions);
+  for(let task of completedSessions) {
     if( task.taskName == taskName ) {
       return task.completed;
     }
@@ -156,22 +156,22 @@ function isCompleted(taskName) {
 function comple() {
 
   let taskList = document.getElementById("task-list");
-  let completedTasks = localStorage.getItem("completedTasks");
-  completedTasks = JSON.parse(completedTasks);
+  let completedSessions = localStorage.getItem("completedSessions");
+  completedSessions = JSON.parse(completedSessions);
   let taskArray = [];
   let taskCheck = 0;
   let foundCheck = false;
   for (let box of taskList.childNodes) {
     if (box.checked) {
       foundCheck = true;
-      for(i = 0; i<completedTasks.length; i++){
-        if( box.id == completedTasks[i].taskName ) {
-          completedTasks[i].completed = true;
+      for(i = 0; i<completedSessions.length; i++){
+        if( box.id == completedSessions[i].taskName ) {
+          completedSessions[i].completed = true;
           completed.innerHTML = "Undo";
           document.getElementById("curr-task").children[0].innerHTML = "None";
         }
       }
-      localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+      localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
 
       let label = document.getElementById("label" + box.id);
       label.style.textDecoration = "line-through";

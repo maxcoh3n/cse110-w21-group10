@@ -143,7 +143,7 @@ function updateCountdown(IsOn) {
           completedSessions.push(completedTask);
         }
 
-        localStorage.setItem("completedTasks", JSON.stringify(completedSessions));
+        localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
         localStorage.setItem(
           "numCurrentSech",
           1 + Number(localStorage.getItem("numCurrentSech"))
