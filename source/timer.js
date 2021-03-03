@@ -11,6 +11,7 @@ Uses the countdown h1 to set and run a timer of length designated by the startTi
 function timer() {
   const sound = document.getElementById("alarm-sound");
 
+  const completed = document.getElementById("new-task-btn");
   completed.innerHTML = "Completed";
   let removeLabels = [];
   let removeTasks = [];
@@ -81,6 +82,7 @@ function updateCountdown(IsOn) {
       title.innerHTML = `${localStorage.getItem("workMins")}:00`;
     }
     workBreakLabel.style.display = "none";
+    const completed = document.getElementById("new-task-btn");
     completed.disabled = false;
   }
 
@@ -121,7 +123,7 @@ function updateCountdown(IsOn) {
         let currentTaskName = document.getElementById("curr-task").children[0]
           .innerHTML;
 
-        for (i = 0; i < completedSessions.length; i++) {
+        for (let i = 0; i < completedSessions.length; i++) {
           if (
             completedSessions[i].taskName == currentTaskName &&
             completedSessions[i].date == date

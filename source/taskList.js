@@ -1,3 +1,5 @@
+import {renderStatistics} from "./statistics.js";
+
 function renderOne(taskInput){
 
   const taskButton = document.getElementById("complete-task-btn");
@@ -18,7 +20,7 @@ function renderOne(taskInput){
         let completedSessions = localStorage.getItem("completedSessions");
         completedSessions = JSON.parse(completedSessions);
         let foundTask = false;
-        for(i = 0; i<completedSessions.length; i++){
+        for(let i = 0; i<completedSessions.length; i++){
           if( box.id == completedSessions[i].taskName ) {
             foundTask = true;
             if( completedSessions[i].completed == false ) {
@@ -68,7 +70,7 @@ function renderAll() {
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
 
-  for (i = 0; i < tasksArray.length; i++) {
+  for (let i = 0; i < tasksArray.length; i++) {
     renderOne(tasksArray[i]);
   }
 
@@ -77,7 +79,7 @@ function renderAll() {
     let completedSessions = localStorage.getItem("completedSessions");
     completedSessions = JSON.parse(completedSessions);
     let foundTask = false;
-    for(i = 0; i<completedSessions.length; i++){
+    for(let i = 0; i<completedSessions.length; i++){
       if( tasksArray[0] == completedSessions[i].taskName ) {
         foundTask = true;
         if( completedSessions[i].completed == false ) {
@@ -154,6 +156,7 @@ function isCompleted(taskName) {
 }
 
 function comple() {
+  incNumCompletedTasks();
 
   let taskList = document.getElementById("task-list");
   let completedSessions = localStorage.getItem("completedSessions");
@@ -164,7 +167,7 @@ function comple() {
   for (let box of taskList.childNodes) {
     if (box.checked) {
       foundCheck = true;
-      for(i = 0; i<completedSessions.length; i++){
+      for(let i = 0; i<completedSessions.length; i++){
         if( box.id == completedSessions[i].taskName ) {
           completedSessions[i].completed = true;
           completed.innerHTML = "Undo";
@@ -220,6 +223,8 @@ function comple() {
 
 function undo() {
 
+  decNumCompletedTasks();
+
   let taskList = document.getElementById("task-list");
   let taskArray = [];
     for (let box of taskList.childNodes) {
@@ -230,7 +235,7 @@ function undo() {
         label.style.textDecoration = "none";
         let completedSessions = localStorage.getItem("completedSessions");
         completedSessions = JSON.parse(completedSessions);
-        for(i = 0; i<completedSessions.length; i++){
+        for(let i = 0; i<completedSessions.length; i++){
           if( box.id == completedSessions[i].taskName ) {
             completedSessions[i].completed = false;
           }
@@ -246,6 +251,8 @@ function undo() {
 }
 
 function del() {
+
+
 
   let taskList = document.getElementById("task-list");
   document.getElementById("curr-task").children[0].innerHTML = "None";
@@ -295,6 +302,46 @@ function del() {
   }
 
 }
+
+/*
+* increases numCompletedTasks statistic
+*/
+function incNumCompletedTasks(){
+  let stats = JSON.parse(localStorage.getItem("statistics"));
+  stats.numCompletedTasks++;
+  localStorage.setItem("statistics",JSON.stringify(stats));
+  renderStatistics();
+}
+
+/*
+* decreases numCompletedTasks statistic
+*/
+function decNumCompletedTasks(){
+  let stats = JSON.parse(localStorage.getItem("statistics"));
+  stats.numCompletedTasks--;
+  localStorage.setItem("statistics",JSON.stringify(stats));
+  renderStatistics();
+}
+
+// /*
+// * increases incNumCompletedTasks statistic
+// */
+// function incNumCompletedTasks(){
+//   let stats = JSON.parse(localStorage.getItem("statistics"));
+//   stats.numCompletedTasks++;
+//   localStorage.setItem("statistics",JSON.stringify(stats));
+//   renderStatistics();
+// }
+
+// /*
+// * decreases incNumCompletedTasks statistic
+// */
+// function decNumCompletedSessions(){
+//   let stats = JSON.parse(localStorage.getItem("statistics"));
+//   stats.numCompletedTasks--;
+//   localStorage.setItem("statistics",JSON.stringify(stats));
+//   renderStatistics();
+// }
 
 const completed = document.getElementById("complete-task-btn");
 completed.onclick = function () {
