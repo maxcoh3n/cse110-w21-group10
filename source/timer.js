@@ -1,6 +1,6 @@
 //Timer
 import { updatePomoLog, AddToLog } from "./pomoLog.js";
-import { changeSession } from "./sessionCircles.js";
+import { changeSession, endBreak } from "./sessionCircles.js";
 
 const countdown = document.getElementById("countdown");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
@@ -149,7 +149,7 @@ function updateCountdown(IsOn) {
 
         sessionNum = Number(sessionNum) + 1;
         changeSession(sessionNum);
-        
+
         console.log(
           "Testing: Work session number " +
             localStorage.getItem("numCurrentSech")
@@ -171,7 +171,6 @@ function updateCountdown(IsOn) {
         localStorage.setItem("numCurrentSech", "0");
         localStorage.setItem("workOrBreak", "work");
         sessionNum = 0;
-        changeSession(sessionNum);
         startBtn.innerHTML = "Start";
         updateCountdown(false);
         return;
@@ -184,4 +183,9 @@ function updateCountdown(IsOn) {
 const startBtn = document.getElementById("start-btn");
 startBtn.onclick = function () {
   timer();
+  let maxSessions = localStorage.getItem("numSessions");
+  if (sessionNum >= maxSessions) {
+    sessionNum = 0;
+  }
+  endBreak(sessionNum);
 };
