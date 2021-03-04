@@ -13,8 +13,7 @@ function renderOne(taskInput){
   tasksArray = JSON.parse(tasksArray);
 
   let task = document.createElement("input");
-  task.addEventListener("click", function() {
-
+  task.addEventListener("click", function () {
     let taskList = document.getElementById("task-list");
 
     let boxChecked = false;
@@ -27,7 +26,7 @@ function renderOne(taskInput){
         for(let i = 0; i<completedSessions.length; i++){
           if( box.id == completedSessions[i].taskName ) {
             foundTask = true;
-            if( completedSessions[i].completed == false ) {
+            if (completedSessions[i].completed == false) {
               document.getElementById("curr-task").children[0].innerHTML = box.id;
               taskButton.innerHTML = "Completed";
             } else {
@@ -36,16 +35,15 @@ function renderOne(taskInput){
             }
           }
         }
-        if( foundTask == false ) {
+        if (foundTask == false) {
           document.getElementById("curr-task").children[0].innerHTML = box.id;
           taskButton.innerHTML = "Delete";
         }
       }
     }
-    if( boxChecked == false ) {
+    if (boxChecked == false) {
       document.getElementById("curr-task").children[0].innerHTML = "None";
     }
-
   });
 
   task.setAttribute("type", "radio");
@@ -64,11 +62,9 @@ function renderOne(taskInput){
 
   label.innerHTML = taskInput + "<br>";
   taskList.appendChild(label);
-
 }
 
 function renderAll() {
-
   const taskButton = document.getElementById("complete-task-btn");
 
   let tasksArray = localStorage.getItem("upcomingTasks");
@@ -79,21 +75,20 @@ function renderAll() {
   }
 
   if (tasksArray.length != 0) {
-
     let completedSessions = localStorage.getItem("completedSessions");
     completedSessions = JSON.parse(completedSessions);
     let foundTask = false;
     for(let i = 0; i<completedSessions.length; i++){
       if( tasksArray[0] == completedSessions[i].taskName ) {
         foundTask = true;
-        if( completedSessions[i].completed == false ) {
+        if (completedSessions[i].completed == false) {
           taskButton.innerHTML = "Completed";
         } else {
           taskButton.innerHTML = "Undo";
         }
       }
     }
-    if( foundTask == false ) {
+    if (foundTask == false) {
       taskButton.innerHTML = "Delete";
     }
 
@@ -119,7 +114,7 @@ addTask.onclick = function () {
     tasksArray.push(newTaskInput.value);
     localStorage.setItem("upcomingTasks", JSON.stringify(tasksArray));
     renderOne(newTaskInput.value);
-    if( tasksArray.length == 1 ) {
+    if (tasksArray.length == 1) {
       taskButton.innerHTML = "Delete";
     }
     newTaskInput.value = "";
@@ -139,8 +134,8 @@ newTaskInput.addEventListener("keyup", function (event) {
 function inCompleted(taskName) {
   let completedSessions = localStorage.getItem("completedSessions");
   completedSessions = JSON.parse(completedSessions);
-  for(let task of completedSessions) {
-    if( task.taskName == taskName ) {
+  for (let task of completedSessions) {
+    if (task.taskName == taskName) {
       return true;
     }
   }
@@ -150,8 +145,8 @@ function inCompleted(taskName) {
 function isCompleted(taskName) {
   let completedSessions = localStorage.getItem("completedSessions");
   completedSessions = JSON.parse(completedSessions);
-  for(let task of completedSessions) {
-    if( task.taskName == taskName ) {
+  for (let task of completedSessions) {
+    if (task.taskName == taskName) {
       return task.completed;
     }
   }
@@ -173,7 +168,6 @@ function comple() {
   //this entire for loop should be replaced with a single thing that only runs for the 1 task that is selected
   for (let box of taskList.childNodes) {
     if (box.checked) {
-      // foundCheck = true;
       for(let i = 0; i<completedSessions.length; i++){
         if( box.id == completedSessions[i].taskName && !completedSessions[i].completed) {
           completedSessions[i].completed = true;
@@ -188,8 +182,7 @@ function comple() {
       let label = document.getElementById("label" + box.id);
       label.style.textDecoration = "line-through";
     } else {
-      if ( box.name == "task-list" &&
-      document.getElementById("label" + box.id).style.textDecoration != "line-through" ) {
+      if (box.name == "task-list" && document.getElementById("label" + box.id).style.textDecoration != "line-through") {
         taskArray.push(box.id);
       }
     }
@@ -211,7 +204,6 @@ function comple() {
     }
     
   }
-
 }
 
 function undo() {
@@ -235,11 +227,8 @@ function undo() {
             completedSessions[i].completed = false;
           }
         }
-        localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
       }
-      if ( box.name == "task-list" ) {
-        taskArray.push(box.id);
-      }
+      localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
     }
     localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
     completedTaskDates = new Set();
@@ -256,8 +245,8 @@ function del() {
   let nextTaskNum = 0;
   for (let box of taskList.childNodes) {
     let label = document.getElementById("label" + box.id);
-    if( box.checked == true ) {
-      taskArray = upcomingTasks.filter( task => task != box.id );
+    if (box.checked == true) {
+      taskArray = upcomingTasks.filter((task) => task != box.id);
       label.remove();
       box.remove();
       break;
@@ -267,12 +256,12 @@ function del() {
   nextTaskNum = Math.floor(nextTaskNum / 2);
   localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
 
-  if( taskArray.length > 0 ) {
-    if( nextTaskNum < (taskArray.length) ) {
+  if (taskArray.length > 0) {
+    if (nextTaskNum < taskArray.length) {
       document.getElementById(taskArray[nextTaskNum]).checked = true;
       document.getElementById("curr-task").children[0].innerHTML = taskArray[nextTaskNum];
-      if( inCompleted(taskArray[nextTaskNum]) ) {
-        if( isCompleted(taskArray[nextTaskNum]) ) {
+      if (inCompleted(taskArray[nextTaskNum])) {
+        if (isCompleted(taskArray[nextTaskNum])) {
           completed.innerHTML = "Undo";
         } else {
           completed.innerHTML = "Completed";
@@ -283,8 +272,8 @@ function del() {
     } else {
       document.getElementById(taskArray[0]).checked = true;
       document.getElementById("curr-task").children[0].innerHTML = taskArray[0];
-      if( inCompleted(taskArray[0]) ) {
-        if( isCompleted(taskArray[0]) ) {
+      if (inCompleted(taskArray[0])) {
+        if (isCompleted(taskArray[0])) {
           completed.innerHTML = "Undo";
         } else {
           completed.innerHTML = "Completed";
@@ -294,7 +283,6 @@ function del() {
       }
     }
   }
-
 }
 
 /*
@@ -341,12 +329,11 @@ function decNumCompletedTaskSessions(numSessions){
 
 const completed = document.getElementById("complete-task-btn");
 completed.onclick = function () {
-
-  if( completed.innerHTML == "Completed" ) {
+  if (completed.innerHTML == "Completed") {
     comple();
-  } else if( completed.innerHTML == "Undo" ) {
+  } else if (completed.innerHTML == "Undo") {
     undo();
-  } else if(completed.innerHTML == "Delete") {
+  } else if (completed.innerHTML == "Delete") {
     del();
   }
 };
