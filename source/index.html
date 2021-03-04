@@ -53,8 +53,24 @@
           <details>
             <summary>Statistics</summary>
             <ol id="stats-list" style="list-style: none">
-              <li>test element</li>
+              <li id="num-tasks-completed">
+                <label>Number of Tasks Completed: </label
+                ><span></span>
+              </li>
+              <li id="avg-sessions-per-day">
+                <label>Average Sessions Per day: </label
+                ><span></span>
+              </li>
+              <li id="average-tasks-per-day">
+                <label>Average Tasks Per day: </label
+                ><span></span>
+              </li>
+              <li id="avg-sessions-per-task">
+                <label>Average Sessions to complete a Task: </label
+                ><span></span>
+              </li>
             </ol>
+            <script src="statistics.js" type="module"></script>
           </details>
         </li>
         <hr />
@@ -95,13 +111,15 @@
       <div id="new-task-container">
         <input id="new-task" type="text" placeholder="Enter New Task Here" />
         <button id="new-task-btn">Add Task</button><br /><br />
-        <script src="taskList.js"></script>
+        <script src="taskList.js" type="module"></script>
       </div>
     </div>
 
     <script src="settings.js"></script>
     <script type="module" src="timer.js"></script>
-    <script src="currTask.js"></script>
     <script type="module" src="sessionCircles.js"></script>
-  </body>
+
+
+</body>
+
 </html>

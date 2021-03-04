@@ -46,7 +46,7 @@ class CompletedTask extends HTMLElement {
     let timeLabel = document.createElement("label");
     let newline = document.createElement("br");
     timeLabel.setAttribute("id", "timeLabel");
-    timeLabel.innerText = "Session time " + this.getAttribute("finishedses");
+    timeLabel.innerText = this.getAttribute("finishedses") + " minute session" ;
     timeLabel.appendChild(newline);
     shadow.getElementById("olTimeSes").appendChild(timeLabel);
   }
