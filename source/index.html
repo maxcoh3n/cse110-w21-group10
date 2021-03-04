@@ -20,51 +20,27 @@
     <button id="settings-btn">Settings</button>
 
     <div id="my-modal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Settings</p>
-        <label id="worktime-label"
-          >Work Time:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label
-        >
-        <input id="worktime-number" type="number" min="20" max="30" />
-        <input
-          id="worktime-slider"
-          type="range"
-          min="20"
-          max="30"
-        /><br /><br />
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Settings</p>
+            <label id="worktime-label">Work Time:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+            <input id="worktime-number" type="number" min="20" max="30">
+            <input id="worktime-slider" type="range" min="20" max="30"><br><br>
 
-        <label id="short-breaktime-label"
-          >Short Break Time:&emsp;&emsp;&emsp;</label
-        >
-        <input id="short-breaktime-number" type="number" min="5" max="10" />
-        <input
-          id="short-breaktime-slider"
-          type="range"
-          min="5"
-          max="10"
-        /><br /><br />
+            <label id="short-breaktime-label">Short Break Time:&emsp;&emsp;&emsp;</label>
+            <input id="short-breaktime-number" type="number" min="5" max="10">
+            <input id="short-breaktime-slider" type="range" min="5" max="10"><br><br>
 
-        <label id="long-breaktime-label"
-          >Long Break Time:&emsp;&emsp;&emsp;</label
-        >
-        <input id="long-breaktime-number" type="number" min="15" max="25" />
-        <input
-          id="long-breaktime-slider"
-          type="range"
-          min="15"
-          max="25"
-        /><br /><br />
+            <label id="long-breaktime-label">Long Break Time:&emsp;&emsp;&emsp;</label>
+            <input id="long-breaktime-number" type="number" min="15" max="25">
+            <input id="long-breaktime-slider" type="range" min="15" max="25"><br><br>
 
-        <label id="num-sessions-label"
-          >Number of Work Sessions Before Long Break:
-        </label>
-        <input id="num-sessions-number" type="number" min="3" max="5" />
-        <input id="num-sessions-slider" type="range" min="3" max="5" />
+            <label id="num-sessions-label">Number of Work Sessions Before Long Break: </label>
+            <input id="num-sessions-number" type="number" min="3" max="5">
+            <input id="num-sessions-slider" type="range" min="3" max="5">
 
-        <br /><br /><label for="dev-mode">Dev Mode</label
-        ><input type="checkbox" id="dev-mode" />
-      </div>
+            <br><br><label for="dev-mode">Dev Mode</label><input type="checkbox" id="dev-mode">
+        </div>
     </div>
 
     <!-- Pomo log -->
@@ -110,9 +86,10 @@
 
     <!-- Timer -->
     <div id="timer-container">
-      <h1 id="countdown"></h1>
-      <!-- We update this for the horseshoe -->
-      <!--div id="canvas-container"></div>
+        <div id="session-circles" data-session-num="0"></div>
+        <h1 id="countdown"></h1>
+        <!-- We update this for the horseshoe -->
+        <!--div id="canvas-container"></div>
             <canvas id="myCanvas" width="500" height="500"></canvas>
         </div--->
       <button id="start-btn">Start</button>
@@ -140,5 +117,9 @@
 
     <script src="settings.js"></script>
     <script type="module" src="timer.js"></script>
-  </body>
+    <script type="module" src="sessionCircles.js"></script>
+
+
+</body>
+
 </html>
