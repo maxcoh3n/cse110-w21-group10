@@ -12,6 +12,11 @@ h1 {
     font-family: 'Lora', serif;
 }
 
+.flex-icon {
+  display: inline-flex;
+  align-items: flex-start;
+}
+
 /* Not yet implemented
 #canvas-container {
 
