@@ -154,10 +154,6 @@ function updateCountdown(IsOn) {
         sessionNum = Number(sessionNum) + 1;
         changeSession(sessionNum);
 
-        // console.log(
-        //   "Testing: Work session number " +
-        //     localStorage.getItem("numCurrentSech")
-        // );
         if (
           localStorage.getItem("numCurrentSech") >=
           localStorage.getItem("numSessions")
@@ -175,7 +171,6 @@ function updateCountdown(IsOn) {
         localStorage.setItem("numCurrentSech", "0");
         localStorage.setItem("workOrBreak", "work");
         sessionNum = 0;
-        console.log("end long break");
         startLongBreak(sessionNum);
         startBtn.innerHTML = "Start";
         updateCountdown(false);

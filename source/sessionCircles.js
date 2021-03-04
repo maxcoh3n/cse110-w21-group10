@@ -41,7 +41,6 @@ function updateCurrColor(event) {
 /* Adds/deletes circles to DOM according to numSessions */
 function renderCircles() {
   let numOfSessions = localStorage.getItem("numSessions");
-  console.log(document.getElementById("num-sessions-slider").value);
 
   // Delete circles
   if (circlesContainer.children.length > sessionSlider.value) {
@@ -53,7 +52,6 @@ function renderCircles() {
       circlesContainer.removeChild(
         circlesContainer.childNodes[circlesContainer.children.length - 1]
       );
-      console.log("delete circle");
     }
   } else if (circlesContainer.children.length < sessionSlider.value) {
     // Add circles
@@ -65,7 +63,6 @@ function renderCircles() {
       let newCircle = document.createElement("span");
       newCircle.setAttribute("class", "blank-circle");
       circlesContainer.appendChild(newCircle);
-      console.log("add circle" + i);
     }
   }
   circlesContainer.childNodes[sessionIdx].setAttribute("class", "curr-circle");
@@ -103,7 +100,6 @@ function startLongBreak(sessionNum) {
 
 /* Enables/disables input to change numSessions */
 function toggleNumSessionInput() {
-  console.log("call toggle numSession input: ");
   sessionNumberInput.disabled = false;
   sessionSlider.disabled = false;
 }

@@ -12,6 +12,4 @@ function house( floors1, bathrooms, rooms, street ) {
     return ret; //random comment2
 }
 
-console.log("hi")
 
-// console.log(functions.add(1,2))
