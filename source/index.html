@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="../images/favicon.png" />
     <title id="title-countdown">Pomodoro Timer</title>
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <script src="constants.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <audio src="./alarm-sound.mp3" id="alarm-sound"></audio>
 
     <!-- Header row with title -->
     <h1>Pomodoro Timer</h1>
-    <hr>
+    <hr />
 
     <!-- Settings -->
     <button id="settings-btn">Settings</button>
@@ -44,33 +43,45 @@
         </div>
     </div>
 
-
     <!-- Pomo log -->
     <div id="pomo-toggle-container">
-        <input id="pomo-toggle" type="checkbox" class="pomo-toggle" />
-        <label for="pomo-toggle" id="pomo-label">Pomodoro Log</label>
+      <input id="pomo-toggle" type="checkbox" class="pomo-toggle" />
+      <label for="pomo-toggle" id="pomo-label">Pomodoro Log</label>
 
-        <ol class="pomo-log">
-            <li id="stats-container">
-                <details>
-                    <summary>Statistics</summary>
-                    <ol id="stats-list" style="list-style: none;">
-                        <li>
-                            test element
-                        </li>
-                    </ol>
-                </details>
-            </li>
-            <hr />
+      <ol class="pomo-log">
+        <li id="stats-container">
+          <details>
+            <summary>Statistics</summary>
+            <ol id="stats-list" style="list-style: none">
+              <li id="num-tasks-completed">
+                <label>Number of Tasks Completed: </label
+                ><span></span>
+              </li>
+              <li id="avg-sessions-per-day">
+                <label>Average Sessions Per day: </label
+                ><span></span>
+              </li>
+              <li id="average-tasks-per-day">
+                <label>Average Tasks Per day: </label
+                ><span></span>
+              </li>
+              <li id="avg-sessions-per-task">
+                <label>Average Sessions to complete a Task: </label
+                ><span></span>
+              </li>
+            </ol>
+            <script src="statistics.js" type="module"></script>
+          </details>
+        </li>
+        <hr />
 
-            <li id="daily-log-container">
-                <h6>Daily Log</h6>
-                <ol id="log-list" style="list-style: none;">
-                </ol>
-            </li>
-        </ol>
-        <script src="./components/completed-task.js"></script>
-        <script type="module" src="pomoLog.js"></script>
+        <li id="daily-log-container">
+          <h6>Daily Log</h6>
+          <ol id="log-list" style="list-style: none"></ol>
+        </li>
+      </ol>
+      <script src="./components/completed-task.js"></script>
+      <script type="module" src="pomoLog.js"></script>
     </div>
 
     <!-- Timer -->
@@ -81,33 +92,31 @@
         <!--div id="canvas-container"></div>
             <canvas id="myCanvas" width="500" height="500"></canvas>
         </div--->
-        <button id="start-btn">Start</button>
-        <!-- Current Task -->
-        <p id="curr-task">Current Task: <span>None</span></p>
-        <h2 id="work-break-label"></h2>
+      <button id="start-btn">Start</button>
+      <!-- Current Task -->
+      <p id="curr-task">Current Task: <span>None</span></p>
+      <h2 id="work-break-label"></h2>
     </div>
     <!-- Task List-->
     <div id="task-list-container">
-        <div id="task-list-header">
-            <h2>Task List</h2> <button id="complete-task-btn">Completed</button>
-        </div>
-        <hr>
-        <div id="task-list">
-        </div>
-        <hr>
-        <!-- <input id="pomo-toggle" type="checkbox" class="pomo-toggle" />
+      <div id="task-list-header">
+        <h2>Task List</h2>
+        <button id="complete-task-btn">Completed</button>
+      </div>
+      <hr />
+      <div id="task-list"></div>
+      <hr />
+      <!-- <input id="pomo-toggle" type="checkbox" class="pomo-toggle" />
         <label for="pomo-toggle" id="pomo-label">Pomodoro Log</label> -->
-        <div id="new-task-container">
-            <input id="new-task" type=text placeholder="Enter New Task Here">
-            <button id="new-task-btn">Add Task</button><br><br>
-            <script src="taskList.js"></script>
-        </div>
+      <div id="new-task-container">
+        <input id="new-task" type="text" placeholder="Enter New Task Here" />
+        <button id="new-task-btn">Add Task</button><br /><br />
+        <script src="taskList.js" type="module"></script>
+      </div>
     </div>
-
 
     <script src="settings.js"></script>
     <script type="module" src="timer.js"></script>
-    <script src="currTask.js"></script>
     <script type="module" src="sessionCircles.js"></script>
 
 

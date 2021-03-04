@@ -1,6 +1,8 @@
 //Timer
 import { updatePomoLog, AddToLog } from "./pomoLog.js";
 import { changeSession, endBreak, startLongBreak } from "./sessionCircles.js";
+import {renderStatistics} from "./statistics.js";
+
 
 const countdown = document.getElementById("countdown");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
@@ -13,6 +15,7 @@ Uses the countdown h1 to set and run a timer of length designated by the startTi
 function timer() {
   const sound = document.getElementById("alarm-sound");
 
+  const completed = document.getElementById("complete-task-btn");
   completed.innerHTML = "Completed";
   let removeLabels = [];
   let removeTasks = [];
@@ -50,6 +53,7 @@ function timer() {
   }
 }
 
+
 function updateCountdown(IsOn) {
   const title = document.getElementById("title-countdown");
   const workBreakLabel = document.getElementById("work-break-label");
@@ -82,6 +86,7 @@ function updateCountdown(IsOn) {
       title.innerHTML = `${localStorage.getItem("workMins")}:00`;
     }
     workBreakLabel.style.display = "none";
+    const completed = document.getElementById("complete-task-btn");
     completed.disabled = false;
   }
 
@@ -107,12 +112,14 @@ function updateCountdown(IsOn) {
 
     title.innerHTML = `${mins}:${sec}`;
     countdown.innerHTML = `${mins}:${sec}`;
-
     if (time == 0) {
       const sound = document.getElementById("alarm-sound");
       sound.play();
       clearInterval(count);
       if (localStorage.getItem("workOrBreak") == "work") {
+        incNumSessions();
+        handleNumDaysWorking();
+
         //Complete tasks
         let completedSessions = localStorage.getItem("completedSessions");
         completedSessions = JSON.parse(completedSessions);
@@ -123,10 +130,11 @@ function updateCountdown(IsOn) {
         let currentTaskName = document.getElementById("curr-task").children[0]
           .innerHTML;
 
-        for (i = 0; i < completedSessions.length; i++) {
+        for (let i = 0; i < completedSessions.length; i++) {
           if (
             completedSessions[i].taskName == currentTaskName &&
-            completedSessions[i].date == date
+            completedSessions[i].date == date &&
+            !completedSessions[i].completed
           ) {
             newTask = false;
             completedSessions[i].durationArray.push(worktimeNumber.value);
@@ -178,6 +186,32 @@ function updateCountdown(IsOn) {
       }
       updateCountdown(true);
     }
+  }
+}
+
+/*
+* increases numsessions statistic
+*/
+function incNumSessions(){
+  let stats = JSON.parse(localStorage.getItem("statistics"));
+  stats.numSessions++;
+  localStorage.setItem("statistics",JSON.stringify(stats));
+  renderStatistics();
+}
+
+/*
+* increases numsessions statistic
+*/
+function handleNumDaysWorking(){
+  let lastDayWorked = localStorage.getItem("lastDayWorked");
+  let dateObject = new Date();
+  let date = dateObject.getMonth() + 1 + "/" + dateObject.getDate();
+  if(lastDayWorked != date){
+    localStorage.setItem("lastDayWorked",date);
+    let stats = JSON.parse(localStorage.getItem("statistics"));
+    stats.numDaysWorking++;
+    localStorage.setItem("statistics",JSON.stringify(stats));
+    renderStatistics();
   }
 }
 

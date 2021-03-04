@@ -1,3 +1,9 @@
+import {renderStatistics} from "./statistics.js";
+
+// runs on page refresh
+renderAll();
+
+
 function renderOne(taskInput){
 
   const taskButton = document.getElementById("complete-task-btn");
@@ -18,7 +24,7 @@ function renderOne(taskInput){
         let completedSessions = localStorage.getItem("completedSessions");
         completedSessions = JSON.parse(completedSessions);
         let foundTask = false;
-        for(i = 0; i<completedSessions.length; i++){
+        for(let i = 0; i<completedSessions.length; i++){
           if( box.id == completedSessions[i].taskName ) {
             foundTask = true;
             if( completedSessions[i].completed == false ) {
@@ -68,7 +74,7 @@ function renderAll() {
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
 
-  for (i = 0; i < tasksArray.length; i++) {
+  for (let i = 0; i < tasksArray.length; i++) {
     renderOne(tasksArray[i]);
   }
 
@@ -77,7 +83,7 @@ function renderAll() {
     let completedSessions = localStorage.getItem("completedSessions");
     completedSessions = JSON.parse(completedSessions);
     let foundTask = false;
-    for(i = 0; i<completedSessions.length; i++){
+    for(let i = 0; i<completedSessions.length; i++){
       if( tasksArray[0] == completedSessions[i].taskName ) {
         foundTask = true;
         if( completedSessions[i].completed == false ) {
@@ -96,7 +102,6 @@ function renderAll() {
   }
 }
 
-renderAll();
 
 const addTask = document.getElementById("new-task-btn");
 addTask.onclick = function () {
@@ -153,22 +158,29 @@ function isCompleted(taskName) {
   return false;
 }
 
+//must be here to be accessed by comple and undo functions
+let completedTaskSessions = 0; 
+let completedTaskDates = new Set(); 
+
 function comple() {
+  incNumCompletedTasks();
 
   let taskList = document.getElementById("task-list");
   let completedSessions = localStorage.getItem("completedSessions");
   completedSessions = JSON.parse(completedSessions);
   let taskArray = [];
-  let taskCheck = 0;
-  let foundCheck = false;
+
+  //this entire for loop should be replaced with a single thing that only runs for the 1 task that is selected
   for (let box of taskList.childNodes) {
     if (box.checked) {
-      foundCheck = true;
-      for(i = 0; i<completedSessions.length; i++){
-        if( box.id == completedSessions[i].taskName ) {
+      // foundCheck = true;
+      for(let i = 0; i<completedSessions.length; i++){
+        if( box.id == completedSessions[i].taskName && !completedSessions[i].completed) {
           completedSessions[i].completed = true;
           completed.innerHTML = "Undo";
           document.getElementById("curr-task").children[0].innerHTML = "None";
+          completedTaskSessions += completedSessions[i].durationArray.length;
+          completedTaskDates.add(completedSessions[i].date);
         }
       }
       localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
@@ -181,44 +193,32 @@ function comple() {
         taskArray.push(box.id);
       }
     }
-    if( foundCheck == false ) {
-      taskCheck++;
-    }
   }
+  incNumCompletedTaskSessions(completedTaskSessions);
   localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
-  taskCheck = Math.floor(taskCheck / 2);
 
   if( taskArray.length > 0 ) {
-    if( taskCheck < (taskArray.length) ) {
-      document.getElementById(taskArray[taskCheck]).checked = true;
-      document.getElementById("curr-task").children[0].innerHTML = taskArray[taskCheck];
-      if( inCompleted(taskArray[taskCheck]) ) {
-        if( isCompleted(taskArray[taskCheck]) ) {
-          completed.innerHTML = "Undo";
-        } else {
-          completed.innerHTML = "Completed";
-        }
+    document.getElementById(taskArray[0]).checked = true;
+    document.getElementById("curr-task").children[0].innerHTML = taskArray[0];
+    if( inCompleted(taskArray[0]) ) {
+      if( isCompleted(taskArray[0]) ) {
+        completed.innerHTML = "Undo";
       } else {
-        completed.innerHTML = "Delete";
+        completed.innerHTML = "Completed";
       }
     } else {
-      document.getElementById(taskArray[0]).checked = true;
-      document.getElementById("curr-task").children[0].innerHTML = taskArray[0];
-      if( inCompleted(taskArray[0]) ) {
-        if( isCompleted(taskArray[0]) ) {
-          completed.innerHTML = "Undo";
-        } else {
-          completed.innerHTML = "Completed";
-        }
-      } else {
-        completed.innerHTML = "Delete";
-      }
+      completed.innerHTML = "Delete";
     }
+    
   }
 
 }
 
 function undo() {
+
+  decNumCompletedTasks();
+  decNumCompletedTaskSessions(completedTaskSessions);
+  completedTaskSessions = 0;
 
   let taskList = document.getElementById("task-list");
   let taskArray = [];
@@ -230,8 +230,8 @@ function undo() {
         label.style.textDecoration = "none";
         let completedSessions = localStorage.getItem("completedSessions");
         completedSessions = JSON.parse(completedSessions);
-        for(i = 0; i<completedSessions.length; i++){
-          if( box.id == completedSessions[i].taskName ) {
+        for(let i = 0; i<completedSessions.length; i++){
+          if( box.id == completedSessions[i].taskName && completedTaskDates.has(completedSessions[i].date)) {
             completedSessions[i].completed = false;
           }
         }
@@ -242,10 +242,11 @@ function undo() {
       }
     }
     localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
-
+    completedTaskDates = new Set();
 }
 
 function del() {
+
 
   let taskList = document.getElementById("task-list");
   document.getElementById("curr-task").children[0].innerHTML = "None";
@@ -296,6 +297,48 @@ function del() {
 
 }
 
+/*
+* increases numCompletedTasks statistic
+*/
+function incNumCompletedTasks(){
+  let stats = JSON.parse(localStorage.getItem("statistics"));
+  stats.numCompletedTasks++;
+  localStorage.setItem("statistics",JSON.stringify(stats));
+  renderStatistics();
+}
+
+/*
+* decreases numCompletedTasks statistic
+*/
+function decNumCompletedTasks(){
+  let stats = JSON.parse(localStorage.getItem("statistics"));
+  stats.numCompletedTasks--;
+  localStorage.setItem("statistics",JSON.stringify(stats));
+  renderStatistics();
+}
+
+/*
+* increases numCompletedTaskSessions statistic
+* @param {number} numSessions
+*/
+function incNumCompletedTaskSessions(numSessions){
+  let stats = JSON.parse(localStorage.getItem("statistics"));
+  stats.numCompletedTaskSessions+= numSessions;
+  localStorage.setItem("statistics",JSON.stringify(stats));
+  renderStatistics();
+}
+
+/*
+* decreases numCompletedTaskSessions statistic
+ * @param {number} numSessions
+*/
+function decNumCompletedTaskSessions(numSessions){
+  let stats = JSON.parse(localStorage.getItem("statistics"));
+  stats.numCompletedTaskSessions -= numSessions;
+  localStorage.setItem("statistics",JSON.stringify(stats));
+  renderStatistics();
+}
+
 const completed = document.getElementById("complete-task-btn");
 completed.onclick = function () {
 
@@ -306,5 +349,4 @@ completed.onclick = function () {
   } else if(completed.innerHTML == "Delete") {
     del();
   }
-
 };
