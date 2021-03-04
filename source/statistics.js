@@ -11,9 +11,20 @@ function renderStatistics(){
 
 
     numCompletedTasks.innerHTML = statsObj.numCompletedTasks;
-    // avgSessionsPerDay.innerHTML = ;
-    // avgTasksPerDay.innerHTML = ;
-    // avgSessionsPerTask.innerHTML = ;
+
+    if(statsObj.numCompletedTasks >0){
+        avgSessionsPerTask.innerHTML = (statsObj.numCompletedTaskSessions / statsObj.numCompletedTasks).toFixed(2);
+    }else{
+        avgSessionsPerTask.innerHTML = "N/A";
+    }
+
+    if(statsObj.numDaysWorking >0){
+        avgTasksPerDay.innerHTML = (statsObj.numCompletedTasks / statsObj.numDaysWorking).toFixed(2);
+        avgSessionsPerDay.innerHTML = (statsObj.numSessions / statsObj.numDaysWorking).toFixed(2);
+    }else{
+        avgTasksPerDay.innerHTML = "N/A";
+        avgSessionsPerDay.innerHTML = "N/A";    
+    }
 
 }
 

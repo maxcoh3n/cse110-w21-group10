@@ -1,6 +1,8 @@
 //Timer
 import { updatePomoLog, AddToLog } from "./pomoLog.js";
 import { changeSession, endBreak, startLongBreak } from "./sessionCircles.js";
+import {renderStatistics} from "./statistics.js";
+
 
 const countdown = document.getElementById("countdown");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
@@ -115,6 +117,9 @@ function updateCountdown(IsOn) {
       sound.play();
       clearInterval(count);
       if (localStorage.getItem("workOrBreak") == "work") {
+        incNumSessions();
+        handleNumDaysWorking();
+
         //Complete tasks
         let completedSessions = localStorage.getItem("completedSessions");
         completedSessions = JSON.parse(completedSessions);
@@ -128,7 +133,8 @@ function updateCountdown(IsOn) {
         for (let i = 0; i < completedSessions.length; i++) {
           if (
             completedSessions[i].taskName == currentTaskName &&
-            completedSessions[i].date == date
+            completedSessions[i].date == date &&
+            !completedSessions[i].completed
           ) {
             newTask = false;
             completedSessions[i].durationArray.push(worktimeNumber.value);
@@ -180,6 +186,32 @@ function updateCountdown(IsOn) {
       }
       updateCountdown(true);
     }
+  }
+}
+
+/*
+* increases numsessions statistic
+*/
+function incNumSessions(){
+  let stats = JSON.parse(localStorage.getItem("statistics"));
+  stats.numSessions++;
+  localStorage.setItem("statistics",JSON.stringify(stats));
+  renderStatistics();
+}
+
+/*
+* increases numsessions statistic
+*/
+function handleNumDaysWorking(){
+  let lastDayWorked = localStorage.getItem("lastDayWorked");
+  let dateObject = new Date();
+  let date = dateObject.getMonth() + 1 + "/" + dateObject.getDate();
+  if(lastDayWorked != date){
+    localStorage.setItem("lastDayWorked",date);
+    let stats = JSON.parse(localStorage.getItem("statistics"));
+    stats.numDaysWorking++;
+    localStorage.setItem("statistics",JSON.stringify(stats));
+    renderStatistics();
   }
 }
 
