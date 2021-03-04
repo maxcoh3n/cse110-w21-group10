@@ -1,37 +1,28 @@
 import {timer} from "../timer.js";
 
-// import {functionAdd, functionSub} from "../functions"
+// describe('timer ', ()=>{
+//   //Testing functions in timer.js
+//   test( ' does not crash', ()=>{
+//     document.body.innerHTML =
+//     '        <title id="title-countdown">Pomodoro Timer</title>' +
+//     '        <label id="worktime-label">Work Time:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>' +
+//     '        <h1 id="countdown"></h1>    ' +
+//     '        <button id="start-btn">Start</button>'     +
+//     '        <h2>Task List</h2> <button id="complete-task-btn">Completed</button>    ' +
+//     '        <div id="task-list"> </div>' +
+//     '        <button id="settings-btn">Settings</button>    ' +
+//     '        <br><br><label for="dev-mode">Dev Mode</label><input type="checkbox" id="dev-mode">  ' +
+//     '        <h2 id="work-break-label"></h2>' +
+//     '        <h2>Task List</h2>' +
+//     '        <button id="complete-task-btn">Completed</button>'
+//     ;
 
-// describe("blah", ()=>{
-//   test('boop',()=>{
-//         expect(functionAdd.add(1,1)).toBe(2);
-//   });
+//     expect(timer.timer()).toBeUndefined();
+//     expect(timer.updateCountdown()).toBeUndefined();
+//     //Since updateTime is called in updateCountdown and we didn't crash while running updateCountdown so 
+//     //it's fine if we don't check updateTime solo.
+//   })
 // });
-
-
-describe('timer ', ()=>{
-  //Testing functions in timer.js
-  test( ' does not crash', ()=>{
-    document.body.innerHTML =
-    '        <title id="title-countdown">Pomodoro Timer</title>' +
-    '        <label id="worktime-label">Work Time:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>' +
-    '        <h1 id="countdown"></h1>    ' +
-    '        <button id="start-btn">Start</button>'     +
-    '        <h2>Task List</h2> <button id="complete-task-btn">Completed</button>    ' +
-    '        <div id="task-list"> </div>' +
-    '        <button id="settings-btn">Settings</button>    ' +
-    '        <br><br><label for="dev-mode">Dev Mode</label><input type="checkbox" id="dev-mode">  ' +
-    '        <h2 id="work-break-label"></h2>' +
-    '        <h2>Task List</h2>' +
-    '        <button id="complete-task-btn">Completed</button>'
-    ;
-
-    expect(timer.timer()).toBeUndefined();
-    expect(timer.updateCountdown()).toBeUndefined();
-    //Since updateTime is called in updateCountdown and we didn't crash while running updateCountdown so 
-    //it's fine if we don't check updateTime solo.
-  })
-});
 
 //   //Testing functions in settings.js
 //   test( ' does not crash', ()=>{
@@ -64,4 +55,12 @@ describe('timer ', ()=>{
 //   });
 
 
+// });
+
+// import {functionAdd, functionSub} from "../functions"
+
+// describe("blah", ()=>{
+//   test('boop',()=>{
+//         expect(functionAdd.add(1,1)).toBe(2);
+//   });
 // });
