@@ -27,10 +27,10 @@ function timer() {
         removeTasks.push(task);
       }
     }
-    for(let label of removeLabels) {
+    for (let label of removeLabels) {
       label.remove();
     }
-    for(let task of removeTasks) {
+    for (let task of removeTasks) {
       task.remove();
     }
 
@@ -56,7 +56,7 @@ function updateCountdown(IsOn) {
 
   const devMode = document.getElementById("dev-mode");
   if (IsOn) {
-    var time;  // must be var so that updateTime can access it
+    var time; // must be var so that updateTime can access it
     if (localStorage.getItem("workOrBreak") == "work") {
       time = localStorage.getItem("workMins") * 60;
     } else if (localStorage.getItem("workOrBreak") == "break") {
@@ -64,7 +64,7 @@ function updateCountdown(IsOn) {
     } else if (localStorage.getItem("workOrBreak") == "longBreak") {
       time = localStorage.getItem("longBreakMins") * 60;
     }
-    var count = setInterval(updateTime, devMode.checked ? .5 : 1000);
+    var count = setInterval(updateTime, devMode.checked ? 0.5 : 1000);
     localStorage.setItem("intervalID", count);
   } else {
     let taskList = document.getElementById("task-list");
@@ -90,10 +90,7 @@ function updateCountdown(IsOn) {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Work Time";
     }
-    if (
-      localStorage.getItem("workOrBreak") == "break" ||
-      localStorage.getItem("workOrBreak") == "longBreak"
-    ) {
+    if (localStorage.getItem("workOrBreak") == "break" || localStorage.getItem("workOrBreak") == "longBreak") {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Break Time";
     }
@@ -120,14 +117,10 @@ function updateCountdown(IsOn) {
         let dateObject = new Date();
         let date = dateObject.getMonth() + 1 + "/" + dateObject.getDate();
         let worktimeNumber = document.getElementById("worktime-number");
-        let currentTaskName = document.getElementById("curr-task").children[0]
-          .innerHTML;
+        let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
 
         for (i = 0; i < completedSessions.length; i++) {
-          if (
-            completedSessions[i].taskName == currentTaskName &&
-            completedSessions[i].date == date
-          ) {
+          if (completedSessions[i].taskName == currentTaskName && completedSessions[i].date == date) {
             newTask = false;
             completedSessions[i].durationArray.push(worktimeNumber.value);
             updatePomoLog(completedSessions[i]); //for pomo log, function from pomoLog.js
@@ -146,18 +139,12 @@ function updateCountdown(IsOn) {
         }
 
         localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
-        localStorage.setItem(
-          "numCurrentSech",
-          1 + Number(localStorage.getItem("numCurrentSech"))
-        );
+        localStorage.setItem("numCurrentSech", 1 + Number(localStorage.getItem("numCurrentSech")));
 
         sessionNum = Number(sessionNum) + 1;
         changeSession(sessionNum);
 
-        if (
-          localStorage.getItem("numCurrentSech") >=
-          localStorage.getItem("numSessions")
-        ) {
+        if (localStorage.getItem("numCurrentSech") >= localStorage.getItem("numSessions")) {
           localStorage.setItem("workOrBreak", "longBreak");
         } else {
           localStorage.setItem("workOrBreak", "break");

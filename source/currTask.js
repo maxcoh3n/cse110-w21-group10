@@ -2,8 +2,7 @@
 let tasks = document.getElementById("task-list");
 tasks.addEventListener("change", function (event) {
   if (event.target.name == "task-list") {
-    document.getElementById("curr-task").children[0].innerHTML =
-      event.target.id;
+    document.getElementById("curr-task").children[0].innerHTML = event.target.id;
   }
 });
 
@@ -12,8 +11,7 @@ const checkOneTaskSize = function () {
   let storedTasks = localStorage.getItem("upcomingTasks");
   storedTasks = JSON.parse(storedTasks);
   if (storedTasks.length == 1) {
-    document.getElementById("curr-task").children[0].innerHTML =
-      storedTasks[0];
+    document.getElementById("curr-task").children[0].innerHTML = storedTasks[0];
   }
 };
 
@@ -25,8 +23,7 @@ taskListObserver.observe(tasks, mutations);
 function checkOneStoredTask() {
   let storedTasks = localStorage.getItem("upcomingTasks");
   if (JSON.parse(storedTasks).length == 1) {
-    document.getElementById("curr-task").children[0].innerHTML =
-      tasks.children[0].id;
+    document.getElementById("curr-task").children[0].innerHTML = tasks.children[0].id;
   }
 }
 checkOneStoredTask();
