@@ -8,6 +8,7 @@ Wednesday 02/24/21 @9am - 9:30am on Sasya's Zoom
 
 ## our team attendance
 - Max
+- Noah
 
 ## what was discussed
 - each team gave 5-7 minute disucssion of
