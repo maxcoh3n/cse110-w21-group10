@@ -159,8 +159,8 @@ function isCompleted(taskName) {
 }
 
 //must be here to be accessed by comple and undo functions
-let completedTaskSessions = 0; //hack
-let completedTaskDates = new Set(); //hack
+let completedTaskSessions = 0; 
+let completedTaskDates = new Set(); 
 
 function comple() {
   incNumCompletedTasks();
@@ -179,8 +179,8 @@ function comple() {
           completedSessions[i].completed = true;
           completed.innerHTML = "Undo";
           document.getElementById("curr-task").children[0].innerHTML = "None";
-          completedTaskSessions += completedSessions[i].durationArray.length; //not hack
-          completedTaskDates.add(completedSessions[i].date); //hack
+          completedTaskSessions += completedSessions[i].durationArray.length;
+          completedTaskDates.add(completedSessions[i].date);
         }
       }
       localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
@@ -231,7 +231,7 @@ function undo() {
         let completedSessions = localStorage.getItem("completedSessions");
         completedSessions = JSON.parse(completedSessions);
         for(let i = 0; i<completedSessions.length; i++){
-          if( box.id == completedSessions[i].taskName && completedTaskDates.has(completedSessions[i].date)) { //2nd part is hack
+          if( box.id == completedSessions[i].taskName && completedTaskDates.has(completedSessions[i].date)) {
             completedSessions[i].completed = false;
           }
         }
@@ -242,7 +242,7 @@ function undo() {
       }
     }
     localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
-    completedTaskDates = new Set(); //hack
+    completedTaskDates = new Set();
 }
 
 function del() {
