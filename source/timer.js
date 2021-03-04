@@ -1,8 +1,10 @@
 //Timer
 import { updatePomoLog, AddToLog } from "./pomoLog.js";
+import { changeSession, endBreak, startLongBreak } from "./sessionCircles.js";
 
 const countdown = document.getElementById("countdown");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
+let sessionNum = localStorage.getItem("numCurrentSech");
 /**
 timer
 Uses the countdown h1 to set and run a timer of length designated by the startTime parameter.
@@ -62,7 +64,7 @@ function updateCountdown(IsOn) {
     } else if (localStorage.getItem("workOrBreak") == "longBreak") {
       time = localStorage.getItem("longBreakMins") * 60;
     }
-    var count = setInterval(updateTime, devMode.checked ? 10 : 1000);
+    var count = setInterval(updateTime, devMode.checked ? .5 : 1000);
     localStorage.setItem("intervalID", count);
   } else {
     let taskList = document.getElementById("task-list");
@@ -148,11 +150,14 @@ function updateCountdown(IsOn) {
           "numCurrentSech",
           1 + Number(localStorage.getItem("numCurrentSech"))
         );
+
+        sessionNum = Number(sessionNum) + 1;
+        changeSession(sessionNum);
+
         if (
           localStorage.getItem("numCurrentSech") >=
           localStorage.getItem("numSessions")
         ) {
-          localStorage.setItem("numCurrentSech", "0");
           localStorage.setItem("workOrBreak", "longBreak");
         } else {
           localStorage.setItem("workOrBreak", "break");
@@ -163,7 +168,10 @@ function updateCountdown(IsOn) {
         updateCountdown(false);
         return;
       } else if (localStorage.getItem("workOrBreak") == "longBreak") {
+        localStorage.setItem("numCurrentSech", "0");
         localStorage.setItem("workOrBreak", "work");
+        sessionNum = 0;
+        startLongBreak(sessionNum);
         startBtn.innerHTML = "Start";
         updateCountdown(false);
         return;
@@ -176,4 +184,9 @@ function updateCountdown(IsOn) {
 const startBtn = document.getElementById("start-btn");
 startBtn.onclick = function () {
   timer();
+  let maxSessions = localStorage.getItem("numSessions");
+  if (sessionNum >= maxSessions) {
+    sessionNum = 0;
+  }
+  endBreak(sessionNum);
 };
