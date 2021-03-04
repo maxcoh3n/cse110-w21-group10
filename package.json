@@ -21,5 +21,10 @@
   },
   "prettier": {
     "printWidth": 120
+  },
+  "jest" : {
+    "transform" : {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   }
 }

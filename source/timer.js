@@ -214,3 +214,6 @@ startBtn.onclick = function () {
   }
   endBreak(sessionNum);
 };
+
+// module.exports = timer;
+export {timer};
