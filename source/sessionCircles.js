@@ -1,10 +1,8 @@
 let circlesContainer = document.getElementById("session-circles");
 let sessionIdx = localStorage.getItem("numCurrentSech");
-let numOfSessions = localStorage.getItem("numSessions");
 
 /* Updates previous session color to completed color when completed */
 function updatePrevColor(event) {
-  console.log(event.detail.session);
   let sessionIdx = event.detail.session;
 
   // Mark previous circles completed; reset to blank if end of pomo cycle
@@ -13,6 +11,9 @@ function updatePrevColor(event) {
       "class",
       "completed-circle"
     );
+
+    sessionNumberInput.disabled = true;
+    sessionSlider.disabled = true;
   } else {
     resetColors();
   }
@@ -29,7 +30,6 @@ function resetColors() {
 /* Updates current circle color to curr-circle when starting next session */
 function updateCurrColor(event) {
   let sessionIdx = event.detail.session;
-  console.log(sessionIdx);
   circlesContainer.childNodes[sessionIdx].setAttribute("class", "curr-circle");
   if (sessionIdx == 0) {
     for (let i = 1; i < circlesContainer.childNodes.length; i++) {
@@ -40,6 +40,9 @@ function updateCurrColor(event) {
 
 /* Adds/deletes circles to DOM according to numSessions */
 function renderCircles() {
+  let numOfSessions = localStorage.getItem("numSessions");
+  console.log(document.getElementById("num-sessions-slider").value);
+
   // Delete circles
   if (circlesContainer.children.length > sessionSlider.value) {
     for (
@@ -62,10 +65,10 @@ function renderCircles() {
       let newCircle = document.createElement("span");
       newCircle.setAttribute("class", "blank-circle");
       circlesContainer.appendChild(newCircle);
+      console.log("add circle" + i);
     }
   }
   circlesContainer.childNodes[sessionIdx].setAttribute("class", "curr-circle");
-  numOfSessions = localStorage.getItem("numSessions");
 }
 
 /* Create custom event for session change */
@@ -88,12 +91,32 @@ function endBreak(sessionNum) {
   circlesContainer.dispatchEvent(event);
 }
 
+/* Custom event for start of long break */
+function startLongBreak(sessionNum) {
+  let event = new CustomEvent("longBreakStart", {
+    detail: {
+      session: sessionNum,
+    },
+  });
+  circlesContainer.dispatchEvent(event);
+}
+
+/* Enables/disables input to change numSessions */
+function toggleNumSessionInput() {
+  console.log("call toggle numSession input: ");
+  sessionNumberInput.disabled = false;
+  sessionSlider.disabled = false;
+}
+
 let sessionSlider = document.getElementById("num-sessions-slider");
 let sessionNumberInput = document.getElementById("num-sessions-number");
+sessionSlider.value = localStorage.getItem("numSessions");
+sessionNumberInput.value = localStorage.getItem("numSessions");
 sessionNumberInput.addEventListener("input", renderCircles);
 sessionSlider.addEventListener("input", renderCircles);
 circlesContainer.addEventListener("sessionChange", updatePrevColor);
 circlesContainer.addEventListener("breakEnd", updateCurrColor);
+circlesContainer.addEventListener("longBreakStart", toggleNumSessionInput);
 renderCircles();
 
-export { changeSession, endBreak };
+export { changeSession, endBreak, startLongBreak };

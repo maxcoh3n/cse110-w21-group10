@@ -1,6 +1,6 @@
 //Timer
 import { updatePomoLog, AddToLog } from "./pomoLog.js";
-import { changeSession, endBreak } from "./sessionCircles.js";
+import { changeSession, endBreak, startLongBreak } from "./sessionCircles.js";
 
 const countdown = document.getElementById("countdown");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
@@ -56,7 +56,7 @@ function updateCountdown(IsOn) {
     } else if (localStorage.getItem("workOrBreak") == "longBreak") {
       time = localStorage.getItem("longBreakMins") * 60;
     }
-    var count = setInterval(updateTime, devMode.checked ? 10 : 1000);
+    var count = setInterval(updateTime, devMode.checked ? .5 : 1000);
     localStorage.setItem("intervalID", count);
   } else {
     let taskList = document.getElementById("task-list");
@@ -171,6 +171,8 @@ function updateCountdown(IsOn) {
         localStorage.setItem("numCurrentSech", "0");
         localStorage.setItem("workOrBreak", "work");
         sessionNum = 0;
+        console.log("end long break");
+        startLongBreak(sessionNum);
         startBtn.innerHTML = "Start";
         updateCountdown(false);
         return;
