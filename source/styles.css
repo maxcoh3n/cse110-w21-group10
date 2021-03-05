@@ -249,3 +249,18 @@ input[type="range"]{
     display: none;
   }
 }
+
+.flex {
+  display:flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 60px;
+  padding: 5px
+}
+#test-btn-container{
+  margin-right: 20px;
+
+}
+#test-btn{
+  height:20px;
+}

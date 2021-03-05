@@ -18,6 +18,7 @@ window.onclick = function (event) {
   }
 };
 const volumeNum = document.getElementById("volume-number")
+volumeNum.value = 50
 const volumeSlider = document.getElementById('volume-slider')
 const worktimeSlider = document.getElementById("worktime-slider");
 const worktimeNumber = document.getElementById("worktime-number");
@@ -30,6 +31,8 @@ const numSessionsNumber = document.getElementById("num-sessions-number");
 const test = document.getElementById("test-btn");
 const testAudio = document.getElementById("alarm-sound");
 const iconVol = document.getElementById('iconvol')
+const soundPicker = document.getElementById('sounds')
+
 
 worktimeSlider.value = localStorage.getItem("workMins");
 worktimeNumber.value = localStorage.getItem("workMins");
@@ -51,16 +54,22 @@ numSessionsNumber.addEventListener("input", updateNumSessions);
 volumeSlider.addEventListener("input", updateVol);
 volumeNum.addEventListener('input',updateVol);
 test.addEventListener('click', updateTest);
+soundPicker.addEventListener('click',updateSound)
 
+function updateSound(e){
 
+  console.log('here', e.target.value)
+  const value = e.target.value
+  testAudio.src = value
+  document.getElementById("alarm-sound").src = value
+}
 
 function updateTest(){
-  console.log('here')
+
   const vol = volumeNum.value
   testAudio.volume = vol/100
-  testAudio.play()
 
-    
+  testAudio.play() 
 }
 
 function updateVol(e) {

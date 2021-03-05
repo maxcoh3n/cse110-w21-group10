@@ -44,12 +44,26 @@
             <div class='flex-icon'>
                 <label id="volume-label">Volume: &emsp; <img id='iconvol' style="width:20px;height:20px;"
                         src="../images/icons/volume-level-3.svg" alt='horn' /></label>
-                <input id="volume-number" type="number" min="0" max="100">
+                <input id="volume-number" type="number">
             </div>
             <input id="volume-slider" type="range" min="0" max="100">
-
-            <div id="test-btn-container">
-                <button id="test-btn" type="submit">Test</button>
+            <div class='flex'>
+                <div id="test-btn-container">
+                    <button id="test-btn" type="submit">Test</button>
+                </div>
+                <select name='sounds' id='sounds'>
+                    <option value="./sounds/alarm_clock_0.mp3">Alarm Clock 1</option>
+                    <option value="./sounds/alarm_clock_1.mp3">Alarm Clock 2</option> 
+                    <option value="./sounds/alarm_clock_2.mp3">Alarm Clock 3</option>
+                    <option value="./sounds/alarm_clock_6.mp3">Alarm Clock 4</option>
+                    <option value="./sounds/alarm_clock_3.mp3">Alarm Classic</option>
+                    <option value="./sounds/alarm_clock_4.mp3">Alarm Rooster-hug</option>
+                    <option value="./sounds/alarm_clock_5.mp3">Alarm clock 2015 new</option> 
+                    <option value="./sounds/alarm_clock_7.mp3">Alarm</option>
+                    <option value="./sounds/alarm_clock_8.mp3">Alarm Beep</option>
+                    <option value="./sounds/alarm_clock_9.mp3">Alarm in my head</option>
+                    <option value="./sounds/alarm_clock_10.mp3">Alarm </option>
+                </select>
             </div>
 
             <br><br><label for="dev-mode">Dev Mode</label><input type="checkbox" id="dev-mode">
@@ -121,7 +135,6 @@
     <script src="settings.js"></script>
     <script src="timer.js"></script>
     <script src="currTask.js"></script>
-    <script src="volumeSetting.js"></script>
 
 
 

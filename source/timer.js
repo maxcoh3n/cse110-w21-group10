@@ -9,6 +9,8 @@ const workBreakLabel = document.getElementById("work-break-label");
 /*sound*/
 const sound = document.getElementById("alarm-sound");
 
+
+
 function startSound() {
   sound.play();
 }
