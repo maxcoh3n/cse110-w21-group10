@@ -6,7 +6,6 @@ import {renderStatistics} from "./statistics.js";
 
 const countdown = document.getElementById("countdown");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
-<<<<<<< HEAD
 const workBreakLabel = document.getElementById("work-break-label");
 
 /*sound*/
@@ -18,9 +17,7 @@ function startSound() {
   sound.play();
 }
 
-=======
 let sessionNum = localStorage.getItem("numCurrentSech");
->>>>>>> 6633c350b9e637ea5cd83999d14ed27dcf7a18df
 /**
 timer
 Uses the countdown h1 to set and run a timer of length designated by the startTime parameter.

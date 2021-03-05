@@ -1,33 +1,56 @@
 //Settings
 
-let modal = document.getElementById('my-modal');
+var modal = document.getElementById("my-modal");
+var settingsBtn = document.getElementById("settings-btn");
+var span = document.getElementsByClassName("close")[0];
 
-let settingsBtn = document.getElementById('settings-btn');
 settingsBtn.onclick = function () {
-  modal.style.display = 'block';
+  modal.style.display = "block";
 };
 
-let span = document.getElementsByClassName('close')[0];
 span.onclick = function () {
-  modal.style.display = 'none';
+  modal.style.display = "none";
 };
 
 window.onclick = function (event) {
   if (event.target == modal) {
-    modal.style.display = 'none';
+    modal.style.display = "none";
   }
 };
-
-
 const volumeNum = document.getElementById("volume-number")
 volumeNum.value = 50
 const volumeSlider = document.getElementById('volume-slider')
+const worktimeSlider = document.getElementById("worktime-slider");
+const worktimeNumber = document.getElementById("worktime-number");
+const shortBreaktimeSlider = document.getElementById("short-breaktime-slider");
+const shortBreaktimeNumber = document.getElementById("short-breaktime-number");
+const longBreaktimeSlider = document.getElementById("long-breaktime-slider");
+const longBreaktimeNumber = document.getElementById("long-breaktime-number");
+const numSessionsSlider = document.getElementById("num-sessions-slider");
+const numSessionsNumber = document.getElementById("num-sessions-number");
 const test = document.getElementById("test-btn");
 const testAudio = document.getElementById("alarm-sound");
 const iconVol = document.getElementById('iconvol')
 const soundPicker = document.getElementById('sounds')
 
 
+worktimeSlider.value = localStorage.getItem("workMins");
+worktimeNumber.value = localStorage.getItem("workMins");
+shortBreaktimeSlider.value = localStorage.getItem("shortBreakMins");
+shortBreaktimeNumber.value = localStorage.getItem("shortBreakMins");
+longBreaktimeSlider.value = localStorage.getItem("longBreakMins");
+longBreaktimeNumber.value = localStorage.getItem("longBreakMins");
+numSessionsSlider.value = localStorage.getItem("numSessions");
+numSessionsNumber.value = localStorage.getItem("numSessions");
+
+worktimeSlider.addEventListener("input", updateWorktime);
+worktimeNumber.addEventListener("input", updateWorktime);
+shortBreaktimeSlider.addEventListener("input", updateShortBreaktime);
+shortBreaktimeNumber.addEventListener("input", updateShortBreaktime);
+longBreaktimeSlider.addEventListener("input", updateLongBreaktime);
+longBreaktimeNumber.addEventListener("input", updateLongBreaktime);
+numSessionsSlider.addEventListener("input", updateNumSessions);
+numSessionsNumber.addEventListener("input", updateNumSessions);
 volumeSlider.addEventListener("input", updateVol);
 volumeNum.addEventListener('input',updateVol);
 test.addEventListener('click', updateTest);
@@ -35,25 +58,17 @@ soundPicker.addEventListener('click',updateSound)
 
 function updateSound(e){
 
-<<<<<<< HEAD
   console.log('here', e.target.value)
   const value = e.target.value
   testAudio.src = value
   document.getElementById("alarm-sound").src = value
 }
 
-=======
->>>>>>> 6633c350b9e637ea5cd83999d14ed27dcf7a18df
 function updateTest(){
 
   const vol = volumeNum.value
   testAudio.volume = vol/100
-<<<<<<< HEAD
-
   testAudio.play() 
-=======
-  testAudio.play()    
->>>>>>> 6633c350b9e637ea5cd83999d14ed27dcf7a18df
 }
 
 function updateVol(e) {
@@ -77,71 +92,35 @@ function updateVol(e) {
 	else {
 		iconVol.src = "../images/icons/volume-level-0.svg";
 	
-	}
-	
+	}	
 }
-
-//Work Time
-const worktimeSlider = document.getElementById('worktime-slider');
-worktimeSlider.value = localStorage.getItem('workMins');
-worktimeSlider.addEventListener('input', updateWorktime);
-
-const worktimeNumber = document.getElementById('worktime-number');
-worktimeNumber.value = localStorage.getItem('workMins');
-worktimeNumber.addEventListener('input', updateWorktime);
 
 function updateWorktime(e) {
   let num = e.target.value;
   worktimeSlider.value = num;
   worktimeNumber.value = num;
-  localStorage.setItem('workMins', num);
-  document.getElementById('countdown').innerHTML = localStorage.getItem('workMins') + ':00';
+  localStorage.setItem("workMins", num);
+  document.getElementById("countdown").innerHTML =
+    localStorage.getItem("workMins") + ":00";
 }
-
-//Short Breaktime
-const shortBreaktimeSlider = document.getElementById('short-breaktime-slider');
-shortBreaktimeSlider.value = localStorage.getItem('shortBreakMins');
-shortBreaktimeSlider.addEventListener('input', updateShortBreaktime);
-
-const shortBreaktimeNumber = document.getElementById('short-breaktime-number');
-shortBreaktimeNumber.value = localStorage.getItem('shortBreakMins');
-shortBreaktimeNumber.addEventListener('input', updateShortBreaktime);
 
 function updateShortBreaktime(e) {
   let num = e.target.value;
   shortBreaktimeSlider.value = num;
   shortBreaktimeNumber.value = num;
-  localStorage.setItem('shortBreakMins', num);
+  localStorage.setItem("shortBreakMins", num);
 }
-
-//Long Breaktime
-const longBreaktimeSlider = document.getElementById('long-breaktime-slider');
-longBreaktimeSlider.value = localStorage.getItem('longBreakMins');
-longBreaktimeSlider.addEventListener('input', updateLongBreaktime);
-
-const longBreaktimeNumber = document.getElementById('long-breaktime-number');
-longBreaktimeNumber.value = localStorage.getItem('longBreakMins');
-longBreaktimeNumber.addEventListener('input', updateLongBreaktime);
 
 function updateLongBreaktime(e) {
   let num = e.target.value;
   longBreaktimeSlider.value = num;
   longBreaktimeNumber.value = num;
-  localStorage.setItem('longBreakMins', num);
+  localStorage.setItem("longBreakMins", num);
 }
-
-//Number of Work Sessions Before Long Break
-const numSessionsSlider = document.getElementById('num-sessions-slider');
-numSessionsSlider.value = localStorage.getItem('numSessions');
-numSessionsSlider.addEventListener('input', updateNumSessions);
-
-const numSessionsNumber = document.getElementById('num-sessions-number');
-numSessionsNumber.value = localStorage.getItem('numSessions');
-numSessionsNumber.addEventListener('input', updateNumSessions);
 
 function updateNumSessions(e) {
   let num = e.target.value;
   numSessionsSlider.value = num;
   numSessionsNumber.value = num;
-  localStorage.setItem('numSessions', num);
+  localStorage.setItem("numSessions", num);
 }
