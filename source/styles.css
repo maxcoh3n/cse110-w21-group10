@@ -1,15 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lora&display=swap");
 
 * {
-    background-color:snow;
-    font-family: 'Lora', serif;
+  background-color: snow;
+  font-family: "Lora", serif;
 }
 
 h1 {
-    color:rgb(47, 50, 53);
-    text-align: center;
-    font-size: 2em;
-    font-family: 'Lora', serif;
+  color: rgb(47, 50, 53);
+  text-align: center;
+  font-size: 2em;
+  font-family: "Lora", serif;
 }
 
 .flex-icon {
@@ -31,8 +31,8 @@ h1 {
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
@@ -49,22 +49,26 @@ h1 {
 #timer-container {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10px;
+  margin-top: 10%;
   margin-bottom: 10px;
   width: 45%;
-  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #countdown {
   font-size: 100pt;
+  margin: 0 .3em 50px;
+  position: relative;
 }
 
 #start-btn {
   font-size: 20px;
+  width: fit-content;
   position: relative;
   bottom: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  align-self: center;
 
   /*
   position: absolute;
@@ -89,13 +93,13 @@ h1 {
   cursor: pointer;
 }
 
-input[type="range"]{
+input[type="range"] {
   width: 500px;
 }
 
 #settings-btn {
   position: absolute;
-  top:3%;
+  top: 3%;
   right: 2%;
   font-size: 15px;
 }
@@ -198,12 +202,11 @@ input[type="range"]{
   font-size: 12pt;
   position: relative;
   bottom: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  align-self: center;
 }
 
 /* Task List ----------------------------------------------------------------*/
-#task-list-container{
+#task-list-container {
   position: absolute;
   right: 4%;
   top: 15%;
@@ -213,14 +216,14 @@ input[type="range"]{
   border-style: solid;
   border-width: 2px;
   border-radius: 2%;
-  border-color:silver;
+  border-color: silver;
   /*
   right: 50px;
   top: 50px;
   */
 }
 
-#task-list-header{
+#task-list-header {
   display: inline-block;
   width: 100%;
 }
@@ -231,25 +234,26 @@ input[type="range"]{
   display: inline-block;
 }
 
-#complete-task-btn{
-  vertical-align:top;
+#complete-task-btn {
+  vertical-align: top;
   float: right;
 }
 
-.tasks:hover{
+.tasks:hover {
   background-color: yellow;
 }
 
 /* Media query to prevent bunching of elements */
-@media only screen and (max-width: 950px){
-  #pomo-toggle-container{
+@media only screen and (max-width: 950px) {
+  #pomo-toggle-container {
     display: none;
   }
-  #task-list-container{
+  #task-list-container {
     display: none;
   }
 }
 
+<<<<<<< HEAD
 .flex {
   display:flex;
   align-items: center;
@@ -263,4 +267,48 @@ input[type="range"]{
 }
 #test-btn{
   height:20px;
+=======
+/* Session circles */
+#session-circles {
+  --blank-circle: rgb(238, 238, 238);
+  --blank-border: rgb(219, 219, 219);
+  --curr-circle: yellow;
+  --curr-border: rgb(223, 223, 23);
+  --completed-circle: green;
+  --completed-border: rgb(8, 107, 8);
+  align-self: center;
+  margin-bottom: 0;
+  bottom: 20px;
+  position: relative;
+}
+
+.blank-circle {
+  margin: 0 4px;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background-color: var(--blank-circle);
+  border: 4px solid var(--blank-border);
+}
+
+.curr-circle {
+  margin: 0 4px;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background-color: var(--curr-circle);
+  border: 4px solid var(--curr-border);
+}
+
+.completed-circle {
+  margin: 0 4px;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background-color: var(--completed-circle);
+  border: 4px solid var(--completed-border);
+>>>>>>> 6633c350b9e637ea5cd83999d14ed27dcf7a18df
 }
