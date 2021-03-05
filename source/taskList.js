@@ -66,9 +66,14 @@ function renderOne(taskInput){
 
 function renderAll() {
   const taskButton = document.getElementById("complete-task-btn");
-
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
+
+  if(tasksArray.length == 0){
+    taskButton.disabled = true;
+  }else{
+    taskButton.disabled = false;
+  }
 
   for (let i = 0; i < tasksArray.length; i++) {
     renderOne(tasksArray[i]);
@@ -103,7 +108,7 @@ addTask.onclick = function () {
   const taskButton = document.getElementById("complete-task-btn");
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
-
+ 
   const newTaskInput = document.getElementById("new-task");
 
   if (tasksArray.includes(newTaskInput.value)) {
@@ -112,6 +117,7 @@ addTask.onclick = function () {
 
   if (newTaskInput.value) {
     tasksArray.push(newTaskInput.value);
+    taskButton.disabled = false;
     localStorage.setItem("upcomingTasks", JSON.stringify(tasksArray));
     renderOne(newTaskInput.value);
     if (tasksArray.length == 1) {
@@ -257,6 +263,7 @@ function del() {
   localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
 
   if (taskArray.length > 0) {
+    completed.disabled = false;
     if (nextTaskNum < taskArray.length) {
       document.getElementById(taskArray[nextTaskNum]).checked = true;
       document.getElementById("curr-task").children[0].innerHTML = taskArray[nextTaskNum];
@@ -283,6 +290,7 @@ function del() {
       }
     }
   }
+  completed.disabled = true;
 }
 
 /*
