@@ -266,7 +266,6 @@ function del() {
   localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
 
   if (taskArray.length > 0) {
-    completed.disabled = false;
     if (nextTaskNum < taskArray.length) {
       document.getElementById(taskArray[nextTaskNum]).checked = true;
       document.getElementById("curr-task").children[0].innerHTML = taskArray[nextTaskNum];
@@ -280,7 +279,6 @@ function del() {
         completed.innerHTML = "Delete";
       }
     } else {
-      completed.disabled = true;
       document.getElementById(taskArray[0]).checked = true;
       document.getElementById("curr-task").children[0].innerHTML = taskArray[0];
       if (inCompleted(taskArray[0])) {
@@ -293,6 +291,12 @@ function del() {
         completed.innerHTML = "Delete";
       }
     }
+  }
+ 
+  if(taskList.children.length != 0){
+    completed.disabled = false;
+  }else{
+    completed.disabled = true;
   }
 }
 
