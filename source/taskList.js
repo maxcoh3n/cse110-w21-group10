@@ -227,8 +227,11 @@ function undo() {
             completedSessions[i].completed = false;
           }
         }
+        localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
       }
-      localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
+      if ( box.name == "task-list" ) {
+        taskArray.push(box.id);
+      }
     }
     localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
     completedTaskDates = new Set();
