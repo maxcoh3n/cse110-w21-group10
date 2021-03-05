@@ -27,6 +27,11 @@ const worktimeNumber = document.getElementById('worktime-number');
 worktimeNumber.value = localStorage.getItem('workMins');
 worktimeNumber.addEventListener('input', updateWorktime);
 
+/**
+ * @param {numeric value input} e 
+ * Change the work time to input value
+ * Display the work time on the page.
+ */
 function updateWorktime(e) {
   let num = e.target.value;
   worktimeSlider.value = num;
@@ -44,6 +49,10 @@ const shortBreaktimeNumber = document.getElementById('short-breaktime-number');
 shortBreaktimeNumber.value = localStorage.getItem('shortBreakMins');
 shortBreaktimeNumber.addEventListener('input', updateShortBreaktime);
 
+/**
+ * @param {numeric value input} e 
+ * Change the work time to input value
+ */
 function updateShortBreaktime(e) {
   let num = e.target.value;
   shortBreaktimeSlider.value = num;
@@ -60,6 +69,10 @@ const longBreaktimeNumber = document.getElementById('long-breaktime-number');
 longBreaktimeNumber.value = localStorage.getItem('longBreakMins');
 longBreaktimeNumber.addEventListener('input', updateLongBreaktime);
 
+/**
+ * @param {numeric value input} e 
+ * Change the long break time to input value
+ */
 function updateLongBreaktime(e) {
   let num = e.target.value;
   longBreaktimeSlider.value = num;
@@ -76,6 +89,10 @@ const numSessionsNumber = document.getElementById('num-sessions-number');
 numSessionsNumber.value = localStorage.getItem('numSessions');
 numSessionsNumber.addEventListener('input', updateNumSessions);
 
+/**
+ * @param {numeric value input} e 
+ * Change the number of sessions to input value
+ */
 function updateNumSessions(e) {
   let num = e.target.value;
   numSessionsSlider.value = num;

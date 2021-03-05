@@ -3,7 +3,6 @@ import {renderStatistics} from "./statistics.js";
 // runs on page refresh
 renderAll();
 
-
 function renderOne(taskInput){
 
   const taskButton = document.getElementById("complete-task-btn");
@@ -131,6 +130,15 @@ newTaskInput.addEventListener("keyup", function (event) {
   }
 });
 
+/**
+ * @param {a string input of a task} taskInput 
+ * Checking if the task is in completed session
+ * If the task is found
+ *  return true
+ * else
+ *  return false
+ * determine if the button will say delete
+ */
 function inCompleted(taskName) {
   let completedSessions = localStorage.getItem("completedSessions");
   completedSessions = JSON.parse(completedSessions);
@@ -142,6 +150,15 @@ function inCompleted(taskName) {
   return false;
 }
 
+/**
+ * @param {a string input of a task} taskName 
+ * Checking if the task is in progress of complete
+ * If the task is found
+ *  return true
+ * else
+ *  return false
+ * determines if the button says undo or complete
+ */
 function isCompleted(taskName) {
   let completedSessions = localStorage.getItem("completedSessions");
   completedSessions = JSON.parse(completedSessions);
@@ -157,6 +174,11 @@ function isCompleted(taskName) {
 let completedTaskSessions = 0; 
 let completedTaskDates = new Set(); 
 
+/**
+ * Marked a task as completed
+ * Strike through the task after task completed
+ * Change the check to the next task
+ */
 function comple() {
   incNumCompletedTasks();
 
@@ -206,6 +228,9 @@ function comple() {
   }
 }
 
+/**
+ * Undo a task that marked completed
+ */
 function undo() {
 
   decNumCompletedTasks();
@@ -234,9 +259,10 @@ function undo() {
     completedTaskDates = new Set();
 }
 
+/**
+ * Delete a task
+ */
 function del() {
-
-
   let taskList = document.getElementById("task-list");
   document.getElementById("curr-task").children[0].innerHTML = "None";
   let taskArray = [];
