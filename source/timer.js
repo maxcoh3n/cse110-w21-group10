@@ -41,6 +41,23 @@ function timer() {
     document.getElementById("settings-btn").style.display = "none";
     updateCountdown(true);
   } else {
+    let completedSessions = localStorage.getItem("completedSessions");
+    completedSessions = JSON.parse(completedSessions);
+    console.log(completedSessions);
+    let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
+    let newTask = true;
+    for(let i = 0; i < completedSessions.length; i++){
+      if(completedSessions[i].taskName == currentTaskName){
+        newTask = false;
+        break;
+      }
+    }
+    if(newTask == true){
+      completed.innerHTML = "Delete";
+    }else{
+      completed.innerHTML = "Completed";
+    }
+    
     let taskList = document.getElementById("task-list");
     for (let task of taskList.childNodes) {
       task.disabled = false; // enables changing tasks
