@@ -280,6 +280,7 @@ function del() {
         completed.innerHTML = "Delete";
       }
     } else {
+      completed.disabled = true;
       document.getElementById(taskArray[0]).checked = true;
       document.getElementById("curr-task").children[0].innerHTML = taskArray[0];
       if (inCompleted(taskArray[0])) {
@@ -293,7 +294,6 @@ function del() {
       }
     }
   }
-  completed.disabled = true;
 }
 
 /*
