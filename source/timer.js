@@ -141,6 +141,7 @@ function updateCountdown(IsOn) {
         if (newTask == true) {
           let completedTask = {
             taskName: currentTaskName,
+            taskID: completedSessions.filter(task => task.taskName == currentTaskName).length,
             durationArray: [worktimeNumber.value],
             date: date,
             completed: false,
