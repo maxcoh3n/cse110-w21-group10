@@ -108,20 +108,32 @@ addTask.onclick = function () {
   const taskButton = document.getElementById("complete-task-btn");
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
- 
+
   const newTaskInput = document.getElementById("new-task");
 
   if (tasksArray.includes(newTaskInput.value)) {
     newTaskInput.value = "";
   }
 
+  let completedSessions = localStorage.getItem("completedSessions");
+  completedSessions = JSON.parse(completedSessions);
+  for( let sessesion of completedSessions ) {
+    if( sessesion.taskName == newTaskInput.value ) {
+      sessesion.completed = false;
+    }
+  }
+
+  localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
+
   if (newTaskInput.value) {
     tasksArray.push(newTaskInput.value);
     taskButton.disabled = false;
     localStorage.setItem("upcomingTasks", JSON.stringify(tasksArray));
     renderOne(newTaskInput.value);
-    if (tasksArray.length == 1) {
+    if ( inCompleted(newTaskInput.value) == false ) {
       taskButton.innerHTML = "Delete";
+    } else {
+      taskButton.innerHTML = "Completed";
     }
     newTaskInput.value = "";
   }
@@ -137,6 +149,10 @@ newTaskInput.addEventListener("keyup", function (event) {
   }
 });
 
+/*
+* @param taskName : a task inputted by the user
+* @return : returns boolean, determines if task is in completed sessesions
+*/
 function inCompleted(taskName) {
   let completedSessions = localStorage.getItem("completedSessions");
   completedSessions = JSON.parse(completedSessions);
@@ -148,6 +164,10 @@ function inCompleted(taskName) {
   return false;
 }
 
+/*
+* @param taskName : a task inputted by the user
+* @return : returns boolean, determines if task is completed
+*/
 function isCompleted(taskName) {
   let completedSessions = localStorage.getItem("completedSessions");
   completedSessions = JSON.parse(completedSessions);
@@ -160,9 +180,12 @@ function isCompleted(taskName) {
 }
 
 //must be here to be accessed by comple and undo functions
-let completedTaskSessions = 0; 
-let completedTaskDates = new Set(); 
+let completedTaskSessions = 0;
+let completedTaskDates = new Set();
 
+/*
+* handles the completion state for tasks
+*/
 function comple() {
   incNumCompletedTasks();
 
@@ -171,7 +194,6 @@ function comple() {
   completedSessions = JSON.parse(completedSessions);
   let taskArray = [];
 
-  //this entire for loop should be replaced with a single thing that only runs for the 1 task that is selected
   for (let box of taskList.childNodes) {
     if (box.checked) {
       for(let i = 0; i<completedSessions.length; i++){
@@ -208,10 +230,13 @@ function comple() {
     } else {
       completed.innerHTML = "Delete";
     }
-    
   }
+
 }
 
+/*
+* handles the undo state for tasks
+*/
 function undo() {
 
   decNumCompletedTasks();
@@ -243,8 +268,10 @@ function undo() {
     completedTaskDates = new Set();
 }
 
+/*
+* handles the delete state for tasks
+*/
 function del() {
-
 
   let taskList = document.getElementById("task-list");
   document.getElementById("curr-task").children[0].innerHTML = "None";
@@ -292,7 +319,7 @@ function del() {
       }
     }
   }
- 
+
   if(taskList.children.length != 0){
     completed.disabled = false;
   }else{
@@ -342,6 +369,9 @@ function decNumCompletedTaskSessions(numSessions){
   renderStatistics();
 }
 
+/*
+* handles the three phases for tasks
+*/
 const completed = document.getElementById("complete-task-btn");
 completed.onclick = function () {
   if (completed.innerHTML == "Completed") {

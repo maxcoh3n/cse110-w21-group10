@@ -14,6 +14,7 @@ Uses the countdown h1 to set and run a timer of length designated by the startTi
 
 function timer() {
   const sound = document.getElementById("alarm-sound");
+  let taskList = document.getElementById("task-list");
 
   const completed = document.getElementById("complete-task-btn");
   completed.innerHTML = "Completed";
@@ -21,7 +22,6 @@ function timer() {
   let removeTasks = [];
   if (startBtn.innerHTML == "Start") {
     completed.disabled = true; // disables changing tasks during work session
-    let taskList = document.getElementById("task-list");
     for (let task of taskList.childNodes) {
       task.disabled = true;
       let label = document.getElementById("label" + task.id);
@@ -57,7 +57,7 @@ function timer() {
     }else{
       completed.innerHTML = "Completed";
     }
-    
+
     let taskList = document.getElementById("task-list");
     for (let task of taskList.childNodes) {
       task.disabled = false; // enables changing tasks
