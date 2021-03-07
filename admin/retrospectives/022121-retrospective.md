@@ -1,7 +1,6 @@
 # Keyboard Warriors
 
-## Sprint 1 Review
-
+## Sprint 1 Retrospective
 ## When and Where
 
 Sunday 02/21/21 5:30pm-6:30pm on Max's Zoom
