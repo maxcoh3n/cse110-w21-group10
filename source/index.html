@@ -46,10 +46,9 @@
                 <input id="volume-number" type="number" min="0" max="100">
             </div>
             <input id="volume-slider" type="range" min="0" max="100">
+            
             <div class='flex'>
-                <div id="test-btn-container">
-                    <button id="test-btn" type="submit">Test</button>
-                </div>
+                <label id="sounds-label">Alarm Sound: &emsp;</label>
                 <select name='sounds' id='sounds'>
                     <option value="./sounds/alarm_clock_0.mp3">Digital 1</option>
                     <option value="./sounds/alarm_clock_2.mp3">Digital 2</option>
@@ -63,6 +62,9 @@
                     <option value="./sounds/alarm_clock_6.mp3">Rooster</option>
                     <option value="./sounds/alarm_clock_9.mp3">Alarm in my head</option>
                 </select>
+                <div id="test-btn-container">
+                    <button id="test-btn" type="submit">Test</button>
+                </div>
             </div>
 
             <br><br><label for="dev-mode">Dev Mode</label><input type="checkbox" id="dev-mode">
