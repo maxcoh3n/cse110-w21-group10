@@ -6,6 +6,17 @@ import {renderStatistics} from "./statistics.js";
 
 const countdown = document.getElementById("countdown");
 countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
+const workBreakLabel = document.getElementById("work-break-label");
+
+/*sound*/
+const sound = document.getElementById("alarm-sound");
+
+
+
+function startSound() {
+  sound.play();
+}
+
 let sessionNum = localStorage.getItem("numCurrentSech");
 /**
 timer
@@ -20,7 +31,9 @@ function timer() {
   let removeLabels = [];
   let removeTasks = [];
   if (startBtn.innerHTML == "Start") {
-    completed.disabled = true; // disables changing tasks during work session
+    const vol = localStorage.getItem('vol')
+    sound.volume = vol/100
+    completed.disabled = true;
     let taskList = document.getElementById("task-list");
     for (let task of taskList.childNodes) {
       task.disabled = true;
@@ -128,6 +141,7 @@ function updateCountdown(IsOn) {
     countdown.innerHTML = `${mins}:${sec}`;
     if (time == 0) {
       const sound = document.getElementById("alarm-sound");
+      sound.src = localStorage.getItem('soundType')
       sound.play();
       clearInterval(count);
       if (localStorage.getItem("workOrBreak") == "work") {
