@@ -28,7 +28,7 @@ const longBreaktimeNumber = document.getElementById("long-breaktime-number");
 const numSessionsSlider = document.getElementById("num-sessions-slider");
 const numSessionsNumber = document.getElementById("num-sessions-number");
 const test = document.getElementById("test-btn");
-const testAudio = document.getElementById("alarm-sound");
+const audio = document.getElementById("alarm-sound");
 const soundPicker = document.getElementById('sounds')
 const iconVol = document.getElementById('iconvol')
 
@@ -43,7 +43,7 @@ longBreaktimeNumber.value = localStorage.getItem("longBreakMins");
 numSessionsSlider.value = localStorage.getItem("numSessions");
 numSessionsNumber.value = localStorage.getItem("numSessions");
 soundPicker.value = localStorage.getItem("soundtype");
-testAudio.src = localStorage.getItem("soundtype");
+audio.src = localStorage.getItem("soundtype");
 
 worktimeSlider.addEventListener("input", updateWorktime);
 worktimeNumber.addEventListener("input", updateWorktime);
@@ -60,15 +60,15 @@ soundPicker.addEventListener('click',updateSound)
 
 function updateSound(e){
   const value = e.target.value
-  testAudio.src = value
+  audio.src = value
   localStorage.setItem("soundtype",value)
   document.getElementById("alarm-sound").src = value
 }
 
 function updateTest(){
   const vol = volumeNum.value
-  testAudio.volume = vol/100
-  testAudio.play() 
+  audio.volume = vol/100
+  audio.play() 
 }
 
 function updateVol(e) {
