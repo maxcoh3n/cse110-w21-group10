@@ -18,7 +18,6 @@ window.onclick = function (event) {
   }
 };
 const volumeNum = document.getElementById("volume-number")
-volumeNum.value = 50
 const volumeSlider = document.getElementById('volume-slider')
 const worktimeSlider = document.getElementById("worktime-slider");
 const worktimeNumber = document.getElementById("worktime-number");
@@ -30,10 +29,11 @@ const numSessionsSlider = document.getElementById("num-sessions-slider");
 const numSessionsNumber = document.getElementById("num-sessions-number");
 const test = document.getElementById("test-btn");
 const testAudio = document.getElementById("alarm-sound");
-const iconVol = document.getElementById('iconvol')
 const soundPicker = document.getElementById('sounds')
+const iconVol = document.getElementById('iconvol')
 
-
+volumeSlider.value = localStorage.getItem("vol");
+volumeNum.value = localStorage.getItem("vol");
 worktimeSlider.value = localStorage.getItem("workMins");
 worktimeNumber.value = localStorage.getItem("workMins");
 shortBreaktimeSlider.value = localStorage.getItem("shortBreakMins");
@@ -42,6 +42,8 @@ longBreaktimeSlider.value = localStorage.getItem("longBreakMins");
 longBreaktimeNumber.value = localStorage.getItem("longBreakMins");
 numSessionsSlider.value = localStorage.getItem("numSessions");
 numSessionsNumber.value = localStorage.getItem("numSessions");
+soundPicker.value = localStorage.getItem("soundtype");
+testAudio.src = localStorage.getItem("soundtype");
 
 worktimeSlider.addEventListener("input", updateWorktime);
 worktimeNumber.addEventListener("input", updateWorktime);
@@ -57,15 +59,13 @@ test.addEventListener('click', updateTest);
 soundPicker.addEventListener('click',updateSound)
 
 function updateSound(e){
-
-  console.log('here', e.target.value)
   const value = e.target.value
   testAudio.src = value
+  localStorage.setItem("soundtype",value)
   document.getElementById("alarm-sound").src = value
 }
 
 function updateTest(){
-
   const vol = volumeNum.value
   testAudio.volume = vol/100
   testAudio.play() 
@@ -76,23 +76,18 @@ function updateVol(e) {
   volumeSlider.value = num;
   volumeNum.value = num;
   localStorage.setItem("vol", num);
-  console.log(num)
   if (num > 66 && num < 101) {
-		iconVol.src = "../images/icons/volume-level-3.svg";
-
-	}
-	else if (num > 33 && num < 67){
-		iconVol.src = "../images/icons/volume-level-2.svg";
-	
-	}
-	else if (num > 0 && num < 34) {
-		iconVol.src = "../images/icons/volume-level-1.svg";
-	
-	}
-	else {
-		iconVol.src = "../images/icons/volume-level-0.svg";
-	
-	}	
+      iconVol.src = "../images/icons/volume-level-3.svg";
+  }
+  else if (num > 33 && num < 67) {
+      iconVol.src = "../images/icons/volume-level-2.svg";
+  }
+  else if (num > 0 && num < 34) {
+      iconVol.src = "../images/icons/volume-level-1.svg";
+  }
+  else {
+      iconVol.src = "../images/icons/volume-level-0.svg";
+  }
 }
 
 function updateWorktime(e) {
