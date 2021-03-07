@@ -43,7 +43,6 @@ function timer() {
   } else {
     let completedSessions = localStorage.getItem("completedSessions");
     completedSessions = JSON.parse(completedSessions);
-    console.log(completedSessions);
     let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
     let newTask = true;
     for(let i = 0; i < completedSessions.length; i++){
