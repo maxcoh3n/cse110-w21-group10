@@ -1,8 +1,8 @@
 //Settings
 
-var modal = document.getElementById("my-modal");
-var settingsBtn = document.getElementById("settings-btn");
-var span = document.getElementsByClassName("close")[0];
+let modal = document.getElementById("my-modal");
+let settingsBtn = document.getElementById("settings-btn");
+let span = document.getElementsByClassName("close")[0];
 
 settingsBtn.onclick = function () {
   modal.style.display = "block";
