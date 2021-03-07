@@ -13,8 +13,8 @@ if (!numSessions) localStorage.setItem("numSessions", "4");
 let vol = localStorage.getItem("vol");
 if (!vol) localStorage.setItem("vol", "50");
 
-let soundtype = localStorage.getItem("soundtype");
-if (!soundtype) localStorage.setItem("soundtype", "./sounds/alarm_clock_0.mp3");
+let soundType = localStorage.getItem("soundType");
+if (!soundType) localStorage.setItem("soundType", "./sounds/alarm_clock_0.mp3");
 
 let completedSessions = localStorage.getItem("completedSessions");
 if (!completedSessions) localStorage.setItem("completedSessions", "[]");

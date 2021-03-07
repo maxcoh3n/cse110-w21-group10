@@ -124,7 +124,7 @@ function updateCountdown(IsOn) {
     countdown.innerHTML = `${mins}:${sec}`;
     if (time == 0) {
       const sound = document.getElementById("alarm-sound");
-      sound.src = localStorage.getItem('soundtype')
+      sound.src = localStorage.getItem('soundType')
       sound.play();
       clearInterval(count);
       if (localStorage.getItem("workOrBreak") == "work") {
