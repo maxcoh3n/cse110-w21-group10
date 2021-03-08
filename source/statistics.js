@@ -1,6 +1,12 @@
 // Calls on page refresh
 renderStatistics();
 
+/**
+ * Get the total number of tasks completed.
+ * Calculate the average session per day.
+ * Calculate the average tasks per day.
+ * Display the number in the statistic log
+ */
 function renderStatistics(){
     const numCompletedTasks = document.getElementById("num-tasks-completed").childNodes[2];
     const avgSessionsPerDay = document.getElementById("avg-sessions-per-day").childNodes[2];
