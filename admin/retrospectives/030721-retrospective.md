@@ -28,3 +28,12 @@ Sunday 03/07/21 12:35pm - 1:10pm on Max's Zoom
   - lack of direction
   - participation/low energy
 
+## Artifacts:
+
+![Radar](retro-2-happiness-radar.PNG)
+
+![Mad Sad Glad Raw](retro-2-mad-sad-glad-raw.PNG)
+
+![Mad Sad Glad Voted](retro-2-mad-sad-glad.PNG)
+
+![Action items](retro-2-action-items.PNG)
