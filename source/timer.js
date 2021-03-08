@@ -11,18 +11,23 @@ const workBreakLabel = document.getElementById("work-break-label");
 /*sound*/
 const sound = document.getElementById("alarm-sound");
 
-
-
 function startSound() {
   sound.play();
 }
 
 let sessionNum = localStorage.getItem("numCurrentSech");
-/**
-timer
-Uses the countdown h1 to set and run a timer of length designated by the startTime parameter.
-*/
 
+/**
+ * Uses the countdown h1 to set and run a 
+ * timer of length designated by the startTime parameter.
+ * If the button with "start" is clicked
+ *  disable completed button
+ *  Change the button to "Cancel"
+ * If the button with "cancel" is clicked
+ *  Enable choosing task
+ *  Stop countdown
+ *  Change the button to "Start".
+*/
 function timer() {
   const sound = document.getElementById("alarm-sound");
 
@@ -83,7 +88,16 @@ function timer() {
   }
 }
 
-
+/**
+ * @param {boolean} IsOn 
+ * If the condition input is true
+ *  Set time equal to work or short break or long break
+ *  Start counting down the timer
+ * If the condition input is false
+ *  Display the time of work or short break or long break
+ *  without counting down
+ *  disable the complete button
+ */
 function updateCountdown(IsOn) {
   const title = document.getElementById("title-countdown");
   const workBreakLabel = document.getElementById("work-break-label");
@@ -120,6 +134,14 @@ function updateCountdown(IsOn) {
     completed.disabled = false;
   }
 
+  /**
+   * Display the if the user is currently in work time or break time
+   * Count down the timer
+   * When the time reach 0
+   * Notify use with alarm sound 
+   * Add new completed session with the current task
+   * Add the complete task to log
+   */
   function updateTime() {
     if (localStorage.getItem("workOrBreak") == "work") {
       workBreakLabel.style.display = "block";

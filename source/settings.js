@@ -58,6 +58,10 @@ volumeNum.addEventListener('input',updateVol);
 test.addEventListener('click', updateTest);
 soundPicker.addEventListener('click',updateSound)
 
+/**
+ * @param {string} e
+ * Change the current sound type to input value 
+ */
 function updateSound(e){
   const value = e.target.value
   audio.src = value
@@ -65,12 +69,20 @@ function updateSound(e){
   document.getElementById("alarm-sound").src = value
 }
 
+/**
+ * Test the loudness of the current volume
+ */
 function updateTest(){
   const vol = volumeNum.value
   audio.volume = vol/100
   audio.play() 
 }
 
+/**
+ * @param {number} e 
+ * Change the volume of the sound to input value
+ * Change the image of the speaker according to the volume
+ */
 function updateVol(e) {
   let num = e.target.value;
   volumeSlider.value = num;
@@ -90,6 +102,11 @@ function updateVol(e) {
   }
 }
 
+/**
+ * @param {number} e 
+ * Change the work time to input value
+ * Display the work time on the page.
+ */
 function updateWorktime(e) {
   let num = e.target.value;
   worktimeSlider.value = num;
@@ -99,6 +116,10 @@ function updateWorktime(e) {
     localStorage.getItem("workMins") + ":00";
 }
 
+/**
+ * @param {number} e 
+ * Change the short break time to input value
+ */
 function updateShortBreaktime(e) {
   let num = e.target.value;
   shortBreaktimeSlider.value = num;
@@ -106,6 +127,10 @@ function updateShortBreaktime(e) {
   localStorage.setItem("shortBreakMins", num);
 }
 
+/**
+ * @param {number} e 
+ * Change the long break time to input value
+ */
 function updateLongBreaktime(e) {
   let num = e.target.value;
   longBreaktimeSlider.value = num;
@@ -113,6 +138,10 @@ function updateLongBreaktime(e) {
   localStorage.setItem("longBreakMins", num);
 }
 
+/**
+ * @param {number} e 
+ * Change the number of sessions to input value
+ */
 function updateNumSessions(e) {
   let num = e.target.value;
   numSessionsSlider.value = num;
