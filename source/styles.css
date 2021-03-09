@@ -12,6 +12,11 @@ h1 {
   font-family: "Lora", serif;
 }
 
+.flex-icon {
+  display: inline-flex;
+  align-items: flex-start;
+}
+
 /* Not yet implemented
 #canvas-container {
 
@@ -28,6 +33,11 @@ h1 {
   height: 100%; /* Full height */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+}
+
+#sounds {
+  width: 200px;
+  height: 20px;
 }
 
 /* Modal Content/Box */
@@ -248,6 +258,21 @@ input[type="range"] {
   }
 }
 
+.flex {
+  display:flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 60px;
+  padding: 5px
+}
+#test-btn-container{
+  margin-right: 20px;
+
+}
+#test-btn{
+  height:20px;
+}
+  
 /* Session circles */
 #session-circles {
   --blank-circle: rgb(238, 238, 238);

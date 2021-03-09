@@ -3,7 +3,6 @@ import {renderStatistics} from "./statistics.js";
 // runs on page refresh
 renderAll();
 
-
 function renderOne(taskInput){
 
   const taskButton = document.getElementById("complete-task-btn");
@@ -66,9 +65,14 @@ function renderOne(taskInput){
 
 function renderAll() {
   const taskButton = document.getElementById("complete-task-btn");
-
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
+
+  if(tasksArray.length == 0){
+    taskButton.disabled = true;
+  }else{
+    taskButton.disabled = false;
+  }
 
   for (let i = 0; i < tasksArray.length; i++) {
     renderOne(tasksArray[i]);
@@ -103,7 +107,7 @@ addTask.onclick = function () {
   const taskButton = document.getElementById("complete-task-btn");
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
-
+ 
   const newTaskInput = document.getElementById("new-task");
 
   if (tasksArray.includes(newTaskInput.value)) {
@@ -112,6 +116,7 @@ addTask.onclick = function () {
 
   if (newTaskInput.value) {
     tasksArray.push(newTaskInput.value);
+    taskButton.disabled = false;
     localStorage.setItem("upcomingTasks", JSON.stringify(tasksArray));
     renderOne(newTaskInput.value);
     if (tasksArray.length == 1) {
@@ -131,6 +136,15 @@ newTaskInput.addEventListener("keyup", function (event) {
   }
 });
 
+/**
+ * @param {string} taskInput 
+ * Checking if the task is in completed session
+ * If the task is found
+ *  return true
+ * else
+ *  return false
+ * determine if the button will say delete
+ */
 function inCompleted(taskName) {
   let completedSessions = localStorage.getItem("completedSessions");
   completedSessions = JSON.parse(completedSessions);
@@ -142,6 +156,15 @@ function inCompleted(taskName) {
   return false;
 }
 
+/**
+ * @param {string} taskName 
+ * Checking if the task is in progress of complete
+ * If the task is found
+ *  return true
+ * else
+ *  return false
+ * determines if the button says undo or complete
+ */
 function isCompleted(taskName) {
   let completedSessions = localStorage.getItem("completedSessions");
   completedSessions = JSON.parse(completedSessions);
@@ -157,6 +180,11 @@ function isCompleted(taskName) {
 let completedTaskSessions = 0; 
 let completedTaskDates = new Set(); 
 
+/**
+ * Marked a task as completed
+ * Strike through the task after task completed
+ * Change the check to the next task
+ */
 function comple() {
   incNumCompletedTasks();
 
@@ -206,6 +234,9 @@ function comple() {
   }
 }
 
+/**
+ * Undo a task that marked completed
+ */
 function undo() {
 
   decNumCompletedTasks();
@@ -227,13 +258,19 @@ function undo() {
             completedSessions[i].completed = false;
           }
         }
+        localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
       }
-      localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
+      if ( box.name == "task-list" ) {
+        taskArray.push(box.id);
+      }
     }
     localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
     completedTaskDates = new Set();
 }
 
+/**
+ * Delete a task
+ */
 function del() {
 
 
@@ -282,6 +319,12 @@ function del() {
         completed.innerHTML = "Delete";
       }
     }
+  }
+ 
+  if(taskList.children.length != 0){
+    completed.disabled = false;
+  }else{
+    completed.disabled = true;
   }
 }
 

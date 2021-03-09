@@ -7,45 +7,46 @@
 ## Context and Problem Statement
 
 What statistics do we want to have available for the user?
-Additionally, how will we compute these? Doing them every time user asks for statistics will be O(n) which increases as user uses app, so ideally
-we would like to make this O(1)
+How will we compute these?
 
+## Decision Drivers
+
+Computing statistics each time that the user asks for them will be O(n), increasing each time the user uses the app, and we ideally want a solution that is O(1).
 
 ## Considered Options
 
-* calculate based on completedSessions
-* store statistics in localstorage, update it separately
-
+* Calculate based on completedSessions
+* Store statistics in localstorage, and update it independently
 
 ## Decision Outcome
 
-* store statistics in localstorage, update it separately because O(1) and simpler, even if decentralized
+* Chosen Options: Store statistics in localStorage
 
+Storing statistics in localStorage and updating it separately allows us to obtain the desired runtime of O(1) and it also allows more simplicity, even though there's an additional calculation abstracted away in a different function.
 
-## details of what statistics will be displayed and what values they will use:
+### Details of what statistics will be displayed and what values they will use
 
-
-avg num sessions to complete a task (total number of session of completed tasks/ # of completed tasks)
- - numCompletedTaskSessions
-    - add to onclick for completed button- add size of duration array
-      - undo must get rid of these, so you need to store num tasksAdded and then subtract them when u hit undo and set this var to 0
-  - numCompletedTasks
-    - add to onclick for completed button
-avg tasks completed per day (edited) 
-    - numCompletedTasks
-    - numDaysWorking - total # of days that the user has used our app
-        - must store a new value called lastDayWorked
+* Average number of sessions to complete a task
+  * Calculation: (total number of session of completed tasks/ # of completed tasks)
+  * Stored as: numCompletedTaskSessions
+    * Add to onclick for completed button- add size of duration array
+      * Undo must get rid of these, so you need to store number of tasksAdded and then subtract them when you hit undo
+        * Set this var to 0
+* Total number of completed tasks
+  * Stored as: numCompletedTasks
+  * Add to onclick for completed button
+* Average tasks completed per day
+* Total number of days that the user has used our app
+  * Stored as: numDaysWorking
+    * must store a new value called lastDayWorked
 avg sessions per day
-    - totalsessions
-        - increment when timer hits zero
-     - numDaysWorking
-total tasks completed
- - numCompletedTasks
+* Total number of pomo sessions
+  * Stored as: totalsessions
+    * increment when timer hits zero
 
-## details of what statistics localStorage will store
+### Variables going into localStorage
 
-- numCompletedTaskSessions
-- numCompletedTasks
-- numDaysWorking
-- totalsessions
-
+* numCompletedTaskSessions
+* numCompletedTasks
+* numDaysWorking
+* totalsessions
