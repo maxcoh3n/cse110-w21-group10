@@ -3,10 +3,25 @@ import { updatePomoLog, AddToLog } from "./pomoLog.js";
 import { changeSession, endBreak, startLongBreak } from "./sessionCircles.js";
 import {renderStatistics} from "./statistics.js";
 
+// repopulates pomo log when page is refreshed.
+window.addEventListener("DOMContentLoaded", (event) => {
+  const countdown = document.getElementById("countdown");
+  countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
 
-const countdown = document.getElementById("countdown");
-countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
-const workBreakLabel = document.getElementById("work-break-label");
+
+  //TODO CLEAN THIS UP
+  const startBtn = document.getElementById("start-btn");
+startBtn.onclick = function () {
+  timer();
+  let maxSessions = localStorage.getItem("numSessions");
+  if (sessionNum >= maxSessions) {
+    sessionNum = 0;
+  }
+  endBreak(sessionNum);
+};
+});
+
+let sessionNum = localStorage.getItem("numCurrentSech");
 
 /*sound*/
 const sound = document.getElementById("alarm-sound");
@@ -15,7 +30,6 @@ function startSound() {
   sound.play();
 }
 
-let sessionNum = localStorage.getItem("numCurrentSech");
 
 /**
  * Uses the countdown h1 to set and run a 
@@ -35,6 +49,8 @@ function timer() {
   completed.innerHTML = "Completed";
   let removeLabels = [];
   let removeTasks = [];
+
+  const startBtn = document.getElementById("start-btn");
   if (startBtn.innerHTML == "Start") {
     const vol = localStorage.getItem('vol')
     sound.volume = vol/100
@@ -143,6 +159,7 @@ function updateCountdown(IsOn) {
    * Add the complete task to log
    */
   function updateTime() {
+    const startBtn = document.getElementById("start-btn");
     if (localStorage.getItem("workOrBreak") == "work") {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Work Time";
@@ -258,12 +275,6 @@ function handleNumDaysWorking(){
   }
 }
 
-const startBtn = document.getElementById("start-btn");
-startBtn.onclick = function () {
-  timer();
-  let maxSessions = localStorage.getItem("numSessions");
-  if (sessionNum >= maxSessions) {
-    sessionNum = 0;
-  }
-  endBreak(sessionNum);
-};
+
+
+export {timer};
