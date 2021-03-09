@@ -3,23 +3,26 @@ import { updatePomoLog, AddToLog } from "./pomoLog.js";
 import { changeSession, endBreak, startLongBreak } from "./sessionCircles.js";
 import {renderStatistics} from "./statistics.js";
 
-// sets timer when page is refreshed
+// repopulates pomo log when page is refreshed.
 window.addEventListener("DOMContentLoaded", (event) => {
   const countdown = document.getElementById("countdown");
   countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
 
-//TODO RESTRUCTURE THISS!!!! 
+
+  //TODO CLEAN THIS UP
   const startBtn = document.getElementById("start-btn");
 startBtn.onclick = function () {
   timer();
   let maxSessions = localStorage.getItem("numSessions");
-  let sessionNum = Number(localStorage.getItem("numCurrentSech"));
   if (sessionNum >= maxSessions) {
     sessionNum = 0;
   }
   endBreak(sessionNum);
 };
 });
+
+let sessionNum = localStorage.getItem("numCurrentSech");
+
 
 /**
 timer
@@ -93,8 +96,6 @@ function updateCountdown(IsOn) {
     }
     document.getElementById("settings-btn").style.display = "block";
     clearInterval(localStorage.getItem("intervalID"));
-
-    const countdown = document.getElementById("countdown");
     if (localStorage.getItem("workOrBreak") == "work") {
       countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
       title.innerHTML = `${localStorage.getItem("workMins")}:00`;
@@ -110,7 +111,6 @@ function updateCountdown(IsOn) {
 
   function updateTime() {
     const startBtn = document.getElementById("start-btn");
-
     if (localStorage.getItem("workOrBreak") == "work") {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Work Time";
@@ -172,7 +172,7 @@ function updateCountdown(IsOn) {
         localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
         localStorage.setItem("numCurrentSech", 1 + Number(localStorage.getItem("numCurrentSech")));
 
-        let sessionNum = Number(localStorage.getItem("numCurrentSech")) +1;
+        sessionNum = Number(sessionNum) + 1;
         changeSession(sessionNum);
 
         if (localStorage.getItem("numCurrentSech") >= localStorage.getItem("numSessions")) {
@@ -188,7 +188,7 @@ function updateCountdown(IsOn) {
       } else if (localStorage.getItem("workOrBreak") == "longBreak") {
         localStorage.setItem("numCurrentSech", "0");
         localStorage.setItem("workOrBreak", "work");
-        let sessionNum = 0;
+        sessionNum = 0;
         startLongBreak(sessionNum);
         startBtn.innerHTML = "Start";
         updateCountdown(false);
@@ -227,5 +227,4 @@ function handleNumDaysWorking(){
 
 
 
-// module.exports = timer;
 export {timer};
