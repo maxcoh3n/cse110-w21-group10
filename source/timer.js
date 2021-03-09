@@ -109,6 +109,8 @@ function updateCountdown(IsOn) {
   }
 
   function updateTime() {
+    const startBtn = document.getElementById("start-btn");
+
     if (localStorage.getItem("workOrBreak") == "work") {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Work Time";

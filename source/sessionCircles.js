@@ -7,7 +7,10 @@ function updatePrevColor(event) {
     let circlesContainer = document.getElementById("session-circles");
     circlesContainer.childNodes[sessionIdx - 1].setAttribute("class", "completed-circle");
 
+    let sessionNumberInput = document.getElementById("num-sessions-number");
     sessionNumberInput.disabled = true;
+
+    let sessionSlider = document.getElementById("num-sessions-slider");
     sessionSlider.disabled = true;
   } else {
     resetColors();
@@ -94,7 +97,11 @@ function startLongBreak(sessionNum) {
 
 /* Enables/disables input to change numSessions */
 function toggleNumSessionInput() {
+  let sessionNumberInput = document.getElementById("num-sessions-number");
+
   sessionNumberInput.disabled = false;
+  
+  let sessionSlider = document.getElementById("num-sessions-slider");
   sessionSlider.disabled = false;
 }
 
