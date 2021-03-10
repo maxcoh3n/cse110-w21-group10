@@ -1,22 +1,23 @@
 //Settings
 
-let modal = document.getElementById("my-modal");
+let settingsModal = document.getElementById("settings-modal");
 let settingsBtn = document.getElementById("settings-btn");
-let span = document.getElementsByClassName("close")[0];
+let settingsSpan = document.getElementById("settings-span");
 
 settingsBtn.onclick = function () {
-  modal.style.display = "block";
+  settingsModal.style.display = "block";
 };
 
-span.onclick = function () {
-  modal.style.display = "none";
+settingsSpan.onclick = function () {
+  settingsModal.style.display = "none";
 };
 
 window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+  if (event.target == settingsModal) {
+    settingsModal.style.display = "none";
   }
 };
+
 const volumeNum = document.getElementById("volume-number")
 const volumeSlider = document.getElementById('volume-slider')
 const worktimeSlider = document.getElementById("worktime-slider");
