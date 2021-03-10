@@ -44,7 +44,7 @@ function renderOne(taskInput){
               taskButton.innerHTML = "Completed";
             } else {
               taskButton.innerHTML = "Undo";
-              document.getElementById("curr-task").children[0].innerHTML = "None";
+              document.getElementById("curr-task").children[0].innerHTML = "Default Task";
             }
           }
         }
@@ -55,7 +55,7 @@ function renderOne(taskInput){
       }
     }
     if (boxChecked == false) {
-      document.getElementById("curr-task").children[0].innerHTML = "None";
+      document.getElementById("curr-task").children[0].innerHTML = "Default Task";
     }
   });
 
@@ -218,7 +218,7 @@ function comple() {
         if( box.id == completedSessions[i].taskName && !completedSessions[i].completed) {
           completedSessions[i].completed = true;
           completed.innerHTML = "Undo";
-          document.getElementById("curr-task").children[0].innerHTML = "None";
+          document.getElementById("curr-task").children[0].innerHTML = "Default Task";
           completedTaskSessions += completedSessions[i].durationArray.length;
           completedTaskDates.add(completedSessions[i].date);
         }
@@ -293,7 +293,7 @@ function del() {
 
 
   let taskList = document.getElementById("task-list");
-  document.getElementById("curr-task").children[0].innerHTML = "None";
+  document.getElementById("curr-task").children[0].innerHTML = "Default Task";
   let taskArray = [];
   let upcomingTasks = localStorage.getItem("upcomingTasks");
   upcomingTasks = JSON.parse(upcomingTasks);
