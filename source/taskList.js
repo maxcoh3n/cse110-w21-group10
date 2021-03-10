@@ -101,7 +101,9 @@ function renderAll() {
   }
 }
 
-
+/*
+* adds a new task to the upcoming tasks list
+*/
 const addTask = document.getElementById("new-task-btn");
 addTask.onclick = function () {
   const taskButton = document.getElementById("complete-task-btn");
@@ -112,6 +114,13 @@ addTask.onclick = function () {
 
   if (tasksArray.includes(newTaskInput.value)) {
     newTaskInput.value = "";
+  }
+
+  let taskList = document.getElementById('task-list');
+  for (let box of taskList.childNodes) {
+    if (box.id == newTaskInput.value) {
+      newTaskInput.value = "";
+      }
   }
 
   let completedSessions = localStorage.getItem("completedSessions");
@@ -129,16 +138,30 @@ addTask.onclick = function () {
     taskButton.disabled = false;
     localStorage.setItem("upcomingTasks", JSON.stringify(tasksArray));
     renderOne(newTaskInput.value);
-    if ( inCompleted(newTaskInput.value) == false ) {
-      taskButton.innerHTML = "Delete";
-    } else {
-      taskButton.innerHTML = "Completed";
+    if( tasksArray.length == 1 ) {
+      if ( inCompleted(newTaskInput.value) == false ) {
+        taskButton.innerHTML = "Delete";
+      } else {
+        taskButton.innerHTML = "Completed";
+      }
     }
     newTaskInput.value = "";
   }
 
   tasksArray = localStorage.getItem("upcomingTasks");
 };
+
+/*
+* clears the display of the task list to the user
+*/
+function clearTaskList() {
+
+  let taskList = document.getElementById('task-list');
+  while( taskList.firstChild ) {
+    taskList.removeChild(taskList.firstChild);
+  }
+
+}
 
 const newTaskInput = document.getElementById("new-task");
 newTaskInput.addEventListener("keyup", function (event) {
@@ -393,3 +416,6 @@ completed.onclick = function () {
     del();
   }
 };
+
+
+export {clearTaskList};

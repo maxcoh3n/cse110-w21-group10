@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   //TODO CLEAN THIS UP
   const startBtn = document.getElementById("start-btn");
-startBtn.onclick = function () {
+  startBtn.onclick = function () {
   timer();
   let maxSessions = localStorage.getItem("numSessions");
   if (sessionNum >= maxSessions) {
@@ -32,7 +32,7 @@ function startSound() {
 
 
 /**
- * Uses the countdown h1 to set and run a 
+ * Uses the countdown h1 to set and run a
  * timer of length designated by the startTime parameter.
  * If the button with "start" is clicked
  *  disable completed button
@@ -105,7 +105,7 @@ function timer() {
 }
 
 /**
- * @param {boolean} IsOn 
+ * @param {boolean} IsOn
  * If the condition input is true
  *  Set time equal to work or short break or long break
  *  Start counting down the timer
@@ -154,7 +154,7 @@ function updateCountdown(IsOn) {
    * Display the if the user is currently in work time or break time
    * Count down the timer
    * When the time reach 0
-   * Notify use with alarm sound 
+   * Notify use with alarm sound
    * Add new completed session with the current task
    * Add the complete task to log
    */
@@ -275,6 +275,16 @@ function handleNumDaysWorking(){
   }
 }
 
+/*
+* space bar to start timer
+*/
+const startBtn = document.getElementById("start-btn");
+document.body.onkeyup = function(e) {
+  if( e.keyCode == 32 && document.activeElement != document.getElementById("new-task") ) {
+    e.preventDefault();
+    startBtn.click();
+  }
+}
 
 
 export {timer};

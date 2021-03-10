@@ -1,3 +1,9 @@
+import {renderStatistics} from "./statistics.js";
+import { clearLog } from "./pomoLog.js";
+import { clearTaskList } from "./taskList.js";
+
+
+
 //Settings
 
 let modal = document.getElementById("my-modal");
@@ -60,7 +66,7 @@ soundPicker.addEventListener('click',updateSound)
 
 /**
  * @param {string} e
- * Change the current sound type to input value 
+ * Change the current sound type to input value
  */
 function updateSound(e){
   const value = e.target.value
@@ -75,11 +81,11 @@ function updateSound(e){
 function updateTest(){
   const vol = volumeNum.value
   audio.volume = vol/100
-  audio.play() 
+  audio.play()
 }
 
 /**
- * @param {number} e 
+ * @param {number} e
  * Change the volume of the sound to input value
  * Change the image of the speaker according to the volume
  */
@@ -103,7 +109,7 @@ function updateVol(e) {
 }
 
 /**
- * @param {number} e 
+ * @param {number} e
  * Change the work time to input value
  * Display the work time on the page.
  */
@@ -117,7 +123,7 @@ function updateWorktime(e) {
 }
 
 /**
- * @param {number} e 
+ * @param {number} e
  * Change the short break time to input value
  */
 function updateShortBreaktime(e) {
@@ -128,7 +134,7 @@ function updateShortBreaktime(e) {
 }
 
 /**
- * @param {number} e 
+ * @param {number} e
  * Change the long break time to input value
  */
 function updateLongBreaktime(e) {
@@ -139,7 +145,7 @@ function updateLongBreaktime(e) {
 }
 
 /**
- * @param {number} e 
+ * @param {number} e
  * Change the number of sessions to input value
  */
 function updateNumSessions(e) {
@@ -147,4 +153,32 @@ function updateNumSessions(e) {
   numSessionsSlider.value = num;
   numSessionsNumber.value = num;
   localStorage.setItem("numSessions", num);
+}
+
+/*
+* clears the statistics/data for the user's session history
+*/
+const clearData = document.getElementById("clear-data-btn");
+clearData.onclick = function () {
+  if( clearData.labels[0].innerText == '' ) {
+    clearData.labels[0].innerText = "Clearing your data is an irreversible action, your session history will be lost. \nAre you sure you want to clear your data?\n\n";
+  } else {
+
+    const stats = JSON.parse(localStorage.getItem("statistics"));
+    stats.numCompletedTaskSessions = 0;
+    stats.numCompletedTasks = 0;
+    stats.numDaysWorking = 0;
+    stats.numDistractions = 0;
+    stats.numSessions = 0;
+    localStorage.setItem("statistics", JSON.stringify(stats));
+    renderStatistics();
+
+    localStorage.setItem("completedSessions", '[]');
+    clearLog();
+
+    localStorage.setItem("upcomingTasks", '[]');
+    clearTaskList();
+
+    clearData.labels[0].innerText = '';
+  }
 }
