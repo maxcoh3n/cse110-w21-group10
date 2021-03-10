@@ -24,7 +24,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#comple">comple</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#del">del</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#house">house</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#inCompleted">inCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isCompleted">isCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#timer">timer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#undo">undo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateCountdown">updateCountdown</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateLongBreaktime">updateLongBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateNumSessions">updateNumSessions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateShortBreaktime">updateShortBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateSound">updateSound</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateTest">updateTest</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateVol">updateVol</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateWorktime">updateWorktime</a></span></li>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#comple">comple</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#house">house</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#inCompleted">inCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isCompleted">isCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#timer">timer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#undo">undo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateCountdown">updateCountdown</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateLongBreaktime">updateLongBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateNumSessions">updateNumSessions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateShortBreaktime">updateShortBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateSound">updateSound</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateTest">updateTest</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateVol">updateVol</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateWorktime">updateWorktime</a></span></li>
 </nav>
 
 <div id="main">
@@ -39,26 +39,31 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>//Settings
+            <pre class="prettyprint source linenums"><code>import {renderStatistics} from "./statistics.js";
+import { clearLog } from "./pomoLog.js";
+import { clearTaskList } from "./taskList.js";
 
-let settingsModal = document.getElementById("settings-modal");
+
+
+//Settings
+
+let modal = document.getElementById("my-modal");
 let settingsBtn = document.getElementById("settings-btn");
-let settingsSpan = document.getElementById("settings-span");
+let span = document.getElementsByClassName("close")[0];
 
 settingsBtn.onclick = function () {
-  settingsModal.style.display = "block";
+  modal.style.display = "block";
 };
 
-settingsSpan.onclick = function () {
-  settingsModal.style.display = "none";
+span.onclick = function () {
+  modal.style.display = "none";
 };
 
 window.onclick = function (event) {
-  if (event.target == settingsModal) {
-    settingsModal.style.display = "none";
+  if (event.target == modal) {
+    modal.style.display = "none";
   }
 };
-
 const volumeNum = document.getElementById("volume-number")
 const volumeSlider = document.getElementById('volume-slider')
 const worktimeSlider = document.getElementById("worktime-slider");
@@ -190,7 +195,34 @@ function updateNumSessions(e) {
   numSessionsNumber.value = num;
   localStorage.setItem("numSessions", num);
 }
-</code></pre>
+
+/*
+* clears the statistics/data for the user's session history
+*/
+const clearData = document.getElementById("clear-data-btn");
+clearData.onclick = function () {
+  if( clearData.labels[0].innerText == '' ) {
+    clearData.labels[0].innerText = "Clearing your data is an irreversible action, your session history will be lost. \nAre you sure you want to clear your data?\n\n";
+  } else {
+
+    const stats = JSON.parse(localStorage.getItem("statistics"));
+    stats.numCompletedTaskSessions = 0;
+    stats.numCompletedTasks = 0;
+    stats.numDaysWorking = 0;
+    stats.numDistractions = 0;
+    stats.numSessions = 0;
+    localStorage.setItem("statistics", JSON.stringify(stats));
+    renderStatistics();
+
+    localStorage.setItem("completedSessions", '[]');
+    clearLog();
+
+    localStorage.setItem("upcomingTasks", '[]');
+    clearTaskList();
+
+    clearData.labels[0].innerText = '';
+  }
+}</code></pre>
         </article>
     </section>
 
@@ -202,7 +234,7 @@ function updateNumSessions(e) {
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Wed Mar 10 2021 06:04:50 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Wed Mar 10 2021 10:08:49 GMT+0000 (Coordinated Universal Time) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

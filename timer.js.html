@@ -24,7 +24,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#comple">comple</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#del">del</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#house">house</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#inCompleted">inCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isCompleted">isCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#timer">timer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#undo">undo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateCountdown">updateCountdown</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateLongBreaktime">updateLongBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateNumSessions">updateNumSessions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateShortBreaktime">updateShortBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateSound">updateSound</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateTest">updateTest</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateVol">updateVol</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateWorktime">updateWorktime</a></span></li>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#comple">comple</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#house">house</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#inCompleted">inCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isCompleted">isCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#timer">timer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#undo">undo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateCountdown">updateCountdown</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateLongBreaktime">updateLongBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateNumSessions">updateNumSessions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateShortBreaktime">updateShortBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateSound">updateSound</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateTest">updateTest</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateVol">updateVol</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateWorktime">updateWorktime</a></span></li>
 </nav>
 
 <div id="main">
@@ -52,7 +52,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   //TODO CLEAN THIS UP
   const startBtn = document.getElementById("start-btn");
-startBtn.onclick = function () {
+  startBtn.onclick = function () {
   timer();
   let maxSessions = localStorage.getItem("numSessions");
   if (sessionNum >= maxSessions) {
@@ -73,7 +73,7 @@ function startSound() {
 
 
 /**
- * Uses the countdown h1 to set and run a 
+ * Uses the countdown h1 to set and run a
  * timer of length designated by the startTime parameter.
  * If the button with "start" is clicked
  *  disable completed button
@@ -85,6 +85,7 @@ function startSound() {
 */
 function timer() {
   const sound = document.getElementById("alarm-sound");
+  let taskList = document.getElementById("task-list");
 
   const completed = document.getElementById("complete-task-btn");
   completed.innerHTML = "Completed";
@@ -118,7 +119,6 @@ function timer() {
   } else {
     let completedSessions = localStorage.getItem("completedSessions");
     completedSessions = JSON.parse(completedSessions);
-    console.log(completedSessions);
     let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
     let newTask = true;
     for(let i = 0; i &lt; completedSessions.length; i++){
@@ -132,7 +132,7 @@ function timer() {
     }else{
       completed.innerHTML = "Completed";
     }
-    
+
     let taskList = document.getElementById("task-list");
     for (let task of taskList.childNodes) {
       task.disabled = false; // enables changing tasks
@@ -146,7 +146,7 @@ function timer() {
 }
 
 /**
- * @param {boolean} IsOn 
+ * @param {boolean} IsOn
  * If the condition input is true
  *  Set time equal to work or short break or long break
  *  Start counting down the timer
@@ -195,7 +195,7 @@ function updateCountdown(IsOn) {
    * Display the if the user is currently in work time or break time
    * Count down the timer
    * When the time reach 0
-   * Notify use with alarm sound 
+   * Notify use with alarm sound
    * Add new completed session with the current task
    * Add the complete task to log
    */
@@ -316,9 +316,29 @@ function handleNumDaysWorking(){
   }
 }
 
+const startBtn = document.getElementById("start-btn");
+startBtn.onclick = function () {
+  timer();
+  let maxSessions = localStorage.getItem("numSessions");
+  if (sessionNum >= maxSessions) {
+    sessionNum = 0;
+  }
+  endBreak(sessionNum);
+};
+
+/*
+* space bar to start timer
+*/
+document.body.onkeyup = function(e) {
+  if( e.keyCode == 32 &amp;&amp; document.activeElement != document.getElementById("new-task") ) {
+    e.preventDefault();
+    startBtn.click();
+  }
+}
 
 
-export {timer};</code></pre>
+export {timer};
+</code></pre>
         </article>
     </section>
 
@@ -330,7 +350,7 @@ export {timer};</code></pre>
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Wed Mar 10 2021 06:04:50 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Wed Mar 10 2021 10:08:49 GMT+0000 (Coordinated Universal Time) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
