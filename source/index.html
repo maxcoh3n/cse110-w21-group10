@@ -19,11 +19,11 @@
     <!-- Settings -->
     <button id="settings-btn">Settings</button>
 
-    <div id="my-modal" class="modal">
+    <div id="settings-modal" class="modal">
 
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Settings</p>
+            <span id="settings-span" class="close">&times;</span>
+            <h2>Settings</h2>
             <label id="worktime-label">Work Time:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
             <input id="worktime-number" type="number" min="20" max="30">
             <input id="worktime-slider" type="range" min="20" max="30"><br><br>
@@ -123,7 +123,7 @@
         </div--->
         <button id="start-btn">Start</button>
         <!-- Current Task -->
-        <p id="curr-task">Current Task: <span>None</span></p>
+        <p id="curr-task">Current Task: <span>Default Task</span></p>
         <h2 id="work-break-label"></h2>
     </div>
     <!-- Task List-->
@@ -148,6 +148,30 @@
     <script type="module" src="timer.js"></script>
     <script type="module" src="sessionCircles.js"></script>
 
+    <!-- Info -->
+    <button id="info-btn">Information</button>
+    <div id="info-modal" class="modal">
+      <div class="modal-content">
+        <span id="info-span" class="close">&times;</span>
+
+        <h2>Information</h2><hr>
+        <ul>
+          <li>Click the Settings button in the top right corner and configure your settings</li>
+          <li>Add tasks to the task list to the right. You can click Delete if you added a task by mistake</li>
+          <li>Select the task you want and click Start to start the timer</li>
+          <li>After you have completed a session you can click Complete to complete the selected task and Undo if you clicked Complete by mistake</li>
+          <li>You can click the Pomodoro Log button on the left to view a log of completed sessions and statistics. </li>
+        </ul><br>
+
+        <p>Select your language:
+        <input type="radio" id="english" name="language">
+        <label for="english">English</label>
+        <input type="radio" id="spanish" name="language">
+        <label for="spanish">Spanish</label></p>
+
+      </div>
+    </div>
+    <script src="info.js" type="module"></script>
 
 </body>
 
