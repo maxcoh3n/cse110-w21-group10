@@ -1,7 +1,21 @@
 import {renderStatistics} from "./statistics.js";
 
-// runs on page refresh
-renderAll();
+
+// adds listeners and refreshes when page is loaded
+window.addEventListener("DOMContentLoaded", (event) => {
+  renderAll();
+
+  const addTask = document.getElementById("new-task-btn");
+  addTask.addEventListener("click", addTaskEvent );
+
+
+  const newTaskInput = document.getElementById("new-task");
+  newTaskInput.addEventListener("keyup", keyUpEvent );
+
+  const completed = document.getElementById("complete-task-btn");
+  completed.addEventListener("click", completedEvent )
+
+});
 
 function renderOne(taskInput){
 
@@ -101,9 +115,10 @@ function renderAll() {
   }
 }
 
-
-const addTask = document.getElementById("new-task-btn");
-addTask.onclick = function () {
+  /*
+  * TODO
+  */
+  function addTaskEvent() {
   const taskButton = document.getElementById("complete-task-btn");
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
@@ -125,16 +140,19 @@ addTask.onclick = function () {
     newTaskInput.value = "";
   }
 
-  tasksArray = localStorage.getItem("upcomingTasks");
+  // tasksArray = localStorage.getItem("upcomingTasks");
 };
 
-const newTaskInput = document.getElementById("new-task");
-newTaskInput.addEventListener("keyup", function (event) {
+/*
+  * TODO
+*/
+function keyUpEvent(event) {
   if (event.keyCode === 13) {
     event.preventDefault();
+    const addTask = document.getElementById("new-task-btn");
     addTask.click();
   }
-});
+}
 
 /**
  * @param {string} taskInput 
@@ -293,6 +311,7 @@ function del() {
   nextTaskNum = Math.floor(nextTaskNum / 2);
   localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
 
+  const completed = document.getElementById("complete-task-btn");
   if (taskArray.length > 0) {
     if (nextTaskNum < taskArray.length) {
       document.getElementById(taskArray[nextTaskNum]).checked = true;
@@ -370,8 +389,8 @@ function decNumCompletedTaskSessions(numSessions){
   renderStatistics();
 }
 
-const completed = document.getElementById("complete-task-btn");
-completed.onclick = function () {
+function completedEvent(){
+  const completed = document.getElementById("complete-task-btn");
   if (completed.innerHTML == "Completed") {
     comple();
   } else if (completed.innerHTML == "Undo") {
@@ -380,3 +399,6 @@ completed.onclick = function () {
     del();
   }
 };
+
+
+export {renderOne, renderAll, renderStatistics};
