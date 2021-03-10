@@ -24,7 +24,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#comple">comple</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#del">del</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#house">house</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#inCompleted">inCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isCompleted">isCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#renderStatistics">renderStatistics</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#timer">timer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#undo">undo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateCountdown">updateCountdown</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateLongBreaktime">updateLongBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateNumSessions">updateNumSessions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateShortBreaktime">updateShortBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateSound">updateSound</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateTest">updateTest</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateVol">updateVol</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateWorktime">updateWorktime</a></span></li>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#comple">comple</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#del">del</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#house">house</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#inCompleted">inCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isCompleted">isCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#timer">timer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#undo">undo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateCountdown">updateCountdown</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateLongBreaktime">updateLongBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateNumSessions">updateNumSessions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateShortBreaktime">updateShortBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateSound">updateSound</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateTest">updateTest</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateVol">updateVol</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateWorktime">updateWorktime</a></span></li>
 </nav>
 
 <div id="main">
@@ -44,10 +44,25 @@ import { updatePomoLog, AddToLog } from "./pomoLog.js";
 import { changeSession, endBreak, startLongBreak } from "./sessionCircles.js";
 import {renderStatistics} from "./statistics.js";
 
+// repopulates pomo log when page is refreshed.
+window.addEventListener("DOMContentLoaded", (event) => {
+  const countdown = document.getElementById("countdown");
+  countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
 
-const countdown = document.getElementById("countdown");
-countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
-const workBreakLabel = document.getElementById("work-break-label");
+
+  //TODO CLEAN THIS UP
+  const startBtn = document.getElementById("start-btn");
+startBtn.onclick = function () {
+  timer();
+  let maxSessions = localStorage.getItem("numSessions");
+  if (sessionNum >= maxSessions) {
+    sessionNum = 0;
+  }
+  endBreak(sessionNum);
+};
+});
+
+let sessionNum = localStorage.getItem("numCurrentSech");
 
 /*sound*/
 const sound = document.getElementById("alarm-sound");
@@ -56,7 +71,6 @@ function startSound() {
   sound.play();
 }
 
-let sessionNum = localStorage.getItem("numCurrentSech");
 
 /**
  * Uses the countdown h1 to set and run a 
@@ -76,6 +90,8 @@ function timer() {
   completed.innerHTML = "Completed";
   let removeLabels = [];
   let removeTasks = [];
+
+  const startBtn = document.getElementById("start-btn");
   if (startBtn.innerHTML == "Start") {
     const vol = localStorage.getItem('vol')
     sound.volume = vol/100
@@ -184,6 +200,7 @@ function updateCountdown(IsOn) {
    * Add the complete task to log
    */
   function updateTime() {
+    const startBtn = document.getElementById("start-btn");
     if (localStorage.getItem("workOrBreak") == "work") {
       workBreakLabel.style.display = "block";
       workBreakLabel.innerHTML = "Work Time";
@@ -299,16 +316,9 @@ function handleNumDaysWorking(){
   }
 }
 
-const startBtn = document.getElementById("start-btn");
-startBtn.onclick = function () {
-  timer();
-  let maxSessions = localStorage.getItem("numSessions");
-  if (sessionNum >= maxSessions) {
-    sessionNum = 0;
-  }
-  endBreak(sessionNum);
-};
-</code></pre>
+
+
+export {timer};</code></pre>
         </article>
     </section>
 
@@ -320,7 +330,7 @@ startBtn.onclick = function () {
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Wed Mar 10 2021 01:44:09 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Wed Mar 10 2021 01:44:54 GMT+0000 (Coordinated Universal Time) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
