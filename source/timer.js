@@ -275,19 +275,10 @@ function handleNumDaysWorking(){
   }
 }
 
-const startBtn = document.getElementById("start-btn");
-startBtn.onclick = function () {
-  timer();
-  let maxSessions = localStorage.getItem("numSessions");
-  if (sessionNum >= maxSessions) {
-    sessionNum = 0;
-  }
-  endBreak(sessionNum);
-};
-
 /*
 * space bar to start timer
 */
+const startBtn = document.getElementById("start-btn");
 document.body.onkeyup = function(e) {
   if( e.keyCode == 32 && document.activeElement != document.getElementById("new-task") ) {
     e.preventDefault();
