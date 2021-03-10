@@ -1,21 +1,7 @@
 import {renderStatistics} from "./statistics.js";
 
-
-// adds listeners and refreshes when page is loaded
-window.addEventListener("DOMContentLoaded", (event) => {
-  renderAll();
-
-  const addTask = document.getElementById("new-task-btn");
-  addTask.addEventListener("click", addTaskEvent );
-
-
-  const newTaskInput = document.getElementById("new-task");
-  newTaskInput.addEventListener("keyup", keyUpEvent );
-
-  const completed = document.getElementById("complete-task-btn");
-  completed.addEventListener("click", completedEvent )
-
-});
+// runs on page refresh
+renderAll();
 
 function renderOne(taskInput){
 
@@ -44,7 +30,7 @@ function renderOne(taskInput){
               taskButton.innerHTML = "Completed";
             } else {
               taskButton.innerHTML = "Undo";
-              document.getElementById("curr-task").children[0].innerHTML = "None";
+              document.getElementById("curr-task").children[0].innerHTML = "Default Task";
             }
           }
         }
@@ -55,7 +41,7 @@ function renderOne(taskInput){
       }
     }
     if (boxChecked == false) {
-      document.getElementById("curr-task").children[0].innerHTML = "None";
+      document.getElementById("curr-task").children[0].innerHTML = "Default Task";
     }
   });
 
@@ -115,10 +101,9 @@ function renderAll() {
   }
 }
 
-  /*
-  * TODO
-  */
-  function addTaskEvent() {
+
+const addTask = document.getElementById("new-task-btn");
+addTask.onclick = function () {
   const taskButton = document.getElementById("complete-task-btn");
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
@@ -140,19 +125,16 @@ function renderAll() {
     newTaskInput.value = "";
   }
 
-  // tasksArray = localStorage.getItem("upcomingTasks");
+  tasksArray = localStorage.getItem("upcomingTasks");
 };
 
-/*
-  * TODO
-*/
-function keyUpEvent(event) {
+const newTaskInput = document.getElementById("new-task");
+newTaskInput.addEventListener("keyup", function (event) {
   if (event.keyCode === 13) {
     event.preventDefault();
-    const addTask = document.getElementById("new-task-btn");
     addTask.click();
   }
-}
+});
 
 /**
  * @param {string} taskInput 
@@ -218,7 +200,7 @@ function comple() {
         if( box.id == completedSessions[i].taskName && !completedSessions[i].completed) {
           completedSessions[i].completed = true;
           completed.innerHTML = "Undo";
-          document.getElementById("curr-task").children[0].innerHTML = "None";
+          document.getElementById("curr-task").children[0].innerHTML = "Default Task";
           completedTaskSessions += completedSessions[i].durationArray.length;
           completedTaskDates.add(completedSessions[i].date);
         }
@@ -293,7 +275,7 @@ function del() {
 
 
   let taskList = document.getElementById("task-list");
-  document.getElementById("curr-task").children[0].innerHTML = "None";
+  document.getElementById("curr-task").children[0].innerHTML = "Default Task";
   let taskArray = [];
   let upcomingTasks = localStorage.getItem("upcomingTasks");
   upcomingTasks = JSON.parse(upcomingTasks);
@@ -311,7 +293,6 @@ function del() {
   nextTaskNum = Math.floor(nextTaskNum / 2);
   localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
 
-  const completed = document.getElementById("complete-task-btn");
   if (taskArray.length > 0) {
     if (nextTaskNum < taskArray.length) {
       document.getElementById(taskArray[nextTaskNum]).checked = true;
@@ -389,8 +370,8 @@ function decNumCompletedTaskSessions(numSessions){
   renderStatistics();
 }
 
-function completedEvent(){
-  const completed = document.getElementById("complete-task-btn");
+const completed = document.getElementById("complete-task-btn");
+completed.onclick = function () {
   if (completed.innerHTML == "Completed") {
     comple();
   } else if (completed.innerHTML == "Undo") {
@@ -399,6 +380,3 @@ function completedEvent(){
     del();
   }
 };
-
-
-export {renderOne, renderAll, renderStatistics};
