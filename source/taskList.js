@@ -3,7 +3,6 @@ import {renderStatistics} from "./statistics.js";
 // runs on page refresh
 renderAll();
 
-
 function renderOne(taskInput){
 
   const taskButton = document.getElementById("complete-task-btn");
@@ -149,10 +148,15 @@ newTaskInput.addEventListener("keyup", function (event) {
   }
 });
 
-/*
-* @param taskName : a task inputted by the user
-* @return : returns boolean, determines if task is in completed sessesions
-*/
+/**
+ * @param {string} taskInput - a task inputted by the user
+ * Checking if the task is in completed session
+ * If the task is found
+ *  return true
+ * else
+ *  return false
+ * determine if the button will say delete
+ */
 function inCompleted(taskName) {
   let completedSessions = localStorage.getItem("completedSessions");
   completedSessions = JSON.parse(completedSessions);
@@ -164,10 +168,15 @@ function inCompleted(taskName) {
   return false;
 }
 
-/*
-* @param taskName : a task inputted by the user
-* @return : returns boolean, determines if task is completed
-*/
+/**
+ * @param {string} taskName - a task inputted by the user
+ * Checking if the task is in progress of complete
+ * If the task is found
+ *  return true
+ * else
+ *  return false
+ * determines if the button says undo or complete
+ */
 function isCompleted(taskName) {
   let completedSessions = localStorage.getItem("completedSessions");
   completedSessions = JSON.parse(completedSessions);
@@ -183,9 +192,11 @@ function isCompleted(taskName) {
 let completedTaskSessions = 0;
 let completedTaskDates = new Set();
 
-/*
-* handles the completion state for tasks
-*/
+/**
+ * Marked a task as completed
+ * Strike through the task after task completed
+ * Change the check to the next task
+ */
 function comple() {
   incNumCompletedTasks();
 
@@ -234,9 +245,9 @@ function comple() {
 
 }
 
-/*
-* handles the undo state for tasks
-*/
+/**
+ * Undo a task that marked completed
+ */
 function undo() {
 
   decNumCompletedTasks();
