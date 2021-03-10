@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Home - Documentation</title>
+    <title>statistics.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,54 +29,55 @@
 
 <div id="main">
     
+    <h1 class="page-title">statistics.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// Calls on page refresh
+renderStatistics();
+
+/**
+ * Get the total number of tasks completed.
+ * Calculate the average session per day.
+ * Calculate the average tasks per day.
+ * Display the number in the statistic log
+ */
+function renderStatistics(){
+    const numCompletedTasks = document.getElementById("num-tasks-completed").childNodes[2];
+    const avgSessionsPerDay = document.getElementById("avg-sessions-per-day").childNodes[2];
+    const avgTasksPerDay = document.getElementById("average-tasks-per-day").childNodes[2];
+    const avgSessionsPerTask = document.getElementById("avg-sessions-per-task").childNodes[2];
+
+    const statsObj = JSON.parse(localStorage.getItem("statistics"));
 
 
+    numCompletedTasks.innerHTML = statsObj.numCompletedTasks;
 
+    if(statsObj.numCompletedTasks >0){
+        avgSessionsPerTask.innerHTML = (statsObj.numCompletedTaskSessions / statsObj.numCompletedTasks).toFixed(2);
+    }else{
+        avgSessionsPerTask.innerHTML = "N/A";
+    }
 
+    if(statsObj.numDaysWorking >0){
+        avgTasksPerDay.innerHTML = (statsObj.numCompletedTasks / statsObj.numDaysWorking).toFixed(2);
+        avgSessionsPerDay.innerHTML = (statsObj.numSessions / statsObj.numDaysWorking).toFixed(2);
+    }else{
+        avgTasksPerDay.innerHTML = "N/A";
+        avgSessionsPerDay.innerHTML = "N/A";    
+    }
 
+}
 
-
-
-
-    
-
-
-    <section class="readme">
-        <article><p>Welcome to our repository!</p>
-<h2>Setup guide</h2>
-<ol>
-<li>
-<p>Installing live server extension:</p>
-<ul>
-<li>Open Visual Studio Code.</li>
-<li>On the leftside, click on the extension icon or press (Ctrl+Shift+X).</li>
-<li>Click &quot;Search Extensions in Marketplace&quot; at the top.</li>
-<li>Search &quot;Live Server&quot; by Ritwick Dey.</li>
-<li>Install the extension and restart visual studio code.</li>
-<li>To use the extension, right click on the html file and select &quot;Open with live server&quot;.</li>
-</ul>
-</li>
-<li>
-<p>Installing prettier extension:</p>
-<ul>
-<li>Open Visual Studio Code.</li>
-<li>On the leftside, click on the extension icon or press (Ctrl+Shift+X).</li>
-<li>Click &quot;Search Extensions in Marketplace&quot; at the top.</li>
-<li>Search &quot;Prettier-code formatter&quot; by Prettier.</li>
-<li>Install the extension and restart visual studio code.</li>
-<li>This extension is a built in so it will automatically format the codes.</li>
-</ul>
-</li>
-</ol></article>
+export {renderStatistics};</code></pre>
+        </article>
     </section>
-
-
 
 
 
