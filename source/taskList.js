@@ -211,7 +211,7 @@ function comple() {
   completedSessions = JSON.parse(completedSessions);
   let taskArray = [];
 
-  //this entire for loop should be replaced with a single thing that only runs for the 1 task that is selected
+  const completed = document.getElementById("complete-task-btn");
   for (let box of taskList.childNodes) {
     if (box.checked) {
       for(let i = 0; i<completedSessions.length; i++){
@@ -267,6 +267,7 @@ function undo() {
       let label = document.getElementById("label" + box.id);
       if( box.checked ) {
         document.getElementById("curr-task").children[0].innerHTML = box.id;
+        const completed = document.getElementById("complete-task-btn");
         completed.innerHTML = "Completed";
         label.style.textDecoration = "none";
         let completedSessions = localStorage.getItem("completedSessions");
