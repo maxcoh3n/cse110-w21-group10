@@ -1,7 +1,7 @@
 //info.js
 
 //runs when page is loaded
-window.addEventListener("DOMContentLoaded", (event) => {
+window.addEventListener("DOMContentLoaded", () => {
     let infoModal = document.getElementById("info-modal");
     let infoBtn = document.getElementById("info-btn");
     let infoSpan = document.getElementById("info-span");
