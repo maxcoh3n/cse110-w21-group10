@@ -23,7 +23,7 @@ function renderStatistics(){
         avgSessionsPerDay.innerHTML = (statsObj.numSessions / statsObj.numDaysWorking).toFixed(2);
     }else{
         avgTasksPerDay.innerHTML = "N/A";
-        avgSessionsPerDay.innerHTML = "N/A";    
+        avgSessionsPerDay.innerHTML = "N/A";
     }
 
 }

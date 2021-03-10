@@ -1,3 +1,9 @@
+import {renderStatistics} from "./statistics.js";
+import { clearLog } from "./pomoLog.js";
+import { clearTaskList } from "./taskList.js";
+
+
+
 //Settings
 
 let modal = document.getElementById('my-modal');
@@ -81,4 +87,32 @@ function updateNumSessions(e) {
   numSessionsSlider.value = num;
   numSessionsNumber.value = num;
   localStorage.setItem('numSessions', num);
+}
+
+/*
+* clears the statistics/data for the user's session history
+*/
+const clearData = document.getElementById("clear-data-btn");
+clearData.onclick = function () {
+  if( clearData.labels[0].innerText == '' ) {
+    clearData.labels[0].innerText = "Clearing your data is an irreversible action, your session history will be lost. \nAre you sure you want to clear your data?\n\n";
+  } else {
+
+    const stats = JSON.parse(localStorage.getItem("statistics"));
+    stats.numCompletedTaskSessions = 0;
+    stats.numCompletedTasks = 0;
+    stats.numDaysWorking = 0;
+    stats.numDistractions = 0;
+    stats.numSessions = 0;
+    localStorage.setItem("statistics", JSON.stringify(stats));
+    renderStatistics();
+
+    localStorage.setItem("completedSessions", '[]');
+    clearLog();
+
+    localStorage.setItem("upcomingTasks", '[]');
+    clearTaskList();
+
+    clearData.labels[0].innerText = '';
+  }
 }

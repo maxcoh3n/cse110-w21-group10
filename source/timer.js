@@ -231,3 +231,13 @@ startBtn.onclick = function () {
   }
   endBreak(sessionNum);
 };
+
+/*
+* space bar to start timer
+*/
+document.body.onkeyup = function(e) {
+  if( e.keyCode == 32 && document.activeElement != document.getElementById("new-task") ) {
+    e.preventDefault();
+    startBtn.click();
+  }
+}
