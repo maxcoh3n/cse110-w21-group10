@@ -66,7 +66,7 @@ soundPicker.addEventListener('click',updateSound)
 
 /**
  * @param {string} e
- * Change the current sound type to input value 
+ * Change the current sound type to input value
  */
 function updateSound(e){
   const value = e.target.value
@@ -81,11 +81,11 @@ function updateSound(e){
 function updateTest(){
   const vol = volumeNum.value
   audio.volume = vol/100
-  audio.play() 
+  audio.play()
 }
 
 /**
- * @param {number} e 
+ * @param {number} e
  * Change the volume of the sound to input value
  * Change the image of the speaker according to the volume
  */
@@ -109,7 +109,7 @@ function updateVol(e) {
 }
 
 /**
- * @param {number} e 
+ * @param {number} e
  * Change the work time to input value
  * Display the work time on the page.
  */
@@ -123,7 +123,7 @@ function updateWorktime(e) {
 }
 
 /**
- * @param {number} e 
+ * @param {number} e
  * Change the short break time to input value
  */
 function updateShortBreaktime(e) {
@@ -134,7 +134,7 @@ function updateShortBreaktime(e) {
 }
 
 /**
- * @param {number} e 
+ * @param {number} e
  * Change the long break time to input value
  */
 function updateLongBreaktime(e) {
@@ -145,7 +145,7 @@ function updateLongBreaktime(e) {
 }
 
 /**
- * @param {number} e 
+ * @param {number} e
  * Change the number of sessions to input value
  */
 function updateNumSessions(e) {
