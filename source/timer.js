@@ -1,24 +1,24 @@
 //Timer
 import { updatePomoLog, AddToLog } from "./pomoLog.js";
 import { changeSession, endBreak, startLongBreak } from "./sessionCircles.js";
-import {renderStatistics} from "./statistics.js";
+import { renderStatistics } from "./statistics.js";
+import { drawHorseShoe, stopHorseShoe } from "./horseshoe.js";
 
 // repopulates pomo log when page is refreshed.
 window.addEventListener("DOMContentLoaded", (event) => {
   const countdown = document.getElementById("countdown");
   countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
 
-
   //TODO CLEAN THIS UP
   const startBtn = document.getElementById("start-btn");
-startBtn.onclick = function () {
-  timer();
-  let maxSessions = localStorage.getItem("numSessions");
-  if (sessionNum >= maxSessions) {
-    sessionNum = 0;
-  }
-  endBreak(sessionNum);
-};
+  startBtn.onclick = function () {
+    timer();
+    let maxSessions = localStorage.getItem("numSessions");
+    if (sessionNum >= maxSessions) {
+      sessionNum = 0;
+    }
+    endBreak(sessionNum);
+  };
 });
 
 let sessionNum = localStorage.getItem("numCurrentSech");
@@ -30,9 +30,8 @@ function startSound() {
   sound.play();
 }
 
-
 /**
- * Uses the countdown h1 to set and run a 
+ * Uses the countdown h1 to set and run a
  * timer of length designated by the startTime parameter.
  * If the button with "start" is clicked
  *  disable completed button
@@ -41,7 +40,7 @@ function startSound() {
  *  Enable choosing task
  *  Stop countdown
  *  Change the button to "Start".
-*/
+ */
 function timer() {
   const sound = document.getElementById("alarm-sound");
 
@@ -52,8 +51,8 @@ function timer() {
 
   const startBtn = document.getElementById("start-btn");
   if (startBtn.innerHTML == "Start") {
-    const vol = localStorage.getItem('vol')
-    sound.volume = vol/100
+    const vol = localStorage.getItem("vol");
+    sound.volume = vol / 100;
     completed.disabled = true;
     let taskList = document.getElementById("task-list");
     for (let task of taskList.childNodes) {
@@ -75,23 +74,24 @@ function timer() {
     document.getElementById("settings-btn").style.display = "none";
     updateCountdown(true);
   } else {
+    stopHorseShoe();
     let completedSessions = localStorage.getItem("completedSessions");
     completedSessions = JSON.parse(completedSessions);
     console.log(completedSessions);
     let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
     let newTask = true;
-    for(let i = 0; i < completedSessions.length; i++){
-      if(completedSessions[i].taskName == currentTaskName){
+    for (let i = 0; i < completedSessions.length; i++) {
+      if (completedSessions[i].taskName == currentTaskName) {
         newTask = false;
         break;
       }
     }
-    if(newTask == true){
+    if (newTask == true) {
       completed.innerHTML = "Delete";
-    }else{
+    } else {
       completed.innerHTML = "Completed";
     }
-    
+
     let taskList = document.getElementById("task-list");
     for (let task of taskList.childNodes) {
       task.disabled = false; // enables changing tasks
@@ -105,7 +105,7 @@ function timer() {
 }
 
 /**
- * @param {boolean} IsOn 
+ * @param {boolean} IsOn
  * If the condition input is true
  *  Set time equal to work or short break or long break
  *  Start counting down the timer
@@ -123,10 +123,13 @@ function updateCountdown(IsOn) {
     var time; // must be var so that updateTime can access it
     if (localStorage.getItem("workOrBreak") == "work") {
       time = localStorage.getItem("workMins") * 60;
+      drawHorseShoe(time / 60, 1, devMode.checked ? true : false);
     } else if (localStorage.getItem("workOrBreak") == "break") {
       time = localStorage.getItem("shortBreakMins") * 60;
+      drawHorseShoe(time / 60, -1, devMode.checked ? true : false);
     } else if (localStorage.getItem("workOrBreak") == "longBreak") {
       time = localStorage.getItem("longBreakMins") * 60;
+      drawHorseShoe(time / 60, -1, devMode.checked ? true : false);
     }
     var count = setInterval(updateTime, devMode.checked ? 0.5 : 1000);
     localStorage.setItem("intervalID", count);
@@ -154,7 +157,7 @@ function updateCountdown(IsOn) {
    * Display the if the user is currently in work time or break time
    * Count down the timer
    * When the time reach 0
-   * Notify use with alarm sound 
+   * Notify use with alarm sound
    * Add new completed session with the current task
    * Add the complete task to log
    */
@@ -179,8 +182,9 @@ function updateCountdown(IsOn) {
     title.innerHTML = `${mins}:${sec}`;
     countdown.innerHTML = `${mins}:${sec}`;
     if (time == 0) {
+      stopHorseShoe();
       const sound = document.getElementById("alarm-sound");
-      sound.src = localStorage.getItem('soundType')
+      sound.src = localStorage.getItem("soundType");
       sound.play();
       clearInterval(count);
       if (localStorage.getItem("workOrBreak") == "work") {
@@ -250,31 +254,29 @@ function updateCountdown(IsOn) {
 }
 
 /*
-* increases numsessions statistic
-*/
-function incNumSessions(){
+ * increases numsessions statistic
+ */
+function incNumSessions() {
   let stats = JSON.parse(localStorage.getItem("statistics"));
   stats.numSessions++;
-  localStorage.setItem("statistics",JSON.stringify(stats));
+  localStorage.setItem("statistics", JSON.stringify(stats));
   renderStatistics();
 }
 
 /*
-* increases numsessions statistic
-*/
-function handleNumDaysWorking(){
+ * increases numsessions statistic
+ */
+function handleNumDaysWorking() {
   let lastDayWorked = localStorage.getItem("lastDayWorked");
   let dateObject = new Date();
   let date = dateObject.getMonth() + 1 + "/" + dateObject.getDate();
-  if(lastDayWorked != date){
-    localStorage.setItem("lastDayWorked",date);
+  if (lastDayWorked != date) {
+    localStorage.setItem("lastDayWorked", date);
     let stats = JSON.parse(localStorage.getItem("statistics"));
     stats.numDaysWorking++;
-    localStorage.setItem("statistics",JSON.stringify(stats));
+    localStorage.setItem("statistics", JSON.stringify(stats));
     renderStatistics();
   }
 }
 
-
-
-export {timer};
+export { timer };

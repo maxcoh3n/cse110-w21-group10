@@ -17,11 +17,6 @@ h1 {
   align-items: flex-start;
 }
 
-/* Not yet implemented
-#canvas-container {
-
-}
-*/
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -61,10 +56,14 @@ h1 {
   flex-direction: column;
   justify-content: center;
 }
-
+#myCanvas {
+  position: relative;
+  width: 80%;
+  left: 10%;
+}
 #countdown {
   font-size: 100pt;
-  margin: 0 .3em 50px;
+  margin: 0 0.3em 50px;
   position: relative;
 }
 
@@ -259,20 +258,19 @@ input[type="range"] {
 }
 
 .flex {
-  display:flex;
+  display: flex;
   align-items: center;
   box-sizing: border-box;
   height: 60px;
-  padding: 5px
+  padding: 5px;
 }
-#test-btn-container{
+#test-btn-container {
   margin-right: 20px;
+}
+#test-btn {
+  height: 20px;
+}
 
-}
-#test-btn{
-  height:20px;
-}
-  
 /* Session circles */
 #session-circles {
   --blank-circle: rgb(238, 238, 238);

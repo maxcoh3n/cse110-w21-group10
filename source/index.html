@@ -116,11 +116,11 @@
     <!-- Timer -->
     <div id="timer-container">
       <div id="session-circles" data-session-num="0"></div>
+      <div id="canvas-container">
+        <canvas id="myCanvas" width="500" height="500"></canvas>
+    </div>
       <h1 id="countdown"></h1>
       <!-- We update this for the horseshoe -->
-      <!--div id="canvas-container"></div>
-            <canvas id="myCanvas" width="500" height="500"></canvas>
-        </div--->
         <button id="start-btn">Start</button>
         <!-- Current Task -->
         <p id="curr-task">Current Task: <span>None</span></p>
@@ -147,7 +147,7 @@
     <script src="settings.js" type="module"></script>
     <script type="module" src="timer.js"></script>
     <script type="module" src="sessionCircles.js"></script>
-
+    <script type="module" src="horseshoe.js"></script>
 
 </body>
 
