@@ -1,7 +1,6 @@
 # Keyboard Warriors
 
-## Sprint 1 Review
-
+## Sprint 1 Retrospective
 ## When and Where
 
 Sunday 02/21/21 5:30pm-6:30pm on Max's Zoom
@@ -34,3 +33,12 @@ Sunday 02/21/21 5:30pm-6:30pm on Max's Zoom
     - we need to be more careful at our sprint kickoff
     - give better time frames for each task
 
+## Artifacts:
+
+![Radar](retro-1-avg-happiness-radar.PNG)
+
+![Radar](retro-1-happiness-radar-range.PNG)
+
+![Mad Sad Glad](retro-1-mad-sad-glad.PNG)
+
+![Action items](retro-1-action-items.PNG)
