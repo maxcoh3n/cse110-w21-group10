@@ -56,7 +56,7 @@ h1 {
   flex-direction: column;
   justify-content: center;
 }
-#myCanvas {
+#horseshoe {
   position: relative;
   width: 80%;
   left: 10%;
