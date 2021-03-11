@@ -24,7 +24,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#comple">comple</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#del">del</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#drawHorseShoe">drawHorseShoe</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#house">house</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#inCompleted">inCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isCompleted">isCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#stopHorseShoe">stopHorseShoe</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#timer">timer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#undo">undo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateCountdown">updateCountdown</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateLongBreaktime">updateLongBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateNumSessions">updateNumSessions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateShortBreaktime">updateShortBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateSound">updateSound</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateTest">updateTest</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateVol">updateVol</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateWorktime">updateWorktime</a></span></li>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#comple">comple</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#drawHorseShoe">drawHorseShoe</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#inCompleted">inCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isCompleted">isCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#stopHorseShoe">stopHorseShoe</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#timer">timer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#undo">undo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateCountdown">updateCountdown</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateLongBreaktime">updateLongBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateNumSessions">updateNumSessions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateShortBreaktime">updateShortBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateSound">updateSound</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateTest">updateTest</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateVol">updateVol</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateWorktime">updateWorktime</a></span></li>
 </nav>
 
 <div id="main">
@@ -43,6 +43,7 @@
 import { updatePomoLog, AddToLog } from "./pomoLog.js";
 import { changeSession, endBreak, startLongBreak } from "./sessionCircles.js";
 import { renderStatistics } from "./statistics.js";
+import { getDate } from "./getDate.js";
 import { drawHorseShoe, stopHorseShoe } from "./horseshoe.js";
 
 // repopulates pomo log when page is refreshed.
@@ -82,6 +83,7 @@ let sessionNum = localStorage.getItem("numCurrentSech");
  */
 function timer() {
   const sound = document.getElementById("alarm-sound");
+  let taskList = document.getElementById("task-list");
 
   const completed = document.getElementById("complete-task-btn");
   completed.innerHTML = "Completed";
@@ -233,8 +235,7 @@ function updateCountdown(IsOn) {
         let completedSessions = localStorage.getItem("completedSessions");
         completedSessions = JSON.parse(completedSessions);
         let newTask = true;
-        let dateObject = new Date();
-        let date = dateObject.getMonth() + 1 + "/" + dateObject.getDate();
+        let date = getDate();
         let worktimeNumber = document.getElementById("worktime-number");
         let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
 
@@ -306,8 +307,7 @@ function incNumSessions() {
  */
 function handleNumDaysWorking() {
   let lastDayWorked = localStorage.getItem("lastDayWorked");
-  let dateObject = new Date();
-  let date = dateObject.getMonth() + 1 + "/" + dateObject.getDate();
+  let date = getDate();
   if (lastDayWorked != date) {
     localStorage.setItem("lastDayWorked", date);
     let stats = JSON.parse(localStorage.getItem("statistics"));
@@ -317,7 +317,20 @@ function handleNumDaysWorking() {
   }
 }
 
-export { timer };
+/*
+* space bar to start timer
+*/
+const startBtn = document.getElementById("start-btn");
+document.body.onkeyup = function(e) {
+  if( e.keyCode == 32 &amp;&amp; document.activeElement != document.getElementById("new-task") ) {
+    e.preventDefault();
+    startBtn.click();
+  }
+}
+
+
+
+export {timer};
 </code></pre>
         </article>
     </section>
@@ -330,7 +343,7 @@ export { timer };
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Thu Mar 11 2021 22:55:21 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Thu Mar 11 2021 22:56:44 GMT+0000 (Coordinated Universal Time) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
