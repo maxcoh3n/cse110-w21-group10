@@ -2,6 +2,7 @@
 import { updatePomoLog, AddToLog } from "./pomoLog.js";
 import { changeSession, endBreak, startLongBreak } from "./sessionCircles.js";
 import { renderStatistics } from "./statistics.js";
+import { drawHorseShoe, stopHorseShoe } from "./horseshoe.js";
 
 // repopulates pomo log when page is refreshed.
 window.addEventListener("DOMContentLoaded", (event) => {
@@ -13,9 +14,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
   startBtn.addEventListener("click", start);
 });
 
-/* 
-* TODO add doc
-*/
+/*
+ * TODO add doc
+ */
 function start() {
   timer();
   let maxSessions = localStorage.getItem("numSessions");
@@ -71,6 +72,7 @@ function timer() {
     document.getElementById("settings-btn").style.display = "none";
     updateCountdown(true);
   } else {
+    stopHorseShoe();
     let completedSessions = localStorage.getItem("completedSessions");
     completedSessions = JSON.parse(completedSessions);
     let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
@@ -118,10 +120,13 @@ function updateCountdown(IsOn) {
     var time; // must be var so that updateTime can access it
     if (localStorage.getItem("workOrBreak") == "work") {
       time = localStorage.getItem("workMins") * 60;
+      drawHorseShoe(time / 60, 1, devMode.checked ? true : false);
     } else if (localStorage.getItem("workOrBreak") == "break") {
       time = localStorage.getItem("shortBreakMins") * 60;
+      drawHorseShoe(time / 60, -1, devMode.checked ? true : false);
     } else if (localStorage.getItem("workOrBreak") == "longBreak") {
       time = localStorage.getItem("longBreakMins") * 60;
+      drawHorseShoe(time / 60, -1, devMode.checked ? true : false);
     }
     var count = setInterval(updateTime, devMode.checked ? 0.5 : 1000);
     localStorage.setItem("intervalID", count);
@@ -174,6 +179,7 @@ function updateCountdown(IsOn) {
     title.innerHTML = `${mins}:${sec}`;
     countdown.innerHTML = `${mins}:${sec}`;
     if (time == 0) {
+      stopHorseShoe();
       const sound = document.getElementById("alarm-sound");
       sound.src = localStorage.getItem("soundType");
       sound.play();
