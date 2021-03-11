@@ -1,9 +1,12 @@
 import {renderStatistics} from "./statistics.js";
 import { clearLog } from "./pomoLog.js";
 import { clearTaskList } from "./taskList.js";
+import {setLocalStorageDefaults} from "./constants.js"
 
-
-
+// renders statistics is refreshed.
+window.addEventListener("DOMContentLoaded", (event) => {
+  resetSettings();
+});
 //Settings
 
 let settingsModal = document.getElementById("settings-modal");
@@ -24,46 +27,51 @@ window.onclick = function (event) {
   }
 };
 
-const volumeNum = document.getElementById("volume-number")
-const volumeSlider = document.getElementById('volume-slider')
-const worktimeSlider = document.getElementById("worktime-slider");
-const worktimeNumber = document.getElementById("worktime-number");
-const shortBreaktimeSlider = document.getElementById("short-breaktime-slider");
-const shortBreaktimeNumber = document.getElementById("short-breaktime-number");
-const longBreaktimeSlider = document.getElementById("long-breaktime-slider");
-const longBreaktimeNumber = document.getElementById("long-breaktime-number");
-const numSessionsSlider = document.getElementById("num-sessions-slider");
-const numSessionsNumber = document.getElementById("num-sessions-number");
-const test = document.getElementById("test-btn");
-const audio = document.getElementById("alarm-sound");
-const soundPicker = document.getElementById('sounds')
-const iconVol = document.getElementById('icon-vol')
+  const volumeNum = document.getElementById("volume-number")
+  const volumeSlider = document.getElementById('volume-slider')
+  const worktimeSlider = document.getElementById("worktime-slider");
+  const worktimeNumber = document.getElementById("worktime-number");
+  const shortBreaktimeSlider = document.getElementById("short-breaktime-slider");
+  const shortBreaktimeNumber = document.getElementById("short-breaktime-number");
+  const longBreaktimeSlider = document.getElementById("long-breaktime-slider");
+  const longBreaktimeNumber = document.getElementById("long-breaktime-number");
+  const numSessionsSlider = document.getElementById("num-sessions-slider");
+  const numSessionsNumber = document.getElementById("num-sessions-number");
+  const test = document.getElementById("test-btn");
+  const audio = document.getElementById("alarm-sound");
+  const soundPicker = document.getElementById('sounds')
+  const iconVol = document.getElementById('icon-vol')
 
-volumeSlider.value = localStorage.getItem("vol");
-volumeNum.value = localStorage.getItem("vol");
-worktimeSlider.value = localStorage.getItem("workMins");
-worktimeNumber.value = localStorage.getItem("workMins");
-shortBreaktimeSlider.value = localStorage.getItem("shortBreakMins");
-shortBreaktimeNumber.value = localStorage.getItem("shortBreakMins");
-longBreaktimeSlider.value = localStorage.getItem("longBreakMins");
-longBreaktimeNumber.value = localStorage.getItem("longBreakMins");
-numSessionsSlider.value = localStorage.getItem("numSessions");
-numSessionsNumber.value = localStorage.getItem("numSessions");
-soundPicker.value = localStorage.getItem("soundType");
-audio.src = localStorage.getItem("soundType");
+/*
+* sets all settings to localstorage values and adds listeners
+*/
+function resetSettings(){
+  volumeSlider.value = localStorage.getItem("vol");
+  volumeNum.value = localStorage.getItem("vol");
+  worktimeSlider.value = localStorage.getItem("workMins");
+  worktimeNumber.value = localStorage.getItem("workMins");
+  shortBreaktimeSlider.value = localStorage.getItem("shortBreakMins");
+  shortBreaktimeNumber.value = localStorage.getItem("shortBreakMins");
+  longBreaktimeSlider.value = localStorage.getItem("longBreakMins");
+  longBreaktimeNumber.value = localStorage.getItem("longBreakMins");
+  numSessionsSlider.value = localStorage.getItem("numSessions");
+  numSessionsNumber.value = localStorage.getItem("numSessions");
+  soundPicker.value = localStorage.getItem("soundType");
+  audio.src = localStorage.getItem("soundType");
 
-worktimeSlider.addEventListener("input", updateWorktime);
-worktimeNumber.addEventListener("input", updateWorktime);
-shortBreaktimeSlider.addEventListener("input", updateShortBreaktime);
-shortBreaktimeNumber.addEventListener("input", updateShortBreaktime);
-longBreaktimeSlider.addEventListener("input", updateLongBreaktime);
-longBreaktimeNumber.addEventListener("input", updateLongBreaktime);
-numSessionsSlider.addEventListener("input", updateNumSessions);
-numSessionsNumber.addEventListener("input", updateNumSessions);
-volumeSlider.addEventListener("input", updateVol);
-volumeNum.addEventListener('input',updateVol);
-test.addEventListener('click', updateTest);
-soundPicker.addEventListener('click',updateSound)
+  worktimeSlider.addEventListener("input", updateWorktime);
+  worktimeNumber.addEventListener("input", updateWorktime);
+  shortBreaktimeSlider.addEventListener("input", updateShortBreaktime);
+  shortBreaktimeNumber.addEventListener("input", updateShortBreaktime);
+  longBreaktimeSlider.addEventListener("input", updateLongBreaktime);
+  longBreaktimeNumber.addEventListener("input", updateLongBreaktime);
+  numSessionsSlider.addEventListener("input", updateNumSessions);
+  numSessionsNumber.addEventListener("input", updateNumSessions);
+  volumeSlider.addEventListener("input", updateVol);
+  volumeNum.addEventListener('input',updateVol);
+  test.addEventListener('click', updateTest);
+  soundPicker.addEventListener('click',updateSound)
+}
 
 /**
  * @param {string} e
@@ -161,25 +169,21 @@ function updateNumSessions(e) {
 */
 const clearData = document.getElementById("clear-data-btn");
 clearData.onclick = function () {
-  if( clearData.labels[0].innerText == '' ) {
-    clearData.labels[0].innerText = "Clearing your data is an irreversible action, your session history will be lost. \nAre you sure you want to clear your data?\n\n";
-  } else {
+  const DELETE_MESSAGE = "Clearing your data is an irreversible action, your session history will be lost. \nAre you sure you want to clear your data?\n\n"
+  let response = confirm(DELETE_MESSAGE);
+  if(response) {
 
-    const stats = JSON.parse(localStorage.getItem("statistics"));
-    stats.numCompletedTaskSessions = 0;
-    stats.numCompletedTasks = 0;
-    stats.numDaysWorking = 0;
-    stats.numDistractions = 0;
-    stats.numSessions = 0;
-    localStorage.setItem("statistics", JSON.stringify(stats));
+    localStorage.clear();
+    setLocalStorageDefaults();
+
+
     renderStatistics();
 
-    localStorage.setItem("completedSessions", '[]');
     clearLog();
 
-    localStorage.setItem("upcomingTasks", '[]');
     clearTaskList();
-
-    clearData.labels[0].innerText = '';
+    resetSettings();
   }
 }
+
+export {resetSettings};
