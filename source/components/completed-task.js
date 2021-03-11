@@ -13,6 +13,7 @@ class CompletedTask extends HTMLElement {
     let nameLabel = document.createElement("label");
     let dateLabel = document.createElement("label");
     let ol = document.createElement("ol");
+    let img = document.createElement("img");
 
     // for css styling
     li.setAttribute("class", "listElement");
@@ -20,6 +21,9 @@ class CompletedTask extends HTMLElement {
     nameLabel.setAttribute("id", "nameLabel");
     dateLabel.setAttribute("id", "DateLabel");
     ol.setAttribute("id", "olTimeSes");
+    img.setAttribute("id", "img");
+    img.setAttribute("src", "../images/checkmark.jpg");
+    img.setAttribute("style", "width:25px;height:25px");
 
     dateLabel.innerText = this.getAttribute("date") + ": ";
     nameLabel.innerText = this.getAttribute("name");
@@ -37,6 +41,9 @@ class CompletedTask extends HTMLElement {
     // div.appped three below
     li.appendChild(dateLabel);
     li.appendChild(nameLabel);
+    if (this.getAttribute("isdone") == 1) {
+      li.append(img);
+    }
     li.appendChild(ol);
 
     // let style = document.createElement("style"); // for css style
