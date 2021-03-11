@@ -118,11 +118,11 @@
     <!-- Timer -->
     <div id="timer-container">
       <div id="session-circles" data-session-num="0"></div>
+      <div id="canvas-container">
+        <canvas id="horseshoe" width="500" height="500"></canvas>
+    </div id = "hi">
       <h1 id="countdown"></h1>
       <!-- We update this for the horseshoe -->
-      <!--div id="canvas-container"></div>
-            <canvas id="myCanvas" width="500" height="500"></canvas>
-        </div--->
         <button id="start-btn">Start</button>
         <!-- Current Task -->
         <p id="curr-task">Current Task: <span>Default Task</span></p>
@@ -157,7 +157,7 @@
         <span id="info-span" class="close">&times;</span>
 
         <h2>Information</h2><hr>
-        <ul>
+        <ul id ="language-option">
           <li>Click the Settings button in the top right corner and configure your settings</li>
           <li>Add tasks to the task list to the right. You can click Delete if you added a task by mistake</li>
           <li>Select the task you want and click Start to start the timer</li>
@@ -166,7 +166,7 @@
         </ul><br>
 
         <p>Select your language:
-        <input type="radio" id="english" name="language">
+        <input type="radio" id="english" name="language" checked="checked">
         <label for="english">English</label>
         <input type="radio" id="spanish" name="language">
         <label for="spanish">Spanish</label></p>
@@ -174,6 +174,7 @@
       </div>
     </div>
     <script src="info.js" type="module"></script>
+    
 
 </body>
 
