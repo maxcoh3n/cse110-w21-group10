@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Home - Documentation</title>
+    <title>testDocs.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,54 +29,32 @@
 
 <div id="main">
     
+    <h1 class="page-title">testDocs.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// import functions from "functions"
 
-
-
-
-
-
-
-
-
-    
-
-
-    <section class="readme">
-        <article><p>Welcome to our repository!</p>
-<h2>Setup guide</h2>
-<ol>
-<li>
-<p>Installing live server extension:</p>
-<ul>
-<li>Open Visual Studio Code.</li>
-<li>On the leftside, click on the extension icon or press (Ctrl+Shift+X).</li>
-<li>Click &quot;Search Extensions in Marketplace&quot; at the top.</li>
-<li>Search &quot;Live Server&quot; by Ritwick Dey.</li>
-<li>Install the extension and restart visual studio code.</li>
-<li>To use the extension, right click on the html file and select &quot;Open with live server&quot;.</li>
-</ul>
-</li>
-<li>
-<p>Installing prettier extension:</p>
-<ul>
-<li>Open Visual Studio Code.</li>
-<li>On the leftside, click on the extension icon or press (Ctrl+Shift+X).</li>
-<li>Click &quot;Search Extensions in Marketplace&quot; at the top.</li>
-<li>Search &quot;Prettier-code formatter&quot; by Prettier.</li>
-<li>Install the extension and restart visual studio code.</li>
-<li>This extension is a built in so it will automatically format the codes.</li>
-</ul>
-</li>
-</ol></article>
+/**
+ *
+ * @param {number} floors1
+ * @param {number} bathrooms
+ * @param {number} rooms
+ * @param {string} street
+ */
+function house(floors1, bathrooms, rooms, street) {
+  let ret = `This house on ${street} street has ${floors1} floors, ${bathrooms} bathrooms, and ${rooms} rooms!`;
+  return ret; //random comment2
+}
+</code></pre>
+        </article>
     </section>
-
-
 
 
 
