@@ -2,6 +2,8 @@
 import { updatePomoLog, AddToLog } from "./pomoLog.js";
 import { changeSession, endBreak, startLongBreak } from "./sessionCircles.js";
 import { renderStatistics } from "./statistics.js";
+import { getDate } from "./getDate.js";
+
 
 // repopulates pomo log when page is refreshed.
 window.addEventListener("DOMContentLoaded", (event) => {
@@ -187,8 +189,7 @@ function updateCountdown(IsOn) {
         let completedSessions = localStorage.getItem("completedSessions");
         completedSessions = JSON.parse(completedSessions);
         let newTask = true;
-        let dateObject = new Date();
-        let date = dateObject.getMonth() + 1 + "/" + dateObject.getDate();
+        let date = getDate();
         let worktimeNumber = document.getElementById("worktime-number");
         let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
 
@@ -260,8 +261,7 @@ function incNumSessions() {
  */
 function handleNumDaysWorking() {
   let lastDayWorked = localStorage.getItem("lastDayWorked");
-  let dateObject = new Date();
-  let date = dateObject.getMonth() + 1 + "/" + dateObject.getDate();
+  let date = getDate();
   if (lastDayWorked != date) {
     localStorage.setItem("lastDayWorked", date);
     let stats = JSON.parse(localStorage.getItem("statistics"));
@@ -281,6 +281,7 @@ document.body.onkeyup = function(e) {
     startBtn.click();
   }
 }
+
 
 
 export {timer};

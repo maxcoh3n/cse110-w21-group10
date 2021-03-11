@@ -1,4 +1,5 @@
 import {renderStatistics} from "./statistics.js";
+import { getDate } from "./getDate.js";
 
 
 // adds listeners and refreshes when page is loaded
@@ -230,7 +231,6 @@ function isCompleted(taskName) {
 
 //must be here to be accessed by comple and undo functions
 let completedTaskSessions = 0;
-let completedTaskDates = new Set();
 
 /**
  * Marked a task as completed
@@ -249,12 +249,11 @@ function comple() {
   for (let box of taskList.childNodes) {
     if (box.checked) {
       for(let i = 0; i<completedSessions.length; i++){
-        if( box.id == completedSessions[i].taskName && !completedSessions[i].completed) {
+        if( box.id == completedSessions[i].taskName && completedSessions[i].date == getDate()) {
           completedSessions[i].completed = true;
           completed.innerHTML = "Undo";
           document.getElementById("curr-task").children[0].innerHTML = "Default Task";
           completedTaskSessions += completedSessions[i].durationArray.length;
-          completedTaskDates.add(completedSessions[i].date);
         }
       }
       localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
@@ -307,7 +306,7 @@ function undo() {
         let completedSessions = localStorage.getItem("completedSessions");
         completedSessions = JSON.parse(completedSessions);
         for(let i = 0; i<completedSessions.length; i++){
-          if( box.id == completedSessions[i].taskName && completedTaskDates.has(completedSessions[i].date)) {
+          if( box.id == completedSessions[i].taskName && completedSessions[i].date == getDate()) {
             completedSessions[i].completed = false;
           }
         }
@@ -318,7 +317,6 @@ function undo() {
       }
     }
     localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
-    completedTaskDates = new Set();
 }
 
 /*
