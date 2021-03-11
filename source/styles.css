@@ -28,6 +28,7 @@ h1 {
   height: 100%; /* Full height */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+  z-index: 2;
 }
 
 #sounds {
