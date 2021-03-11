@@ -1,3 +1,4 @@
+import { getDate } from "./getDate.js";
 import { renderStatistics } from "./statistics.js";
 import { updateLogWhenPageRefresh } from "./pomoLog.js";
 
@@ -113,9 +114,9 @@ function renderAll() {
 }
 
 /*
- * TODO
- */
-function addTaskEvent() {
+* adds a new task to the upcoming tasks list
+*/
+  function addTaskEvent() {
   const taskButton = document.getElementById("complete-task-btn");
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
@@ -126,13 +127,34 @@ function addTaskEvent() {
     newTaskInput.value = "";
   }
 
+  let taskList = document.getElementById('task-list');
+  for (let box of taskList.childNodes) {
+    if (box.id == newTaskInput.value) {
+      newTaskInput.value = "";
+      }
+  }
+
+  let completedSessions = localStorage.getItem("completedSessions");
+  completedSessions = JSON.parse(completedSessions);
+  for( let sessesion of completedSessions ) {
+    if( sessesion.taskName == newTaskInput.value ) {
+      sessesion.completed = false;
+    }
+  }
+
+  localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
+
   if (newTaskInput.value) {
     tasksArray.push(newTaskInput.value);
     taskButton.disabled = false;
     localStorage.setItem("upcomingTasks", JSON.stringify(tasksArray));
     renderOne(newTaskInput.value);
-    if (tasksArray.length == 1) {
-      taskButton.innerHTML = "Delete";
+    if( tasksArray.length == 1 ) {
+      if ( inCompleted(newTaskInput.value) == false ) {
+        taskButton.innerHTML = "Delete";
+      } else {
+        taskButton.innerHTML = "Completed";
+      }
     }
     newTaskInput.value = "";
   }
@@ -141,8 +163,21 @@ function addTaskEvent() {
 }
 
 /*
- * TODO
- */
+* clears the display of the task list to the user
+*/
+function clearTaskList() {
+
+  let taskList = document.getElementById('task-list');
+  while( taskList.firstChild ) {
+    taskList.removeChild(taskList.firstChild);
+  }
+
+}
+
+
+/*
+* TODO
+*/
 function keyUpEvent(event) {
   if (event.keyCode === 13) {
     event.preventDefault();
@@ -152,7 +187,7 @@ function keyUpEvent(event) {
 }
 
 /**
- * @param {string} taskInput
+ * @param {string} taskInput - a task inputted by the user
  * Checking if the task is in completed session
  * If the task is found
  *  return true
@@ -172,7 +207,7 @@ function inCompleted(taskName) {
 }
 
 /**
- * @param {string} taskName
+ * @param {string} taskName - a task inputted by the user
  * Checking if the task is in progress of complete
  * If the task is found
  *  return true
@@ -193,7 +228,6 @@ function isCompleted(taskName) {
 
 //must be here to be accessed by comple and undo functions
 let completedTaskSessions = 0;
-let completedTaskDates = new Set();
 
 /**
  * Marked a task as completed
@@ -211,13 +245,12 @@ function comple() {
   const completed = document.getElementById("complete-task-btn");
   for (let box of taskList.childNodes) {
     if (box.checked) {
-      for (let i = 0; i < completedSessions.length; i++) {
-        if (box.id == completedSessions[i].taskName && !completedSessions[i].completed) {
+      for(let i = 0; i<completedSessions.length; i++){
+        if( box.id == completedSessions[i].taskName && completedSessions[i].date == getDate()) {
           completedSessions[i].completed = true;
           completed.innerHTML = "Undo";
           document.getElementById("curr-task").children[0].innerHTML = "Default Task";
           completedTaskSessions += completedSessions[i].durationArray.length;
-          completedTaskDates.add(completedSessions[i].date);
         }
       }
       localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
@@ -259,18 +292,19 @@ function undo() {
 
   let taskList = document.getElementById("task-list");
   let taskArray = [];
-  for (let box of taskList.childNodes) {
-    let label = document.getElementById("label" + box.id);
-    if (box.checked) {
-      document.getElementById("curr-task").children[0].innerHTML = box.id;
-      const completed = document.getElementById("complete-task-btn");
-      completed.innerHTML = "Completed";
-      label.style.textDecoration = "none";
-      let completedSessions = localStorage.getItem("completedSessions");
-      completedSessions = JSON.parse(completedSessions);
-      for (let i = 0; i < completedSessions.length; i++) {
-        if (box.id == completedSessions[i].taskName && completedTaskDates.has(completedSessions[i].date)) {
-          completedSessions[i].completed = false;
+    for (let box of taskList.childNodes) {
+      let label = document.getElementById("label" + box.id);
+      if( box.checked ) {
+        document.getElementById("curr-task").children[0].innerHTML = box.id;
+        const completed = document.getElementById("complete-task-btn");
+        completed.innerHTML = "Completed";
+        label.style.textDecoration = "none";
+        let completedSessions = localStorage.getItem("completedSessions");
+        completedSessions = JSON.parse(completedSessions);
+        for(let i = 0; i<completedSessions.length; i++){
+          if( box.id == completedSessions[i].taskName && completedSessions[i].date == getDate()) {
+            completedSessions[i].completed = false;
+          }
         }
       }
       localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
@@ -278,17 +312,15 @@ function undo() {
     if (box.name == "task-list") {
       taskArray.push(box.id);
     }
-  }
-  localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
-  completedTaskDates = new Set();
-
-  updateLogWhenPageRefresh();
+    localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
+    updateLogWhenPageRefresh();
 }
 
-/**
- * Delete a task
- */
+/*
+* handles the delete state for tasks
+*/
 function del() {
+
   let taskList = document.getElementById("task-list");
   document.getElementById("curr-task").children[0].innerHTML = "Default Task";
   let taskArray = [];
@@ -337,7 +369,7 @@ function del() {
     }
   }
 
-  if (taskList.children.length != 0) {
+  if(taskList.children.length != 0){
     completed.disabled = false;
   } else {
     completed.disabled = true;
@@ -386,7 +418,10 @@ function decNumCompletedTaskSessions(numSessions) {
   renderStatistics();
 }
 
-function completedEvent() {
+/*
+* handles the three phases for tasks
+*/
+function completedEvent(){
   const completed = document.getElementById("complete-task-btn");
   if (completed.innerHTML == "Completed") {
     comple();
@@ -397,4 +432,4 @@ function completedEvent() {
   }
 }
 
-export { renderOne, renderAll, renderStatistics };
+export {clearTaskList, renderOne, renderAll, renderStatistics};

@@ -39,6 +39,7 @@ function updateLogWhenPageRefresh() {
     RenderToLog(completedSessions[i]);
   }
 }
+
 function RenderToLog(newTask) {
   let dailyLog = document.getElementById("log-list");
   let customElement = document.createElement("completed-task");
@@ -56,4 +57,16 @@ function RenderToLog(newTask) {
   dailyLog.appendChild(customElement);
 }
 
-export { updatePomoLog, AddToLog, updateLogWhenPageRefresh };
+/*
+* clears the display of the log to the user
+*/
+function clearLog() {
+
+  let dailyLog = document.getElementById('log-list');
+  while( dailyLog.firstChild ) {
+    dailyLog.removeChild(dailyLog.firstChild);
+  }
+
+}
+
+export { updatePomoLog, AddToLog, clearLog, updateLogWhenPageRefresh };
