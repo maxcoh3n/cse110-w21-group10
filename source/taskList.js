@@ -1,7 +1,21 @@
 import {renderStatistics} from "./statistics.js";
 
-// runs on page refresh
-renderAll();
+
+// adds listeners and refreshes when page is loaded
+window.addEventListener("DOMContentLoaded", (event) => {
+  renderAll();
+
+  const addTask = document.getElementById("new-task-btn");
+  addTask.addEventListener("click", addTaskEvent );
+
+
+  const newTaskInput = document.getElementById("new-task");
+  newTaskInput.addEventListener("keyup", keyUpEvent );
+
+  const completed = document.getElementById("complete-task-btn");
+  completed.addEventListener("click", completedEvent )
+
+});
 
 function renderOne(taskInput){
 
@@ -30,7 +44,7 @@ function renderOne(taskInput){
               taskButton.innerHTML = "Completed";
             } else {
               taskButton.innerHTML = "Undo";
-              document.getElementById("curr-task").children[0].innerHTML = "None";
+              document.getElementById("curr-task").children[0].innerHTML = "Default Task";
             }
           }
         }
@@ -41,7 +55,7 @@ function renderOne(taskInput){
       }
     }
     if (boxChecked == false) {
-      document.getElementById("curr-task").children[0].innerHTML = "None";
+      document.getElementById("curr-task").children[0].innerHTML = "Default Task";
     }
   });
 
@@ -104,8 +118,7 @@ function renderAll() {
 /*
 * adds a new task to the upcoming tasks list
 */
-const addTask = document.getElementById("new-task-btn");
-addTask.onclick = function () {
+  function addTaskEvent() {
   const taskButton = document.getElementById("complete-task-btn");
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
@@ -148,7 +161,7 @@ addTask.onclick = function () {
     newTaskInput.value = "";
   }
 
-  tasksArray = localStorage.getItem("upcomingTasks");
+  // tasksArray = localStorage.getItem("upcomingTasks");
 };
 
 /*
@@ -163,13 +176,17 @@ function clearTaskList() {
 
 }
 
-const newTaskInput = document.getElementById("new-task");
-newTaskInput.addEventListener("keyup", function (event) {
+
+/*
+* TODO
+*/
+function keyUpEvent(event) {
   if (event.keyCode === 13) {
     event.preventDefault();
+    const addTask = document.getElementById("new-task-btn");
     addTask.click();
   }
-});
+}
 
 /**
  * @param {string} taskInput - a task inputted by the user
@@ -228,13 +245,14 @@ function comple() {
   completedSessions = JSON.parse(completedSessions);
   let taskArray = [];
 
+  const completed = document.getElementById("complete-task-btn");
   for (let box of taskList.childNodes) {
     if (box.checked) {
       for(let i = 0; i<completedSessions.length; i++){
         if( box.id == completedSessions[i].taskName && !completedSessions[i].completed) {
           completedSessions[i].completed = true;
           completed.innerHTML = "Undo";
-          document.getElementById("curr-task").children[0].innerHTML = "None";
+          document.getElementById("curr-task").children[0].innerHTML = "Default Task";
           completedTaskSessions += completedSessions[i].durationArray.length;
           completedTaskDates.add(completedSessions[i].date);
         }
@@ -283,6 +301,7 @@ function undo() {
       let label = document.getElementById("label" + box.id);
       if( box.checked ) {
         document.getElementById("curr-task").children[0].innerHTML = box.id;
+        const completed = document.getElementById("complete-task-btn");
         completed.innerHTML = "Completed";
         label.style.textDecoration = "none";
         let completedSessions = localStorage.getItem("completedSessions");
@@ -308,7 +327,7 @@ function undo() {
 function del() {
 
   let taskList = document.getElementById("task-list");
-  document.getElementById("curr-task").children[0].innerHTML = "None";
+  document.getElementById("curr-task").children[0].innerHTML = "Default Task";
   let taskArray = [];
   let upcomingTasks = localStorage.getItem("upcomingTasks");
   upcomingTasks = JSON.parse(upcomingTasks);
@@ -326,6 +345,7 @@ function del() {
   nextTaskNum = Math.floor(nextTaskNum / 2);
   localStorage.setItem("upcomingTasks", JSON.stringify(taskArray));
 
+  const completed = document.getElementById("complete-task-btn");
   if (taskArray.length > 0) {
     if (nextTaskNum < taskArray.length) {
       document.getElementById(taskArray[nextTaskNum]).checked = true;
@@ -406,8 +426,8 @@ function decNumCompletedTaskSessions(numSessions){
 /*
 * handles the three phases for tasks
 */
-const completed = document.getElementById("complete-task-btn");
-completed.onclick = function () {
+function completedEvent(){
+  const completed = document.getElementById("complete-task-btn");
   if (completed.innerHTML == "Completed") {
     comple();
   } else if (completed.innerHTML == "Undo") {
@@ -418,4 +438,4 @@ completed.onclick = function () {
 };
 
 
-export {clearTaskList};
+export {clearTaskList, renderOne, renderAll, renderStatistics};

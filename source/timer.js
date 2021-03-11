@@ -1,35 +1,31 @@
 //Timer
 import { updatePomoLog, AddToLog } from "./pomoLog.js";
 import { changeSession, endBreak, startLongBreak } from "./sessionCircles.js";
-import {renderStatistics} from "./statistics.js";
+import { renderStatistics } from "./statistics.js";
 
 // repopulates pomo log when page is refreshed.
 window.addEventListener("DOMContentLoaded", (event) => {
   const countdown = document.getElementById("countdown");
   countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
 
-
   //TODO CLEAN THIS UP
   const startBtn = document.getElementById("start-btn");
-  startBtn.onclick = function () {
+  startBtn.addEventListener("click", start);
+});
+
+/* 
+* TODO add doc
+*/
+function start() {
   timer();
   let maxSessions = localStorage.getItem("numSessions");
   if (sessionNum >= maxSessions) {
     sessionNum = 0;
   }
   endBreak(sessionNum);
-};
-});
-
-let sessionNum = localStorage.getItem("numCurrentSech");
-
-/*sound*/
-const sound = document.getElementById("alarm-sound");
-
-function startSound() {
-  sound.play();
 }
 
+let sessionNum = localStorage.getItem("numCurrentSech");
 
 /**
  * Uses the countdown h1 to set and run a
@@ -41,7 +37,7 @@ function startSound() {
  *  Enable choosing task
  *  Stop countdown
  *  Change the button to "Start".
-*/
+ */
 function timer() {
   const sound = document.getElementById("alarm-sound");
   let taskList = document.getElementById("task-list");
@@ -53,8 +49,8 @@ function timer() {
 
   const startBtn = document.getElementById("start-btn");
   if (startBtn.innerHTML == "Start") {
-    const vol = localStorage.getItem('vol')
-    sound.volume = vol/100
+    const vol = localStorage.getItem("vol");
+    sound.volume = vol / 100;
     completed.disabled = true;
     let taskList = document.getElementById("task-list");
     for (let task of taskList.childNodes) {
@@ -80,15 +76,15 @@ function timer() {
     completedSessions = JSON.parse(completedSessions);
     let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
     let newTask = true;
-    for(let i = 0; i < completedSessions.length; i++){
-      if(completedSessions[i].taskName == currentTaskName){
+    for (let i = 0; i < completedSessions.length; i++) {
+      if (completedSessions[i].taskName == currentTaskName) {
         newTask = false;
         break;
       }
     }
-    if(newTask == true){
+    if (newTask == true) {
       completed.innerHTML = "Delete";
-    }else{
+    } else {
       completed.innerHTML = "Completed";
     }
 
@@ -180,7 +176,7 @@ function updateCountdown(IsOn) {
     countdown.innerHTML = `${mins}:${sec}`;
     if (time == 0) {
       const sound = document.getElementById("alarm-sound");
-      sound.src = localStorage.getItem('soundType')
+      sound.src = localStorage.getItem("soundType");
       sound.play();
       clearInterval(count);
       if (localStorage.getItem("workOrBreak") == "work") {
@@ -250,27 +246,27 @@ function updateCountdown(IsOn) {
 }
 
 /*
-* increases numsessions statistic
-*/
-function incNumSessions(){
+ * increases numsessions statistic
+ */
+function incNumSessions() {
   let stats = JSON.parse(localStorage.getItem("statistics"));
   stats.numSessions++;
-  localStorage.setItem("statistics",JSON.stringify(stats));
+  localStorage.setItem("statistics", JSON.stringify(stats));
   renderStatistics();
 }
 
 /*
-* increases numsessions statistic
-*/
-function handleNumDaysWorking(){
+ * increases numsessions statistic
+ */
+function handleNumDaysWorking() {
   let lastDayWorked = localStorage.getItem("lastDayWorked");
   let dateObject = new Date();
   let date = dateObject.getMonth() + 1 + "/" + dateObject.getDate();
-  if(lastDayWorked != date){
-    localStorage.setItem("lastDayWorked",date);
+  if (lastDayWorked != date) {
+    localStorage.setItem("lastDayWorked", date);
     let stats = JSON.parse(localStorage.getItem("statistics"));
     stats.numDaysWorking++;
-    localStorage.setItem("statistics",JSON.stringify(stats));
+    localStorage.setItem("statistics", JSON.stringify(stats));
     renderStatistics();
   }
 }
