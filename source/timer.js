@@ -11,24 +11,22 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   //TODO CLEAN THIS UP
   const startBtn = document.getElementById("start-btn");
-  startBtn.onclick = function () {
-    timer();
-    let maxSessions = localStorage.getItem("numSessions");
-    if (sessionNum >= maxSessions) {
-      sessionNum = 0;
-    }
-    endBreak(sessionNum);
-  };
+  startBtn.addEventListener("click", start);
 });
 
-let sessionNum = localStorage.getItem("numCurrentSech");
-
-/*sound*/
-const sound = document.getElementById("alarm-sound");
-
-function startSound() {
-  sound.play();
+/*
+ * TODO add doc
+ */
+function start() {
+  timer();
+  let maxSessions = localStorage.getItem("numSessions");
+  if (sessionNum >= maxSessions) {
+    sessionNum = 0;
+  }
+  endBreak(sessionNum);
 }
+
+let sessionNum = localStorage.getItem("numCurrentSech");
 
 /**
  * Uses the countdown h1 to set and run a
@@ -77,7 +75,6 @@ function timer() {
     stopHorseShoe();
     let completedSessions = localStorage.getItem("completedSessions");
     completedSessions = JSON.parse(completedSessions);
-    console.log(completedSessions);
     let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
     let newTask = true;
     for (let i = 0; i < completedSessions.length; i++) {

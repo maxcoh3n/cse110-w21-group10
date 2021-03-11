@@ -1,4 +1,6 @@
 import {timer} from "../timer.js";
+import {renderOne, renderAll, renderStatistics} from "../taskList.js";
+
 
 describe('timer ', ()=>{
   //Testing functions in timer.js
