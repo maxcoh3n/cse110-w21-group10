@@ -89,16 +89,16 @@ function updateVol(e) {
   volumeNum.value = num;
   localStorage.setItem("vol", num);
   if (num > 66 && num < 101) {
-      iconVol.src = "../images/icons/volume-level-3.svg";
+      iconVol.src = "../source/icons/volume-level-3.svg";
   }
   else if (num > 33 && num < 67) {
-      iconVol.src = "../images/icons/volume-level-2.svg";
+      iconVol.src = "../source/icons/volume-level-2.svg";
   }
   else if (num > 0 && num < 34) {
-      iconVol.src = "../images/icons/volume-level-1.svg";
+      iconVol.src = "../source/icons/volume-level-1.svg";
   }
   else {
-      iconVol.src = "../images/icons/volume-level-0.svg";
+      iconVol.src = "../source/icons/volume-level-0.svg";
   }
 }
 
