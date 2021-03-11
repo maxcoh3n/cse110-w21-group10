@@ -24,7 +24,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#comple">comple</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#del">del</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#house">house</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#inCompleted">inCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isCompleted">isCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#timer">timer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#undo">undo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateCountdown">updateCountdown</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateLongBreaktime">updateLongBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateNumSessions">updateNumSessions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateShortBreaktime">updateShortBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateSound">updateSound</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateTest">updateTest</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateVol">updateVol</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateWorktime">updateWorktime</a></span></li>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#comple">comple</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#house">house</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#inCompleted">inCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isCompleted">isCompleted</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#timer">timer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#undo">undo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateCountdown">updateCountdown</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateLongBreaktime">updateLongBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateNumSessions">updateNumSessions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateShortBreaktime">updateShortBreaktime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateSound">updateSound</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateTest">updateTest</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateVol">updateVol</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#updateWorktime">updateWorktime</a></span></li>
 </nav>
 
 <div id="main">
@@ -156,27 +156,48 @@ function renderAll() {
   }
 }
 
-  /*
-  * TODO
-  */
+/*
+* adds a new task to the upcoming tasks list
+*/
   function addTaskEvent() {
   const taskButton = document.getElementById("complete-task-btn");
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
- 
+
   const newTaskInput = document.getElementById("new-task");
 
   if (tasksArray.includes(newTaskInput.value)) {
     newTaskInput.value = "";
   }
 
+  let taskList = document.getElementById('task-list');
+  for (let box of taskList.childNodes) {
+    if (box.id == newTaskInput.value) {
+      newTaskInput.value = "";
+      }
+  }
+
+  let completedSessions = localStorage.getItem("completedSessions");
+  completedSessions = JSON.parse(completedSessions);
+  for( let sessesion of completedSessions ) {
+    if( sessesion.taskName == newTaskInput.value ) {
+      sessesion.completed = false;
+    }
+  }
+
+  localStorage.setItem("completedSessions", JSON.stringify(completedSessions));
+
   if (newTaskInput.value) {
     tasksArray.push(newTaskInput.value);
     taskButton.disabled = false;
     localStorage.setItem("upcomingTasks", JSON.stringify(tasksArray));
     renderOne(newTaskInput.value);
-    if (tasksArray.length == 1) {
-      taskButton.innerHTML = "Delete";
+    if( tasksArray.length == 1 ) {
+      if ( inCompleted(newTaskInput.value) == false ) {
+        taskButton.innerHTML = "Delete";
+      } else {
+        taskButton.innerHTML = "Completed";
+      }
     }
     newTaskInput.value = "";
   }
@@ -185,7 +206,20 @@ function renderAll() {
 };
 
 /*
-  * TODO
+* clears the display of the task list to the user
+*/
+function clearTaskList() {
+
+  let taskList = document.getElementById('task-list');
+  while( taskList.firstChild ) {
+    taskList.removeChild(taskList.firstChild);
+  }
+
+}
+
+
+/*
+* TODO
 */
 function keyUpEvent(event) {
   if (event.keyCode === 13) {
@@ -196,7 +230,7 @@ function keyUpEvent(event) {
 }
 
 /**
- * @param {string} taskInput 
+ * @param {string} taskInput - a task inputted by the user
  * Checking if the task is in completed session
  * If the task is found
  *  return true
@@ -216,7 +250,7 @@ function inCompleted(taskName) {
 }
 
 /**
- * @param {string} taskName 
+ * @param {string} taskName - a task inputted by the user
  * Checking if the task is in progress of complete
  * If the task is found
  *  return true
@@ -236,8 +270,8 @@ function isCompleted(taskName) {
 }
 
 //must be here to be accessed by comple and undo functions
-let completedTaskSessions = 0; 
-let completedTaskDates = new Set(); 
+let completedTaskSessions = 0;
+let completedTaskDates = new Set();
 
 /**
  * Marked a task as completed
@@ -289,8 +323,8 @@ function comple() {
     } else {
       completed.innerHTML = "Delete";
     }
-    
   }
+
 }
 
 /**
@@ -328,11 +362,10 @@ function undo() {
     completedTaskDates = new Set();
 }
 
-/**
- * Delete a task
- */
+/*
+* handles the delete state for tasks
+*/
 function del() {
-
 
   let taskList = document.getElementById("task-list");
   document.getElementById("curr-task").children[0].innerHTML = "Default Task";
@@ -381,7 +414,7 @@ function del() {
       }
     }
   }
- 
+
   if(taskList.children.length != 0){
     completed.disabled = false;
   }else{
@@ -431,6 +464,9 @@ function decNumCompletedTaskSessions(numSessions){
   renderStatistics();
 }
 
+/*
+* handles the three phases for tasks
+*/
 function completedEvent(){
   const completed = document.getElementById("complete-task-btn");
   if (completed.innerHTML == "Completed") {
@@ -443,7 +479,7 @@ function completedEvent(){
 };
 
 
-export {renderOne, renderAll, renderStatistics};
+export {clearTaskList, renderOne, renderAll, renderStatistics};
 </code></pre>
         </article>
     </section>
@@ -456,7 +492,7 @@ export {renderOne, renderAll, renderStatistics};
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Wed Mar 10 2021 22:54:29 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Thu Mar 11 2021 01:11:34 GMT+0000 (Coordinated Universal Time) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
