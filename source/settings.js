@@ -42,7 +42,7 @@ const audio = document.getElementById("alarm-sound");
 const soundPicker = document.getElementById('sounds')
 const iconVol = document.getElementById('icon-vol')
 
-/*
+/**
 * sets all settings to localstorage values and adds listeners
 */
 function resetSettings() {
@@ -58,6 +58,7 @@ function resetSettings() {
   numSessionsNumber.value = localStorage.getItem("numSessions");
   soundPicker.value = localStorage.getItem("soundType");
   audio.src = localStorage.getItem("soundType");
+  updateVolIcon(localStorage.getItem("vol"));
 
   worktimeSlider.addEventListener("input", updateWorktime);
   worktimeNumber.addEventListener("input", updateWorktime);
