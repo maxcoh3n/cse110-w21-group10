@@ -29,12 +29,17 @@ function updatePomoLog(updatedTask) {
 }
 // repopulates pomo log from data in local storage
 function updateLogWhenPageRefresh() {
+  let dailyLog = document.getElementById("log-list");
+  while (dailyLog.firstChild) {
+    dailyLog.removeChild(dailyLog.firstChild);
+  }
   let completedSessions = localStorage.getItem("completedSessions");
   completedSessions = JSON.parse(completedSessions);
   for (let i = completedSessions.length - 1; i >= 0; i--) {
     RenderToLog(completedSessions[i]);
   }
 }
+
 function RenderToLog(newTask) {
   let dailyLog = document.getElementById("log-list");
   let customElement = document.createElement("completed-task");
@@ -42,9 +47,26 @@ function RenderToLog(newTask) {
   customElement.setAttribute("name", newTask.taskName);
   customElement.setAttribute("date", newTask.date);
   customElement.setAttribute("id", newTask.taskName + " " + newTask.date);
+  if (newTask.completed) {
+    customElement.setAttribute("isdone", 1);
+  } else {
+    customElement.setAttribute("isdone", 0);
+  }
 
   customElement.setAttribute("totaltime", JSON.stringify(newTask.durationArray));
   dailyLog.appendChild(customElement);
 }
 
-export { updatePomoLog, AddToLog };
+/*
+* clears the display of the log to the user
+*/
+function clearLog() {
+
+  let dailyLog = document.getElementById('log-list');
+  while( dailyLog.firstChild ) {
+    dailyLog.removeChild(dailyLog.firstChild);
+  }
+
+}
+
+export { updatePomoLog, AddToLog, clearLog, updateLogWhenPageRefresh };

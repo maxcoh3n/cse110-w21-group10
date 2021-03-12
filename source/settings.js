@@ -72,7 +72,6 @@ function resetSettings(){
   volumeNum.addEventListener('input',updateVol);
   test.addEventListener('click', updateTest);
   soundPicker.addEventListener('click',updateSound);
-  setIconVolImage()
 }
 
 /**
@@ -105,13 +104,13 @@ function updateVol(e) {
   volumeSlider.value = num;
   volumeNum.value = num;
   localStorage.setItem("vol", num);
-  updateVolIcon(vol)
+  updateVolIcon(num);
 }
 
 /** 
-* @param {number} vol - volume out of 100
+* @param {number} num - volume out of 100
 */
-function updateVolIcon(vol){
+function updateVolIcon(num){
   if (num > 66 && num <= 100) {
     iconVol.src = "./icons/volume-level-3.svg";
   }
