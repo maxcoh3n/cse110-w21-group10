@@ -4,7 +4,8 @@
   "description": "A pomodoro timer for cse 110 by group 10",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "coverage" : "jest --coverage"
   },
   "repository": {
     "type": "git",
