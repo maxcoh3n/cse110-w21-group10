@@ -35,6 +35,24 @@ h1 {
   height: 20px;
 }
 
+/* settings labels*/
+.label {
+  font-size: 13px;
+  position: relative;
+  width: 500px;
+  margin: 10px;
+}
+.numLeft{
+  position: absolute;
+  top:5px
+}
+.numRight{
+  position: absolute;
+  left: 98%;
+  top:5px
+}
+
+
 /* Modal Content/Box */
 .modal-content {
   margin: 10% auto; /* 15% from the top and centered */
