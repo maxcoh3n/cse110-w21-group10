@@ -1,7 +1,7 @@
-import {renderStatistics} from "./statistics.js";
+import { renderStatistics } from "./statistics.js";
 import { clearLog } from "./pomoLog.js";
 import { clearTaskList } from "./taskList.js";
-import {setLocalStorageDefaults} from "./constants.js"
+import { setLocalStorageDefaults } from "./constants.js"
 
 // renders statistics is refreshed.
 window.addEventListener("DOMContentLoaded", (event) => {
@@ -27,25 +27,25 @@ window.onclick = function (event) {
   }
 };
 
-  const volumeNum = document.getElementById("volume-number")
-  const volumeSlider = document.getElementById('volume-slider')
-  const worktimeSlider = document.getElementById("worktime-slider");
-  const worktimeNumber = document.getElementById("worktime-number");
-  const shortBreaktimeSlider = document.getElementById("short-breaktime-slider");
-  const shortBreaktimeNumber = document.getElementById("short-breaktime-number");
-  const longBreaktimeSlider = document.getElementById("long-breaktime-slider");
-  const longBreaktimeNumber = document.getElementById("long-breaktime-number");
-  const numSessionsSlider = document.getElementById("num-sessions-slider");
-  const numSessionsNumber = document.getElementById("num-sessions-number");
-  const test = document.getElementById("test-btn");
-  const audio = document.getElementById("alarm-sound");
-  const soundPicker = document.getElementById('sounds')
-  const iconVol = document.getElementById('icon-vol')
+const volumeNum = document.getElementById("volume-number")
+const volumeSlider = document.getElementById('volume-slider')
+const worktimeSlider = document.getElementById("worktime-slider");
+const worktimeNumber = document.getElementById("worktime-number");
+const shortBreaktimeSlider = document.getElementById("short-breaktime-slider");
+const shortBreaktimeNumber = document.getElementById("short-breaktime-number");
+const longBreaktimeSlider = document.getElementById("long-breaktime-slider");
+const longBreaktimeNumber = document.getElementById("long-breaktime-number");
+const numSessionsSlider = document.getElementById("num-sessions-slider");
+const numSessionsNumber = document.getElementById("num-sessions-number");
+const test = document.getElementById("test-btn");
+const audio = document.getElementById("alarm-sound");
+const soundPicker = document.getElementById('sounds')
+const iconVol = document.getElementById('icon-vol')
 
 /**
 * sets all settings to localstorage values and adds listeners
 */
-function resetSettings(){
+function resetSettings() {
   volumeSlider.value = localStorage.getItem("vol");
   volumeNum.value = localStorage.getItem("vol");
   worktimeSlider.value = localStorage.getItem("workMins");
@@ -69,28 +69,28 @@ function resetSettings(){
   numSessionsSlider.addEventListener("input", updateNumSessions);
   numSessionsNumber.addEventListener("input", updateNumSessions);
   volumeSlider.addEventListener("input", updateVol);
-  volumeNum.addEventListener('input',updateVol);
+  volumeNum.addEventListener('input', updateVol);
   test.addEventListener('click', updateTest);
-  soundPicker.addEventListener('click',updateSound);
+  soundPicker.addEventListener('click', updateSound)
 }
 
 /**
  * @param {string} e
  * Change the current sound type to input value
  */
-function updateSound(e){
+function updateSound(e) {
   const value = e.target.value
   audio.src = value
-  localStorage.setItem("soundType",value)
+  localStorage.setItem("soundType", value)
   document.getElementById("alarm-sound").src = value
 }
 
 /**
  * Test the loudness of the current volume
  */
-function updateTest(){
+function updateTest() {
   const vol = volumeNum.value
-  audio.volume = vol/100
+  audio.volume = vol / 100
   audio.play()
 }
 
@@ -104,24 +104,17 @@ function updateVol(e) {
   volumeSlider.value = num;
   volumeNum.value = num;
   localStorage.setItem("vol", num);
-  updateVolIcon(num);
-}
-
-/** 
-* @param {number} num - volume out of 100
-*/
-function updateVolIcon(num){
-  if (num > 66 && num <= 100) {
-    iconVol.src = "./icons/volume-level-3.svg";
+  if (num > 66 && num < 101) {
+    iconVol.src = "../images/icons/volume-level-3.svg";
   }
   else if (num > 33 && num < 67) {
-      iconVol.src = "./icons/volume-level-2.svg";
+    iconVol.src = "../images/icons/volume-level-2.svg";
   }
   else if (num > 0 && num < 34) {
-      iconVol.src = "./icons/volume-level-1.svg";
+    iconVol.src = "../images/icons/volume-level-1.svg";
   }
   else {
-      iconVol.src = "./icons/volume-level-0.svg";
+    iconVol.src = "../images/icons/volume-level-0.svg";
   }
 }
 
@@ -131,6 +124,7 @@ function updateVolIcon(num){
  * Display the work time on the page.
  */
 function updateWorktime(e) {
+  console.log('HIIIIIIIII')
   let num = e.target.value;
   worktimeSlider.value = num;
   worktimeNumber.value = num;
@@ -179,7 +173,7 @@ const clearData = document.getElementById("clear-data-btn");
 clearData.onclick = function () {
   const DELETE_MESSAGE = "Clearing your data is an irreversible action, your session history will be lost. \nAre you sure you want to clear your data?\n\n"
   let response = confirm(DELETE_MESSAGE);
-  if(response) {
+  if (response) {
 
     localStorage.clear();
     setLocalStorageDefaults();
@@ -194,4 +188,4 @@ clearData.onclick = function () {
   }
 }
 
-export {resetSettings};
+export { resetSettings };
