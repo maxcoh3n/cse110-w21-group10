@@ -24,28 +24,54 @@
         <div class="modal-content">
             <span id="settings-span" class="close">&times;</span>
             <h2>Settings</h2>
-            <label id="worktime-label">Work Time:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
-            <input id="worktime-number" type="number" min="20" max="30">
-            <input id="worktime-slider" type="range" min="20" max="30"><br><br>
+            <div class='flex'>
+              <label id="worktime-label">Work Time:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+              <input id="worktime-number" type="number" min="20" max="30">
+              <div class='label'>
+                  <p class='numLeft'>20</p><input id="worktime-slider" type="range" min="20" max="30">
+                  <p class='numRight'>30</p>
+              </div>
+          </div>
+          <div class='flex'>
+              <label id="short-breaktime-label">Short Break Time:&emsp;&emsp;&emsp;</label>
+              <input id="short-breaktime-number" type="number" min="5" max="10">
+              <div class='label'>
+                  <p class='numLeft'>5</p><input id="short-breaktime-slider" type="range" min="5" max="10">
+                  <p class='numRight'>10</p>
+              </div>
 
-            <label id="short-breaktime-label">Short Break Time:&emsp;&emsp;&emsp;</label>
-            <input id="short-breaktime-number" type="number" min="5" max="10">
-            <input id="short-breaktime-slider" type="range" min="5" max="10"><br><br>
+            </div>
+            <div class='flex'>
+                <label id="long-breaktime-label">Long Break Time:&emsp;&emsp;&emsp;</label>
+                <input id="long-breaktime-number" type="number" min="15" max="25">
+                <div class='label'>
+                    <p class='numLeft'>15</p><input id="long-breaktime-slider" type="range" min="15" max="25">
+                    <p class='numRight'>25</p>
+                </div>
 
-            <label id="long-breaktime-label">Long Break Time:&emsp;&emsp;&emsp;</label>
-            <input id="long-breaktime-number" type="number" min="15" max="25">
-            <input id="long-breaktime-slider" type="range" min="15" max="25"><br><br>
-
-            <label id="num-sessions-label">Number of Work Sessions Before Long Break: </label>
-            <input id="num-sessions-number" type="number" min="3" max="5">
-            <input id="num-sessions-slider" type="range" min="3" max="5"><br><br>
+              </div>
+              <div class='flex'>
+                  <label id="num-sessions-label">Number of Work Sessions Before Long Break: </label>
+                  <input id="num-sessions-number" type="number" min="3" max="5">
+                  <div class='label'>
+                      <p class='numLeft'>3</p><input id="num-sessions-slider" type="range" min="3" max="5">
+                      <p class='numRight'>5</p>
+                  </div>
+  
+              </div>
+              <div class='flex'>
 
             <div class='flex-icon'>
                 <label id="volume-label">Volume: &emsp; <img id='icon-vol' style="width:20px;height:20px;"
                        alt='horn' /></label>
                 <input id="volume-number" type="number" min="0" max="100">
             </div>
-            <input id="volume-slider" type="range" min="0" max="100">
+            <div class='label'>
+              <p class='numLeft'>0</p><input id="volume-slider" type="range" min="0" max="100">
+              <p class='numRight'>100</p>
+          </div>
+
+      </div>
 
             <div class='flex'>
                 <label id="sounds-label">Alarm Sound: &emsp;</label>
@@ -67,9 +93,9 @@
                 </div>
             </div>
 
-            <br><br><label for="dev-mode">Dev Mode</label><input type="checkbox" id="dev-mode">
+            <label for="dev-mode">Dev Mode</label><input type="checkbox" id="dev-mode"><br>
 
-            <br /><br /><label for="clear-data-btn"></label><button id="clear-data-btn">Clear ALL Data</button>
+            <label for="clear-data-btn"></label><button id="clear-data-btn">Clear ALL Data</button>
         </div>
 
     </div>
