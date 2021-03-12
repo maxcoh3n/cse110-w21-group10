@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="../images/favicon.png" />
     <title id="title-countdown">Pomodoro Timer</title>
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <script src="constants.js" type ="module"></script>
-  </head>
+    <script src="constants.js" type="module"></script>
+</head>
 
-  <body>
+<body>
     <audio id="alarm-sound"></audio>
 
     <!-- Header row with title -->
@@ -24,28 +25,53 @@
         <div class="modal-content">
             <span id="settings-span" class="close">&times;</span>
             <h2>Settings</h2>
-            <label id="worktime-label">Work Time:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
-            <input id="worktime-number" type="number" min="20" max="30">
-            <input id="worktime-slider" type="range" min="20" max="30"><br><br>
+            <div class='flex'>
+                <label id="worktime-label">Work Time:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+                <input id="worktime-number" type="number" min="20" max="30">
+                <div class='label'>
+                    <p class='num'>20</p><input id="worktime-slider" type="range" min="20" max="30">
+                    <p class='numRight'>30</p>
+                </div><br><br>
+            </div>
+            <div class='flex'>
+                <label id="short-breaktime-label">Short Break Time:&emsp;&emsp;&emsp;</label>
+                <input id="short-breaktime-number" type="number" min="5" max="10">
+                <div class='label'>
+                    <p class='num'>5</p><input id="short-breaktime-slider" type="range" min="5" max="10">
+                    <p class='numRight'>10</p>
+                </div><br><br>
 
-            <label id="short-breaktime-label">Short Break Time:&emsp;&emsp;&emsp;</label>
-            <input id="short-breaktime-number" type="number" min="5" max="10">
-            <input id="short-breaktime-slider" type="range" min="5" max="10"><br><br>
+            </div>
+            <div class='flex'>
+                <label id="long-breaktime-label">Long Break Time:&emsp;&emsp;&emsp;</label>
+                <input id="long-breaktime-number" type="number" min="15" max="25">
+                <div class='label'>
+                    <p class='num'>15</p><input id="long-breaktime-slider" type="range" min="15" max="25">
+                    <p class='numRight'>25</p>
+                </div><br><br>
 
-            <label id="long-breaktime-label">Long Break Time:&emsp;&emsp;&emsp;</label>
-            <input id="long-breaktime-number" type="number" min="15" max="25">
-            <input id="long-breaktime-slider" type="range" min="15" max="25"><br><br>
+            </div>
+            <div class='flex'>
+                <label id="num-sessions-label">Number of Work Sessions Before Long Break: </label>
+                <input id="num-sessions-number" type="number" min="3" max="5">
+                <div class='label'>
+                    <p class='num'>3</p><input id="num-sessions-slider" type="range" min="3" max="5">
+                    <p class='numRight'>5</p>
+                </div><br><br>
 
-            <label id="num-sessions-label">Number of Work Sessions Before Long Break: </label>
-            <input id="num-sessions-number" type="number" min="3" max="5">
-            <input id="num-sessions-slider" type="range" min="3" max="5"><br><br>
-
+            </div>
+            <div class='flex'>
             <div class='flex-icon'>
                 <label id="volume-label">Volume: &emsp; <img id='icon-vol' style="width:20px;height:20px;"
                         src="../images/icons/volume-level-3.svg" alt='horn' /></label>
                 <input id="volume-number" type="number" min="0" max="100">
             </div>
-            <input id="volume-slider" type="range" min="0" max="100">
+            <div class='label'>
+                <p class='num'>0</p><input id="volume-slider" type="range" min="0" max="100">
+                <p class='numRight'>100</p>
+            </div><br><br>
+           
+        </div>
 
             <div class='flex'>
                 <label id="sounds-label">Alarm Sound: &emsp;</label>
@@ -76,53 +102,49 @@
 
     <!-- Pomo log -->
     <div id="pomo-toggle-container">
-      <input id="pomo-toggle" type="checkbox" class="pomo-toggle" />
-      <label for="pomo-toggle" id="pomo-label">Pomodoro Log</label>
+        <input id="pomo-toggle" type="checkbox" class="pomo-toggle" />
+        <label for="pomo-toggle" id="pomo-label">Pomodoro Log</label>
 
-      <ol class="pomo-log">
-        <li id="stats-container">
-          <details>
-            <summary>Statistics</summary>
-            <ol id="stats-list" style="list-style: none">
-              <li id="num-tasks-completed">
-                <label>Number of Tasks Completed: </label
-                ><span></span>
-              </li>
-              <li id="avg-sessions-per-day">
-                <label>Average Sessions Per day: </label
-                ><span></span>
-              </li>
-              <li id="average-tasks-per-day">
-                <label>Average Tasks Per day: </label
-                ><span></span>
-              </li>
-              <li id="avg-sessions-per-task">
-                <label>Average Sessions to complete a Task: </label
-                ><span></span>
-              </li>
-            </ol>
-            <script src="statistics.js" type="module"></script>
-          </details>
-        </li>
-        <hr />
+        <ol class="pomo-log">
+            <li id="stats-container">
+                <details>
+                    <summary>Statistics</summary>
+                    <ol id="stats-list" style="list-style: none">
+                        <li id="num-tasks-completed">
+                            <label>Number of Tasks Completed: </label><span></span>
+                        </li>
+                        <li id="avg-sessions-per-day">
+                            <label>Average Sessions Per day: </label><span></span>
+                        </li>
+                        <li id="average-tasks-per-day">
+                            <label>Average Tasks Per day: </label><span></span>
+                        </li>
+                        <li id="avg-sessions-per-task">
+                            <label>Average Sessions to complete a Task: </label><span></span>
+                        </li>
+                    </ol>
+                    <script src="statistics.js" type="module"></script>
+                </details>
+            </li>
+            <hr />
 
-        <li id="daily-log-container">
-          <h6>Daily Log</h6>
-          <ol id="log-list" style="list-style: none"></ol>
-        </li>
-      </ol>
-      <script src="./components/completed-task.js"></script>
-      <script type="module" src="pomoLog.js"></script>
+            <li id="daily-log-container">
+                <h6>Daily Log</h6>
+                <ol id="log-list" style="list-style: none"></ol>
+            </li>
+        </ol>
+        <script src="./components/completed-task.js"></script>
+        <script type="module" src="pomoLog.js"></script>
     </div>
 
     <!-- Timer -->
     <div id="timer-container">
-      <div id="session-circles" data-session-num="0"></div>
-      <div id="canvas-container">
-        <canvas id="horseshoe" width="500" height="500"></canvas>
-    </div id = "hi">
-      <h1 id="countdown"></h1>
-      <!-- We update this for the horseshoe -->
+        <div id="session-circles" data-session-num="0"></div>
+        <div id="canvas-container">
+            <canvas id="horseshoe" width="500" height="500"></canvas>
+        </div id="hi">
+        <h1 id="countdown"></h1>
+        <!-- We update this for the horseshoe -->
         <button id="start-btn">Start</button>
         <!-- Current Task -->
         <p id="curr-task">Current Task: <span>Default Task</span></p>
@@ -130,20 +152,20 @@
     </div>
     <!-- Task List-->
     <div id="task-list-container">
-      <div id="task-list-header">
-        <h2>Task List</h2>
-        <button id="complete-task-btn">Completed</button>
-      </div>
-      <hr />
-      <div id="task-list"></div>
-      <hr />
-      <!-- <input id="pomo-toggle" type="checkbox" class="pomo-toggle" />
+        <div id="task-list-header">
+            <h2>Task List</h2>
+            <button id="complete-task-btn">Completed</button>
+        </div>
+        <hr />
+        <div id="task-list"></div>
+        <hr />
+        <!-- <input id="pomo-toggle" type="checkbox" class="pomo-toggle" />
         <label for="pomo-toggle" id="pomo-label">Pomodoro Log</label> -->
-      <div id="new-task-container">
-        <input id="new-task" type="text" placeholder="Enter New Task Here" />
-        <button id="new-task-btn">Add Task</button><br />
-        <script src="taskList.js" type="module"></script>
-      </div>
+        <div id="new-task-container">
+            <input id="new-task" type="text" placeholder="Enter New Task Here" />
+            <button id="new-task-btn">Add Task</button><br />
+            <script src="taskList.js" type="module"></script>
+        </div>
     </div>
 
     <script src="settings.js" type="module"></script>
@@ -153,28 +175,32 @@
     <!-- Info -->
     <button id="info-btn">Information</button>
     <div id="info-modal" class="modal">
-      <div class="modal-content">
-        <span id="info-span" class="close">&times;</span>
+        <div class="modal-content">
+            <span id="info-span" class="close">&times;</span>
 
-        <h2>Information</h2><hr>
-        <ul id ="language-option">
-          <li>Click the Settings button in the top right corner and configure your settings</li>
-          <li>Add tasks to the task list to the right. You can click Delete if you added a task by mistake</li>
-          <li>Select the task you want and click Start to start the timer</li>
-          <li>After you have completed a session you can click Complete to complete the selected task and Undo if you clicked Complete by mistake</li>
-          <li>You can click the Pomodoro Log button on the left to view a log of completed sessions and statistics. </li>
-        </ul><br>
+            <h2>Information</h2>
+            <hr>
+            <ul id="language-option">
+                <li>Click the Settings button in the top right corner and configure your settings</li>
+                <li>Add tasks to the task list to the right. You can click Delete if you added a task by mistake</li>
+                <li>Select the task you want and click Start to start the timer</li>
+                <li>After you have completed a session you can click Complete to complete the selected task and Undo if
+                    you clicked Complete by mistake</li>
+                <li>You can click the Pomodoro Log button on the left to view a log of completed sessions and
+                    statistics. </li>
+            </ul><br>
 
-        <p>Select your language:
-        <input type="radio" id="english" name="language" checked="checked">
-        <label for="english">English</label>
-        <input type="radio" id="spanish" name="language">
-        <label for="spanish">Spanish</label></p>
+            <p>Select your language:
+                <input type="radio" id="english" name="language" checked="checked">
+                <label for="english">English</label>
+                <input type="radio" id="spanish" name="language">
+                <label for="spanish">Spanish</label>
+            </p>
 
-      </div>
+        </div>
     </div>
     <script src="info.js" type="module"></script>
-    
+
 
 </body>
 
