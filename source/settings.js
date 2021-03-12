@@ -42,7 +42,7 @@ window.onclick = function (event) {
   const soundPicker = document.getElementById('sounds')
   const iconVol = document.getElementById('icon-vol')
 
-/*
+/**
 * sets all settings to localstorage values and adds listeners
 */
 function resetSettings(){
@@ -58,6 +58,7 @@ function resetSettings(){
   numSessionsNumber.value = localStorage.getItem("numSessions");
   soundPicker.value = localStorage.getItem("soundType");
   audio.src = localStorage.getItem("soundType");
+  updateVolIcon(localStorage.getItem("vol"));
 
   worktimeSlider.addEventListener("input", updateWorktime);
   worktimeNumber.addEventListener("input", updateWorktime);
@@ -70,7 +71,7 @@ function resetSettings(){
   volumeSlider.addEventListener("input", updateVol);
   volumeNum.addEventListener('input',updateVol);
   test.addEventListener('click', updateTest);
-  soundPicker.addEventListener('click',updateSound)
+  soundPicker.addEventListener('click',updateSound);
 }
 
 /**
@@ -103,17 +104,24 @@ function updateVol(e) {
   volumeSlider.value = num;
   volumeNum.value = num;
   localStorage.setItem("vol", num);
-  if (num > 66 && num < 101) {
-      iconVol.src = "../images/icons/volume-level-3.svg";
+  updateVolIcon(num);
+}
+
+/** 
+* @param {number} num - volume out of 100
+*/
+function updateVolIcon(num){
+  if (num > 66 && num <= 100) {
+    iconVol.src = "./icons/volume-level-3.svg";
   }
   else if (num > 33 && num < 67) {
-      iconVol.src = "../images/icons/volume-level-2.svg";
+      iconVol.src = "./icons/volume-level-2.svg";
   }
   else if (num > 0 && num < 34) {
-      iconVol.src = "../images/icons/volume-level-1.svg";
+      iconVol.src = "./icons/volume-level-1.svg";
   }
   else {
-      iconVol.src = "../images/icons/volume-level-0.svg";
+      iconVol.src = "./icons/volume-level-0.svg";
   }
 }
 
