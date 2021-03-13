@@ -152,9 +152,9 @@ input[type="range"] {
   position: absolute;
   top: 16%;
   left: 6%;
-  width: 250px;
+  width: 300px;
   text-align: left;
-  margin-left: 10px;
+  margin-left: 5px;
   --orange: #ff8566;
   --orange-shadow: #f07c5f;
   --label-color: #9b2406;
@@ -213,8 +213,10 @@ input[type="range"] {
 
 #daily-log-container > h6 {
   padding: 0;
+  padding-bottom: 5px;
   margin: 0;
-  font-size: 10pt;
+  font-size: 11pt;
+  text-decoration: underline;
 }
 
 @keyframes overflow-animation {
