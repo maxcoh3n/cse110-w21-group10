@@ -1,6 +1,6 @@
 //Timer
 import { updatePomoLog, AddToLog } from "./pomoLog.js";
-import { changeSession, endBreak, startLongBreak } from "./sessionCircles.js";
+import { changeSession, endBreak, startLongBreak, resetColors } from "./sessionCircles.js";
 import { renderStatistics } from "./statistics.js";
 import { getDate } from "./getDate.js";
 import { drawHorseShoe, stopHorseShoe } from "./horseshoe.js";
@@ -20,11 +20,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
  */
 function start() {
   timer();
-  let maxSessions = localStorage.getItem("numSessions");
-  if (sessionNum >= maxSessions) {
-    sessionNum = 0;
-  }
-  endBreak(sessionNum);
 }
 
 let sessionNum = localStorage.getItem("numCurrentSech");
@@ -71,10 +66,43 @@ function timer() {
     }
 
     startBtn.innerHTML = "Cancel";
-    document.getElementById("settings-btn").style.display = "none";
+
+    // Disable all other features
+    document.getElementById("settings-btn").disabled = true;
+    document.getElementById("task-list-container").style.opacity = "60%";
+    document.getElementById("new-task").disabled = true;
+    document.getElementById("new-task-btn").disabled = true;
+    document.getElementById("info-btn").disabled = true;
+    let pomologBtn = document.getElementById("pomo-toggle");
+    pomologBtn.disabled = true;
+    document.getElementById("pomo-label").style.opacity = "60%";
+    let pomologOpen = pomologBtn.checked;
+    pomologBtn.checked = false;
+    localStorage.setItem("pomologOpen", String(pomologOpen));
+    let maxSessions = localStorage.getItem("numSessions");
+    if (sessionNum >= maxSessions) {
+      sessionNum = 0;
+    }
+    endBreak(sessionNum);
+
     updateCountdown(true);
   } else {
     stopHorseShoe();
+
+    // Enable all other features
+    document.getElementById("settings-btn").disabled = false;
+    document.getElementById("task-list-container").style.opacity = "100%";
+    document.getElementById("new-task-container").style.opacity = "100%";
+    document.getElementById("new-task").disabled = false;
+    document.getElementById("new-task-btn").disabled = false;
+    document.getElementById("info-btn").disabled = false;
+    let pomologBtn = document.getElementById("pomo-toggle");
+    pomologBtn.disabled = false;
+    document.getElementById("pomo-label").style.opacity = "100%";
+    pomologBtn.checked = localStorage.getItem("pomologOpen") == "true" ? true : false;
+
+    resetColors();
+
     let completedSessions = localStorage.getItem("completedSessions");
     completedSessions = JSON.parse(completedSessions);
     let currentTaskName = document.getElementById("curr-task").children[0].innerHTML;
@@ -229,16 +257,28 @@ function updateCountdown(IsOn) {
 
         if (localStorage.getItem("numCurrentSech") >= localStorage.getItem("numSessions")) {
           localStorage.setItem("workOrBreak", "longBreak");
+          localStorage.setItem("numCurrentSech", "0");
         } else {
           localStorage.setItem("workOrBreak", "break");
         }
+
+        // Enable all other features
+        document.getElementById("settings-btn").disabled = false;
+        document.getElementById("task-list-container").style.opacity = "100%";
+        document.getElementById("new-task-container").style.opacity = "100%";
+        document.getElementById("new-task").disabled = false;
+        document.getElementById("new-task-btn").disabled = false;
+        document.getElementById("info-btn").disabled = false;
+        let pomologBtn = document.getElementById("pomo-toggle");
+        pomologBtn.disabled = false;
+        document.getElementById("pomo-label").style.opacity = "100%";
+        pomologBtn.checked = localStorage.getItem("pomologOpen") == "true" ? true : false;
       } else if (localStorage.getItem("workOrBreak") == "break") {
         localStorage.setItem("workOrBreak", "work");
         startBtn.innerHTML = "Start";
         updateCountdown(false);
         return;
       } else if (localStorage.getItem("workOrBreak") == "longBreak") {
-        localStorage.setItem("numCurrentSech", "0");
         localStorage.setItem("workOrBreak", "work");
         sessionNum = 0;
         startLongBreak(sessionNum);
@@ -277,16 +317,14 @@ function handleNumDaysWorking() {
 }
 
 /*
-* space bar to start timer
-*/
+ * space bar to start timer
+ */
 const startBtn = document.getElementById("start-btn");
-document.body.onkeyup = function(e) {
-  if( e.keyCode == 32 && document.activeElement != document.getElementById("new-task") ) {
+document.body.onkeyup = function (e) {
+  if (e.keyCode == 32 && document.activeElement != document.getElementById("new-task")) {
     e.preventDefault();
     startBtn.click();
   }
-}
+};
 
-
-
-export {timer};
+export { timer };
