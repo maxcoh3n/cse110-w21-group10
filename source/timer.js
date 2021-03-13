@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   startBtn.addEventListener("click", start);
 });
 
-/*
+/**
  * TODO add doc
  */
 function start() {
@@ -251,7 +251,7 @@ function updateCountdown(IsOn) {
   }
 }
 
-/*
+/**
  * increases numsessions statistic
  */
 function incNumSessions() {
@@ -261,7 +261,7 @@ function incNumSessions() {
   renderStatistics();
 }
 
-/*
+/**
  * increases numsessions statistic
  */
 function handleNumDaysWorking() {
@@ -276,7 +276,7 @@ function handleNumDaysWorking() {
   }
 }
 
-/*
+/**
 * space bar to start timer
 */
 const startBtn = document.getElementById("start-btn");

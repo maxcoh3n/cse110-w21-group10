@@ -3,7 +3,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
   updateLogWhenPageRefresh();
 });
 
-// adds new item to pomo log, newTask is the new item from local storage
+/**
+ * 
+ * @param {*} newTask new item to pomo log, newTask is the new item from local storage 
+ */
 function AddToLog(newTask) {
   let dailyLog = document.getElementById("log-list");
   let customElement = document.createElement("completed-task");
@@ -16,7 +19,11 @@ function AddToLog(newTask) {
   dailyLog.prepend(customElement);
 }
 
-// updates an existing pomo log entry, updatedTask is the taks to update
+/**
+ * // updates an existing pomo log entry, updatedTask is the taks to update
+ * @param {*} updatedTask 
+ * @returns 
+ */
 function updatePomoLog(updatedTask) {
   let dailyLog = document.getElementById("log-list");
   let children = dailyLog.children;
@@ -27,7 +34,12 @@ function updatePomoLog(updatedTask) {
     }
   }
 }
-// repopulates pomo log from data in local storage
+
+
+// 
+/**
+ * repopulates pomo log from data in local storage
+ */
 function updateLogWhenPageRefresh() {
   let dailyLog = document.getElementById("log-list");
   while (dailyLog.firstChild) {
@@ -40,6 +52,10 @@ function updateLogWhenPageRefresh() {
   }
 }
 
+/**
+ * TODO
+ * @param {*} newTask 
+ */
 function RenderToLog(newTask) {
   let dailyLog = document.getElementById("log-list");
   let customElement = document.createElement("completed-task");
