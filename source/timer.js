@@ -16,7 +16,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
 });
 
 /*
- * TODO add doc
+ * Starts the timer, duration depend on user input for work time
+ * and styling features depend on break or work time
  */
 function start() {
   timer();

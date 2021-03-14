@@ -177,7 +177,7 @@ function clearTaskList() {
 
 
 /*
-* TODO
+* allows for enter key to add a new task to the task list
 */
 function keyUpEvent(event) {
   if (event.keyCode === 13) {
