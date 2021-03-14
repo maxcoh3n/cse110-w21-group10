@@ -44,19 +44,7 @@ function ChangeToEnglish() {
     unorderedLi.appendChild(tag);
   }
 }
-// function ChangeToSpanish() {
-//   let unorderedLi = document.getElementById("language-option");
-//   unorderedLi.childNodes[0].innerHTML =
-//     "CHaga clic en el botón Configuración en la esquina superior derecha y configure sus ajustes.";
-//   unorderedLi.childNodes[1].innerHTML =
-//     "Agregue tareas a la lista de tareas de la derecha. Puede hacer clic en Eliminar si agregó una tarea por error.";
-//   unorderedLi.childNodes[2].innerHTML =
-//     "Seleccione la tarea que desee y haga clic en Iniciar para iniciar el temporizador.";
-//   unorderedLi.childNodes[3].innerHTML =
-//     "Una vez que haya completado una sesión, puede hacer clic en Completar para completar la tarea seleccionada y Deshacer si hizo clic en Completar por error.";
-//   unorderedLi.childNodes[4].innerHTML =
-//     "Puede hacer clic en el botón Registro Pomodoro a la izquierda para ver un registro de las sesiones completadas y las estadísticas.";
-// }
+
 function ChangeToSpanish() {
   let unorderedLi = document.getElementById("language-option");
   while (unorderedLi.firstChild) {
@@ -75,3 +63,5 @@ function ChangeToSpanish() {
     unorderedLi.appendChild(tag);
   }
 }
+
+export {ChangeToEnglish, ChangeToSpanish};

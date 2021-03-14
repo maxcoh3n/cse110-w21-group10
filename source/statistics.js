@@ -3,6 +3,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
   renderStatistics();
 });
 
+/**
+ * Renders all statistics for the app
+ */
 function renderStatistics() {
   const numCompletedTasks = document.getElementById("num-tasks-completed").childNodes[2];
   const avgSessionsPerDay = document.getElementById("avg-sessions-per-day").childNodes[2];

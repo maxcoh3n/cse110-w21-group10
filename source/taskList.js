@@ -139,6 +139,7 @@ function renderAll() {
   for( let sessesion of completedSessions ) {
     if( sessesion.taskName == newTaskInput.value ) {
       sessesion.completed = false;
+      decNumCompletedTasks();
     }
   }
 
@@ -159,7 +160,7 @@ function renderAll() {
     newTaskInput.value = "";
   }
 
-  // tasksArray = localStorage.getItem("upcomingTasks");
+  updateLogWhenPageRefresh();
 }
 
 /*

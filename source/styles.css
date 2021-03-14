@@ -35,6 +35,24 @@ h1 {
   height: 20px;
 }
 
+/* settings labels*/
+.label {
+  font-size: 13px;
+  position: relative;
+  width: 500px;
+  margin: 10px;
+}
+.numLeft{
+  position: absolute;
+  top:5px
+}
+.numRight{
+  position: absolute;
+  left: 98%;
+  top:5px
+}
+
+
 /* Modal Content/Box */
 .modal-content {
   margin: 10% auto; /* 15% from the top and centered */
@@ -134,9 +152,9 @@ input[type="range"] {
   position: absolute;
   top: 16%;
   left: 6%;
-  width: 250px;
+  width: 275px;
   text-align: left;
-  margin-left: 10px;
+  margin-left: 5px;
   --orange: #ff8566;
   --orange-shadow: #ffad99;
   --label-color: #9b2406;
@@ -195,8 +213,10 @@ input[type="range"] {
 
 #daily-log-container > h6 {
   padding: 0;
+  padding-bottom: 5px;
   margin: 0;
-  font-size: 10pt;
+  font-size: 11pt;
+  text-decoration: underline;
 }
 
 @keyframes overflow-animation {
