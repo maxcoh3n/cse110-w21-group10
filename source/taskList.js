@@ -17,10 +17,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
 });
 
 /**
- * TODO
  * @param {*} taskInput 
+ * Takes the taskInput (task name) and renders that task to the task list
  */
-
 function renderOne(taskInput) {
   const taskButton = document.getElementById("complete-task-btn");
 
@@ -81,7 +80,8 @@ function renderOne(taskInput) {
 }
 
 /**
- * TODO
+ * runs on page load
+ * renders all tasks in the upcomingTasks local storage to the task list
  */
 function renderAll() {
   const taskButton = document.getElementById("complete-task-btn");
