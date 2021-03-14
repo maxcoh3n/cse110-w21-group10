@@ -117,10 +117,10 @@ button:hover{
 }
 .Setting-window{
   margin: 10% auto; /* 15% from the top and centered */
-  padding: 20px;
+  padding: 20px; 
   border: 1px solid #888;
  width: 40%;  /* Could be more or less, depending on screen size */
- height: 60%;
+ height: 70%;
 }
 
 
@@ -142,6 +142,7 @@ h1 {
   position: absolute;
   right: 100px;
 }
+
 
 #info-btn {
   width: 40;
@@ -310,7 +311,7 @@ input::placeholder {
 /* Pomo log -----------------------------------------------------------------*/
 #pomo-toggle-container {
   position: relative;
-  max-width: 320px;
+  max-width: 500px;
   --orange: #ff8566;
   --label-color: white;
   --light-orange: #cd6146;
@@ -348,9 +349,9 @@ input::placeholder {
   position: relative;
   max-height: 0;
   overflow: hidden;
-  border-radius: 18px;
+  border-radius: 20px;
   box-shadow: 2px 5px 8px  #25111c;
-
+  right: 24%;
   list-style: none;
   padding: 0px;
   margin-top: 8px;
@@ -390,7 +391,7 @@ input::placeholder {
   padding: 0;
   padding-bottom: 5px;
   margin: 0;
-  font-size: 11pt;
+  font-size: 15pt;
   text-decoration: underline;
 }
 
@@ -493,12 +494,12 @@ input[type="number"] {
   margin-bottom: 30px;
   height: 60px;
   padding: 5px;
-  font-size: 30px;
+  font-size: 20px;
   margin-left: 40px;
 }
 
 .flex-alarm {
-  font-size: 30px;
+  font-size: 20px;
   margin: 40px;
   display: flex;
   align-items: center;
