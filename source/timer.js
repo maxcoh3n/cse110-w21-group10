@@ -143,7 +143,6 @@ function timer() {
  */
 function updateCountdown(IsOn) {
   const title = document.getElementById("title-countdown");
-  const workBreakLabel = document.getElementById("work-break-label");
 
   const devMode = document.getElementById("dev-mode");
   if (IsOn) {
@@ -175,7 +174,7 @@ function updateCountdown(IsOn) {
       countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
       title.innerHTML = `${localStorage.getItem("workMins")}:00`;
     }
-    workBreakLabel.style.display = "none";
+
     const completed = document.getElementById("complete-task-btn");
     completed.disabled = false;
   }
@@ -190,14 +189,7 @@ function updateCountdown(IsOn) {
    */
   function updateTime() {
     const startBtn = document.getElementById("start-btn");
-    if (localStorage.getItem("workOrBreak") == "work") {
-      workBreakLabel.style.display = "block";
-      workBreakLabel.innerHTML = "Work Time";
-    }
-    if (localStorage.getItem("workOrBreak") == "break" || localStorage.getItem("workOrBreak") == "longBreak") {
-      workBreakLabel.style.display = "block";
-      workBreakLabel.innerHTML = "Break Time";
-    }
+
     time--;
     time = time < 0 ? 0 : time;
 
