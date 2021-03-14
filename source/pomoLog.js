@@ -4,8 +4,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
 });
 
 /**
- * 
- * @param {*} newTask new item to pomo log, newTask is the new item from local storage 
+ *
+ * @param {*} newTask new item to pomo log, newTask is the new item from local storage
  */
 function AddToLog(newTask) {
   let dailyLog = document.getElementById("log-list");
@@ -20,9 +20,9 @@ function AddToLog(newTask) {
 }
 
 /**
- * // updates an existing pomo log entry, updatedTask is the taks to update
- * @param {*} updatedTask 
- * @returns 
+ * @param {*} updatedTask
+ * @returns When the correct Task was found to save some for loop iterations.
+ *  updates an existing pomo log entry, updatedTask is the task to update.
  */
 function updatePomoLog(updatedTask) {
   let dailyLog = document.getElementById("log-list");
@@ -35,10 +35,9 @@ function updatePomoLog(updatedTask) {
   }
 }
 
-
-// 
+//
 /**
- * repopulates pomo log from data in local storage
+ * repopulates pomo log using data in local storage.
  */
 function updateLogWhenPageRefresh() {
   let dailyLog = document.getElementById("log-list");
@@ -53,8 +52,9 @@ function updateLogWhenPageRefresh() {
 }
 
 /**
- * TODO
- * @param {*} newTask 
+ * @param {*} newTask
+ * Renders a new task to the pomo log.
+ * Builds a custom component with data from local storage and appends it to the log.
  */
 function RenderToLog(newTask) {
   let dailyLog = document.getElementById("log-list");
@@ -74,15 +74,13 @@ function RenderToLog(newTask) {
 }
 
 /*
-* clears the display of the log to the user
-*/
+ * clears the display of the log to the user
+ */
 function clearLog() {
-
-  let dailyLog = document.getElementById('log-list');
-  while( dailyLog.firstChild ) {
+  let dailyLog = document.getElementById("log-list");
+  while (dailyLog.firstChild) {
     dailyLog.removeChild(dailyLog.firstChild);
   }
-
 }
 
 export { updatePomoLog, AddToLog, clearLog, updateLogWhenPageRefresh };
