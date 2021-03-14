@@ -26,9 +26,14 @@ function updatePrevColor(event) {
 function resetColors() {
   let circlesContainer = document.getElementById("session-circles");
   for (let i = 0; i < circlesContainer.childNodes.length; i++) {
-    circlesContainer.childNodes[i].setAttribute("class", "blank-circle");
+    console.log(localStorage.getItem("numCurrentSech"));
+    if (i < Number(localStorage.getItem("numCurrentSech"))) {
+      circlesContainer.childNodes[i].setAttribute("class", "completed-circle");
+    } else {
+      circlesContainer.childNodes[i].setAttribute("class", "blank-circle");
+    }
   }
-  circlesContainer.childNodes[0].setAttribute("class", "curr-circle");
+  console.log("reset color");
 }
 
 
@@ -45,6 +50,7 @@ function updateCurrColor(event) {
       circlesContainer.childNodes[i].setAttribute("class", "blank-circle");
     }
   }
+  console.log("update curr color");
 }
 
 /**
@@ -52,7 +58,6 @@ function updateCurrColor(event) {
  */
 function renderCircles() {
   let circlesContainer = document.getElementById("session-circles");
-  // let numOfSessions = localStorage.getItem("numSessions");
   let sessionSlider = document.getElementById("num-sessions-slider");
 
   // Delete circles
@@ -68,8 +73,6 @@ function renderCircles() {
       circlesContainer.appendChild(newCircle);
     }
   }
-  let sessionIdx = localStorage.getItem("numCurrentSech");
-  circlesContainer.childNodes[sessionIdx].setAttribute("class", "curr-circle");
 }
 
 
@@ -147,4 +150,4 @@ window.addEventListener("DOMContentLoaded", (event) => {
   renderCircles();
 });
 
-export { changeSession, endBreak, startLongBreak };
+export { changeSession, endBreak, startLongBreak, resetColors };

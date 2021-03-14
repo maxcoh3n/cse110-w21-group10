@@ -156,9 +156,9 @@ input[type="range"] {
   text-align: left;
   margin-left: 5px;
   --orange: #ff8566;
-  --orange-shadow: #f07c5f;
+  --orange-shadow: #ffad99;
   --label-color: #9b2406;
-  --light-orange: #ffc2b3;
+  --light-orange: #ffd6cc;
   --background: rgb(245, 245, 245);
 }
 
@@ -203,7 +203,7 @@ input[type="range"] {
   border-radius: 5px;
   background-color: var(--light-orange);
   color: var(--label-color);
-  box-shadow: 2px 2px 3px var(--orange-shadow);
+  box-shadow: 2px 3px 2px var(--orange-shadow);
 }
 
 #pomo-label:active {
