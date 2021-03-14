@@ -123,4 +123,4 @@ window.addEventListener("DOMContentLoaded", (event) => {
   renderCircles();
 });
 
-export { changeSession, endBreak, startLongBreak };
+export {updatePrevColor, updateCurrColor, renderCircles, resetColors, changeSession, endBreak, startLongBreak, toggleNumSessionInput };

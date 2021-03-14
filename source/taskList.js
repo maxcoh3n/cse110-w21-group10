@@ -150,8 +150,8 @@ function renderAll() {
     taskButton.disabled = false;
     localStorage.setItem("upcomingTasks", JSON.stringify(tasksArray));
     renderOne(newTaskInput.value);
-    if( tasksArray.length == 1 ) {
-      if ( inCompleted(newTaskInput.value) == false ) {
+    if(tasksArray.length == 1 ) {
+      if (inCompleted(newTaskInput.value) == false ) {
         taskButton.innerHTML = "Delete";
       } else {
         taskButton.innerHTML = "Completed";
@@ -300,7 +300,7 @@ function undo() {
         const completed = document.getElementById("complete-task-btn");
         completed.innerHTML = "Completed";
         label.style.textDecoration = "none";
-        let completedSessions = localStorage.getItem("completedSessions");
+        var completedSessions = localStorage.getItem("completedSessions");
         completedSessions = JSON.parse(completedSessions);
         for(let i = 0; i<completedSessions.length; i++){
           if( box.id == completedSessions[i].taskName && completedSessions[i].date == getDate()) {
@@ -433,4 +433,7 @@ function completedEvent(){
   }
 }
 
-export {clearTaskList, renderOne, renderAll, renderStatistics};
+export {renderOne, renderAll, addTaskEvent, keyUpEvent , 
+  inCompleted, isCompleted, comple, undo, del, incNumCompletedTasks, clearTaskList,
+  decNumCompletedTasks, incNumCompletedTaskSessions, 
+  decNumCompletedTaskSessions, completedEvent};
