@@ -5,7 +5,7 @@ import { renderStatistics } from "./statistics.js";
 import { getDate } from "./getDate.js";
 import { drawHorseShoe, stopHorseShoe } from "./horseshoe.js";
 
-// repopulates pomo log when page is refreshed.
+// Adds an event listener to the start button when page is loaded.
 window.addEventListener("DOMContentLoaded", (event) => {
   const countdown = document.getElementById("countdown");
   countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
@@ -16,7 +16,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
 });
 
 /**
- * TODO add doc
+ * Starts the timer, duration depend on user input for work time
+ * and styling features depend on break or work time
  */
 function start() {
   timer();
@@ -277,16 +278,14 @@ function handleNumDaysWorking() {
 }
 
 /**
-* space bar to start timer
-*/
+ * space bar to start timer
+ */
 const startBtn = document.getElementById("start-btn");
-document.body.onkeyup = function(e) {
-  if( e.keyCode == 32 && document.activeElement != document.getElementById("new-task") ) {
+document.body.onkeyup = function (e) {
+  if (e.keyCode == 32 && document.activeElement != document.getElementById("new-task")) {
     e.preventDefault();
     startBtn.click();
   }
-}
+};
 
-
-
-export {timer};
+export { timer };
