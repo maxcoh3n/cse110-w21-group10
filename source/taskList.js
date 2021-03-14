@@ -39,7 +39,7 @@ function renderOne(taskInput) {
         completedSessions = JSON.parse(completedSessions);
         let foundTask = false;
         for (let i = 0; i < completedSessions.length; i++) {
-          if (box.id == completedSessions[i].taskName) {
+          if (box.id == completedSessions[i].taskName && completedSessions[i].date == getDate() ) {
             foundTask = true;
             if (completedSessions[i].completed == false) {
               document.getElementById("curr-task").children[0].innerHTML = box.id;
@@ -103,7 +103,7 @@ function renderAll() {
     completedSessions = JSON.parse(completedSessions);
     let foundTask = false;
     for (let i = 0; i < completedSessions.length; i++) {
-      if (tasksArray[0] == completedSessions[i].taskName) {
+      if (tasksArray[0] == completedSessions[i].taskName && completedSessions[i].date == getDate() ) {
         foundTask = true;
         if (completedSessions[i].completed == false) {
           taskButton.innerHTML = "Completed";
@@ -201,7 +201,7 @@ function keyUpEvent(event) {
 
 /**
  * @param {string} taskInput - a task inputted by the user
- * Checking if the task is in completed session
+ * Checking if the task is in completed session and date is today
  * If the task is found
  *  return true
  * else
@@ -212,7 +212,7 @@ function inCompleted(taskName) {
   let completedSessions = localStorage.getItem("completedSessions");
   completedSessions = JSON.parse(completedSessions);
   for (let task of completedSessions) {
-    if (task.taskName == taskName) {
+    if (task.taskName == taskName && task.date == getDate()) {
       return true;
     }
   }
