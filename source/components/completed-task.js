@@ -22,8 +22,8 @@ class CompletedTask extends HTMLElement {
     dateLabel.setAttribute("id", "DateLabel");
     ol.setAttribute("id", "olTimeSes");
     img.setAttribute("id", "img");
-    img.setAttribute("src", "../images/checkmark.jpg");
-    img.setAttribute("style", "width:25px;height:25px");
+    img.setAttribute("src", "../source/icons/checkmark.png");
+    img.setAttribute("style", "width:25px;height:25px;margin-bottom:-3px;margin-left:3px");
 
     dateLabel.innerText = this.getAttribute("date") + ": ";
     nameLabel.innerText = this.getAttribute("name");
@@ -33,7 +33,7 @@ class CompletedTask extends HTMLElement {
       let timeLabel = document.createElement("label");
       let newline = document.createElement("br");
       timeLabel.setAttribute("id", "timeLabel");
-      timeLabel.innerText = arr[i] + " minute session";
+      timeLabel.innerText = "- " + arr[i] + " minute session";
       timeLabel.appendChild(newline);
       ol.appendChild(timeLabel);
     }
@@ -58,7 +58,7 @@ class CompletedTask extends HTMLElement {
     let timeLabel = document.createElement("label");
     let newline = document.createElement("br");
     timeLabel.setAttribute("id", "timeLabel");
-    timeLabel.innerText = this.getAttribute("finishedses") + " minute session";
+    timeLabel.innerText = "- " +this.getAttribute("finishedses") + " minute session";
     timeLabel.appendChild(newline);
     shadow.getElementById("olTimeSes").appendChild(timeLabel);
   }
