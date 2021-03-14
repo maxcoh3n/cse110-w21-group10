@@ -1,7 +1,7 @@
 // sets constants when page is refreshed - must be before domcontentloaded
   setLocalStorageDefaults();
 
-/*
+/** 
 * Sets all default values in localstorage if they do not exist yet
 */
 function setLocalStorageDefaults() {

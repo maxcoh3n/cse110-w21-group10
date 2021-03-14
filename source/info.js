@@ -26,6 +26,11 @@ window.addEventListener("DOMContentLoaded", () => {
   SpanishRadioBut.addEventListener("input", ChangeToSpanish);
   englishRadioBut.addEventListener("input", ChangeToEnglish);
 });
+
+
+/**
+ * TODO
+ */
 function ChangeToEnglish() {
   let unorderedLi = document.getElementById("language-option");
   while (unorderedLi.firstChild) {
@@ -45,6 +50,9 @@ function ChangeToEnglish() {
   }
 }
 
+/**
+ * TODO
+ */
 function ChangeToSpanish() {
   let unorderedLi = document.getElementById("language-option");
   while (unorderedLi.firstChild) {

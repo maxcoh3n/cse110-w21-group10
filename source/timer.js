@@ -15,7 +15,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
   startBtn.addEventListener("click", start);
 });
 
-/*
+
+/**
  * Starts the timer, duration depend on user input for work time
  * and styling features depend on break or work time
  */
@@ -252,7 +253,7 @@ function updateCountdown(IsOn) {
   }
 }
 
-/*
+/**
  * increases numsessions statistic
  */
 function incNumSessions() {
@@ -262,7 +263,7 @@ function incNumSessions() {
   renderStatistics();
 }
 
-/*
+/**
  * increases numsessions statistic
  */
 function handleNumDaysWorking() {
@@ -277,7 +278,7 @@ function handleNumDaysWorking() {
   }
 }
 
-/*
+/**
 * space bar to start timer
 */
 const startBtn = document.getElementById("start-btn");

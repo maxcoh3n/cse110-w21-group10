@@ -194,8 +194,8 @@ function updateNumSessions(e) {
   localStorage.setItem("numSessions", num);
 }
 
-/*
-* clears the statistics/data for the user's session history
+/**
+* clears the statistics data for the user's session history
 */
 function clearDataPrompt() {
   const DELETE_MESSAGE = "Clearing your data is an irreversible action, your session history will be lost. \nAre you sure you want to clear your data?\n\n"
