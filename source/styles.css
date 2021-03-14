@@ -135,18 +135,6 @@ input[type="range"] {
   font-size: 15px;
 }
 
-#work-break-label {
-  --border-color: black;
-  border: 2px solid var(--border-color);
-  width: fit-content;
-  display: none;
-  padding: 0.35em;
-  position: absolute;
-  bottom: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 /* Pomo log -----------------------------------------------------------------*/
 #pomo-toggle-container {
   position: absolute;
