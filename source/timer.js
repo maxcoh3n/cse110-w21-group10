@@ -10,7 +10,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
   const countdown = document.getElementById("countdown");
   countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
 
-  //TODO CLEAN THIS UP
   const startBtn = document.getElementById("start-btn");
   startBtn.addEventListener("click", start);
 });
@@ -280,10 +279,10 @@ function handleNumDaysWorking() {
 /**
  * space bar to start timer
  */
-const startBtn = document.getElementById("start-btn");
 document.body.onkeyup = function (e) {
   if (e.keyCode == 32 && document.activeElement != document.getElementById("new-task")) {
     e.preventDefault();
+    const startBtn = document.getElementById("start-btn");
     startBtn.click();
   }
 };
