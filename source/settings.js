@@ -96,7 +96,7 @@ function resetSettings(){
 }
 
 /**
- * @param {string} e
+ * @param {Object} e
  * Change the current sound type to input value
  */
 function updateSound(e){
@@ -116,7 +116,7 @@ function updateTest(){
 }
 
 /**
- * @param {number} e
+ * @param {Object} e
  * Change the volume of the sound to input value
  * Change the image of the speaker according to the volume
  */
@@ -129,7 +129,7 @@ function updateVol(e) {
 }
 
 /** 
-* @param {number} num - volume out of 100
+* @param {Object} num - volume out of 100
 */
 function updateVolIcon(num){
   const iconVol = document.getElementById('icon-vol');
@@ -148,7 +148,7 @@ function updateVolIcon(num){
 }
 
 /**
- * @param {number} e
+ * @param {Object} e
  * Change the work time to input value
  * Display the work time on the page.
  */
@@ -173,7 +173,7 @@ function updateShortBreaktime(e) {
 }
 
 /**
- * @param {number} e
+ * @param {Object} e
  * Change the long break time to input value
  */
 function updateLongBreaktime(e) {
@@ -184,7 +184,7 @@ function updateLongBreaktime(e) {
 }
 
 /**
- * @param {number} e
+ * @param {Object} e
  * Change the number of sessions to input value
  */
 function updateNumSessions(e) {
@@ -194,8 +194,8 @@ function updateNumSessions(e) {
   localStorage.setItem("numSessions", num);
 }
 
-/*
-* clears the statistics/data for the user's session history
+/**
+* clears the statistics data for the user's session history
 */
 function clearDataPrompt() {
   const DELETE_MESSAGE = "Clearing your data is an irreversible action, your session history will be lost. \nAre you sure you want to clear your data?\n\n"

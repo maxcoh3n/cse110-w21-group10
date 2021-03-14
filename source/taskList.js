@@ -16,6 +16,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
   completed.addEventListener("click", completedEvent);
 });
 
+/**
+ * @param {*} taskInput 
+ * Takes the taskInput (task name) and renders that task to the task list
+ */
 function renderOne(taskInput) {
   const taskButton = document.getElementById("complete-task-btn");
 
@@ -75,6 +79,10 @@ function renderOne(taskInput) {
   taskList.appendChild(label);
 }
 
+/**
+ * runs on page load
+ * renders all tasks in the upcomingTasks local storage to the task list
+ */
 function renderAll() {
   const taskButton = document.getElementById("complete-task-btn");
   let tasksArray = localStorage.getItem("upcomingTasks");
@@ -113,7 +121,7 @@ function renderAll() {
   }
 }
 
-/*
+/**
 * adds a new task to the upcoming tasks list
 */
   function addTaskEvent() {
@@ -163,7 +171,7 @@ function renderAll() {
   updateLogWhenPageRefresh();
 }
 
-/*
+/**
 * clears the display of the task list to the user
 */
 function clearTaskList() {
@@ -176,8 +184,9 @@ function clearTaskList() {
 }
 
 
-/*
-* TODO
+
+/**
+* allows for enter key to add a new task to the task list
 */
 function keyUpEvent(event) {
   if (event.keyCode === 13) {
@@ -317,7 +326,7 @@ function undo() {
     updateLogWhenPageRefresh();
 }
 
-/*
+/**
 * handles the delete state for tasks
 */
 function del() {
@@ -377,7 +386,7 @@ function del() {
   }
 }
 
-/*
+/**
  * increases numCompletedTasks statistic
  */
 function incNumCompletedTasks() {
@@ -387,7 +396,7 @@ function incNumCompletedTasks() {
   renderStatistics();
 }
 
-/*
+/**
  * decreases numCompletedTasks statistic
  */
 function decNumCompletedTasks() {
@@ -419,7 +428,7 @@ function decNumCompletedTaskSessions(numSessions) {
   renderStatistics();
 }
 
-/*
+/**
 * handles the three phases for tasks
 */
 function completedEvent(){
