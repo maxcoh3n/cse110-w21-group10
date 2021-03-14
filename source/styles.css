@@ -50,6 +50,10 @@ button:focus {
 button:hover{
   border: 0.25px solid black;
 }
+button:disabled {
+  cursor: default;
+  border: 0.25px solid rgba(201, 201, 201, 0.906);
+}
 
 .flex-icon {
   display: inline-flex;
