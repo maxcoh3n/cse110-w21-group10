@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,178 +14,27 @@
   </head>
 
   <body>
-    <!-- Header row with title -->
-    <h1>Pomodoro Timer</h1>
-    <hr />
-    <audio id="alarm-sound"></audio>
 
-    <!-- Settings -->
-    <button id="settings-btn">Settings</button>
-
-    <div id="settings-modal" class="modal">
-
-        <div class="modal-content">
-            <span id="settings-span" class="close">&times;</span>
-            <h2>Settings</h2>
-            <div class='flex'>
-              <label id="worktime-label">Work Time:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
-              <input id="worktime-number" type="number" min="20" max="30">
-              <div class='label'>
-                  <p class='numLeft'>20</p><input id="worktime-slider" type="range" min="20" max="30">
-                  <p class='numRight'>30</p>
-              </div>
-          </div>
-          <div class='flex'>
-              <label id="short-breaktime-label">Short Break Time:&emsp;&emsp;&emsp;</label>
-              <input id="short-breaktime-number" type="number" min="5" max="10">
-              <div class='label'>
-                  <p class='numLeft'>5</p><input id="short-breaktime-slider" type="range" min="5" max="10">
-                  <p class='numRight'>10</p>
-              </div>
-
-            </div>
-            <div class='flex'>
-                <label id="long-breaktime-label">Long Break Time:&emsp;&emsp;&emsp;</label>
-                <input id="long-breaktime-number" type="number" min="15" max="25">
-                <div class='label'>
-                    <p class='numLeft'>15</p><input id="long-breaktime-slider" type="range" min="15" max="25">
-                    <p class='numRight'>25</p>
-                </div>
-
-              </div>
-              <div class='flex'>
-                  <label id="num-sessions-label">Number of Work Sessions Before Long Break: </label>
-                  <input id="num-sessions-number" type="number" min="3" max="5">
-                  <div class='label'>
-                      <p class='numLeft'>3</p><input id="num-sessions-slider" type="range" min="3" max="5">
-                      <p class='numRight'>5</p>
-                  </div>
-  
-              </div>
-              <div class='flex'>
-
-            <div class='flex-icon'>
-                <label id="volume-label">Volume: &emsp; <img id='icon-vol' style="width:20px;height:20px;"
-                       alt='horn' /></label>
-                <input id="volume-number" type="number" min="0" max="100">
-            </div>
-            <div class='label'>
-              <p class='numLeft'>0</p><input id="volume-slider" type="range" min="0" max="100">
-              <p class='numRight'>100</p>
-          </div>
-
+    <div id="header-box">
+      <!-- Info -->
+      <div id="header-container">
+        <!-- Header row with title -->
+        <h1>Pomodoro Timer</h1>
+        <input type = "image" src = "./icons/info.png" id="info-btn" width="30" height="30">
+          <span class="tooltiptext">Tooltip text</span>
+        </input>
       </div>
+      
 
-            <div class='flex'>
-                <label id="sounds-label">Alarm Sound: &emsp;</label>
-                <select name='sounds' id='sounds'>
-                    <option value="./sounds/alarm_clock_0.mp3">Digital 1</option>
-                    <option value="./sounds/alarm_clock_2.mp3">Digital 2</option>
-                    <option value="./sounds/alarm_clock_8.mp3">Digital 3</option>
-                    <option value="./sounds/alarm_clock_1.mp3">Classic 1</option>
-                    <option value="./sounds/alarm_clock_3.mp3">Classic 2</option>
-                    <option value="./sounds/alarm_clock_4.mp3">Modern 1</option>
-                    <option value="./sounds/alarm_clock_7.mp3">Modern 2</option>
-                    <option value="./sounds/alarm_clock_10.mp3">Modern 3</option>
-                    <option value="./sounds/alarm_clock_5.mp3">Soothing</option>
-                    <option value="./sounds/alarm_clock_6.mp3">Rooster</option>
-                    <option value="./sounds/alarm_clock_9.mp3">Alarm in my head</option>
-                </select>
-                <div id="test-btn-container">
-                    <button id="test-btn" type="submit">Test</button>
-                </div>
-            </div>
-
-            <label for="dev-mode">Dev Mode</label><input type="checkbox" id="dev-mode"><br>
-
-            <label for="clear-data-btn"></label><button id="clear-data-btn">Clear ALL Data</button>
-        </div>
-
+      <!-- Settings -->
+      <button id="settings-btn">Settings</button>      
     </div>
 
-    <!-- Pomo log -->
-    <div id="pomo-toggle-container">
-      <input id="pomo-toggle" type="checkbox" class="pomo-toggle" />
-      <label for="pomo-toggle" id="pomo-label">Pomodoro Log</label>
-
-      <ol class="pomo-log">
-        <li id="stats-container">
-          <details>
-            <summary>Statistics</summary>
-            <ol id="stats-list" style="list-style: none">
-              <li id="num-tasks-completed">
-                <label>Number of Tasks Completed: </label
-                ><span></span>
-              </li>
-              <li id="avg-sessions-per-day">
-                <label>Average Sessions Per day: </label
-                ><span></span>
-              </li>
-              <li id="average-tasks-per-day">
-                <label>Average Tasks Per day: </label
-                ><span></span>
-              </li>
-              <li id="avg-sessions-per-task">
-                <label>Average Sessions to complete a Task: </label
-                ><span></span>
-              </li>
-            </ol>
-            <script src="statistics.js" type="module"></script>
-          </details>
-        </li>
-        <hr />
-
-        <li id="daily-log-container">
-          <h6>Daily Log: </h6>
-          <ol id="log-list" style="list-style: none"></ol>
-        </li>
-      </ol>
-      <script src="./components/completed-task.js"></script>
-      <script type="module" src="pomoLog.js"></script>
-    </div>
-
-    <!-- Timer -->
-    <div id="timer-container">
-      <div id="session-circles" data-session-num="0"></div>
-      <div id="canvas-container">
-        <canvas id="horseshoe" width="500" height="500"></canvas>
-    </div id = "hi">
-      <h1 id="countdown"></h1>
-      <!-- We update this for the horseshoe -->
-        <button id="start-btn">Start</button>
-        <!-- Current Task -->
-        <p id="curr-task">Current Task: <span>Default Task</span></p>
-        <h2 id="work-break-label"></h2>
-    </div>
-    <!-- Task List-->
-    <div id="task-list-container">
-      <div id="task-list-header">
-        <h2>Task List</h2>
-        <button id="complete-task-btn">Completed</button>
-      </div>
-      <hr />
-      <div id="task-list"></div>
-      <hr />
-      <!-- <input id="pomo-toggle" type="checkbox" class="pomo-toggle" />
-        <label for="pomo-toggle" id="pomo-label">Pomodoro Log</label> -->
-      <div id="new-task-container">
-        <input id="new-task" type="text" placeholder="Enter New Task Here" />
-        <button id="new-task-btn">Add Task</button><br />
-        <script src="taskList.js" type="module"></script>
-      </div>
-    </div>
-
-    <script src="settings.js" type="module"></script>
-    <script type="module" src="timer.js"></script>
-    <script type="module" src="sessionCircles.js"></script>
-
-    <!-- Info -->
-    <button id="info-btn">Information</button>
     <div id="info-modal" class="modal">
       <div class="modal-content">
         <span id="info-span" class="close">&times;</span>
 
-        <h2>Information</h2><hr>
+        <h1>Information</h1><hr>
         <ul id ="language-option">
           <li>Click the Settings button in the top right corner and configure your settings.</li>
           <li>Add tasks to the task list to the right. You can click Delete if you added a task by mistake.</li>
@@ -190,15 +43,194 @@
           <li>You can click the Pomodoro Log button on the left to view a log of completed sessions and statistics. </li>
         </ul><br>
 
-        <p>Select your language:
-        <input type="radio" id="english" name="language" checked="checked">
-        <label for="english">English</label>
-        <input type="radio" id="spanish" name="language">
-        <label for="spanish">Spanish</label></p>
+        <div id="language-select">
+          <p>Select your language:<br>
+          <input type="radio" id="english" name="language" checked="checked">
+          <label for="english">English</label><br>
+          <input type="radio" id="spanish" name="language">
+          <label for="spanish">Spanish</label></p>
+        </div>
 
       </div>
     </div>
     <script src="info.js" type="module"></script>
+
+
+    <audio id="alarm-sound"></audio>
+
+    <div id="settings-modal" class="modal">
+
+       <div class="Setting-window">
+          <span id="settings-span" class="close">&times;</span>
+          <h1>Settings</h1><hr>
+        <div class="settings-flex">
+        <div class='flex'>
+           <div id = "setting-flex-child">
+            <label id="worktime-label">Work Time:</label>
+            <input id="worktime-number" type="number" min="20" max="30">
+           </div>
+            <div class='label'>
+                <p class='numLeft'>20</p><input id="worktime-slider" type="range" min="20" max="30">
+                <p class='numRight'>30</p>
+            </div>
+            <br>
+
+        </div>
+        <div class='flex'>
+           <div id = "setting-flex-child">
+              <label id="short-breaktime-label">Short Break Time:</label>
+                <input id="short-breaktime-number" type="number" min="5" max="10"><br>
+           </div>
+            <div class='label'>
+                <p class='numLeft'>5</p><input id="short-breaktime-slider" type="range" min="5" max="10">
+                <p class='numRight'>10</p><br>
+            </div>
+          </div>
+          <div class='flex'>
+            <div id = "setting-flex-child">
+              <label id="long-breaktime-label">Long Break Time:</label>
+              <input id="long-breaktime-number" type="number" min="15" max="25"><br>
+            </div>
+              <div class='label'>
+                  <p class='numLeft'>15</p><input id="long-breaktime-slider" type="range" min="15" max="25">
+                  <p class='numRight'>25</p>
+              </div>
+            </div>
+            <div class='flex'>
+              <div id = "setting-flex-child">
+                <label id="num-sessions-label">Work Sessions Before Long Break: </label>
+                <input id="num-sessions-number" type="number" min="3" max="5"><br>
+              </div>
+                <div class='label'>
+                    <p class='numLeft'>3</p><input id="num-sessions-slider" type="range" min="3" max="5">
+                    <p class='numRight'>5</p>
+                </div>
+            </div>
+            <div class='flex'>
+
+          <div class='flex-icon'>
+              <label id="volume-label">Volume:<img id='icon-vol' style="width:20px;height:20px;"
+                    alt='horn' /></label>
+              <input id="volume-number" type="number" min="0" max="100">
+          </div>
+          <div class='label'>
+            <p class='numLeft'>0</p><input id="volume-slider" type="range" min="0" max="100">
+            <p class='numRight'>100</p>
+        </div>
+
+    </div>
+
+          <div class='flex-alarm'>
+              <label id="sounds-label">Alarm Sound:</label>
+              <select name='sounds' id='sounds'>
+                  <option value="./sounds/alarm_clock_0.mp3">Digital 1</option>
+                  <option value="./sounds/alarm_clock_2.mp3">Digital 2</option>
+                  <option value="./sounds/alarm_clock_1.mp3">Classic 1</option>
+                  <option value="./sounds/alarm_clock_3.mp3">Classic 2</option>
+                  <option value="./sounds/alarm_clock_4.mp3">Modern 1</option>
+                  <option value="./sounds/alarm_clock_10.mp3">Modern 3</option>
+                  <option value="./sounds/alarm_clock_5.mp3">Soothing</option>
+                  <option value="./sounds/alarm_clock_6.mp3">Rooster</option>
+                  <option value="./sounds/alarm_clock_9.mp3">Alarm in my head</option>
+              </select>
+              <div id="test-btn-container">
+                  <button id="test-btn" type="submit">Test</button>
+              </div>
+          </div>
+
+          <label for="dev-mode">Dev Mode</label><input type="checkbox" id="dev-mode"><br>
+
+          <label for="clear-data-btn"></label><button id="clear-data-btn">Clear ALL Data</button>
+      </div>
+    </div>
+    </div>
+
+    <hr/>
+
+    <main>
+      <!-- Pomo log -->
+      <div id="pomo-toggle-container">
+        <input id="pomo-toggle" type="checkbox" class="pomo-toggle" />
+        <label for="pomo-toggle" id="pomo-label">Pomodoro Log</label>
+
+        <ol class="pomo-log">
+          <li id="stats-container">
+            <details>
+              <summary>Statistics</summary>
+              <ol id="stats-list" style="list-style: none">
+                <li id="num-tasks-completed">
+                  <label>Number of Tasks Completed: </label
+                  ><span></span>
+                </li>
+                <li id="avg-sessions-per-day">
+                  <label>Average Sessions Per day: </label
+                  ><span></span>
+                </li>
+                <li id="average-tasks-per-day">
+                  <label>Average Tasks Per day: </label
+                  ><span></span>
+                </li>
+                <li id="avg-sessions-per-task">
+                  <label>Average Sessions to complete a Task: </label
+                  ><span></span>
+                </li>
+              </ol>
+              <script src="statistics.js" type="module"></script>
+            </details>
+          </li>
+          <hr />
+
+          <li id="daily-log-container">
+            <h6>Daily Log: </h6>
+            <ol id="log-list" style="list-style: none"></ol>
+          </li>
+        </ol>
+        <script src="./components/completed-task.js"></script>
+        <script type="module" src="pomoLog.js"></script>
+      </div>
+
+      <!-- Timer -->
+      <div id="timer-container">
+        <div id="canvas-container" width="600" height="600">
+          <canvas id="horseshoe" width="600" height="600"></canvas>
+          <div id="countdown-container">
+            <div id="session-circles" data-session-num="0"></div>
+            <h1 id="countdown"></h1>
+          </div>
+        </div>
+        
+        <!-- We update this for the horseshoe -->
+        <div id="start-container">
+          <button id="start-btn">Start</button>
+  
+          <!-- Current Task -->
+          <p id="curr-task">Current Task: <span>Default Task</span></p>
+        </div>
+        <h2 id="work-break-label"></h2>
+      </div>
+
+      <!-- Task List-->
+      <div id="task-list-container">
+        <div id="task-list-header">
+          <h2>Task List</h2>
+          <button id="complete-task-btn">Completed</button>
+        </div>
+        <hr />
+        <div id="task-list"></div>
+        <hr />
+        <!-- <input id="pomo-toggle" type="checkbox" class="pomo-toggle" />
+          <label for="pomo-toggle" id="pomo-label">Pomodoro Log</label> -->
+        <div id="new-task-container">
+          <input id="new-task" type="text" placeholder="Enter New Task Here" />
+          <button id="new-task-btn">Add Task</button><br />
+          <script src="taskList.js" type="module"></script>
+        </div>
+      </div>
+    </main>
+    <script src="settings.js" type="module"></script>
+    <script type="module" src="timer.js"></script>
+    <script type="module" src="sessionCircles.js"></script>
+
     
 
 </body>

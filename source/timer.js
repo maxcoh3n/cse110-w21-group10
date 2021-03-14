@@ -69,6 +69,7 @@ function timer() {
 
     // Disable all other features
     document.getElementById("settings-btn").disabled = true;
+    document.getElementById("settings-btn").style.opacity = "60%";
     document.getElementById("task-list-container").style.opacity = "60%";
     document.getElementById("new-task").disabled = true;
     document.getElementById("new-task-btn").disabled = true;
@@ -91,6 +92,7 @@ function timer() {
 
     // Enable all other features
     document.getElementById("settings-btn").disabled = false;
+    document.getElementById("settings-btn").style.opacity = "100%";
     document.getElementById("task-list-container").style.opacity = "100%";
     document.getElementById("new-task-container").style.opacity = "100%";
     document.getElementById("new-task").disabled = false;
@@ -264,6 +266,7 @@ function updateCountdown(IsOn) {
 
         // Enable all other features
         document.getElementById("settings-btn").disabled = false;
+        document.getElementById("settings-btn").style.opacity = "100%";
         document.getElementById("task-list-container").style.opacity = "100%";
         document.getElementById("new-task-container").style.opacity = "100%";
         document.getElementById("new-task").disabled = false;
