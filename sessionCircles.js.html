@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>horseshoe.js - Documentation</title>
+    <title>sessionCircles.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">horseshoe.js</h1>
+    <h1 class="page-title">sessionCircles.js</h1>
     
 
     
@@ -40,74 +40,155 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Stops the Horse shoe animation by calling cancelInterval.
- * Clears out the canvas.
+ * Updates previous session color to completed color when completed
+ * @param {Object} event 
  */
-function stopHorseShoe() {
-  clearInterval(localStorage.getItem("animateID"));
-  let canvas = document.getElementById("horseshoe");
-  let ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+function updatePrevColor(event) {
+  let sessionIdx = event.detail.session;
+
+  // Mark previous circles completed; reset to blank if end of pomo cycle
+  if (sessionIdx != 0) {
+    let circlesContainer = document.getElementById("session-circles");
+    circlesContainer.childNodes[sessionIdx - 1].setAttribute("class", "completed-circle");
+
+    let sessionNumberInput = document.getElementById("num-sessions-number");
+    sessionNumberInput.disabled = true;
+
+    let sessionSlider = document.getElementById("num-sessions-slider");
+    sessionSlider.disabled = true;
+  } else {
+    resetColors();
+  }
 }
+
 /**
- *
- * @param {number} time
- * @param {number} direction
- * @param {boolean} devMode
- * Starts the horseshoe animation in the HTML canvas tag with id horseshoe. Input var time 
- * represents the timer duration in minutes, which affects the rate at which the horseshoe 
- * changes in shape. Direction indicates if we are drawing clockwise (when working timer), or
- * counterclockwise (when break timer).
+ * Resets colors (Current session index is 0)
  */
-function drawHorseShoe(time, direction, devMode) {
-  var canvas = document.getElementById("horseshoe");
-  var ctx = canvas.getContext("2d");
-  ctx.lineWidth = 30;
-  ctx.strokeStyle = "black";
-
-  // Scaling based on width allows for easy resizability
-  var cw = canvas.width;
-  var ch = canvas.height;
-  var cx = cw / 2;
-  var cy = ch / 2;
-  var radius = (Math.min(cw, ch) * 0.75) / 2;
-  var startAngle = (-5 * Math.PI) / 4;
-  var endAngle = (5 * Math.PI) / 4;
-  var offset = 0;
-
-  // Start offset at max angle if we are counting back
-  if (direction == -1) {
-    offset = (3 * Math.PI) / 2;
+function resetColors() {
+  let circlesContainer = document.getElementById("session-circles");
+  for (let i = 0; i &lt; circlesContainer.childNodes.length; i++) {
+    circlesContainer.childNodes[i].setAttribute("class", "blank-circle");
   }
+  circlesContainer.childNodes[0].setAttribute("class", "curr-circle");
+}
 
-  // Amount of movement (in radians) per second
-  var increment = (3 * Math.PI) / (2 * time * 60);
 
-  // Function animate runs every second
-  var count = setInterval(animate, devMode ? 0.5 : 1000);
-  localStorage.setItem("animateID", count);
-
-  /**
-    * One cycle of the animation. Change the offset based on increment (depends on time). 
-    * Draw an arc from start angle to end angle. 
-  */
-  function animate() {
-    ctx.clearRect(0, 0, cw, ch);
-    // Drawing work arc means we increment offset depending on workTime
-    if (direction == 1) {
-      offset += increment;
+/**
+ * Updates current circle color to curr-circle when starting next session 
+ * @param {Object} event 
+ */
+function updateCurrColor(event) {
+  let circlesContainer = document.getElementById("session-circles");
+  let sessionIdx = event.detail.session;
+  circlesContainer.childNodes[sessionIdx].setAttribute("class", "curr-circle");
+  if (sessionIdx == 0) {
+    for (let i = 1; i &lt; circlesContainer.childNodes.length; i++) {
+      circlesContainer.childNodes[i].setAttribute("class", "blank-circle");
     }
-    // Drawing break arc means we decrement offset depending on breakTime
-    else if (direction == -1) {
-      offset -= increment;
-    }
-    // Draw an arc that has fixed starting degrees, with ending degrees dependent on timer
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius, startAngle, offset - endAngle);
-    ctx.stroke();
   }
 }
-export { drawHorseShoe, stopHorseShoe };
+
+/**
+ * Adds/deletes circles to DOM according to numSessions
+ */
+function renderCircles() {
+  let circlesContainer = document.getElementById("session-circles");
+  // let numOfSessions = localStorage.getItem("numSessions");
+  let sessionSlider = document.getElementById("num-sessions-slider");
+
+  // Delete circles
+  if (circlesContainer.children.length > sessionSlider.value) {
+    for (let i = circlesContainer.children.length - sessionSlider.value; i > 0; i--) {
+      circlesContainer.removeChild(circlesContainer.childNodes[circlesContainer.children.length - 1]);
+    }
+  } else if (circlesContainer.children.length &lt; sessionSlider.value) {
+    // Add circles
+    for (let i = sessionSlider.value - circlesContainer.children.length; i > 0; i--) {
+      let newCircle = document.createElement("span");
+      newCircle.setAttribute("class", "blank-circle");
+      circlesContainer.appendChild(newCircle);
+    }
+  }
+  let sessionIdx = localStorage.getItem("numCurrentSech");
+  circlesContainer.childNodes[sessionIdx].setAttribute("class", "curr-circle");
+}
+
+
+
+/**
+ * Create custom event for session change
+ * @param {*} sessionNum 
+ */
+function changeSession(sessionNum) {
+  let circlesContainer = document.getElementById("session-circles");
+  let event = new CustomEvent("sessionChange", {
+    detail: {
+      session: sessionNum,
+    },
+  });
+  circlesContainer.dispatchEvent(event);
+}
+
+
+/**
+ * Create custom event for break ending
+ * @param {*} sessionNum 
+ */
+function endBreak(sessionNum) {
+  let circlesContainer = document.getElementById("session-circles");
+  let event = new CustomEvent("breakEnd", {
+    detail: {
+      session: sessionNum,
+    },
+  });
+  circlesContainer.dispatchEvent(event);
+}
+
+/**
+ * Custom event for start of long break 
+ * @param {*} sessionNum 
+ */
+function startLongBreak(sessionNum) {
+  let circlesContainer = document.getElementById("session-circles");
+  let event = new CustomEvent("longBreakStart", {
+    detail: {
+      session: sessionNum,
+    },
+  });
+  circlesContainer.dispatchEvent(event);
+}
+
+
+/**
+ * Enables/disables input to change numSessions
+ */
+function toggleNumSessionInput() {
+  let sessionNumberInput = document.getElementById("num-sessions-number");
+
+  sessionNumberInput.disabled = false;
+
+  let sessionSlider = document.getElementById("num-sessions-slider");
+  sessionSlider.disabled = false;
+}
+
+window.addEventListener("DOMContentLoaded", (event) => {
+  let sessionSlider = document.getElementById("num-sessions-slider");
+  sessionSlider.value = localStorage.getItem("numSessions");
+  sessionSlider.addEventListener("input", renderCircles);
+
+  let sessionNumberInput = document.getElementById("num-sessions-number");
+  sessionNumberInput.value = localStorage.getItem("numSessions");
+  sessionNumberInput.addEventListener("input", renderCircles);
+
+  let circlesContainer = document.getElementById("session-circles");
+  circlesContainer.addEventListener("sessionChange", updatePrevColor);
+  circlesContainer.addEventListener("breakEnd", updateCurrColor);
+  circlesContainer.addEventListener("longBreakStart", toggleNumSessionInput);
+
+  renderCircles();
+});
+
+export { changeSession, endBreak, startLongBreak };
 </code></pre>
         </article>
     </section>
