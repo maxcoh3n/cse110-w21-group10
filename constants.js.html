@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>horseshoe.js - Documentation</title>
+    <title>constants.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">horseshoe.js</h1>
+    <h1 class="page-title">constants.js</h1>
     
 
     
@@ -39,75 +39,59 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Stops the Horse shoe animation by calling cancelInterval.
- * Clears out the canvas.
- */
-function stopHorseShoe() {
-  clearInterval(localStorage.getItem("animateID"));
-  let canvas = document.getElementById("horseshoe");
-  let ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-/**
- *
- * @param {number} time
- * @param {number} direction
- * @param {boolean} devMode
- * Starts the horseshoe animation in the HTML canvas tag with id horseshoe. Input var time 
- * represents the timer duration in minutes, which affects the rate at which the horseshoe 
- * changes in shape. Direction indicates if we are drawing clockwise (when working timer), or
- * counterclockwise (when break timer).
- */
-function drawHorseShoe(time, direction, devMode) {
-  var canvas = document.getElementById("horseshoe");
-  var ctx = canvas.getContext("2d");
-  ctx.lineWidth = 30;
-  ctx.strokeStyle = "black";
+            <pre class="prettyprint source linenums"><code>// sets constants when page is refreshed - must be before domcontentloaded
+  setLocalStorageDefaults();
 
-  // Scaling based on width allows for easy resizability
-  var cw = canvas.width;
-  var ch = canvas.height;
-  var cx = cw / 2;
-  var cy = ch / 2;
-  var radius = (Math.min(cw, ch) * 0.75) / 2;
-  var startAngle = (-5 * Math.PI) / 4;
-  var endAngle = (5 * Math.PI) / 4;
-  var offset = 0;
+/** 
+* Sets all default values in localstorage if they do not exist yet
+*/
+function setLocalStorageDefaults() {
+  let workMins = localStorage.getItem("workMins");
+  if (!workMins) localStorage.setItem("workMins", "25");
 
-  // Start offset at max angle if we are counting back
-  if (direction == -1) {
-    offset = (3 * Math.PI) / 2;
+  let shortBreakMins = localStorage.getItem("shortBreakMins");
+  if (!shortBreakMins) localStorage.setItem("shortBreakMins", "5");
+
+  let longBreakMins = localStorage.getItem("longBreakMins");
+  if (!longBreakMins) localStorage.setItem("longBreakMins", "15");
+
+  let numSessions = localStorage.getItem("numSessions");
+  if (!numSessions) localStorage.setItem("numSessions", "4");
+
+  let vol = localStorage.getItem("vol");
+  if (!vol) localStorage.setItem("vol", "50");
+
+  let soundType = localStorage.getItem("soundType");
+  if (!soundType) localStorage.setItem("soundType", "./sounds/alarm_clock_0.mp3");
+
+  let completedSessions = localStorage.getItem("completedSessions");
+  if (!completedSessions) localStorage.setItem("completedSessions", "[]");
+
+  let upcomingTasks = localStorage.getItem("upcomingTasks");
+  if (!upcomingTasks) localStorage.setItem("upcomingTasks", "[]");
+
+  let workOrBreak = localStorage.getItem("workOrBreak");
+  if (workOrBreak != "work") {
+    localStorage.setItem("workOrBreak", "work");
   }
+  let numCurrentSech = localStorage.getItem("numCurrentSech");
+  if (numCurrentSech != 0) localStorage.setItem("numCurrentSech", "0");
 
-  // Amount of movement (in radians) per second
-  var increment = (3 * Math.PI) / (2 * time * 60);
+  let statistics = localStorage.getItem("statistics");
+  let statsObj = {
+    numCompletedTaskSessions: 0,
+    numCompletedTasks: 0,
+    numSessions: 0,
+    numDaysWorking: 0,
+    numDistractions: 0,
+  };
+  if (!statistics) localStorage.setItem("statistics", JSON.stringify(statsObj));
 
-  // Function animate runs every second
-  var count = setInterval(animate, devMode ? 0.5 : 1000);
-  localStorage.setItem("animateID", count);
-
-  /**
-    * One cycle of the animation. Change the offset based on increment (depends on time). 
-    * Draw an arc from start angle to end angle. 
-  */
-  function animate() {
-    ctx.clearRect(0, 0, cw, ch);
-    // Drawing work arc means we increment offset depending on workTime
-    if (direction == 1) {
-      offset += increment;
-    }
-    // Drawing break arc means we decrement offset depending on breakTime
-    else if (direction == -1) {
-      offset -= increment;
-    }
-    // Draw an arc that has fixed starting degrees, with ending degrees dependent on timer
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius, startAngle, offset - endAngle);
-    ctx.stroke();
-  }
+  let lastDayWorked = localStorage.getItem("lastDayWorked");
+  if (!lastDayWorked) localStorage.setItem("lastDayWorked", "");
 }
-export { drawHorseShoe, stopHorseShoe };
+
+export {setLocalStorageDefaults};
 </code></pre>
         </article>
     </section>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>horseshoe.js - Documentation</title>
+    <title>info.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">horseshoe.js</h1>
+    <h1 class="page-title">info.js</h1>
     
 
     
@@ -39,75 +39,82 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Stops the Horse shoe animation by calling cancelInterval.
- * Clears out the canvas.
- */
-function stopHorseShoe() {
-  clearInterval(localStorage.getItem("animateID"));
-  let canvas = document.getElementById("horseshoe");
-  let ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
+            <pre class="prettyprint source linenums"><code>//info.js
+
+//runs when page is loaded
+window.addEventListener("DOMContentLoaded", () => {
+  let infoModal = document.getElementById("info-modal");
+  let infoBtn = document.getElementById("info-btn");
+  let infoSpan = document.getElementById("info-span");
+
+  infoBtn.onclick = function () {
+    infoModal.style.display = "block";
+  };
+
+  infoSpan.onclick = function () {
+    infoModal.style.display = "none";
+  };
+
+  window.addEventListener("click", function (event) {
+    if (event.target == infoModal) {
+      infoModal.style.display = "none";
+    }
+  });
+
+  const englishRadioBut = document.getElementById("english");
+  const SpanishRadioBut = document.getElementById("spanish");
+
+  SpanishRadioBut.addEventListener("input", ChangeToSpanish);
+  englishRadioBut.addEventListener("input", ChangeToEnglish);
+});
+
 /**
- *
- * @param {number} time
- * @param {number} direction
- * @param {boolean} devMode
- * Starts the horseshoe animation in the HTML canvas tag with id horseshoe. Input var time 
- * represents the timer duration in minutes, which affects the rate at which the horseshoe 
- * changes in shape. Direction indicates if we are drawing clockwise (when working timer), or
- * counterclockwise (when break timer).
+ * This function changes the text instructions in the info button to english
+ * when the english radio button is selected.
  */
-function drawHorseShoe(time, direction, devMode) {
-  var canvas = document.getElementById("horseshoe");
-  var ctx = canvas.getContext("2d");
-  ctx.lineWidth = 30;
-  ctx.strokeStyle = "black";
-
-  // Scaling based on width allows for easy resizability
-  var cw = canvas.width;
-  var ch = canvas.height;
-  var cx = cw / 2;
-  var cy = ch / 2;
-  var radius = (Math.min(cw, ch) * 0.75) / 2;
-  var startAngle = (-5 * Math.PI) / 4;
-  var endAngle = (5 * Math.PI) / 4;
-  var offset = 0;
-
-  // Start offset at max angle if we are counting back
-  if (direction == -1) {
-    offset = (3 * Math.PI) / 2;
+function ChangeToEnglish() {
+  let unorderedLi = document.getElementById("language-option");
+  while (unorderedLi.firstChild) {
+    unorderedLi.removeChild(unorderedLi.firstChild);
   }
-
-  // Amount of movement (in radians) per second
-  var increment = (3 * Math.PI) / (2 * time * 60);
-
-  // Function animate runs every second
-  var count = setInterval(animate, devMode ? 0.5 : 1000);
-  localStorage.setItem("animateID", count);
-
-  /**
-    * One cycle of the animation. Change the offset based on increment (depends on time). 
-    * Draw an arc from start angle to end angle. 
-  */
-  function animate() {
-    ctx.clearRect(0, 0, cw, ch);
-    // Drawing work arc means we increment offset depending on workTime
-    if (direction == 1) {
-      offset += increment;
-    }
-    // Drawing break arc means we decrement offset depending on breakTime
-    else if (direction == -1) {
-      offset -= increment;
-    }
-    // Draw an arc that has fixed starting degrees, with ending degrees dependent on timer
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius, startAngle, offset - endAngle);
-    ctx.stroke();
+  let arr = [
+    "Click the Settings button in the top right corner and configure your settings.",
+    "Add tasks to the task list to the right. You can click Delete if you added a task by mistake.",
+    "Select the task you want and click Start to start the timer.",
+    "After you have completed a session you can click Complete to complete the selected task and Undo if you clicked Complete by mistake.",
+    "You can click the Pomodoro Log button on the left to view a log of completed sessions and statistics.",
+  ];
+  for (let i = 0; i &lt; arr.length; i++) {
+    let tag = document.createElement("li");
+    tag.innerText = arr[i];
+    unorderedLi.appendChild(tag);
   }
 }
-export { drawHorseShoe, stopHorseShoe };
+
+/**
+ * This function changes the text instructions in the info button to spanish
+ * when the spanish radio button is selected.
+ */
+function ChangeToSpanish() {
+  let unorderedLi = document.getElementById("language-option");
+  while (unorderedLi.firstChild) {
+    unorderedLi.removeChild(unorderedLi.firstChild);
+  }
+  let arr = [
+    "CHaga clic en el botón Configuración en la esquina superior derecha y configure sus ajustes.",
+    "Agregue tareas a la lista de tareas de la derecha. Puede hacer clic en Eliminar si agregó una tarea por error.",
+    "Seleccione la tarea que desee y haga clic en Iniciar para iniciar el temporizador.",
+    "Una vez que haya completado una sesión, puede hacer clic en Completar para completar la tarea seleccionada y Deshacer si hizo clic en Completar por error.",
+    "Puede hacer clic en el botón Registro Pomodoro a la izquierda para ver un registro de las sesiones completadas y las estadísticas.",
+  ];
+  for (let i = 0; i &lt; arr.length; i++) {
+    let tag = document.createElement("li");
+    tag.innerText = arr[i];
+    unorderedLi.appendChild(tag);
+  }
+}
+
+export { ChangeToEnglish, ChangeToSpanish };
 </code></pre>
         </article>
     </section>
