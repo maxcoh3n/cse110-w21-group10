@@ -21,14 +21,12 @@ function updatePrevColor(event) {
 function resetColors() {
   let circlesContainer = document.getElementById("session-circles");
   for (let i = 0; i < circlesContainer.childNodes.length; i++) {
-    console.log(localStorage.getItem("numCurrentSech"));
     if (i < Number(localStorage.getItem("numCurrentSech"))) {
       circlesContainer.childNodes[i].setAttribute("class", "completed-circle");
     } else {
       circlesContainer.childNodes[i].setAttribute("class", "blank-circle");
     }
   }
-  console.log("reset color");
 }
 
 /* Updates current circle color to curr-circle when starting next session */
@@ -41,7 +39,6 @@ function updateCurrColor(event) {
       circlesContainer.childNodes[i].setAttribute("class", "blank-circle");
     }
   }
-  console.log("update curr color");
 }
 
 /* Adds/deletes circles to DOM according to numSessions */
