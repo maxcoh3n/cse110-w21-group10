@@ -104,27 +104,6 @@ describe('taskList', ()=>{
         expect(taskButton.innerHTML).toBe("Delete");
     })
 
-    /*test('testing renderAll when tasksArray length = 3 and task is found and not completed in completedSessions', ()=>{
-        setLocalStorageDefaults();
-
-        let tasks = ["101", "102", "103"] 
-        localStorage.setItem("upcomingTasks", JSON.stringify(tasks));
-
-        const taskButton = document.getElementById("complete-task-btn");
-        let tasksArray = localStorage.getItem("upcomingTasks");
-        tasksArray = JSON.parse(tasksArray);
-
-        let completed = ["101"] 
-        localStorage.setItem("completedSessions", JSON.stringify(completed));
-        let completedSessions = localStorage.getItem("completedSessions");
-        completedSessions = JSON.parse(completedSessions);
-        let foundTask = false;
-
-        expect(renderAll()).toBeUndefined();
-        //expect(taskButton.disabled).toBe(false);
-        expect(taskButton.innerHTML).toBe("Completed");
-    })*/
-
     test('testing renderAll when tasksArray length = 3 and task is found and completed in completedSessions', ()=>{
         setLocalStorageDefaults();
 
