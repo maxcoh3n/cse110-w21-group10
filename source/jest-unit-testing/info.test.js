@@ -36,8 +36,5 @@ describe('info', () => {
     expect(ChangeToSpanish()).toBeUndefined();
   });
 
-  test('should fail',()=>{
-    expect(420).toBe(69);
-  });
   
 });
