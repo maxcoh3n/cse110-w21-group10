@@ -195,9 +195,6 @@ describe('taskList', ()=>{
 
     test('testing clearTaskList', ()=>{
         setLocalStorageDefaults();
-        // let taskList = document.getElementById('task-list');
-        // var task = document.createElement("101");
-        // taskList.appendChild(task);
         expect(clearTaskList()).toBeUndefined();
     })
 
@@ -211,16 +208,6 @@ describe('taskList', ()=>{
 
         const completed = document.getElementById("complete-task-btn");
     })
-
-    /*test('testing undo', ()=>{
-        setLocalStorageDefaults();
-        let taskList = document.getElementById("task-list");
-        var curr = document.createElement("CSE-101");
-        taskList.appendChild(curr);
-        let completedSessions = localStorage.getItem("completedSessions");
-        completedSessions = JSON.parse(completedSessions);
-        expect(undo()).toBeUndefined();
-    })*/
 
     test('testing del', ()=>{
         setLocalStorageDefaults();
@@ -254,23 +241,11 @@ describe('taskList', ()=>{
         expect(input.addEventListener('input', renderOne())).toBeUndefined();
     })
 
-    // test('testing keyUpEvent', ()=>{
-    //     setLocalStorageDefaults();
-    //     const input = document.querySelector('input');
-    //     expect(input.addEventListener('input', keyUpEvent())).toBeUndefined();
-    // })
-
     test('testing isCompleted', ()=>{
         setLocalStorageDefaults();
         const input = document.querySelector('input');
         expect(input.addEventListener('input', isCompleted())).toBeUndefined();
     })
-
-    // test('testing inCompleted', ()=>{
-    //     setLocalStorageDefaults();
-    //     const input = document.querySelector('input');
-    //     expect(input.addEventListener('input', inCompleted())).toBeUndefined();
-    // })
 
     test('testing incNumCompletedTaskSessions', ()=>{
         setLocalStorageDefaults();

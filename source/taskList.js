@@ -293,18 +293,18 @@ function undo() {
 
   let taskList = document.getElementById("task-list");
   let taskArray = [];
-    for (let box of taskList.childNodes) {
-      let label = document.getElementById("label" + box.id);
-      if( box.checked ) {
-        document.getElementById("curr-task").children[0].innerHTML = box.id;
-        const completed = document.getElementById("complete-task-btn");
-        completed.innerHTML = "Completed";
-        label.style.textDecoration = "none";
-        var completedSessions = localStorage.getItem("completedSessions");
-        completedSessions = JSON.parse(completedSessions);
-        for(let i = 0; i<completedSessions.length; i++){
-          if( box.id == completedSessions[i].taskName && completedSessions[i].date == getDate()) {
-            completedSessions[i].completed = false;
+  for (let box of taskList.childNodes) {
+    let label = document.getElementById("label" + box.id);
+    if (box.checked) {
+      document.getElementById("curr-task").children[0].innerHTML = box.id;
+      const completed = document.getElementById("complete-task-btn");
+      completed.innerHTML = "Completed";
+      label.style.textDecoration = "none";
+      let completedSessions = localStorage.getItem("completedSessions");
+      completedSessions = JSON.parse(completedSessions);
+      for (let i = 0; i < completedSessions.length; i++) {
+        if( box.id == completedSessions[i].taskName && completedSessions[i].date == getDate()) {
+          completedSessions[i].completed = false;
           }
         }
       }

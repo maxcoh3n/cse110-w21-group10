@@ -50,18 +50,6 @@ describe('sessionCircles', ()=>{
         expect(toggleNumSessionInput()).toBeUndefined();
     })
 
-    // test('updatePrevColor', ()=>{
-    //     setLocalStorageDefaults();
-    //     const input = document.querySelector('input');
-    //     expect(input.addEventListener('input', updatePrevColor())).toBeUndefined();
-    // })
-
-    // test('updateCurrColor', ()=>{
-    //     setLocalStorageDefaults();
-    //     const input = document.querySelector('input');
-    //     expect(input.addEventListener('input', updateCurrColor())).toBeUndefined();
-    // })
-
     test('changeSession', ()=>{
         setLocalStorageDefaults();
         const input = document.querySelector('input');
