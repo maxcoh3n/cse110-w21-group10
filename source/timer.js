@@ -5,18 +5,18 @@ import { renderStatistics } from "./statistics.js";
 import { getDate } from "./getDate.js";
 import { drawHorseShoe, stopHorseShoe } from "./horseshoe.js";
 
-// repopulates pomo log when page is refreshed.
+// Adds an event listener to the start button when page is loaded.
 window.addEventListener("DOMContentLoaded", (event) => {
   const countdown = document.getElementById("countdown");
   countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
 
-  //TODO CLEAN THIS UP
   const startBtn = document.getElementById("start-btn");
   startBtn.addEventListener("click", start);
 });
 
-/*
- * TODO add doc
+/**
+ * Starts the timer, duration depend on user input for work time
+ * and styling features depend on break or work time
  */
 function start() {
   timer();
@@ -143,7 +143,6 @@ function timer() {
  */
 function updateCountdown(IsOn) {
   const title = document.getElementById("title-countdown");
-  const workBreakLabel = document.getElementById("work-break-label");
 
   const devMode = document.getElementById("dev-mode");
   if (IsOn) {
@@ -175,7 +174,7 @@ function updateCountdown(IsOn) {
       countdown.innerHTML = `${localStorage.getItem("workMins")}:00`;
       title.innerHTML = `${localStorage.getItem("workMins")}:00`;
     }
-    workBreakLabel.style.display = "none";
+
     const completed = document.getElementById("complete-task-btn");
     completed.disabled = false;
   }
@@ -190,14 +189,7 @@ function updateCountdown(IsOn) {
    */
   function updateTime() {
     const startBtn = document.getElementById("start-btn");
-    if (localStorage.getItem("workOrBreak") == "work") {
-      workBreakLabel.style.display = "block";
-      workBreakLabel.innerHTML = "Work Time";
-    }
-    if (localStorage.getItem("workOrBreak") == "break" || localStorage.getItem("workOrBreak") == "longBreak") {
-      workBreakLabel.style.display = "block";
-      workBreakLabel.innerHTML = "Break Time";
-    }
+
     time--;
     time = time < 0 ? 0 : time;
 
@@ -291,7 +283,7 @@ function updateCountdown(IsOn) {
   }
 }
 
-/*
+/**
  * increases numsessions statistic
  */
 function incNumSessions() {
@@ -301,7 +293,7 @@ function incNumSessions() {
   renderStatistics();
 }
 
-/*
+/**
  * increases numsessions statistic
  */
 function handleNumDaysWorking() {
@@ -316,13 +308,13 @@ function handleNumDaysWorking() {
   }
 }
 
-/*
+/**
  * space bar to start timer
  */
-const startBtn = document.getElementById("start-btn");
 document.body.onkeyup = function (e) {
   if (e.keyCode == 32 && document.activeElement != document.getElementById("new-task")) {
     e.preventDefault();
+    const startBtn = document.getElementById("start-btn");
     startBtn.click();
   }
 };

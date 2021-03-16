@@ -1,5 +1,5 @@
 
-/*
+/**
 * returns today's date in a mm/dd format
 */
 function getDate() {
