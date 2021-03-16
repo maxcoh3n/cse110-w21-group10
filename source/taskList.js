@@ -161,8 +161,8 @@ function renderAll() {
     taskButton.disabled = false;
     localStorage.setItem("upcomingTasks", JSON.stringify(tasksArray));
     renderOne(newTaskInput.value);
-    if( tasksArray.length == 1 ) {
-      if ( inCompleted(newTaskInput.value) == false ) {
+    if(tasksArray.length == 1 ) {
+      if (inCompleted(newTaskInput.value) == false ) {
         taskButton.innerHTML = "Delete";
       } else {
         taskButton.innerHTML = "Completed";
@@ -446,4 +446,7 @@ function completedEvent(){
   }
 }
 
-export {clearTaskList, renderOne, renderAll, renderStatistics};
+export {renderOne, renderAll, addTaskEvent, keyUpEvent , 
+  inCompleted, isCompleted, comple, undo, del, incNumCompletedTasks, clearTaskList,
+  decNumCompletedTasks, incNumCompletedTaskSessions, 
+  decNumCompletedTaskSessions, completedEvent};
