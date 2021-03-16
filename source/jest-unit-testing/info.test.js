@@ -35,5 +35,9 @@ describe('info', () => {
     expect(ChangeToEnglish()).toBeUndefined();
     expect(ChangeToSpanish()).toBeUndefined();
   });
+
+  test('should fail',()=>{
+    expect(420).toBe(69);
+  });
   
 });
