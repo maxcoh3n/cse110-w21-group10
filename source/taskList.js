@@ -174,19 +174,6 @@ function renderAll() {
   updateLogWhenPageRefresh();
 }
 
-/**
-* clears the display of the task list to the user
-*/
-function clearTaskList() {
-
-  let taskList = document.getElementById('task-list');
-  while( taskList.firstChild ) {
-    taskList.removeChild(taskList.firstChild);
-  }
-
-}
-
-
 
 /**
 * allows for enter key to add a new task to the task list
@@ -447,6 +434,6 @@ function completedEvent(){
 }
 
 export {renderOne, renderAll, addTaskEvent, keyUpEvent , 
-  inCompleted, isCompleted, comple, undo, del, incNumCompletedTasks, clearTaskList,
+  inCompleted, isCompleted, comple, undo, del, incNumCompletedTasks, 
   decNumCompletedTasks, incNumCompletedTaskSessions, 
   decNumCompletedTaskSessions, completedEvent};
