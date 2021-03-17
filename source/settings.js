@@ -1,6 +1,3 @@
-import {renderStatistics} from "./statistics.js";
-import { clearLog } from "./pomoLog.js";
-import { clearTaskList } from "./taskList.js";
 import {setLocalStorageDefaults} from "./constants.js"
 
 // renders statistics is refreshed.
@@ -204,14 +201,10 @@ function clearDataPrompt() {
 
     localStorage.clear();
     setLocalStorageDefaults();
+    location.reload();
 
+    // renderStatistics();
 
-    renderStatistics();
-
-    clearLog();
-
-    clearTaskList();
-    resetSettings();
   }
 }
 

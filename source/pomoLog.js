@@ -73,14 +73,5 @@ function RenderToLog(newTask) {
   dailyLog.appendChild(customElement);
 }
 
-/*
- * clears the display of the log to the user
- */
-function clearLog() {
-  let dailyLog = document.getElementById("log-list");
-  while (dailyLog.firstChild) {
-    dailyLog.removeChild(dailyLog.firstChild);
-  }
-}
 
-export { updatePomoLog, AddToLog, clearLog, updateLogWhenPageRefresh };
+export { updatePomoLog, AddToLog, updateLogWhenPageRefresh };
