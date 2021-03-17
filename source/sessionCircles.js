@@ -1,4 +1,7 @@
-/* Updates previous session color to completed color when completed */
+/**
+ * Updates previous session color to completed color when completed
+ * @param {Object} event 
+ */
 function updatePrevColor(event) {
   let sessionIdx = event.detail.session;
 
@@ -17,7 +20,9 @@ function updatePrevColor(event) {
   }
 }
 
-/* Resets colors (Current session index is 0) */
+/**
+ * Resets colors (Current session index is 0)
+ */
 function resetColors() {
   let circlesContainer = document.getElementById("session-circles");
   for (let i = 0; i < circlesContainer.childNodes.length; i++) {
@@ -31,7 +36,11 @@ function resetColors() {
   console.log("reset color");
 }
 
-/* Updates current circle color to curr-circle when starting next session */
+
+/**
+ * Updates current circle color to curr-circle when starting next session 
+ * @param {Object} event 
+ */
 function updateCurrColor(event) {
   let circlesContainer = document.getElementById("session-circles");
   let sessionIdx = event.detail.session;
@@ -44,7 +53,9 @@ function updateCurrColor(event) {
   console.log("update curr color");
 }
 
-/* Adds/deletes circles to DOM according to numSessions */
+/**
+ * Adds/deletes circles to DOM according to numSessions
+ */
 function renderCircles() {
   let circlesContainer = document.getElementById("session-circles");
   let sessionSlider = document.getElementById("num-sessions-slider");
@@ -64,7 +75,12 @@ function renderCircles() {
   }
 }
 
-/* Create custom event for session change */
+
+
+/**
+ * Create custom event for session change
+ * @param {*} sessionNum 
+ */
 function changeSession(sessionNum) {
   let circlesContainer = document.getElementById("session-circles");
   let event = new CustomEvent("sessionChange", {
@@ -75,7 +91,11 @@ function changeSession(sessionNum) {
   circlesContainer.dispatchEvent(event);
 }
 
-/* Create custom event for break ending */
+
+/**
+ * Create custom event for break ending
+ * @param {*} sessionNum 
+ */
 function endBreak(sessionNum) {
   let circlesContainer = document.getElementById("session-circles");
   let event = new CustomEvent("breakEnd", {
@@ -86,7 +106,10 @@ function endBreak(sessionNum) {
   circlesContainer.dispatchEvent(event);
 }
 
-/* Custom event for start of long break */
+/**
+ * Custom event for start of long break 
+ * @param {*} sessionNum 
+ */
 function startLongBreak(sessionNum) {
   let circlesContainer = document.getElementById("session-circles");
   let event = new CustomEvent("longBreakStart", {
@@ -97,16 +120,18 @@ function startLongBreak(sessionNum) {
   circlesContainer.dispatchEvent(event);
 }
 
-/* Enables/disables input to change numSessions */
+
+/**
+ * Enables/disables input to change numSessions
+ */
 function toggleNumSessionInput() {
   let sessionNumberInput = document.getElementById("num-sessions-number");
 
   sessionNumberInput.disabled = false;
-  
+
   let sessionSlider = document.getElementById("num-sessions-slider");
   sessionSlider.disabled = false;
 }
-
 
 window.addEventListener("DOMContentLoaded", (event) => {
   let sessionSlider = document.getElementById("num-sessions-slider");

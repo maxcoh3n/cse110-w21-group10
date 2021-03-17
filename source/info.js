@@ -26,6 +26,11 @@ window.addEventListener("DOMContentLoaded", () => {
   SpanishRadioBut.addEventListener("input", ChangeToSpanish);
   englishRadioBut.addEventListener("input", ChangeToEnglish);
 });
+
+/**
+ * This function changes the text instructions in the info button to english
+ * when the english radio button is selected.
+ */
 function ChangeToEnglish() {
   let unorderedLi = document.getElementById("language-option");
   while (unorderedLi.firstChild) {
@@ -45,6 +50,10 @@ function ChangeToEnglish() {
   }
 }
 
+/**
+ * This function changes the text instructions in the info button to spanish
+ * when the spanish radio button is selected.
+ */
 function ChangeToSpanish() {
   let unorderedLi = document.getElementById("language-option");
   while (unorderedLi.firstChild) {
@@ -64,4 +73,4 @@ function ChangeToSpanish() {
   }
 }
 
-export {ChangeToEnglish, ChangeToSpanish};
+export { ChangeToEnglish, ChangeToSpanish };
