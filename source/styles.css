@@ -492,7 +492,22 @@ input::placeholder {
   #task-list-container {
     display: none;
   }
-  
+
+  #horseshoe {
+    width: 400px;
+    height: 400px;
+  }
+
+  #canvas-container {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #settings-btn {
+    display: none !important;
+  }
 }
 
 /* Media query for laptops */
