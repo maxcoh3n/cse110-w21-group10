@@ -322,4 +322,9 @@ document.body.onkeyup = function (e) {
   }
 };
 
+
+function uselessFunction(){
+  
+}
+
 export { timer };
