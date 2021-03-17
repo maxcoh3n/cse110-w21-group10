@@ -232,7 +232,7 @@ main {
   padding: 10px 20px;
   border-radius: 30px;
   color: rgba(255, 255, 255, 0.906);
-  box-shadow: 4px 5px 5px #52273e;
+  box-shadow: 4px 5px 8px #52273e;
   text-shadow: 2px 2px 2px #5e2c47;
 }
 
@@ -625,6 +625,7 @@ input[type="number"] {
   border-radius: 50%;
   background-color: var(--blank-circle);
   border: 4px solid var(--blank-border);
+  box-shadow: 2px 4px 5px #5c2d46;
 }
 
 .curr-circle {
@@ -635,6 +636,7 @@ input[type="number"] {
   border-radius: 50%;
   background-color: var(--curr-circle);
   border: 4px solid var(--curr-border);
+  box-shadow: 2px 4px 5px ##5c2d46;
 }
 
 .completed-circle {
@@ -645,6 +647,7 @@ input[type="number"] {
   border-radius: 50%;
   background-color: var(--completed-circle);
   border: 4px solid var(--completed-border);
+  box-shadow: 2px 4px 5px ##5c2d46;
 }
 h1:hover {
   cursor: default;
