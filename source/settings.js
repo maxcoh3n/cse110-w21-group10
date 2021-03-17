@@ -1,4 +1,4 @@
-import {setLocalStorageDefaults} from "./constants.js"
+import { setLocalStorageDefaults } from "./constants.js";
 
 // renders statistics is refreshed.
 window.addEventListener("DOMContentLoaded", (event) => {
@@ -20,37 +20,20 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
   };
 
-
   const clearData = document.getElementById("clear-data-btn");
   clearData.onclick = clearDataPrompt;
 
   resetSettings();
 });
-//Settings
 
 
-
-  const volumeNum = document.getElementById("volume-number")
-  const volumeSlider = document.getElementById('volume-slider')
-  const worktimeSlider = document.getElementById("worktime-slider");
-  const worktimeNumber = document.getElementById("worktime-number");
-  const shortBreaktimeSlider = document.getElementById("short-breaktime-slider");
-  const shortBreaktimeNumber = document.getElementById("short-breaktime-number");
-  const longBreaktimeSlider = document.getElementById("long-breaktime-slider");
-  const longBreaktimeNumber = document.getElementById("long-breaktime-number");
-  const numSessionsSlider = document.getElementById("num-sessions-slider");
-  const numSessionsNumber = document.getElementById("num-sessions-number");
-  const test = document.getElementById("test-btn");
-  const audio = document.getElementById("alarm-sound");
-  const soundPicker = document.getElementById('sounds');
-  const iconVol = document.getElementById('icon-vol');
 
 /**
-* sets all settings to localstorage values and adds listeners
-*/
-function resetSettings(){
-  const volumeNum = document.getElementById("volume-number")
-  const volumeSlider = document.getElementById('volume-slider')
+ * sets all settings to localstorage values and adds listeners
+ */
+function resetSettings() {
+  const volumeNum = document.getElementById("volume-number");
+  const volumeSlider = document.getElementById("volume-slider");
   const worktimeSlider = document.getElementById("worktime-slider");
   const worktimeNumber = document.getElementById("worktime-number");
   const shortBreaktimeSlider = document.getElementById("short-breaktime-slider");
@@ -61,8 +44,8 @@ function resetSettings(){
   const numSessionsNumber = document.getElementById("num-sessions-number");
   const test = document.getElementById("test-btn");
   const audio = document.getElementById("alarm-sound");
-  const soundPicker = document.getElementById('sounds');
-  const iconVol = document.getElementById('icon-vol');
+  const soundPicker = document.getElementById("sounds");
+  const iconVol = document.getElementById("icon-vol");
 
   volumeSlider.value = localStorage.getItem("vol");
   volumeNum.value = localStorage.getItem("vol");
@@ -87,29 +70,32 @@ function resetSettings(){
   numSessionsSlider.addEventListener("input", updateNumSessions);
   numSessionsNumber.addEventListener("input", updateNumSessions);
   volumeSlider.addEventListener("input", updateVol);
-  volumeNum.addEventListener('input',updateVol);
-  test.addEventListener('click', updateTest);
-  soundPicker.addEventListener('click',updateSound);
+  volumeNum.addEventListener("input", updateVol);
+  test.addEventListener("click", updateTest);
+  soundPicker.addEventListener("click", updateSound);
 }
 
 /**
  * @param {Object} e
  * Change the current sound type to input value
  */
-function updateSound(e){
-  const value = e.target.value
-  audio.src = value
-  localStorage.setItem("soundType",value)
-  document.getElementById("alarm-sound").src = value
+function updateSound(e) {
+  const value = e.target.value;
+  const audio = document.getElementById("alarm-sound");
+  audio.src = value;
+  localStorage.setItem("soundType", value);
+  document.getElementById("alarm-sound").src = value;
 }
 
 /**
  * Test the loudness of the current volume
  */
-function updateTest(){
-  const vol = volumeNum.value
-  audio.volume = vol/100
-  audio.play()
+function updateTest() {
+  const volumeNum = document.getElementById("volume-number");
+  const vol = volumeNum.value;
+  const audio = document.getElementById("alarm-sound");
+  audio.volume = vol / 100;
+  audio.play();
 }
 
 /**
@@ -119,28 +105,29 @@ function updateTest(){
  */
 function updateVol(e) {
   let num = e.target.value;
+
+  const volumeSlider = document.getElementById("volume-slider");
   volumeSlider.value = num;
+
+  const volumeNum = document.getElementById("volume-number");
   volumeNum.value = num;
   localStorage.setItem("vol", num);
   updateVolIcon(num);
 }
 
-/** 
-* @param {Object} num - volume out of 100
-*/
-function updateVolIcon(num){
-  const iconVol = document.getElementById('icon-vol');
+/**
+ * @param {Object} num - volume out of 100
+ */
+function updateVolIcon(num) {
+  const iconVol = document.getElementById("icon-vol");
   if (num > 66 && num <= 100) {
     iconVol.src = "./icons/volume-level-3.svg";
-  }
-  else if (num > 33 && num < 67) {
-      iconVol.src = "./icons/volume-level-2.svg";
-  }
-  else if (num > 0 && num < 34) {
-      iconVol.src = "./icons/volume-level-1.svg";
-  }
-  else {
-      iconVol.src = "./icons/volume-level-0.svg";
+  } else if (num > 33 && num < 67) {
+    iconVol.src = "./icons/volume-level-2.svg";
+  } else if (num > 0 && num < 34) {
+    iconVol.src = "./icons/volume-level-1.svg";
+  } else {
+    iconVol.src = "./icons/volume-level-0.svg";
   }
 }
 
@@ -151,11 +138,14 @@ function updateVolIcon(num){
  */
 function updateWorktime(e) {
   let num = e.target.value;
+
+  const worktimeSlider = document.getElementById("worktime-slider");
   worktimeSlider.value = num;
+
+  const worktimeNumber = document.getElementById("worktime-number");
   worktimeNumber.value = num;
   localStorage.setItem("workMins", num);
-  document.getElementById("countdown").innerHTML =
-    localStorage.getItem("workMins") + ":00";
+  document.getElementById("countdown").innerHTML = localStorage.getItem("workMins") + ":00";
 }
 
 /**
@@ -164,7 +154,11 @@ function updateWorktime(e) {
  */
 function updateShortBreaktime(e) {
   let num = e.target.value;
+
+  const shortBreaktimeSlider = document.getElementById("short-breaktime-slider");
   shortBreaktimeSlider.value = num;
+
+  const shortBreaktimeNumber = document.getElementById("short-breaktime-number");
   shortBreaktimeNumber.value = num;
   localStorage.setItem("shortBreakMins", num);
 }
@@ -175,7 +169,11 @@ function updateShortBreaktime(e) {
  */
 function updateLongBreaktime(e) {
   let num = e.target.value;
+
+  const longBreaktimeSlider = document.getElementById("long-breaktime-slider");
   longBreaktimeSlider.value = num;
+
+  const longBreaktimeNumber = document.getElementById("long-breaktime-number");
   longBreaktimeNumber.value = num;
   localStorage.setItem("longBreakMins", num);
 }
@@ -186,26 +184,30 @@ function updateLongBreaktime(e) {
  */
 function updateNumSessions(e) {
   let num = e.target.value;
+
+  const numSessionsSlider = document.getElementById("num-sessions-slider");
   numSessionsSlider.value = num;
+
+  const numSessionsNumber = document.getElementById("num-sessions-number");
   numSessionsNumber.value = num;
+
   localStorage.setItem("numSessions", num);
 }
 
 /**
-* clears the statistics data for the user's session history
-*/
+ * clears the statistics data for the user's session history
+ */
 function clearDataPrompt() {
-  const DELETE_MESSAGE = "Clearing your data is an irreversible action, your session history will be lost. \nAre you sure you want to clear your data?\n\n"
+  const DELETE_MESSAGE =
+    "Clearing your data is an irreversible action, your session history will be lost. \nAre you sure you want to clear your data?\n\n";
   let response = confirm(DELETE_MESSAGE);
-  if(response) {
-
+  if (response) {
     localStorage.clear();
     setLocalStorageDefaults();
     location.reload();
 
     // renderStatistics();
-
   }
 }
 
-export {resetSettings};
+export { resetSettings };

@@ -37,7 +37,6 @@ let sessionNum = localStorage.getItem("numCurrentSech");
  */
 function timer() {
   const sound = document.getElementById("alarm-sound");
-  let taskList = document.getElementById("task-list");
 
   const completed = document.getElementById("complete-task-btn");
   completed.innerHTML = "Completed";
