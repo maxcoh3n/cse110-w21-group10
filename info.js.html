@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>settings.js - Documentation</title>
+    <title>info.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">settings.js</h1>
+    <h1 class="page-title">info.js</h1>
     
 
     
@@ -39,224 +39,83 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {renderStatistics} from "./statistics.js";
-import { clearLog } from "./pomoLog.js";
-import { clearTaskList } from "./taskList.js";
-import {setLocalStorageDefaults} from "./constants.js"
+            <pre class="prettyprint source linenums"><code>//info.js
 
-// renders statistics is refreshed.
-window.addEventListener("DOMContentLoaded", (event) => {
-  let settingsModal = document.getElementById("settings-modal");
-  let settingsBtn = document.getElementById("settings-btn");
-  let settingsSpan = document.getElementById("settings-span");
+//runs when page is loaded
+window.addEventListener("DOMContentLoaded", () => {
+  let infoModal = document.getElementById("info-modal");
+  let infoBtn = document.getElementById("info-btn");
+  let infoSpan = document.getElementById("info-span");
 
-  settingsBtn.onclick = function () {
-    settingsModal.style.display = "block";
+  infoBtn.onclick = function () {
+    infoModal.style.display = "block";
   };
 
-  settingsSpan.onclick = function () {
-    settingsModal.style.display = "none";
+  infoSpan.onclick = function () {
+    infoModal.style.display = "none";
   };
 
-  window.onclick = function (event) {
-    if (event.target == settingsModal) {
-      settingsModal.style.display = "none";
+  window.addEventListener("click", function (event) {
+    if (event.target == infoModal) {
+      infoModal.style.display = "none";
     }
-  };
+  });
 
+  const englishRadioBut = document.getElementById("english");
+  const SpanishRadioBut = document.getElementById("spanish");
 
-  const clearData = document.getElementById("clear-data-btn");
-  clearData.onclick = clearDataPrompt;
-
-  resetSettings();
+  SpanishRadioBut.addEventListener("input", ChangeToSpanish);
+  englishRadioBut.addEventListener("input", ChangeToEnglish);
 });
-//Settings
-
-
-
-  const volumeNum = document.getElementById("volume-number")
-  const volumeSlider = document.getElementById('volume-slider')
-  const worktimeSlider = document.getElementById("worktime-slider");
-  const worktimeNumber = document.getElementById("worktime-number");
-  const shortBreaktimeSlider = document.getElementById("short-breaktime-slider");
-  const shortBreaktimeNumber = document.getElementById("short-breaktime-number");
-  const longBreaktimeSlider = document.getElementById("long-breaktime-slider");
-  const longBreaktimeNumber = document.getElementById("long-breaktime-number");
-  const numSessionsSlider = document.getElementById("num-sessions-slider");
-  const numSessionsNumber = document.getElementById("num-sessions-number");
-  const test = document.getElementById("test-btn");
-  const audio = document.getElementById("alarm-sound");
-  const soundPicker = document.getElementById('sounds');
-  const iconVol = document.getElementById('icon-vol');
 
 /**
-* sets all settings to localstorage values and adds listeners
-*/
-function resetSettings(){
-  const volumeNum = document.getElementById("volume-number")
-  const volumeSlider = document.getElementById('volume-slider')
-  const worktimeSlider = document.getElementById("worktime-slider");
-  const worktimeNumber = document.getElementById("worktime-number");
-  const shortBreaktimeSlider = document.getElementById("short-breaktime-slider");
-  const shortBreaktimeNumber = document.getElementById("short-breaktime-number");
-  const longBreaktimeSlider = document.getElementById("long-breaktime-slider");
-  const longBreaktimeNumber = document.getElementById("long-breaktime-number");
-  const numSessionsSlider = document.getElementById("num-sessions-slider");
-  const numSessionsNumber = document.getElementById("num-sessions-number");
-  const test = document.getElementById("test-btn");
-  const audio = document.getElementById("alarm-sound");
-  const soundPicker = document.getElementById('sounds');
-  const iconVol = document.getElementById('icon-vol');
-
-  volumeSlider.value = localStorage.getItem("vol");
-  volumeNum.value = localStorage.getItem("vol");
-  worktimeSlider.value = localStorage.getItem("workMins");
-  worktimeNumber.value = localStorage.getItem("workMins");
-  shortBreaktimeSlider.value = localStorage.getItem("shortBreakMins");
-  shortBreaktimeNumber.value = localStorage.getItem("shortBreakMins");
-  longBreaktimeSlider.value = localStorage.getItem("longBreakMins");
-  longBreaktimeNumber.value = localStorage.getItem("longBreakMins");
-  numSessionsSlider.value = localStorage.getItem("numSessions");
-  numSessionsNumber.value = localStorage.getItem("numSessions");
-  soundPicker.value = localStorage.getItem("soundType");
-  audio.src = localStorage.getItem("soundType");
-  updateVolIcon(localStorage.getItem("vol"));
-
-  worktimeSlider.addEventListener("input", updateWorktime);
-  worktimeNumber.addEventListener("input", updateWorktime);
-  shortBreaktimeSlider.addEventListener("input", updateShortBreaktime);
-  shortBreaktimeNumber.addEventListener("input", updateShortBreaktime);
-  longBreaktimeSlider.addEventListener("input", updateLongBreaktime);
-  longBreaktimeNumber.addEventListener("input", updateLongBreaktime);
-  numSessionsSlider.addEventListener("input", updateNumSessions);
-  numSessionsNumber.addEventListener("input", updateNumSessions);
-  volumeSlider.addEventListener("input", updateVol);
-  volumeNum.addEventListener('input',updateVol);
-  test.addEventListener('click', updateTest);
-  soundPicker.addEventListener('click',updateSound);
-}
-
-/**
- * @param {Object} e
- * Change the current sound type to input value
+ * This function changes the text instructions in the info button to english
+ * when the english radio button is selected.
  */
-function updateSound(e){
-  const value = e.target.value
-  audio.src = value
-  localStorage.setItem("soundType",value)
-  document.getElementById("alarm-sound").src = value
-}
-
-/**
- * Test the loudness of the current volume
- */
-function updateTest(){
-  const vol = volumeNum.value
-  audio.volume = vol/100
-  audio.play()
-}
-
-/**
- * @param {Object} e
- * Change the volume of the sound to input value
- * Change the image of the speaker according to the volume
- */
-function updateVol(e) {
-  let num = e.target.value;
-  volumeSlider.value = num;
-  volumeNum.value = num;
-  localStorage.setItem("vol", num);
-  updateVolIcon(num);
-}
-
-/** 
-* @param {Object} num - volume out of 100
-*/
-function updateVolIcon(num){
-  const iconVol = document.getElementById('icon-vol');
-  if (num > 66 &amp;&amp; num &lt;= 100) {
-    iconVol.src = "./icons/volume-level-3.svg";
+function ChangeToEnglish() {
+  let unorderedLi = document.getElementById("language-option");
+  while (unorderedLi.firstChild) {
+    unorderedLi.removeChild(unorderedLi.firstChild);
   }
-  else if (num > 33 &amp;&amp; num &lt; 67) {
-      iconVol.src = "./icons/volume-level-2.svg";
-  }
-  else if (num > 0 &amp;&amp; num &lt; 34) {
-      iconVol.src = "./icons/volume-level-1.svg";
-  }
-  else {
-      iconVol.src = "./icons/volume-level-0.svg";
+  let arr = [
+    "Click the Settings button in the top right corner and configure your settings.",
+    "Add tasks to the task list to the right. You can click Delete if you added a task by mistake.",
+    "Select the task you want and click Start to start the timer.",
+    "After you have completed a session you can click Complete to complete the selected task and Undo if you clicked Complete by mistake.",
+    "You can click the Pomodoro Log button on the left to view a log of completed sessions and statistics.",
+  ];
+  for (let i = 0; i &lt; arr.length; i++) {
+    let tag = document.createElement("li");
+    tag.innerText = arr[i];
+    unorderedLi.appendChild(tag);
   }
 }
 
 /**
- * @param {Object} e
- * Change the work time to input value
- * Display the work time on the page.
+ * This function changes the text instructions in the info button to spanish
+ * when the spanish radio button is selected.
  */
-function updateWorktime(e) {
-  let num = e.target.value;
-  worktimeSlider.value = num;
-  worktimeNumber.value = num;
-  localStorage.setItem("workMins", num);
-  document.getElementById("countdown").innerHTML =
-    localStorage.getItem("workMins") + ":00";
-}
-
-/**
- * @param {number} e
- * Change the short break time to input value
- */
-function updateShortBreaktime(e) {
-  let num = e.target.value;
-  shortBreaktimeSlider.value = num;
-  shortBreaktimeNumber.value = num;
-  localStorage.setItem("shortBreakMins", num);
-}
-
-/**
- * @param {Object} e
- * Change the long break time to input value
- */
-function updateLongBreaktime(e) {
-  let num = e.target.value;
-  longBreaktimeSlider.value = num;
-  longBreaktimeNumber.value = num;
-  localStorage.setItem("longBreakMins", num);
-}
-
-/**
- * @param {Object} e
- * Change the number of sessions to input value
- */
-function updateNumSessions(e) {
-  let num = e.target.value;
-  numSessionsSlider.value = num;
-  numSessionsNumber.value = num;
-  localStorage.setItem("numSessions", num);
-}
-
-/**
-* clears the statistics data for the user's session history
-*/
-function clearDataPrompt() {
-  const DELETE_MESSAGE = "Clearing your data is an irreversible action, your session history will be lost. \nAre you sure you want to clear your data?\n\n"
-  let response = confirm(DELETE_MESSAGE);
-  if(response) {
-
-    localStorage.clear();
-    setLocalStorageDefaults();
-
-
-    renderStatistics();
-
-    clearLog();
-
-    clearTaskList();
-    resetSettings();
+function ChangeToSpanish() {
+  let unorderedLi = document.getElementById("language-option");
+  while (unorderedLi.firstChild) {
+    unorderedLi.removeChild(unorderedLi.firstChild);
+  }
+  let arr = [
+    "Clic en el botón Configuración en la esquina superior derecha y configure sus ajustes.",
+    "Agregue tareas a la lista de tareas de la derecha. Puede hacer clic en Eliminar si agregó una tarea por error.",
+    "Seleccione la tarea que desee y haga clic en Iniciar para iniciar el temporizador.",
+    "Una vez que haya completado una sesión, puede hacer clic en Completar para completar la tarea seleccionada y Deshacer si hizo clic en Completar por error.",
+    "Puede hacer clic en el botón Registro Pomodoro a la izquierda para ver un registro de las sesiones completadas y las estadísticas.",
+  ];
+  for (let i = 0; i &lt; arr.length; i++) {
+    let tag = document.createElement("li");
+    tag.innerText = arr[i];
+    unorderedLi.appendChild(tag);
   }
 }
 
-export {resetSettings};</code></pre>
+export { ChangeToEnglish, ChangeToSpanish };
+</code></pre>
         </article>
     </section>
 

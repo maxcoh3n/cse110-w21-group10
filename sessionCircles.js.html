@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>settings.js - Documentation</title>
+    <title>sessionCircles.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">settings.js</h1>
+    <h1 class="page-title">sessionCircles.js</h1>
     
 
     
@@ -39,224 +39,160 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {renderStatistics} from "./statistics.js";
-import { clearLog } from "./pomoLog.js";
-import { clearTaskList } from "./taskList.js";
-import {setLocalStorageDefaults} from "./constants.js"
+            <pre class="prettyprint source linenums"><code>/**
+ * Updates previous session color to completed color when completed
+ * @param {Object} event 
+ */
+function updatePrevColor(event) {
+  let sessionIdx = event.detail.session;
 
-// renders statistics is refreshed.
-window.addEventListener("DOMContentLoaded", (event) => {
-  let settingsModal = document.getElementById("settings-modal");
-  let settingsBtn = document.getElementById("settings-btn");
-  let settingsSpan = document.getElementById("settings-span");
+  // Mark previous circles completed; reset to blank if end of pomo cycle
+  if (sessionIdx != 0) {
+    let circlesContainer = document.getElementById("session-circles");
+    circlesContainer.childNodes[sessionIdx - 1].setAttribute("class", "completed-circle");
 
-  settingsBtn.onclick = function () {
-    settingsModal.style.display = "block";
-  };
+    let sessionNumberInput = document.getElementById("num-sessions-number");
+    sessionNumberInput.disabled = true;
 
-  settingsSpan.onclick = function () {
-    settingsModal.style.display = "none";
-  };
+    let sessionSlider = document.getElementById("num-sessions-slider");
+    sessionSlider.disabled = true;
+  } else {
+    resetColors();
+  }
+}
 
-  window.onclick = function (event) {
-    if (event.target == settingsModal) {
-      settingsModal.style.display = "none";
+/**
+ * Resets colors (Current session index is 0)
+ */
+function resetColors() {
+  let circlesContainer = document.getElementById("session-circles");
+  for (let i = 0; i &lt; circlesContainer.childNodes.length; i++) {
+    console.log(localStorage.getItem("numCurrentSech"));
+    if (i &lt; Number(localStorage.getItem("numCurrentSech"))) {
+      circlesContainer.childNodes[i].setAttribute("class", "completed-circle");
+    } else {
+      circlesContainer.childNodes[i].setAttribute("class", "blank-circle");
     }
-  };
+  }
+  console.log("reset color");
+}
 
 
-  const clearData = document.getElementById("clear-data-btn");
-  clearData.onclick = clearDataPrompt;
+/**
+ * Updates current circle color to curr-circle when starting next session 
+ * @param {Object} event 
+ */
+function updateCurrColor(event) {
+  let circlesContainer = document.getElementById("session-circles");
+  let sessionIdx = event.detail.session;
+  circlesContainer.childNodes[sessionIdx].setAttribute("class", "curr-circle");
+  if (sessionIdx == 0) {
+    for (let i = 1; i &lt; circlesContainer.childNodes.length; i++) {
+      circlesContainer.childNodes[i].setAttribute("class", "blank-circle");
+    }
+  }
+  console.log("update curr color");
+}
 
-  resetSettings();
+/**
+ * Adds/deletes circles to DOM according to numSessions
+ */
+function renderCircles() {
+  let circlesContainer = document.getElementById("session-circles");
+  let sessionSlider = document.getElementById("num-sessions-slider");
+
+  // Delete circles
+  if (circlesContainer.children.length > sessionSlider.value) {
+    for (let i = circlesContainer.children.length - sessionSlider.value; i > 0; i--) {
+      circlesContainer.removeChild(circlesContainer.childNodes[circlesContainer.children.length - 1]);
+    }
+  } else if (circlesContainer.children.length &lt; sessionSlider.value) {
+    // Add circles
+    for (let i = sessionSlider.value - circlesContainer.children.length; i > 0; i--) {
+      let newCircle = document.createElement("span");
+      newCircle.setAttribute("class", "blank-circle");
+      circlesContainer.appendChild(newCircle);
+    }
+  }
+}
+
+
+
+/**
+ * Create custom event for session change
+ * @param {*} sessionNum 
+ */
+function changeSession(sessionNum) {
+  let circlesContainer = document.getElementById("session-circles");
+  let event = new CustomEvent("sessionChange", {
+    detail: {
+      session: sessionNum,
+    },
+  });
+  circlesContainer.dispatchEvent(event);
+}
+
+
+/**
+ * Create custom event for break ending
+ * @param {*} sessionNum 
+ */
+function endBreak(sessionNum) {
+  let circlesContainer = document.getElementById("session-circles");
+  let event = new CustomEvent("breakEnd", {
+    detail: {
+      session: sessionNum,
+    },
+  });
+  circlesContainer.dispatchEvent(event);
+}
+
+/**
+ * Custom event for start of long break 
+ * @param {*} sessionNum 
+ */
+function startLongBreak(sessionNum) {
+  let circlesContainer = document.getElementById("session-circles");
+  let event = new CustomEvent("longBreakStart", {
+    detail: {
+      session: sessionNum,
+    },
+  });
+  circlesContainer.dispatchEvent(event);
+}
+
+
+/**
+ * Enables/disables input to change numSessions
+ */
+function toggleNumSessionInput() {
+  let sessionNumberInput = document.getElementById("num-sessions-number");
+
+  sessionNumberInput.disabled = false;
+
+  let sessionSlider = document.getElementById("num-sessions-slider");
+  sessionSlider.disabled = false;
+}
+
+window.addEventListener("DOMContentLoaded", (event) => {
+  let sessionSlider = document.getElementById("num-sessions-slider");
+  sessionSlider.value = localStorage.getItem("numSessions");
+  sessionSlider.addEventListener("input", renderCircles);
+
+  let sessionNumberInput = document.getElementById("num-sessions-number");
+  sessionNumberInput.value = localStorage.getItem("numSessions");
+  sessionNumberInput.addEventListener("input", renderCircles);
+
+  let circlesContainer = document.getElementById("session-circles");
+  circlesContainer.addEventListener("sessionChange", updatePrevColor);
+  circlesContainer.addEventListener("breakEnd", updateCurrColor);
+  circlesContainer.addEventListener("longBreakStart", toggleNumSessionInput);
+
+  renderCircles();
 });
-//Settings
 
-
-
-  const volumeNum = document.getElementById("volume-number")
-  const volumeSlider = document.getElementById('volume-slider')
-  const worktimeSlider = document.getElementById("worktime-slider");
-  const worktimeNumber = document.getElementById("worktime-number");
-  const shortBreaktimeSlider = document.getElementById("short-breaktime-slider");
-  const shortBreaktimeNumber = document.getElementById("short-breaktime-number");
-  const longBreaktimeSlider = document.getElementById("long-breaktime-slider");
-  const longBreaktimeNumber = document.getElementById("long-breaktime-number");
-  const numSessionsSlider = document.getElementById("num-sessions-slider");
-  const numSessionsNumber = document.getElementById("num-sessions-number");
-  const test = document.getElementById("test-btn");
-  const audio = document.getElementById("alarm-sound");
-  const soundPicker = document.getElementById('sounds');
-  const iconVol = document.getElementById('icon-vol');
-
-/**
-* sets all settings to localstorage values and adds listeners
-*/
-function resetSettings(){
-  const volumeNum = document.getElementById("volume-number")
-  const volumeSlider = document.getElementById('volume-slider')
-  const worktimeSlider = document.getElementById("worktime-slider");
-  const worktimeNumber = document.getElementById("worktime-number");
-  const shortBreaktimeSlider = document.getElementById("short-breaktime-slider");
-  const shortBreaktimeNumber = document.getElementById("short-breaktime-number");
-  const longBreaktimeSlider = document.getElementById("long-breaktime-slider");
-  const longBreaktimeNumber = document.getElementById("long-breaktime-number");
-  const numSessionsSlider = document.getElementById("num-sessions-slider");
-  const numSessionsNumber = document.getElementById("num-sessions-number");
-  const test = document.getElementById("test-btn");
-  const audio = document.getElementById("alarm-sound");
-  const soundPicker = document.getElementById('sounds');
-  const iconVol = document.getElementById('icon-vol');
-
-  volumeSlider.value = localStorage.getItem("vol");
-  volumeNum.value = localStorage.getItem("vol");
-  worktimeSlider.value = localStorage.getItem("workMins");
-  worktimeNumber.value = localStorage.getItem("workMins");
-  shortBreaktimeSlider.value = localStorage.getItem("shortBreakMins");
-  shortBreaktimeNumber.value = localStorage.getItem("shortBreakMins");
-  longBreaktimeSlider.value = localStorage.getItem("longBreakMins");
-  longBreaktimeNumber.value = localStorage.getItem("longBreakMins");
-  numSessionsSlider.value = localStorage.getItem("numSessions");
-  numSessionsNumber.value = localStorage.getItem("numSessions");
-  soundPicker.value = localStorage.getItem("soundType");
-  audio.src = localStorage.getItem("soundType");
-  updateVolIcon(localStorage.getItem("vol"));
-
-  worktimeSlider.addEventListener("input", updateWorktime);
-  worktimeNumber.addEventListener("input", updateWorktime);
-  shortBreaktimeSlider.addEventListener("input", updateShortBreaktime);
-  shortBreaktimeNumber.addEventListener("input", updateShortBreaktime);
-  longBreaktimeSlider.addEventListener("input", updateLongBreaktime);
-  longBreaktimeNumber.addEventListener("input", updateLongBreaktime);
-  numSessionsSlider.addEventListener("input", updateNumSessions);
-  numSessionsNumber.addEventListener("input", updateNumSessions);
-  volumeSlider.addEventListener("input", updateVol);
-  volumeNum.addEventListener('input',updateVol);
-  test.addEventListener('click', updateTest);
-  soundPicker.addEventListener('click',updateSound);
-}
-
-/**
- * @param {Object} e
- * Change the current sound type to input value
- */
-function updateSound(e){
-  const value = e.target.value
-  audio.src = value
-  localStorage.setItem("soundType",value)
-  document.getElementById("alarm-sound").src = value
-}
-
-/**
- * Test the loudness of the current volume
- */
-function updateTest(){
-  const vol = volumeNum.value
-  audio.volume = vol/100
-  audio.play()
-}
-
-/**
- * @param {Object} e
- * Change the volume of the sound to input value
- * Change the image of the speaker according to the volume
- */
-function updateVol(e) {
-  let num = e.target.value;
-  volumeSlider.value = num;
-  volumeNum.value = num;
-  localStorage.setItem("vol", num);
-  updateVolIcon(num);
-}
-
-/** 
-* @param {Object} num - volume out of 100
-*/
-function updateVolIcon(num){
-  const iconVol = document.getElementById('icon-vol');
-  if (num > 66 &amp;&amp; num &lt;= 100) {
-    iconVol.src = "./icons/volume-level-3.svg";
-  }
-  else if (num > 33 &amp;&amp; num &lt; 67) {
-      iconVol.src = "./icons/volume-level-2.svg";
-  }
-  else if (num > 0 &amp;&amp; num &lt; 34) {
-      iconVol.src = "./icons/volume-level-1.svg";
-  }
-  else {
-      iconVol.src = "./icons/volume-level-0.svg";
-  }
-}
-
-/**
- * @param {Object} e
- * Change the work time to input value
- * Display the work time on the page.
- */
-function updateWorktime(e) {
-  let num = e.target.value;
-  worktimeSlider.value = num;
-  worktimeNumber.value = num;
-  localStorage.setItem("workMins", num);
-  document.getElementById("countdown").innerHTML =
-    localStorage.getItem("workMins") + ":00";
-}
-
-/**
- * @param {number} e
- * Change the short break time to input value
- */
-function updateShortBreaktime(e) {
-  let num = e.target.value;
-  shortBreaktimeSlider.value = num;
-  shortBreaktimeNumber.value = num;
-  localStorage.setItem("shortBreakMins", num);
-}
-
-/**
- * @param {Object} e
- * Change the long break time to input value
- */
-function updateLongBreaktime(e) {
-  let num = e.target.value;
-  longBreaktimeSlider.value = num;
-  longBreaktimeNumber.value = num;
-  localStorage.setItem("longBreakMins", num);
-}
-
-/**
- * @param {Object} e
- * Change the number of sessions to input value
- */
-function updateNumSessions(e) {
-  let num = e.target.value;
-  numSessionsSlider.value = num;
-  numSessionsNumber.value = num;
-  localStorage.setItem("numSessions", num);
-}
-
-/**
-* clears the statistics data for the user's session history
-*/
-function clearDataPrompt() {
-  const DELETE_MESSAGE = "Clearing your data is an irreversible action, your session history will be lost. \nAre you sure you want to clear your data?\n\n"
-  let response = confirm(DELETE_MESSAGE);
-  if(response) {
-
-    localStorage.clear();
-    setLocalStorageDefaults();
-
-
-    renderStatistics();
-
-    clearLog();
-
-    clearTaskList();
-    resetSettings();
-  }
-}
-
-export {resetSettings};</code></pre>
+export { changeSession, endBreak, startLongBreak, resetColors };
+</code></pre>
         </article>
     </section>
 
