@@ -168,7 +168,7 @@ function renderAll() {
         taskButton.innerHTML = "Completed";
       }
     }
-    newTaskInput.value = "";
+    // newTaskInput.value = "";
   }
 
   updateLogWhenPageRefresh();

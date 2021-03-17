@@ -322,9 +322,12 @@ document.body.onkeyup = function (e) {
   }
 };
 
+/**
+ * 
+ * @param {number} input 
+ */
+function uselessFunction(input){
 
-function uselessFunction(){
-  
 }
 
 export { timer };
