@@ -26,14 +26,12 @@ function updatePrevColor(event) {
 function resetColors() {
   let circlesContainer = document.getElementById("session-circles");
   for (let i = 0; i < circlesContainer.childNodes.length; i++) {
-    console.log(localStorage.getItem("numCurrentSech"));
     if (i < Number(localStorage.getItem("numCurrentSech"))) {
       circlesContainer.childNodes[i].setAttribute("class", "completed-circle");
     } else {
       circlesContainer.childNodes[i].setAttribute("class", "blank-circle");
     }
   }
-  console.log("reset color");
 }
 
 
@@ -50,7 +48,6 @@ function updateCurrColor(event) {
       circlesContainer.childNodes[i].setAttribute("class", "blank-circle");
     }
   }
-  console.log("update curr color");
 }
 
 /**
@@ -150,4 +147,4 @@ window.addEventListener("DOMContentLoaded", (event) => {
   renderCircles();
 });
 
-export { changeSession, endBreak, startLongBreak, resetColors };
+export {updatePrevColor, updateCurrColor, renderCircles, resetColors, changeSession, endBreak, startLongBreak, toggleNumSessionInput };

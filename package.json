@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "coverage" : "jest --coverage"
+    "coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,8 @@
   },
   "jest": {
     "resetMocks": false,
-    "setupFiles": ["jest-localstorage-mock"]
+    "setupFiles": [
+      "jest-localstorage-mock"
+    ]
   }
 }

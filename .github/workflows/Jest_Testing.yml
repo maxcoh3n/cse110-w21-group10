@@ -16,7 +16,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: Change mod
-        run: chmod +rwx node_modules/.bin/jest
+      - name: install jest
+        run: npm i jest
       - name: Run Test
         run: sudo npm test
