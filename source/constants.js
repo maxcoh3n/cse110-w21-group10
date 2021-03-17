@@ -1,9 +1,9 @@
 // sets constants when page is refreshed - must be before domcontentloaded
-  setLocalStorageDefaults();
+setLocalStorageDefaults();
 
-/** 
-* Sets all default values in localstorage if they do not exist yet
-*/
+/**
+ * Sets all default values in localstorage if they do not exist yet
+ */
 function setLocalStorageDefaults() {
   let workMins = localStorage.getItem("workMins");
   if (!workMins) localStorage.setItem("workMins", "25");
@@ -50,4 +50,4 @@ function setLocalStorageDefaults() {
   if (!lastDayWorked) localStorage.setItem("lastDayWorked", "");
 }
 
-export {setLocalStorageDefaults};
+export { setLocalStorageDefaults };

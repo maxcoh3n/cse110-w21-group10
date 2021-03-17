@@ -1,11 +1,20 @@
-import { renderOne, renderAll, addTaskEvent,  
-    isCompleted, comple, undo, del, incNumCompletedTasks, 
-    decNumCompletedTasks, incNumCompletedTaskSessions, 
-    decNumCompletedTaskSessions, completedEvent } from "../taskList.js";
+import {
+  renderOne,
+  renderAll,
+  addTaskEvent,
+  isCompleted,
+  comple,
+  undo,
+  del,
+  incNumCompletedTasks,
+  decNumCompletedTasks,
+  incNumCompletedTaskSessions,
+  decNumCompletedTaskSessions,
+  completedEvent,
+} from "../taskList.js";
 import { setLocalStorageDefaults } from "../constants.js";
-describe('taskList', ()=>{
-    document.body.innerHTML =
-      `
+describe("taskList", () => {
+  document.body.innerHTML = `
       <div id="timer-container">
       <div id="session-circles" data-session-num="0"></div>
       <div id="canvas-container">
@@ -74,146 +83,144 @@ describe('taskList', ()=>{
     <script type="module" src="pomoLog.js"></script>
   </div>
       `;
-    test('testing renderAll when tasksArray length = 0', ()=>{
-        setLocalStorageDefaults();
-        const taskButton = document.getElementById("complete-task-btn");
-        expect(renderAll()).toBeUndefined();
-        expect(taskButton.disabled).toBe(true);
-    })
-
-    test('testing renderAll when tasksArray length = 3 and task is not found in completedSessions', ()=>{
-        setLocalStorageDefaults();
-
-        let tasks = ["101", "102", "103"] 
-        localStorage.setItem("upcomingTasks", JSON.stringify(tasks));
-
-        const taskButton = document.getElementById("complete-task-btn");
-        let tasksArray = localStorage.getItem("upcomingTasks");
-        tasksArray = JSON.parse(tasksArray);
-
-        let completed = ["100"] 
-        localStorage.setItem("completedSessions", JSON.stringify(completed));
-
-        let completedSessions = localStorage.getItem("completedSessions");
-        completedSessions = JSON.parse(completedSessions);
-
-        expect(renderAll()).toBeUndefined();
-        expect(taskButton.disabled).toBe(false);
-        expect(taskButton.innerHTML).toBe("Delete");
-    })
-
-    test('testing renderAll when tasksArray length = 3 and task is found and completed in completedSessions', ()=>{
-        setLocalStorageDefaults();
-
-        let tasks = ["101", "102", "103"] 
-        localStorage.setItem("upcomingTasks", JSON.stringify(tasks));
-
-        const taskButton = document.getElementById("complete-task-btn");
-        let tasksArray = localStorage.getItem("upcomingTasks");
-        tasksArray = JSON.parse(tasksArray);
-
-        let completed = ["101"] 
-        localStorage.setItem("completedSessions", JSON.stringify(completed));
-
-        let completedSessions = localStorage.getItem("completedSessions");
-        completedSessions = JSON.parse(completedSessions);
-
-        let customElement = document.createElement("completed-task");
-        customElement.setAttribute("name", completedSessions.taskName);
-        expect(renderAll()).toBeUndefined();
-        expect(taskButton.disabled).toBe(false);
-    })
-
-    test('testing addTaskEvent adding new task that already exist', ()=>{
-        setLocalStorageDefaults();
-        let tasks = ["101", "102", "103"] 
-        localStorage.setItem("upcomingTasks", JSON.stringify(tasks));
-
-        let tasksArray = localStorage.getItem("upcomingTasks");
-        tasksArray = JSON.parse(tasksArray);
-      
-        const newTaskInput = document.getElementById("new-task");
-        newTaskInput.value = "101";
-
-        let completed = ["101"] 
-        localStorage.setItem("completedSessions", JSON.stringify(completed));
-
-        let completedSessions = localStorage.getItem("completedSessions");
-        completedSessions = JSON.parse(completedSessions);
-
-        expect(addTaskEvent()).toBeUndefined();
-        expect(newTaskInput.value).toBe("");
-    })
-
-    test('testing addTaskEvent adding new task that does not exist in tasksArray', ()=>{
-        setLocalStorageDefaults();
-        let tasks = ["101", "102", "103"] 
-        localStorage.setItem("upcomingTasks", JSON.stringify(tasks));
-
-        let tasksArray = localStorage.getItem("upcomingTasks");
-        tasksArray = JSON.parse(tasksArray);
-      
-        const newTaskInput = document.getElementById("new-task");
-        newTaskInput.value = "100";
-
-        let completed = ["101"] 
-        localStorage.setItem("completedSessions", JSON.stringify(completed));
-
-        let completedSessions = localStorage.getItem("completedSessions");
-        completedSessions = JSON.parse(completedSessions);
-
-        expect(addTaskEvent()).toBeUndefined();
-        expect(newTaskInput.value).toBe("");
-    })
-
-
-
-    test('testing comple', ()=>{
-        setLocalStorageDefaults();
-        expect(comple()).toBeUndefined();
-    })
-
-    test('testing del', ()=>{
-        setLocalStorageDefaults();
-        expect(del()).toBeUndefined();
-    })
-
-    test('testing incNumCompletedTasks', ()=>{
-        setLocalStorageDefaults();
-        expect(incNumCompletedTasks()).toBeUndefined();
-    })
-
-    test('testing decNumCompletedTasks', ()=>{
-        setLocalStorageDefaults();
-        expect(decNumCompletedTasks()).toBeUndefined();
-    })
-
-    test('testing completedEvent', ()=>{
-        setLocalStorageDefaults();
-        expect(completedEvent()).toBeUndefined();
-    })
-
-    test('testing renderOne', ()=>{
-        setLocalStorageDefaults();
-        const input = document.querySelector('input');
-        expect(input.addEventListener('input', renderOne())).toBeUndefined();
-    })
-
-    test('testing isCompleted', ()=>{
-        setLocalStorageDefaults();
-        const input = document.querySelector('input');
-        expect(input.addEventListener('input', isCompleted())).toBeUndefined();
-    })
-
-    test('testing incNumCompletedTaskSessions', ()=>{
-        setLocalStorageDefaults();
-        const input = document.querySelector('input');
-        expect(input.addEventListener('input', incNumCompletedTaskSessions())).toBeUndefined();
-    })
-
-    test('testing decNumCompletedTaskSessions', ()=>{
-        setLocalStorageDefaults();
-        const input = document.querySelector('input');
-        expect(input.addEventListener('input', decNumCompletedTaskSessions())).toBeUndefined();
-    })
+  test("testing renderAll when tasksArray length = 0", () => {
+    setLocalStorageDefaults();
+    const taskButton = document.getElementById("complete-task-btn");
+    expect(renderAll()).toBeUndefined();
+    expect(taskButton.disabled).toBe(true);
   });
+
+  test("testing renderAll when tasksArray length = 3 and task is not found in completedSessions", () => {
+    setLocalStorageDefaults();
+
+    let tasks = ["101", "102", "103"];
+    localStorage.setItem("upcomingTasks", JSON.stringify(tasks));
+
+    const taskButton = document.getElementById("complete-task-btn");
+    let tasksArray = localStorage.getItem("upcomingTasks");
+    tasksArray = JSON.parse(tasksArray);
+
+    let completed = ["100"];
+    localStorage.setItem("completedSessions", JSON.stringify(completed));
+
+    let completedSessions = localStorage.getItem("completedSessions");
+    completedSessions = JSON.parse(completedSessions);
+
+    expect(renderAll()).toBeUndefined();
+    expect(taskButton.disabled).toBe(false);
+    expect(taskButton.innerHTML).toBe("Delete");
+  });
+
+  test("testing renderAll when tasksArray length = 3 and task is found and completed in completedSessions", () => {
+    setLocalStorageDefaults();
+
+    let tasks = ["101", "102", "103"];
+    localStorage.setItem("upcomingTasks", JSON.stringify(tasks));
+
+    const taskButton = document.getElementById("complete-task-btn");
+    let tasksArray = localStorage.getItem("upcomingTasks");
+    tasksArray = JSON.parse(tasksArray);
+
+    let completed = ["101"];
+    localStorage.setItem("completedSessions", JSON.stringify(completed));
+
+    let completedSessions = localStorage.getItem("completedSessions");
+    completedSessions = JSON.parse(completedSessions);
+
+    let customElement = document.createElement("completed-task");
+    customElement.setAttribute("name", completedSessions.taskName);
+    expect(renderAll()).toBeUndefined();
+    expect(taskButton.disabled).toBe(false);
+  });
+
+  test("testing addTaskEvent adding new task that already exist", () => {
+    setLocalStorageDefaults();
+    let tasks = ["101", "102", "103"];
+    localStorage.setItem("upcomingTasks", JSON.stringify(tasks));
+
+    let tasksArray = localStorage.getItem("upcomingTasks");
+    tasksArray = JSON.parse(tasksArray);
+
+    const newTaskInput = document.getElementById("new-task");
+    newTaskInput.value = "101";
+
+    let completed = ["101"];
+    localStorage.setItem("completedSessions", JSON.stringify(completed));
+
+    let completedSessions = localStorage.getItem("completedSessions");
+    completedSessions = JSON.parse(completedSessions);
+
+    expect(addTaskEvent()).toBeUndefined();
+    expect(newTaskInput.value).toBe("");
+  });
+
+  test("testing addTaskEvent adding new task that does not exist in tasksArray", () => {
+    setLocalStorageDefaults();
+    let tasks = ["101", "102", "103"];
+    localStorage.setItem("upcomingTasks", JSON.stringify(tasks));
+
+    let tasksArray = localStorage.getItem("upcomingTasks");
+    tasksArray = JSON.parse(tasksArray);
+
+    const newTaskInput = document.getElementById("new-task");
+    newTaskInput.value = "100";
+
+    let completed = ["101"];
+    localStorage.setItem("completedSessions", JSON.stringify(completed));
+
+    let completedSessions = localStorage.getItem("completedSessions");
+    completedSessions = JSON.parse(completedSessions);
+
+    expect(addTaskEvent()).toBeUndefined();
+    expect(newTaskInput.value).toBe("");
+  });
+
+  test("testing comple", () => {
+    setLocalStorageDefaults();
+    expect(comple()).toBeUndefined();
+  });
+
+  test("testing del", () => {
+    setLocalStorageDefaults();
+    expect(del()).toBeUndefined();
+  });
+
+  test("testing incNumCompletedTasks", () => {
+    setLocalStorageDefaults();
+    expect(incNumCompletedTasks()).toBeUndefined();
+  });
+
+  test("testing decNumCompletedTasks", () => {
+    setLocalStorageDefaults();
+    expect(decNumCompletedTasks()).toBeUndefined();
+  });
+
+  test("testing completedEvent", () => {
+    setLocalStorageDefaults();
+    expect(completedEvent()).toBeUndefined();
+  });
+
+  test("testing renderOne", () => {
+    setLocalStorageDefaults();
+    const input = document.querySelector("input");
+    expect(input.addEventListener("input", renderOne())).toBeUndefined();
+  });
+
+  test("testing isCompleted", () => {
+    setLocalStorageDefaults();
+    const input = document.querySelector("input");
+    expect(input.addEventListener("input", isCompleted())).toBeUndefined();
+  });
+
+  test("testing incNumCompletedTaskSessions", () => {
+    setLocalStorageDefaults();
+    const input = document.querySelector("input");
+    expect(input.addEventListener("input", incNumCompletedTaskSessions())).toBeUndefined();
+  });
+
+  test("testing decNumCompletedTaskSessions", () => {
+    setLocalStorageDefaults();
+    const input = document.querySelector("input");
+    expect(input.addEventListener("input", decNumCompletedTaskSessions())).toBeUndefined();
+  });
+});

@@ -1,8 +1,7 @@
-import {updateLogWhenPageRefresh } from "../pomoLog.js";
+import { updateLogWhenPageRefresh } from "../pomoLog.js";
 
-describe('pomoLog', () => {
-
-    document.body.innerHTML = ` <div id="pomo-toggle-container">
+describe("pomoLog", () => {
+  document.body.innerHTML = ` <div id="pomo-toggle-container">
     <input id="pomo-toggle" type="checkbox" class="pomo-toggle" />
     <label for="pomo-toggle" id="pomo-label">Pomodoro Log</label>
 
@@ -42,9 +41,8 @@ describe('pomoLog', () => {
     <script type="module" src="pomoLog.js"></script>
   </div>`;
 
-  test('does not crash', () => {
+  test("does not crash", () => {
     localStorage.setItem("completedSessions", "101");
     expect(updateLogWhenPageRefresh()).toBeUndefined();
   });
-
 });

@@ -1,7 +1,6 @@
-import {ChangeToEnglish, ChangeToSpanish} from "../info.js";
+import { ChangeToEnglish, ChangeToSpanish } from "../info.js";
 
-describe('info', () => {
-
+describe("info", () => {
   document.body.innerHTML = `<button id="info-btn">Information</button>
   <div id="info-modal" class="modal">
     <div class="modal-content">
@@ -25,16 +24,14 @@ describe('info', () => {
     </div>
   </div>`;
 
-  test('does not crash', () => {
+  test("does not crash", () => {
     let infoBtn = document.getElementById("info-btn");
     let infoSpan = document.getElementById("info-span");
 
     expect(infoBtn.click()).toBeUndefined();
     expect(infoSpan.click()).toBeUndefined();
-   
+
     expect(ChangeToEnglish()).toBeUndefined();
     expect(ChangeToSpanish()).toBeUndefined();
   });
-
-  
 });

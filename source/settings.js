@@ -26,8 +26,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
   resetSettings();
 });
 
-
-
 /**
  * sets all settings to localstorage values and adds listeners
  */

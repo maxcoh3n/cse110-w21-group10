@@ -17,7 +17,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 });
 
 /**
- * @param {Object} taskInput 
+ * @param {Object} taskInput
  * Takes the taskInput (task name) and renders that task to the task list
  */
 function renderOne(taskInput) {
@@ -39,7 +39,7 @@ function renderOne(taskInput) {
         completedSessions = JSON.parse(completedSessions);
         let foundTask = false;
         for (let i = 0; i < completedSessions.length; i++) {
-          if (box.id == completedSessions[i].taskName && completedSessions[i].date == getDate() ) {
+          if (box.id == completedSessions[i].taskName && completedSessions[i].date == getDate()) {
             foundTask = true;
             if (completedSessions[i].completed == false) {
               document.getElementById("curr-task").children[0].innerHTML = box.id;
@@ -103,7 +103,7 @@ function renderAll() {
     completedSessions = JSON.parse(completedSessions);
     let foundTask = false;
     for (let i = 0; i < completedSessions.length; i++) {
-      if (tasksArray[0] == completedSessions[i].taskName && completedSessions[i].date == getDate() ) {
+      if (tasksArray[0] == completedSessions[i].taskName && completedSessions[i].date == getDate()) {
         foundTask = true;
         if (completedSessions[i].completed == false) {
           taskButton.innerHTML = "Completed";
@@ -122,9 +122,9 @@ function renderAll() {
 }
 
 /**
-* adds a new task to the upcoming tasks list
-*/
-  function addTaskEvent() {
+ * adds a new task to the upcoming tasks list
+ */
+function addTaskEvent() {
   const taskButton = document.getElementById("complete-task-btn");
   let tasksArray = localStorage.getItem("upcomingTasks");
   tasksArray = JSON.parse(tasksArray);
@@ -135,19 +135,19 @@ function renderAll() {
     newTaskInput.value = "";
   }
 
-  let taskList = document.getElementById('task-list');
+  let taskList = document.getElementById("task-list");
   for (let box of taskList.childNodes) {
     if (box.id == newTaskInput.value) {
       newTaskInput.value = "";
-      }
+    }
   }
 
   let completedSessions = localStorage.getItem("completedSessions");
   completedSessions = JSON.parse(completedSessions);
 
   // if this was already completed today, we uncomplete it
-  for( let task of completedSessions ) {
-    if( task.taskName == newTaskInput.value && task.date == getDate() ) {
+  for (let task of completedSessions) {
+    if (task.taskName == newTaskInput.value && task.date == getDate()) {
       task.completed = false;
       decNumCompletedTasks();
       decNumCompletedTaskSessions(task.durationArray.length);
@@ -161,8 +161,8 @@ function renderAll() {
     taskButton.disabled = false;
     localStorage.setItem("upcomingTasks", JSON.stringify(tasksArray));
     renderOne(newTaskInput.value);
-    if(tasksArray.length == 1 ) {
-      if (inCompleted(newTaskInput.value) == false ) {
+    if (tasksArray.length == 1) {
+      if (inCompleted(newTaskInput.value) == false) {
         taskButton.innerHTML = "Delete";
       } else {
         taskButton.innerHTML = "Completed";
@@ -174,10 +174,9 @@ function renderAll() {
   updateLogWhenPageRefresh();
 }
 
-
 /**
-* allows for enter key to add a new task to the task list
-*/
+ * allows for enter key to add a new task to the task list
+ */
 function keyUpEvent(event) {
   if (event.keyCode === 13) {
     event.preventDefault();
@@ -245,8 +244,8 @@ function comple() {
   const completed = document.getElementById("complete-task-btn");
   for (let box of taskList.childNodes) {
     if (box.checked) {
-      for(let i = 0; i<completedSessions.length; i++){
-        if( box.id == completedSessions[i].taskName && completedSessions[i].date == getDate()) {
+      for (let i = 0; i < completedSessions.length; i++) {
+        if (box.id == completedSessions[i].taskName && completedSessions[i].date == getDate()) {
           completedSessions[i].completed = true;
           completed.innerHTML = "Undo";
           document.getElementById("curr-task").children[0].innerHTML = "Default Task";
@@ -285,7 +284,7 @@ function comple() {
 /**
  * Undo a task that marked completed
  */
- function undo() {
+function undo() {
   decNumCompletedTasks();
   decNumCompletedTaskSessions(completedTaskSessions);
   completedTaskSessions = 0;
@@ -302,7 +301,7 @@ function comple() {
       let completedSessions = localStorage.getItem("completedSessions");
       completedSessions = JSON.parse(completedSessions);
       for (let i = 0; i < completedSessions.length; i++) {
-        if( box.id == completedSessions[i].taskName && completedSessions[i].date == getDate()) {
+        if (box.id == completedSessions[i].taskName && completedSessions[i].date == getDate()) {
           completedSessions[i].completed = false;
         }
       }
@@ -316,12 +315,10 @@ function comple() {
   updateLogWhenPageRefresh();
 }
 
-
 /**
-* handles the delete state for tasks
-*/
+ * handles the delete state for tasks
+ */
 function del() {
-
   let taskList = document.getElementById("task-list");
   document.getElementById("curr-task").children[0].innerHTML = "Default Task";
   let taskArray = [];
@@ -370,7 +367,7 @@ function del() {
     }
   }
 
-  if(taskList.children.length != 0){
+  if (taskList.children.length != 0) {
     completed.disabled = false;
   } else {
     completed.disabled = true;
@@ -420,9 +417,9 @@ function decNumCompletedTaskSessions(numSessions) {
 }
 
 /**
-* handles the three phases for tasks
-*/
-function completedEvent(){
+ * handles the three phases for tasks
+ */
+function completedEvent() {
   const completed = document.getElementById("complete-task-btn");
   if (completed.innerHTML == "Completed") {
     comple();
@@ -433,7 +430,19 @@ function completedEvent(){
   }
 }
 
-export {renderOne, renderAll, addTaskEvent, keyUpEvent , 
-  inCompleted, isCompleted, comple, undo, del, incNumCompletedTasks, 
-  decNumCompletedTasks, incNumCompletedTaskSessions, 
-  decNumCompletedTaskSessions, completedEvent};
+export {
+  renderOne,
+  renderAll,
+  addTaskEvent,
+  keyUpEvent,
+  inCompleted,
+  isCompleted,
+  comple,
+  undo,
+  del,
+  incNumCompletedTasks,
+  decNumCompletedTasks,
+  incNumCompletedTaskSessions,
+  decNumCompletedTaskSessions,
+  completedEvent,
+};

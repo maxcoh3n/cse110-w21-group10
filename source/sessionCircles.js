@@ -1,6 +1,6 @@
 /**
  * Updates previous session color to completed color when completed
- * @param {Object} event 
+ * @param {Object} event
  */
 function updatePrevColor(event) {
   let sessionIdx = event.detail.session;
@@ -34,10 +34,9 @@ function resetColors() {
   }
 }
 
-
 /**
- * Updates current circle color to curr-circle when starting next session 
- * @param {Object} event 
+ * Updates current circle color to curr-circle when starting next session
+ * @param {Object} event
  */
 function updateCurrColor(event) {
   let circlesContainer = document.getElementById("session-circles");
@@ -72,11 +71,9 @@ function renderCircles() {
   }
 }
 
-
-
 /**
  * Create custom event for session change
- * @param {*} sessionNum 
+ * @param {*} sessionNum
  */
 function changeSession(sessionNum) {
   let circlesContainer = document.getElementById("session-circles");
@@ -88,10 +85,9 @@ function changeSession(sessionNum) {
   circlesContainer.dispatchEvent(event);
 }
 
-
 /**
  * Create custom event for break ending
- * @param {*} sessionNum 
+ * @param {*} sessionNum
  */
 function endBreak(sessionNum) {
   let circlesContainer = document.getElementById("session-circles");
@@ -104,8 +100,8 @@ function endBreak(sessionNum) {
 }
 
 /**
- * Custom event for start of long break 
- * @param {*} sessionNum 
+ * Custom event for start of long break
+ * @param {*} sessionNum
  */
 function startLongBreak(sessionNum) {
   let circlesContainer = document.getElementById("session-circles");
@@ -116,7 +112,6 @@ function startLongBreak(sessionNum) {
   });
   circlesContainer.dispatchEvent(event);
 }
-
 
 /**
  * Enables/disables input to change numSessions
@@ -147,4 +142,13 @@ window.addEventListener("DOMContentLoaded", (event) => {
   renderCircles();
 });
 
-export {updatePrevColor, updateCurrColor, renderCircles, resetColors, changeSession, endBreak, startLongBreak, toggleNumSessionInput };
+export {
+  updatePrevColor,
+  updateCurrColor,
+  renderCircles,
+  resetColors,
+  changeSession,
+  endBreak,
+  startLongBreak,
+  toggleNumSessionInput,
+};

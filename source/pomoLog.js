@@ -73,5 +73,4 @@ function RenderToLog(newTask) {
   dailyLog.appendChild(customElement);
 }
 
-
 export { updatePomoLog, AddToLog, updateLogWhenPageRefresh };
