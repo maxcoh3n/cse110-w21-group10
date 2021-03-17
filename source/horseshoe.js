@@ -21,8 +21,12 @@ function stopHorseShoe() {
 function drawHorseShoe(time, direction, devMode) {
   var canvas = document.getElementById("horseshoe");
   var ctx = canvas.getContext("2d");
-  ctx.lineWidth = 30;
-  ctx.strokeStyle = "black";
+  ctx.lineWidth = 25;
+  ctx.strokeStyle = "rgba(183, 65, 14, 0.7)";
+  ctx.shadowColor = "black";
+  ctx.shadowBlur = 10;
+  ctx.lineCap = "round";
+   //ctx.setLineDash([4, 10]);
 
   // Scaling based on width allows for easy resizability
   var cw = canvas.width;
@@ -59,6 +63,11 @@ function drawHorseShoe(time, direction, devMode) {
     // Drawing break arc means we decrement offset depending on breakTime
     else if (direction == -1) {
       offset -= increment;
+    }
+    // Handles case of overshooting the start angle when decrementing
+    if (offset < 0){
+      offset = 0;
+      return;
     }
     // Draw an arc that has fixed starting degrees, with ending degrees dependent on timer
     ctx.beginPath();

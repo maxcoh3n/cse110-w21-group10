@@ -60,7 +60,7 @@ function ChangeToSpanish() {
     unorderedLi.removeChild(unorderedLi.firstChild);
   }
   let arr = [
-    "CHaga clic en el botón Configuración en la esquina superior derecha y configure sus ajustes.",
+    "Clic en el botón Configuración en la esquina superior derecha y configure sus ajustes.",
     "Agregue tareas a la lista de tareas de la derecha. Puede hacer clic en Eliminar si agregó una tarea por error.",
     "Seleccione la tarea que desee y haga clic en Iniciar para iniciar el temporizador.",
     "Una vez que haya completado una sesión, puede hacer clic en Completar para completar la tarea seleccionada y Deshacer si hizo clic en Completar por error.",
