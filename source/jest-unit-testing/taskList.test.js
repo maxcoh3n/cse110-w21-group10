@@ -1,5 +1,5 @@
 import { renderOne, renderAll, addTaskEvent, keyUpEvent , 
-    inCompleted, isCompleted, comple, undo, del, incNumCompletedTasks, clearTaskList,
+    inCompleted, isCompleted, comple, undo, del, incNumCompletedTasks, 
     decNumCompletedTasks, incNumCompletedTaskSessions, 
     decNumCompletedTaskSessions, completedEvent } from "../taskList.js";
 import { setLocalStorageDefaults } from "../constants.js";
@@ -172,10 +172,7 @@ describe('taskList', ()=>{
         expect(newTaskInput.value).toBe("");
     })
 
-    test('testing clearTaskList', ()=>{
-        setLocalStorageDefaults();
-        expect(clearTaskList()).toBeUndefined();
-    })
+
 
     test('testing comple', ()=>{
         setLocalStorageDefaults();

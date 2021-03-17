@@ -1,4 +1,4 @@
-import {clearLog, updateLogWhenPageRefresh } from "../pomoLog.js";
+import {updateLogWhenPageRefresh } from "../pomoLog.js";
 
 describe('pomoLog', () => {
 
@@ -45,7 +45,6 @@ describe('pomoLog', () => {
   test('does not crash', () => {
     localStorage.setItem("completedSessions", "101");
     expect(updateLogWhenPageRefresh()).toBeUndefined();
-    expect(clearLog()).toBeUndefined();
   });
 
 });
