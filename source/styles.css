@@ -5,30 +5,15 @@
   background-color: #52263e;
   font-family: 'Quicksand', sans-serif;
   color: grey;
-  /*border: 2px solid red;*/
+}
+
+body {
+  height: 100%;
 }
 
 #header-container {
   display: flex;
   position: relative;
-}
-
-.tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 1;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
 }
 
 button {
@@ -51,8 +36,8 @@ button:hover{
   border: 0.25px solid black;
 }
 button:disabled {
-  cursor: default;
   border: 0.25px solid rgba(201, 201, 201, 0.906);
+  cursor: default;
 }
 
 .flex-icon {
@@ -77,11 +62,6 @@ button:disabled {
   color: white;
 }
 
-#sounds {
-  width: 200px;
-  height: 20px;
-}
-
 #canvas-container {
   position: relative;
   display: flex;
@@ -89,6 +69,32 @@ button:disabled {
   width: 100%;
   height: fit-content;
   top: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+::-webkit-scrollbar-corner {
+  display: none;
 }
 
 /* settings labels*/
@@ -100,33 +106,45 @@ button:disabled {
 }
 .numLeft{
   position: absolute;
-  top:5px
+  top: 5px;
 }
 .numRight{
   position: absolute;
   left: 98%;
-  top:5px
+  top: 5px;
 }
 #clear-data-btn{
   background-color:red;
   width: 100%;
+  position: relative;
+  float: center;
 }
 /* Modal Content/Box */
 .modal-content {
-  margin: 10% auto; /* 15% from the top and centered */
+  margin: 5% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
- width: 80%;  /* Could be more or less, depending on screen size */
- height: 50%;
-}
-.Setting-window{
-  margin: 10% auto; /* 15% from the top and centered */
-  padding: 20px; 
-  border: 1px solid #888;
- width: 40%;  /* Could be more or less, depending on screen size */
- height: 70%;
+  width: 50%;  /* Could be more or less, depending on screen size */
+  height: fit-content;
+  min-height: fit-content;
 }
 
+.modal-content * {
+  font-size: 14pt;
+}
+
+.Setting-window{
+  margin: 5% auto; /* 15% from the top and centered */
+  padding: 20px 30px 20px; 
+  border: 1px solid #888;
+  width: fit-content;  /* Could be more or less, depending on screen size */
+  height: fit-content;
+}
+
+.settings-flex {
+  height: fit-content;
+  overflow: auto;
+}
 
 #header-box {
   display: flex;
@@ -167,8 +185,9 @@ h1 {
 /* main flex box */
 main {
   display: flex;
-  /*justify-content: center;*/
-  justify-content: space-between;
+  justify-content: center;
+  height: 100%;
+  /*justify-content: space-between;*/
 }
 
 /* -- Timer Container -- */
@@ -194,9 +213,9 @@ main {
 
 #horseshoe {
   position: relative;
-  width: 80%;
-  left: 15%;
-  top: 0;
+  width: 100%;
+  left: 0px;
+  top: 0px;
   background-image:radial-gradient(circle,  #713b58 10%,#52263e 60%);
 }
 
@@ -222,7 +241,9 @@ main {
   position: relative;
   background-color: #F6A90F;
   border: 0px solid white;
-  box-shadow: 3px 5px 0px rgb(155, 103, 0);
+  /*box-shadow: 3px 5px 0px rgb(155, 103, 0);*/
+  box-shadow: 2px 4px 0px rgb(197, 134, 7);
+
 }
 
 #start-btn:hover {
@@ -271,38 +292,19 @@ input[type="range"] {
   transform: translate(-50%, -50%);
 }
 
-#horseshoe {
-  width: 100%;
-  left: 0;
-}
-
 #task-list *:hover {
   cursor: pointer;
 }
 
-#task-list-container * {
-  color: white;
-  background-color: #965f7d;
-}
-
-#complete-task-btn {
-  /*
-  background-color: #cd6146;
-  */
-  background-color: #6e415b;
-  box-shadow: 1px 1px 5px black;
-
+#task-list input:disabled + label:hover {
+  cursor: default;
 }
 
 #new-task-btn {
-  background-color: #6e415b;
+  background-color: #6e415b !important;
   box-shadow: 1px 1px 5px black;
-
+  font-size: 8pt;
 } 
-
-#task-list-container {
-  background-color: #965f7d;
-}
 
 #new-task {
   color: white;
@@ -316,6 +318,7 @@ input::placeholder {
 #pomo-toggle-container {
   position: relative;
   max-width: 500px;
+  max-height: 300px;
   --orange: #ff8566;
   --label-color: white;
   --light-orange: #cd6146;
@@ -337,12 +340,14 @@ input::placeholder {
 }
 
 .pomo-toggle:checked ~ .pomo-log {
-  max-height: 600px;
-  overflow: scroll;
+  max-height: 450px;
+  overflow: auto;
+  overflow-x: auto;
   display: block;
   height: fit-content;
   background-color: var(--background);
   transition: max-height 0.3s ease-in;
+  padding: 5px 10px;
 }
 
 .pomo-toggle:checked ~ .pomo-log * {
@@ -353,9 +358,9 @@ input::placeholder {
   position: relative;
   max-height: 0;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 10px;
   box-shadow: 2px 5px 8px  #25111c;
-  right: 24%;
+  /*right: 24%;*/
   list-style: none;
   padding: 0px;
   margin-top: 8px;
@@ -385,6 +390,11 @@ input::placeholder {
   border: 0.25px solid black;
 }
 
+#pomo-toggle:disabled + label:hover {
+  cursor: default;
+  border: 0.25px solid rgba(201, 201, 201, 0.906);
+}
+
 #pomo-label:active {
   transition: box-shadow 0.05s ease-in;
   border: 0.25px solid block;
@@ -397,6 +407,7 @@ input::placeholder {
   margin: 0;
   font-size: 15pt;
   text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 @keyframes overflow-animation {
@@ -415,6 +426,7 @@ input::placeholder {
   background-color: #965f7d;
   color: white;
   border-radius: 10px;
+  cursor: default;
 }
 
 #curr-task span {
@@ -425,7 +437,8 @@ input::placeholder {
 /* Task List ----------------------------------------------------------------*/
 #task-list-container {
   position: relative;
-  max-width: 250px;
+  max-width: 300px;
+  min-width: 220px;
   padding: 10px;
   border-style: solid;
   border-width: 2px;
@@ -435,18 +448,18 @@ input::placeholder {
   flex: 1;
   margin-right: 15%;
   top: 8vh;
+  color: white;
+  background-color: #965f7d;
+
   /*
   right: 50px;
   top: 50px;
   */
 }
 
-#new-task-btn {
-  font-size: 8pt;
-}
-
-#complete-task-btn {
-  font-size: 10pt;
+#task-list-container * {
+  color: white;
+  background-color: #965f7d;
 }
 
 #task-list-header {
@@ -463,6 +476,9 @@ input::placeholder {
 #complete-task-btn {
   vertical-align: top;
   float: right;
+  font-size: 10pt;
+  background-color: #6e415b;
+  box-shadow: 1px 1px 5px black;
 }
 
 .tasks:hover {
@@ -480,13 +496,56 @@ input::placeholder {
   
 }
 
+/* Media query for laptops */
+@media only screen and (max-width: 1440px) {
+  main {
+    justify-content: space-evenly;
+  }
+
+  #task-list-container {
+    margin-right: 5%;
+  }
+
+  #pomo-toggle-container {
+    margin-left: 5%;
+  }
+
+  #countdown {
+    font-size: 60px;
+  }
+
+  #daily-log-container > h6 {
+    font-size: 13pt;
+  }
+
+  #daily-log-container * {
+    font-size: 11pt;
+  }
+
+  #stats-container * {
+    font-size: 11pt;
+  }
+
+  #stats-container > details > summary {
+    font-size: 13pt;
+  }
+
+  .modal-content {
+    width: 60%;
+  }
+  
+  .modal-content * {
+    font-size: 12pt;
+  }
+}
+
+#stats-container > details > summary {
+  font-size: 13pt;
+}
+
 input[type="number"] {
   margin-left: 3px;
   margin-bottom: 3px;
-}
-
-.label {
-  font-size: 20px;
 }
 
 .flex {
@@ -495,11 +554,11 @@ input[type="number"] {
   align-items: center;
   box-sizing: border-box;
   */
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   height: 60px;
   padding: 5px;
   font-size: 20px;
-  margin-left: 40px;
+  margin: 0 5px 10px;
 }
 
 .flex-alarm {
@@ -513,6 +572,8 @@ input[type="number"] {
 #sounds {
   margin-left: 10px;
   margin-right: 10px;
+  width: 200px;
+  height: 20px;
 }
 
 #test-btn-container {
@@ -567,3 +628,19 @@ input[type="number"] {
   background-color: var(--completed-circle);
   border: 4px solid var(--completed-border);
 }
+h1:hover {
+  cursor: default;
+}
+h2:hover {
+  cursor: default;
+}
+h3:hover {
+  cursor: default;
+}
+h4:hover {
+  cursor: default;
+}
+h5:hover {
+  cursor: default;
+}
+
