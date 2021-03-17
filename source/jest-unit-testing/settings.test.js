@@ -63,7 +63,6 @@ describe('settings ', ()=>{
 
     test( ' does not crash', ()=>{
 
-        let settingsModal = document.getElementById("settings-modal");
         let settingsBtn = document.getElementById("settings-btn");
         let settingsSpan = document.getElementById("settings-span");
 
