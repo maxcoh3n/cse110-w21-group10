@@ -1,5 +1,4 @@
 import {setLocalStorageDefaults} from "../constants.js";
-import {meh} from "../bad.js"
 
 
 describe('constants', ()=>{

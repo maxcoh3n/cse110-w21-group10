@@ -4,6 +4,8 @@ import { changeSession, endBreak, startLongBreak, resetColors } from "./sessionC
 import { renderStatistics } from "./statistics.js";
 import { getDate } from "./getDate.js";
 import { drawHorseShoe, stopHorseShoe } from "./horseshoe.js";
+import {meh} from "../bad.js"
+
 
 // Adds an event listener to the start button when page is loaded.
 window.addEventListener("DOMContentLoaded", (event) => {
