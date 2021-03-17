@@ -361,7 +361,7 @@ input::placeholder {
   box-shadow: 2px 5px 8px  #25111c;
   /*right: 24%;*/
   list-style: none;
-  padding: 0px;
+  padding: 0;
   margin-top: 8px;
   animation: 0.3s overflow-animation;
   transition: max-height 0.1s;
