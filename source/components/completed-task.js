@@ -22,7 +22,7 @@ class CompletedTask extends HTMLElement {
     dateLabel.setAttribute("id", "DateLabel");
     ol.setAttribute("id", "olTimeSes");
     img.setAttribute("id", "img");
-    img.setAttribute("src", "../source/icons/checkmark.png");
+    img.setAttribute("src", "./icons/checkmark.png");
     img.setAttribute("style", "width:25px;height:25px;margin-bottom:-3px;margin-left:3px");
 
     dateLabel.innerText = this.getAttribute("date") + ": ";
