@@ -41,8 +41,6 @@ describe("statistics", () => {
     expect(avgSessionsPerDay.innerHTML).toBe("N/A");
     expect(avgTasksPerDay.innerHTML).toBe("N/A");
     expect(avgSessionsPerTask.innerHTML).toBe("N/A");
-
-
   });
   test("renders when there are some statistics in localStorage", () => {
     setLocalStorageDefaults();
@@ -62,10 +60,9 @@ describe("statistics", () => {
     const avgTasksPerDay = document.getElementById("average-tasks-per-day").childNodes[2];
     const avgSessionsPerTask = document.getElementById("avg-sessions-per-task").childNodes[2];
 
-
     expect(numCompletedTasks.innerHTML).toBe("3");
     expect(avgSessionsPerDay.innerHTML).toBe("5.00");
     expect(avgTasksPerDay.innerHTML).toBe("1.50");
-    expect(avgSessionsPerTask.innerHTML).toBe("2.00");  
+    expect(avgSessionsPerTask.innerHTML).toBe("2.00");
   });
 });

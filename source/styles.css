@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Lora&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&family=Pacifico&family=Quicksand&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&family=Pacifico&family=Quicksand&display=swap");
 
 * {
   background-color: #52263e;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   color: grey;
 }
 
@@ -20,19 +20,19 @@ button {
   border-radius: 8px;
   color: rgba(255, 255, 255, 0.906);
   padding: 5px;
-  box-shadow: 2px 5px 8px  #25111c;
+  box-shadow: 2px 5px 8px #25111c;
   background-color: #cd6146;
   cursor: pointer;
   border: 0.25px solid rgba(201, 201, 201, 0.906);
   font-size: 18px;
   font-weight: bold;
-  font-family: 'Merienda', cursive;
+  font-family: "Merienda", cursive;
 }
 
 button:focus {
   outline: 0;
 }
-button:hover{
+button:hover {
   border: 0.25px solid black;
 }
 button:disabled {
@@ -81,7 +81,7 @@ button:disabled {
   background: #f1f1f1;
   border-radius: 10px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;
@@ -104,17 +104,17 @@ button:disabled {
   width: 500px;
   margin: 10px;
 }
-.numLeft{
+.numLeft {
   position: absolute;
   top: 5px;
 }
-.numRight{
+.numRight {
   position: absolute;
   left: 98%;
   top: 5px;
 }
-#clear-data-btn{
-  background-color:red;
+#clear-data-btn {
+  background-color: red;
   width: 100%;
   position: relative;
   float: center;
@@ -124,7 +124,7 @@ button:disabled {
   margin: 5% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 50%;  /* Could be more or less, depending on screen size */
+  width: 50%; /* Could be more or less, depending on screen size */
   height: fit-content;
   min-height: fit-content;
 }
@@ -133,11 +133,11 @@ button:disabled {
   font-size: 14pt;
 }
 
-.Setting-window{
+.Setting-window {
   margin: 5% auto; /* 15% from the top and centered */
   padding: 20px 30px;
   border: 1px solid #888;
-  width: fit-content;  /* Could be more or less, depending on screen size */
+  width: fit-content; /* Could be more or less, depending on screen size */
   height: fit-content;
 }
 
@@ -153,7 +153,7 @@ button:disabled {
 }
 
 h1 {
-  color:rgba(255, 255, 255, 0.906);
+  color: rgba(255, 255, 255, 0.906);
   font-size: 36px;
 }
 
@@ -164,7 +164,6 @@ h1 {
   position: absolute;
   right: 100px;
 }
-
 
 #info-btn {
   width: 40;
@@ -216,7 +215,7 @@ main {
   width: 100%;
   left: 0;
   top: 0;
-  background-image:radial-gradient(circle,  #713b58 10%,#52263e 60%);
+  background-image: radial-gradient(circle, #713b58 10%, #52263e 60%);
 }
 
 #countdown {
@@ -227,7 +226,7 @@ main {
   position: relative;
   align-self: center;
   top: 0;
- /* background-color: rgba(183, 65, 14, 0.3); */
+  /* background-color: rgba(183, 65, 14, 0.3); */
   background-color: #965f7d;
   padding: 10px 20px;
   border-radius: 30px;
@@ -241,7 +240,7 @@ main {
   font-size: 30px;
   padding: 5px 45px;
   position: relative;
-  background-color: #F6A90F;
+  background-color: #f6a90f;
   border: 0 solid white;
   /*box-shadow: 3px 5px 0px rgb(155, 103, 0);*/
   box-shadow: 2px 4px 0 rgb(197, 134, 7);
@@ -279,7 +278,6 @@ main {
 input[type="range"] {
   width: 500px;
 }
-
 
 #work-break-label {
   --border-color: black;
@@ -360,7 +358,7 @@ input::placeholder {
   max-height: 0;
   overflow: hidden;
   border-radius: 10px;
-  box-shadow: 2px 5px 8px  #25111c;
+  box-shadow: 2px 5px 8px #25111c;
   /*right: 24%;*/
   list-style: none;
   padding: 0;
@@ -380,14 +378,14 @@ input::placeholder {
   border-radius: 5px;
   background-color: var(--light-orange);
   color: var(--label-color);
-  box-shadow: 2px 5px 8px  #25111c;
+  box-shadow: 2px 5px 8px #25111c;
   cursor: pointer;
   font-size: 20px;
-  font-family: 'Merienda', cursive;
+  font-family: "Merienda", cursive;
   border: 0.25px solid rgba(201, 201, 201, 0.906);
 }
 
-#pomo-label:hover{
+#pomo-label:hover {
   border: 0.25px solid black;
 }
 
@@ -551,7 +549,7 @@ input::placeholder {
   .modal-content {
     width: 60%;
   }
-  
+
   .modal-content * {
     font-size: 12pt;
   }
@@ -586,7 +584,7 @@ input[type="number"] {
   align-items: center;
   justify-items: left;
 }
- 
+
 #sounds {
   margin-left: 10px;
   margin-right: 10px;
@@ -664,4 +662,3 @@ h4:hover {
 h5:hover {
   cursor: default;
 }
-

@@ -13,8 +13,8 @@ function stopHorseShoe() {
  * @param {number} time
  * @param {number} direction
  * @param {boolean} devMode
- * Starts the horseshoe animation in the HTML canvas tag with id horseshoe. Input var time 
- * represents the timer duration in minutes, which affects the rate at which the horseshoe 
+ * Starts the horseshoe animation in the HTML canvas tag with id horseshoe. Input var time
+ * represents the timer duration in minutes, which affects the rate at which the horseshoe
  * changes in shape. Direction indicates if we are drawing clockwise (when working timer), or
  * counterclockwise (when break timer).
  */
@@ -26,7 +26,7 @@ function drawHorseShoe(time, direction, devMode) {
   ctx.shadowColor = "black";
   ctx.shadowBlur = 10;
   ctx.lineCap = "round";
-   //ctx.setLineDash([4, 10]);
+  //ctx.setLineDash([4, 10]);
 
   // Scaling based on width allows for easy resizability
   var cw = canvas.width;
@@ -51,9 +51,9 @@ function drawHorseShoe(time, direction, devMode) {
   localStorage.setItem("animateID", count);
 
   /**
-    * One cycle of the animation. Change the offset based on increment (depends on time). 
-    * Draw an arc from start angle to end angle. 
-  */
+   * One cycle of the animation. Change the offset based on increment (depends on time).
+   * Draw an arc from start angle to end angle.
+   */
   function animate() {
     ctx.clearRect(0, 0, cw, ch);
     // Drawing work arc means we increment offset depending on workTime
@@ -65,7 +65,7 @@ function drawHorseShoe(time, direction, devMode) {
       offset -= increment;
     }
     // Handles case of overshooting the start angle when decrementing
-    if (offset < 0){
+    if (offset < 0) {
       offset = 0;
       return;
     }

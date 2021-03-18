@@ -1,8 +1,7 @@
-import {resetSettings} from "../settings.js";
+import { resetSettings } from "../settings.js";
 
-describe('settings ', ()=>{
-    document.body.innerHTML = 
-      `  
+describe("settings ", () => {
+  document.body.innerHTML = `  
       <audio id="alarm-sound"></audio>
       <button id="settings-btn">Settings</button>
 
@@ -61,20 +60,16 @@ describe('settings ', ()=>{
   
       </div>`;
 
-    test( ' does not crash', ()=>{
+  test(" does not crash", () => {
+    let settingsBtn = document.getElementById("settings-btn");
+    let settingsSpan = document.getElementById("settings-span");
 
-        let settingsModal = document.getElementById("settings-modal");
-        let settingsBtn = document.getElementById("settings-btn");
-        let settingsSpan = document.getElementById("settings-span");
+    expect(settingsBtn.click()).toBeUndefined();
+    expect(settingsSpan.click()).toBeUndefined();
 
-        expect(settingsBtn.click()).toBeUndefined();
-        expect(settingsSpan.click()).toBeUndefined();
+    expect(resetSettings()).toBeUndefined();
 
-        expect(resetSettings()).toBeUndefined();
-        
-        let clearData = document.getElementById("clear-data-btn");
-        expect(clearData.click()).toBeUndefined();
-        
-    })
+    let clearData = document.getElementById("clear-data-btn");
+    expect(clearData.click()).toBeUndefined();
   });
-  
+});
